@@ -1,0 +1,772 @@
+MASTER CONTEXT PROMPT FOR MICROSOFT COPILOT
+Georgia Access 834 Enrollment Reconciliation Project
+
+ROLE AND WORKING STYLE
+
+Act as my technical copilot for an ongoing Georgia Access healthcare data project. Continue from the context below without restarting the analysis or proposing a rebuild.
+
+Primary technologies:
+- 834 XML enrollment files
+- Python ETL
+- Azure SQL
+- SFTP
+- Georgia Access Workbench
+- Vimo/Sisense reports
+- Excel reconciliation
+
+Primary objective:
+Determine why Azure/raw or business-ready counts differ from Vimo/Sisense. The goal is not merely to load XML files. The goal is to identify the exact business definitions, data mappings, issuer/year assignments, household relationships, or source-file issues that explain the differences.
+
+Always:
+- Prefer SQL investigations before proposing Python.
+- Distinguish facts, hypotheses, assumptions, and unresolved questions.
+- Do not invent business rules.
+- Do not assume that a person-level match proves an issuer-level or policy-level match.
+- Do not assume that a record absent from an Excel extract is absent from Azure.
+- Do not assume that a record found under another issuer proves that the Best Life enrollment was loaded.
+- Explain reasoning before writing a query.
+- Use the exact existing table/column names whenever known.
+- If a column name is uncertain, first query INFORMATION_SCHEMA.COLUMNS.
+- Keep meeting answers in natural English, 3-4 sentences maximum, unless I ask for detail.
+
+PROJECT OVERVIEW
+
+This is a Georgia Access healthcare project involving 834 XML enrollment files, Azure SQL, Python ETL automation, and reconciliation against Vimo/Sisense business reports.
+
+PHASE 1: COMPLETED RAW INGESTION
+
+Pipeline:
+834 XML
+→ Parser834
+→ Azure SQL
+→ dbo.inbound_automation
+
+Main table:
+- dbo.inbound_automation
+
+Logging tables:
+- dbo.inbound_automation_run_log
+- dbo.inbound_automation_file_log
+
+Important ingestion characteristics:
+- One row per parsed enrollee transaction
+- Original XML preserved
+- raw_json preserved
+- raw_payload preserved
+- Complete source lineage
+- file_hash
+- row_number_in_file
+- load_run_id
+- loaded_at
+- INSERT ONLY
+- Duplicate files skipped using file_hash
+- Retry logic implemented and validated
+- No business filtering occurs during raw ingestion
+- Only metadata enrichment is applied
+
+Metadata enrichment:
+- issuer normalization
+- insurance type normalization
+- coverage year derivation
+- enrollee status mapping
+- raw record hash
+- source file metadata
+- folder metadata
+
+Business Ready logic is NOT applied during ingestion.
+
+RAW COUNTS AND VALIDATION
+
+2025:
+- 2,141,037 rows
+- 42,458 files loaded
+- 55 duplicate files skipped
+- 0 failed
+
+2026:
+- 1,029,577 rows
+- 28,291 files loaded
+- 0 failed
+
+Total raw rows:
+- 3,170,614
+
+Two previously failed files were retried successfully.
+
+Validated:
+- XML parser
+- Azure inserts
+- duplicate detection
+- retry logic
+- row counts
+- file log
+- source lineage
+- XML spot checks
+
+Current technical conclusion:
+- No strong evidence of raw XML loss
+- Azure loading appears reliable
+- Parser appears reliable
+- Remaining differences are believed to be mainly business-definition/reconciliation differences, except for a smaller unresolved population that still requires source-file investigation
+
+BUSINESS-READY PIPELINE ALREADY PRESENT IN REPOSITORY
+
+The repository already contains Python business-ready logic:
+- canonicalization
+- business month assignment
+- transaction deduplication
+- maintenance collapse
+- lifecycle selection
+- prior-year filtering
+- Model H aggregation
+
+Definitions:
+- Canonicalization means turning multiple raw transactions into one standardized business representation.
+- Raw transactions remain preserved.
+- Business-ready logic has not yet been fully reproduced directly in SQL.
+
+Known business roll-up logic from prior work:
+- Deduplicate by issuer/year/month/status/insurance/member_id
+- Keep latest by member_maint_effective_date, then source_file
+- Enrollment_Count = distinct policy_id, fallback enrollment key
+- Enrollee_Count = distinct member_id
+- REINSTATE may map to CONFIRM
+- Maintenance-only rows may be excluded
+- Grouping may use Coverage_Year, GAA_HIOS_ID, GAA_Load_Date, Insurance_Type, status_id, enrolleeStatus
+- Production annual Model H rollup may sum monthly distinct counts
+- Annual distinct totals are diagnostic and may not equal the production annual metric
+
+KNOWN BUSINESS CLARIFICATIONS
+
+- Enrollment generally means unique policy
+- Enrollee generally means unique member
+- Maintenance codes:
+  - 021 Addition
+  - 001 Change
+  - 024 Cancel/Term
+  - 025 Reinstate
+- Statuses discussed:
+  - Active
+  - Cancel
+  - Term
+  - Pending
+  - Pending Cancel
+  - Abort
+- Enrollment status and enrollee status are different concepts
+- Current active Sisense comparison does not include Term; Term is handled separately
+- Latest CONFIRM plus Latest Non-CONFIRM equals total latest enrollment population in the tested example
+- CANCEL/RETURN breakdown is a subdivision of Non-CONFIRM, not an additional population
+
+CURRENT COMPARISON GOAL
+
+Sisense report fields:
+- HIOS Issuer
+- Insurance Type
+- Coverage Year
+- Enrollments Total
+- Enrollees Total
+- Effectuated
+- Pending Effectuation
+
+Sisense does not contain raw transaction counts.
+
+Unknown business definitions:
+- Enrollment key used by Vimo
+- Enrollee key used by Vimo
+- Coverage year definition
+- Effectuated definition
+- Pending definition
+- Snapshot date
+- Annual aggregation method
+- Subscriber/household handling
+
+SQL COMPARISONS ALREADY PERFORMED
+
+Comparison 1: Annual Distinct
+
+Enrollment key:
+COALESCE(policy_id, health_coverage_policy_no)
+
+Enrollee key:
+COALESCE(member_id, issuer_indiv_identifier, exchg_assigned_enrollee_id)
+
+Results:
+2025:
+- Enrollments: 1,526,788
+- Enrollees: 1,520,172
+
+2026:
+- Enrollments: 824,989
+- Enrollees: 853,341
+
+Compared with Sisense:
+2025:
+- Enrollment difference: +54.8%
+- Enrollee difference: +17.4%
+
+2026:
+- Enrollment difference: +18.2%
+- Enrollee difference: -12.1%
+
+Comparison 2: Latest Status
+
+For each enrollment/member, kept latest transaction.
+Statuses included:
+- CONFIRM
+- CANCEL
+- TERM
+- UNMAPPED
+
+Result:
+- Latest status did not reproduce Sisense
+- CONFIRM is not equal to Effectuated
+- CANCEL + TERM + UNMAPPED is not equal to Pending Effectuation
+
+BASELINE RAW SUMMARY QUERY
+
+SELECT
+    issuer AS [HIOS Issuer ID],
+    insurance_type AS [Insurance Type],
+    coverage_year AS [Coverage Year],
+
+    COUNT(DISTINCT COALESCE(
+        NULLIF(policy_id, ''),
+        NULLIF(health_coverage_policy_no, '')
+    )) AS [Our Enrollments Total],
+
+    COUNT(DISTINCT COALESCE(
+        NULLIF(member_id, ''),
+        NULLIF(issuer_indiv_identifier, ''),
+        NULLIF(exchg_assigned_enrollee_id, '')
+    )) AS [Our Enrollees Total],
+
+    COUNT_BIG(*) AS [Our Raw Rows]
+
+FROM dbo.inbound_automation
+WHERE folder_year IN (2025, 2026)
+  AND coverage_year IN (2025, 2026)
+  AND insurance_type IN ('Health', 'Dental')
+GROUP BY
+    issuer,
+    insurance_type,
+    coverage_year
+ORDER BY
+    issuer,
+    insurance_type,
+    coverage_year;
+
+Meaning:
+- Groups by issuer + insurance type + coverage year
+- Counts distinct policies
+- Counts distinct members
+- Counts all raw transactions
+- Does not apply canonical/business-ready rules
+
+TODAY'S HARI WORKING SESSION
+
+Hari combined:
+- Selma/Azure summary
+- Swathi/Sisense extracts
+- 2025 and 2026 comparisons
+- Active counts only at this stage
+
+Hari highlighted:
+- Rows where Azure is lower than Sisense/Vimo
+- Small issuer examples for detailed review
+- Best Life and Health Insurance Company, issuer 83502, as first deep-dive case
+- CareSource or Kaiser as a possible second issuer
+
+Best Life example discussed:
+- Total enrollments: 752
+- Total enrollees: 858
+- Latest CONFIRM: 328
+- Latest Non-CONFIRM: 424
+- Non-CONFIRM breakdown discussed as Cancel 279 + Return 144 = 424
+
+Requested detail fields:
+- policy ID
+- enrollee/member ID
+- policy benefit start date
+- policy benefit end date
+- enrollee benefit start date
+- enrollee benefit end date
+- enrollment status
+- enrollee status
+- date of enrollment
+- coverage year
+- source file / lineage fields when available
+
+Planned comparison:
+- Match policy/member lists from Azure and Sisense
+- Categorize as:
+  - in both
+  - only in Azure/Selma
+  - only in Vimo/Swathi
+- Spot-check 5-10 important examples in Georgia Access Workbench
+- Use Account History to get source file name/date
+- Trace source file to SFTP, file log, parser, and Azure
+
+IMPORTANT AETNA FINDING
+
+Issuer 82824 (Aetna) should not have had 2025 834s according to the business discussion, but the Azure report showed records. This raised a coverage-year/plan-year grouping hypothesis. This must be validated, not assumed.
+
+BEST LIFE RECONCILIATION FINDINGS
+
+The investigation must distinguish:
+1. Person-level match anywhere in Azure
+2. Same issuer match
+3. Same insurance type match
+4. Same coverage year match
+5. Same policy/enrollment match
+6. Same household/source-file match
+
+A person ID found under another carrier is useful, but it does not prove that the Best Life Dental enrollment was ingested.
+
+The findings workbook showed a large group of Swathi enrollee IDs with person-level matches elsewhere in Azure:
+- Many found under different issuers
+- Many found under 2025, 2026, or both
+- Examples of issuers seen include 49046, 70893, 37001, 45334, 83761, 89942, and others
+
+Correct interpretation:
+- These records are not absent from Azure altogether
+- They may represent the same individuals enrolled with other carriers
+- They do not prove the corresponding Best Life HIOS 83502 Dental enrollment exists
+- They are still important because they classify the original comparison population and show that the lookup must be issuer/policy specific
+
+The unresolved list originally produced approximately 71-73 no-person-ID matches depending on the exact temporary-table population and deduplication. Do not present this number as final until the source list, issuer, year, status, and deduplication basis are explicitly confirmed.
+
+MANUAL WORKBENCH FINDINGS
+
+Pattern A: Workbench resolves a dependent search to subscriber/policy household
+
+Searched member ID:
+- 1007765191
+
+Workbench returned:
+- Policy ID: 1000219154
+- Subscriber ID: 1007765200
+- Name: Ambrose Carroll
+- Reconciliation date: 07/04/2026
+
+Household:
+- Subscriber Ambrose Carroll: 1007765200
+- Spouse Katresa Carroll: 1007765191
+- Child Amani Carroll: 1007765203
+- Child Ambrose Carroll: 1007765202
+- Child Amber Carroll: 1007765201
+
+Azure finding:
+- 1007765200 exists
+- Some other family member IDs exist
+- 1007765191 was not found in the initial person-ID search
+
+Interpretation:
+- Workbench is policy/household-centric
+- A dependent search may populate the subscriber policy
+- We must inventory the full household under the same policy/source file
+- Do not conclude that the dependent is represented in Azure merely because the subscriber is found
+
+Pattern B: Policy and subscriber/household partially found under another issuer
+
+Policy:
+- 211838771
+
+Azure:
+- Issuer: 49046
+- Member found: 1002168067
+- Member not found: 1006457453
+
+Interpretation:
+- A related policy/person exists elsewhere in Azure
+- This does not prove Best Life 83502 ingestion
+- It is a partial-household/cross-issuer case requiring policy/source-file validation
+
+Pattern C: Workbench policy/household not located in Azure
+
+Policy:
+- 210955684
+
+Members:
+- 1000659343
+- 1001741286
+- 1000659344
+
+Current finding:
+- Policy/member combination not located in Azure in the initial checks
+
+This is a stronger source-file investigation candidate.
+
+Another provided policy/member set:
+- Assigned policy ID: 1000204311
+- IDs provided: 10020550776, 10020550817
+Note: These numbers may contain an extra digit compared with the normal 10-digit enrollee ID format. Validate spelling/length before using them in SQL or UI.
+
+MONTH FINDING
+
+An initial impression suggested many cases were from June 2026. Later manual checks found January examples too.
+
+Confirmed conclusion:
+- The pattern is not June-specific
+- Do not describe this as a June-only issue
+- The issue appears across different months in 2026
+- Possible causes are issuer alignment, coverage-year alignment, policy-household mapping, dependent representation, extract logic, or source-file handling
+
+CRITICAL ANALYTICAL CAUTIONS
+
+Never say:
+- “The Best Life record was found” merely because the same enrollee ID exists under another issuer
+- “The file is missing” merely because the member is absent from the Excel extract
+- “The parser dropped the record” without proving the member exists in source XML and the loaded Azure file has fewer/different parsed rows
+- “The coverage year is wrong” without showing which source date each system uses
+- “The remaining 71 are all true missing records” without confirming the temporary-table source and deduplication
+
+Preferred language:
+- “Person-level match found under another issuer”
+- “No match under issuer 83502 using the tested keys”
+- “Currently unresolved”
+- “Source-file investigation candidate”
+- “This supports a hypothesis but does not prove it”
+
+EVIDENCE REQUIRED TO CLASSIFY ROOT CAUSE
+
+Parser drop:
+Accept only if:
+- XML contains the member
+- The exact file was loaded
+- Azure lacks that member from that file
+- Parser/file row counts or raw payload prove omission
+
+Extract/business filter:
+Accept only if:
+- Row exists under 83502 in Azure
+- The Selma Excel query/filter excluded it
+
+Issuer assignment difference:
+Accept only if:
+- Same person exists under another issuer
+- No matching Best Life policy under 83502
+- Workbench/Sisense shows 83502 for the target enrollment
+
+Household mapping difference:
+Accept only if:
+- Policy/subscriber exists under 83502
+- Dependent member is absent or represented differently in the same policy/source file
+
+Missing source file:
+Accept only if:
+- Account History identifies a source file
+- File is absent from SFTP/local archive and file log, or file log proves it never loaded
+
+Loaded file/parser issue:
+Accept only if:
+- Account History source file exists in file log as loaded
+- XML contains target member
+- inbound_automation lacks target row for that file
+
+CORE SQL INVESTIGATION PATTERNS
+
+1. Inspect available columns before assuming names
+
+SELECT
+    ORDINAL_POSITION,
+    COLUMN_NAME,
+    DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'inbound_automation'
+ORDER BY ORDINAL_POSITION;
+
+Status/benefit/date search:
+
+SELECT
+    ORDINAL_POSITION,
+    COLUMN_NAME,
+    DATA_TYPE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_SCHEMA = 'dbo'
+  AND TABLE_NAME = 'inbound_automation'
+  AND (
+        COLUMN_NAME LIKE '%benefit%'
+     OR COLUMN_NAME LIKE '%effective%'
+     OR COLUMN_NAME LIKE '%start%'
+     OR COLUMN_NAME LIKE '%end%'
+     OR COLUMN_NAME LIKE '%status%'
+     OR COLUMN_NAME LIKE '%enrollment%'
+     OR COLUMN_NAME LIKE '%policy%'
+  )
+ORDER BY ORDINAL_POSITION;
+
+2. Search a member across all known enrollee identifiers
+
+DECLARE @MemberId VARCHAR(100) = '1007765191';
+
+SELECT
+    issuer,
+    insurance_type,
+    coverage_year,
+    folder_year,
+    policy_id,
+    health_coverage_policy_no,
+    member_id,
+    issuer_indiv_identifier,
+    exchg_assigned_enrollee_id,
+    enrollee_status,
+    maintenance_type_code,
+    member_maint_effective_date,
+    source_file_name,
+    row_number_in_file,
+    file_hash,
+    load_run_id,
+    loaded_at
+FROM dbo.inbound_automation
+WHERE
+       LTRIM(RTRIM(member_id)) = @MemberId
+    OR LTRIM(RTRIM(issuer_indiv_identifier)) = @MemberId
+    OR LTRIM(RTRIM(exchg_assigned_enrollee_id)) = @MemberId
+ORDER BY
+    issuer,
+    coverage_year,
+    member_maint_effective_date,
+    loaded_at;
+
+3. Search a policy across likely policy fields
+
+DECLARE @PolicyId VARCHAR(100) = '1000219154';
+
+SELECT *
+FROM dbo.inbound_automation
+WHERE
+       LTRIM(RTRIM(policy_id)) = @PolicyId
+    OR LTRIM(RTRIM(health_coverage_policy_no)) = @PolicyId
+ORDER BY
+    issuer,
+    coverage_year,
+    member_maint_effective_date,
+    loaded_at;
+
+4. Strict Best Life issuer/policy/member search
+
+DECLARE @MemberId VARCHAR(100) = '1007765191';
+DECLARE @PolicyId VARCHAR(100) = '1000219154';
+
+SELECT *
+FROM dbo.inbound_automation
+WHERE issuer = '83502'
+  AND insurance_type = 'Dental'
+  AND (
+         LTRIM(RTRIM(policy_id)) = @PolicyId
+      OR LTRIM(RTRIM(health_coverage_policy_no)) = @PolicyId
+      OR LTRIM(RTRIM(member_id)) = @MemberId
+      OR LTRIM(RTRIM(issuer_indiv_identifier)) = @MemberId
+      OR LTRIM(RTRIM(exchg_assigned_enrollee_id)) = @MemberId
+  )
+ORDER BY coverage_year, member_maint_effective_date, loaded_at;
+
+5. Household inventory for a policy
+
+DECLARE @PolicyId VARCHAR(100) = '1000219154';
+
+SELECT
+    issuer,
+    insurance_type,
+    coverage_year,
+    folder_year,
+    policy_id,
+    health_coverage_policy_no,
+    member_id,
+    issuer_indiv_identifier,
+    exchg_assigned_enrollee_id,
+    enrollee_status,
+    maintenance_type_code,
+    member_maint_effective_date,
+    source_file_name,
+    row_number_in_file,
+    file_hash,
+    loaded_at
+FROM dbo.inbound_automation
+WHERE
+       LTRIM(RTRIM(policy_id)) = @PolicyId
+    OR LTRIM(RTRIM(health_coverage_policy_no)) = @PolicyId
+ORDER BY
+    issuer,
+    coverage_year,
+    source_file_name,
+    row_number_in_file;
+
+6. Batch missing-ID search using a temporary table
+
+CREATE TABLE #SwathiMissingEnrolled
+(
+    enrollee_id VARCHAR(100) NOT NULL
+);
+
+-- Insert the verified Swathi IDs here.
+-- Ensure the source is explicitly filtered to:
+-- HIOS 83502, Dental, Coverage Year 2026, correct comparison category/status.
+
+SELECT
+    m.enrollee_id AS [Swathi Enrollee ID],
+    CASE
+        WHEN ia.member_id IS NOT NULL
+          OR ia.issuer_indiv_identifier IS NOT NULL
+          OR ia.exchg_assigned_enrollee_id IS NOT NULL
+        THEN 'FOUND IN DB'
+        ELSE 'NOT FOUND IN DB'
+    END AS [DB Result],
+    ia.issuer,
+    ia.insurance_type,
+    ia.coverage_year,
+    ia.folder_year,
+    ia.policy_id,
+    ia.health_coverage_policy_no,
+    ia.member_id,
+    ia.issuer_indiv_identifier,
+    ia.exchg_assigned_enrollee_id,
+    ia.enrollee_status,
+    ia.maintenance_type_code,
+    ia.member_maint_effective_date,
+    ia.source_file_name,
+    ia.row_number_in_file,
+    ia.file_hash,
+    ia.loaded_at
+FROM #SwathiMissingEnrolled AS m
+LEFT JOIN dbo.inbound_automation AS ia
+    ON  LTRIM(RTRIM(ia.member_id)) = LTRIM(RTRIM(m.enrollee_id))
+    OR  LTRIM(RTRIM(ia.issuer_indiv_identifier)) = LTRIM(RTRIM(m.enrollee_id))
+    OR  LTRIM(RTRIM(ia.exchg_assigned_enrollee_id)) = LTRIM(RTRIM(m.enrollee_id))
+ORDER BY
+    [DB Result],
+    m.enrollee_id,
+    ia.issuer,
+    ia.coverage_year,
+    ia.loaded_at;
+
+7. Strict issuer-specific batch search
+
+SELECT
+    m.enrollee_id AS [Swathi Enrollee ID],
+    CASE
+        WHEN ia.member_id IS NOT NULL
+          OR ia.issuer_indiv_identifier IS NOT NULL
+          OR ia.exchg_assigned_enrollee_id IS NOT NULL
+        THEN 'FOUND UNDER ISSUER 83502'
+        ELSE 'NOT FOUND UNDER ISSUER 83502'
+    END AS [Best Life DB Result],
+    ia.issuer,
+    ia.insurance_type,
+    ia.coverage_year,
+    ia.folder_year,
+    ia.policy_id,
+    ia.health_coverage_policy_no,
+    ia.member_id,
+    ia.issuer_indiv_identifier,
+    ia.exchg_assigned_enrollee_id,
+    ia.enrollee_status,
+    ia.maintenance_type_code,
+    ia.member_maint_effective_date,
+    ia.source_file_name,
+    ia.row_number_in_file,
+    ia.file_hash,
+    ia.load_run_id,
+    ia.loaded_at
+FROM #SwathiMissingEnrolled AS m
+LEFT JOIN dbo.inbound_automation AS ia
+    ON ia.issuer = '83502'
+   AND ia.insurance_type = 'Dental'
+   AND (
+          LTRIM(RTRIM(ia.member_id)) = LTRIM(RTRIM(m.enrollee_id))
+       OR LTRIM(RTRIM(ia.issuer_indiv_identifier)) = LTRIM(RTRIM(m.enrollee_id))
+       OR LTRIM(RTRIM(ia.exchg_assigned_enrollee_id)) = LTRIM(RTRIM(m.enrollee_id))
+   )
+ORDER BY
+    [Best Life DB Result],
+    m.enrollee_id,
+    ia.coverage_year,
+    ia.member_maint_effective_date;
+
+8. File-log validation after Account History provides a file name
+
+DECLARE @FileName VARCHAR(500) = 'PUT_FILE_NAME_HERE';
+
+SELECT *
+FROM dbo.inbound_automation_file_log
+WHERE source_file_name LIKE '%' + @FileName + '%'
+ORDER BY loaded_at DESC;
+
+If source_file_name or loaded_at differs, inspect INFORMATION_SCHEMA.COLUMNS first.
+
+9. Issuer/year distribution for 83502
+
+SELECT
+    issuer,
+    insurance_type,
+    coverage_year,
+    folder_year,
+    COUNT_BIG(*) AS row_count,
+    COUNT(DISTINCT COALESCE(NULLIF(policy_id,''), NULLIF(health_coverage_policy_no,''))) AS policy_count,
+    COUNT(DISTINCT COALESCE(NULLIF(member_id,''), NULLIF(issuer_indiv_identifier,''), NULLIF(exchg_assigned_enrollee_id,''))) AS member_count
+FROM dbo.inbound_automation
+WHERE LTRIM(RTRIM(issuer)) = '83502'
+GROUP BY issuer, insurance_type, coverage_year, folder_year
+ORDER BY coverage_year, folder_year, insurance_type;
+
+NEXT INVESTIGATION PRIORITIES
+
+Priority 1:
+Produce a verified source list from Swathi:
+- issuer 83502
+- Dental
+- coverage year 2026
+- exact comparison category
+- exact status
+- enrollment_id and enrollee_id together
+
+Priority 2:
+Match Swathi enrollment_id to:
+- policy_id
+- health_coverage_policy_no
+- any actual exchange-assigned policy field found in schema
+
+Priority 3:
+For each policy:
+- inventory subscriber and dependents
+- compare Workbench household with Azure household
+- keep issuer, coverage year, file name, and file hash together
+
+Priority 4:
+For unresolved policies:
+- retrieve Account History file name
+- query file log
+- inspect source XML
+- prove whether source file was loaded and whether the member existed in XML
+
+Priority 5:
+Use a known matched Best Life record as a negative/control case. The same SQL path should find it under 83502. This verifies that the search logic itself is valid.
+
+MEETING RESPONSE STYLE
+
+When I paste a meeting note or question:
+- Answer in English
+- Maximum 3-4 sentences
+- Natural spoken style
+- Based only on established project facts
+- If uncertain, use:
+  - “Based on our current findings…”
+  - “I’ll validate that…”
+  - “We should not conclude that yet…”
+  - “The next step is to verify it at policy and source-file level.”
+
+FINAL CURRENT CONCLUSION
+
+The initial “missing Best Life records” population contains multiple categories:
+- person-level matches under other issuers
+- records under different coverage years
+- Workbench household/subscriber resolution
+- partial household matches
+- records excluded by comparison grain/key
+- a smaller genuinely unresolved group requiring source-file validation
+
+The most important analytical rule:
+A person found anywhere in Azure is not the same as the Best Life policy being found under issuer 83502.
+
+The project should continue with issuer-specific, policy-specific, household-specific, and source-file-specific validation.
