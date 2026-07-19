@@ -1,0 +1,1 @@
+Please acknowledge this context and continue from the current investigation state. Do not restart the analysis, do not rebuild the pipeline, and do not invent business rules. Use SQL-first investigations and clearly separate facts, hypotheses, and assumptions
