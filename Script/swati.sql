@@ -263,3 +263,58 @@ SELECT
             ON r.enrollee_id = b.enrollee_id
         WHERE b.enrollee_id IS NULL
     ) AS Raw_Only;
+
+
+WITH swathi_summary AS (
+    SELECT
+        coverage_year,
+        COUNT(*) AS Total_Rows,
+        COUNT(DISTINCT NULLIF(
+            LTRIM(RTRIM(CAST(enrollment_id AS VARCHAR(200)))),
+            ''
+        )) AS Total_Policies,
+        COUNT(DISTINCT NULLIF(
+            LTRIM(RTRIM(CAST(enrollee_id AS VARCHAR(200)))),
+            ''
+        )) AS Total_Enrollees
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id = 37301
+      AND coverage_year IN (2025, 2026)
+    GROUP BY coverage_year
+),
+raw_summary AS (
+    SELECT
+        coverage_year,
+        COUNT_BIG(*) AS Total_Rows,
+
+        COUNT(DISTINCT COALESCE(
+            NULLIF(LTRIM(RTRIM(CAST(policy_id AS VARCHAR(200)))), ''),
+            NULLIF(LTRIM(RTRIM(CAST(health_coverage_policy_no AS VARCHAR(200)))), '')
+        )) AS Total_Policies,
+
+        COUNT(DISTINCT COALESCE(
+            NULLIF(LTRIM(RTRIM(CAST(member_id AS VARCHAR(200)))), ''),
+            NULLIF(LTRIM(RTRIM(CAST(issuer_indiv_identifier AS VARCHAR(200)))), ''),
+            NULLIF(LTRIM(RTRIM(CAST(exchg_assigned_enrollee_id AS VARCHAR(200)))), '')
+        )) AS Total_Enrollees
+
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year IN (2025, 2026)
+    GROUP BY coverage_year
+)
+SELECT
+    COALESCE(s.coverage_year, r.coverage_year) AS Coverage_Year,
+
+    s.Total_Rows AS Swathi_Total_Rows,
+    s.Total_Policies AS Swathi_Total_Policies,
+    s.Total_Enrollees AS Swathi_Total_Enrollees,
+
+    r.Total_Rows AS Raw_834_Total_Rows,
+    r.Total_Policies AS Raw_834_Total_Policies,
+    r.Total_Enrollees AS Raw_834_Total_Enrollees
+
+FROM swathi_summary s
+FULL OUTER JOIN raw_summary r
+    ON s.coverage_year = r.coverage_year
+ORDER BY Coverage_Year;
