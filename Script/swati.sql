@@ -560,3 +560,14 @@ ORDER BY row_count DESC;
 
 
 
+
+SELECT *
+FROM dbo.inbound_automation
+WHERE member_id = 'BURAYA_MEMBER_ID'
+ORDER BY
+    member_maint_effective_date,
+    loaded_at,
+    source_file;
+
+
+
