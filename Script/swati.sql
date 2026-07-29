@@ -548,7 +548,15 @@ ORDER BY
 
 
 
-
+SELECT
+    member_id,
+    COUNT(*) AS row_count
+FROM dbo.inbound_automation
+WHERE issuer = '37301'
+  AND coverage_year = 2026
+GROUP BY member_id
+HAVING COUNT(*) > 1
+ORDER BY row_count DESC;
 
 
 
