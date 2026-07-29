@@ -318,3 +318,52 @@ FROM swathi_summary s
 FULL OUTER JOIN raw_summary r
     ON s.coverage_year = r.coverage_year
 ORDER BY Coverage_Year;
+
+================================
+
+WITH raw_policies AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(
+            COALESCE(
+                NULLIF(policy_id,''),
+                NULLIF(health_coverage_policy_no,'')
+            ) AS VARCHAR(200)
+        ))) AS policy_id
+    FROM dbo.inbound_automation
+    WHERE issuer='37301'
+      AND coverage_year=2026
+),
+business_policies AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(enrollment_id AS VARCHAR(200)))) AS policy_id
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id=37301
+      AND coverage_year=2026
+)
+
+SELECT
+    (SELECT COUNT(*) FROM raw_policies) AS Raw_Policies,
+    (SELECT COUNT(*) FROM business_policies) AS Business_Policies,
+
+    (
+        SELECT COUNT(*)
+        FROM raw_policies r
+        INNER JOIN business_policies b
+            ON r.policy_id=b.policy_id
+    ) AS Matching_Policies,
+
+    (
+        SELECT COUNT(*)
+        FROM business_policies b
+        LEFT JOIN raw_policies r
+            ON r.policy_id=b.policy_id
+        WHERE r.policy_id IS NULL
+    ) AS Business_Only,
+
+    (
+        SELECT COUNT(*)
+        FROM raw_policies r
+        LEFT JOIN business_policies b
+            ON r.policy_id=b.policy_id
+        WHERE b.policy_id IS NULL
+    ) AS Raw_Only;
