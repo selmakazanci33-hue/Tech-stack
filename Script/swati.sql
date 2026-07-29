@@ -57,3 +57,15 @@ SELECT [coverage_year]
       ,[application_last_update_date]
   FROM [dbo].[Enrollments_TEST]
   where[hios_issuer_id]=37301 and [coverage_year]=2026
+
+
+SELECT
+    coverage_year,
+    COUNT(*) AS Total_Rows,
+    COUNT(DISTINCT enrollment_id) AS Total_Enrollments,
+    COUNT(DISTINCT enrollee_id) AS Total_Enrollees
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year IN (2025, 2026)
+GROUP BY coverage_year
+ORDER BY coverage_year;
