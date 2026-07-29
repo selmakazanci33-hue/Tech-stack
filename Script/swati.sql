@@ -570,4 +570,77 @@ ORDER BY
     source_file;
 
 
+--------------
+
+
+
+WITH issuer_records AS (
+    SELECT
+        coverage_year,
+        loaded_at AS GAA_Load_Datetime,
+        issuer AS hios_issuer_id,
+        insurance_type AS Insurance_Type,
+
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(policy_id)), ''),
+            NULLIF(LTRIM(RTRIM(health_coverage_policy_no)), '')
+        ) AS enrollment_id,
+
+        COALESCE(
+            NULLIF(LTRIM(RTRIM(member_id)), ''),
+            NULLIF(LTRIM(RTRIM(issuer_indiv_identifier)), ''),
+            NULLIF(LTRIM(RTRIM(exchg_assigned_enrollee_id)), '')
+        ) AS enrollee_id,
+
+        enrolleeStatus AS enrollee_status_description,
+        member_maint_effective_date AS enrollee_start_date,
+
+        source_file,
+        folder_year,
+        folder_month,
+        file_hash,
+        row_number_in_file,
+        raw_json,
+
+        ROW_NUMBER() OVER (
+            PARTITION BY COALESCE(
+                NULLIF(LTRIM(RTRIM(member_id)), ''),
+                NULLIF(LTRIM(RTRIM(issuer_indiv_identifier)), ''),
+                NULLIF(LTRIM(RTRIM(exchg_assigned_enrollee_id)), '')
+            )
+            ORDER BY
+                member_maint_effective_date DESC,
+                loaded_at DESC,
+                row_number_in_file DESC
+        ) AS rn
+
+    FROM dbo.inbound_automation
+    WHERE LTRIM(RTRIM(CAST(issuer AS VARCHAR(50)))) = '37301'
+      AND coverage_year = 2026
+      AND COALESCE(
+            NULLIF(LTRIM(RTRIM(member_id)), ''),
+            NULLIF(LTRIM(RTRIM(issuer_indiv_identifier)), ''),
+            NULLIF(LTRIM(RTRIM(exchg_assigned_enrollee_id)), '')
+          ) IS NOT NULL
+)
+
+SELECT
+    coverage_year,
+    GAA_Load_Datetime,
+    hios_issuer_id,
+    Insurance_Type,
+    enrollment_id,
+    enrollee_id,
+    enrollee_status_description,
+    enrollee_start_date,
+    source_file,
+    folder_year,
+    folder_month,
+    file_hash,
+    row_number_in_file,
+    raw_json
+FROM issuer_records
+WHERE rn = 1
+ORDER BY enrollee_id;
+
 
