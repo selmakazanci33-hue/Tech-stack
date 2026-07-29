@@ -439,3 +439,70 @@ SELECT
             ON r.id = b.enrollee_id
         WHERE b.enrollee_id IS NULL
     ) AS Raw_Only;
+
+
+
+--------
+
+
+
+SELECT
+    coverage_year,
+    loaded_at AS GAA_Load_Datetime,
+
+    issuer AS hios_issuer_id,
+    insurance_type AS Insurance_Type,
+
+    COALESCE(
+        NULLIF(policy_id, ''),
+        NULLIF(health_coverage_policy_no, '')
+    ) AS enrollment_id,
+
+    COALESCE(
+        NULLIF(member_id, ''),
+        NULLIF(issuer_indiv_identifier, ''),
+        NULLIF(exchg_assigned_enrollee_id, '')
+    ) AS enrollee_id,
+
+    policy_id,
+    health_coverage_policy_no,
+
+    member_id,
+    issuer_indiv_identifier,
+    exchg_assigned_enrollee_id,
+
+    enrolleeStatus AS enrollee_status_description,
+
+    member_maint_effective_date AS enrollee_start_date,
+    member_maint_end_date AS enrollee_end_date,
+
+    benefit_start_date AS benefit_effective_date,
+    benefit_end_date,
+
+    source_file,
+    folder_year,
+    folder_month,
+    file_hash,
+    row_number_in_file,
+
+    raw_json
+FROM dbo.inbound_automation
+WHERE issuer = '37301'
+  AND coverage_year = 2026
+ORDER BY
+    enrollment_id,
+    enrollee_id,
+    member_maint_effective_date;
+
+
+
+
+
+
+
+
+
+
+
+
+
