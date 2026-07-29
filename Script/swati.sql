@@ -367,3 +367,75 @@ SELECT
             ON r.policy_id=b.policy_id
         WHERE b.policy_id IS NULL
     ) AS Raw_Only;
+
+
+=====================
+
+
+WITH raw_ids AS (
+
+    -- Our Enrollee IDs
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(member_id AS VARCHAR(200)))) AS id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+      AND member_id IS NOT NULL
+
+    UNION
+
+    -- Our Policy IDs
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(
+            COALESCE(
+                NULLIF(policy_id,''),
+                NULLIF(health_coverage_policy_no,'')
+            ) AS VARCHAR(200)
+        ))) AS id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+      AND COALESCE(
+            NULLIF(policy_id,''),
+            NULLIF(health_coverage_policy_no,'')
+          ) IS NOT NULL
+),
+
+business_enrollees AS (
+
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(enrollee_id AS VARCHAR(200)))) AS enrollee_id
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id = 37301
+      AND coverage_year = 2026
+      AND enrollee_id IS NOT NULL
+)
+
+SELECT
+
+    (SELECT COUNT(*) FROM raw_ids) AS Raw_Combined_IDs,
+
+    (SELECT COUNT(*) FROM business_enrollees) AS Business_Enrollees,
+
+    (
+        SELECT COUNT(*)
+        FROM raw_ids r
+        INNER JOIN business_enrollees b
+            ON r.id = b.enrollee_id
+    ) AS Matching_IDs,
+
+    (
+        SELECT COUNT(*)
+        FROM business_enrollees b
+        LEFT JOIN raw_ids r
+            ON r.id = b.enrollee_id
+        WHERE r.id IS NULL
+    ) AS Business_Only,
+
+    (
+        SELECT COUNT(*)
+        FROM raw_ids r
+        LEFT JOIN business_enrollees b
+            ON r.id = b.enrollee_id
+        WHERE b.enrollee_id IS NULL
+    ) AS Raw_Only;
