@@ -140,3 +140,28 @@ SELECT
 FROM dbo.Enrollments_TEST
 WHERE hios_issuer_id = 37301
   AND coverage_year = 2026;
+
+
+SELECT
+    source,
+    COUNT(*) AS Total_Rows,
+    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
+    COUNT(DISTINCT enrollee_id) AS Distinct_Enrollees
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year = 2026
+GROUP BY source
+ORDER BY Distinct_Enrollees DESC;
+
+
+SELECT
+    enrollee_id,
+    COUNT(DISTINCT source) AS Source_Count,
+    STRING_AGG(DISTINCT source, ', ') AS Sources
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year = 2026
+  AND enrollee_id IS NOT NULL
+GROUP BY enrollee_id
+HAVING COUNT(DISTINCT source) > 1
+ORDER BY Source_Count DESC;
