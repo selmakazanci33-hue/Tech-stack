@@ -97,3 +97,12 @@ LEFT JOIN raw_enrollees r
     ON b.enrollee_id = r.enrollee_id
 WHERE r.enrollee_id IS NULL
 ORDER BY b.enrollee_id;
+
+
+SELECT
+    COUNT(DISTINCT member_id) AS member_id_count,
+    COUNT(DISTINCT issuer_indiv_identifier) AS issuer_indiv_identifier_count,
+    COUNT(DISTINCT exchg_assigned_enrollee_id) AS exchg_assigned_enrollee_id_count
+FROM dbo.inbound_automation
+WHERE issuer = '37301'
+  AND coverage_year = 2026;
