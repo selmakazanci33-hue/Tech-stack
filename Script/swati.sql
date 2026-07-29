@@ -115,3 +115,28 @@ FROM dbo.inbound_automation
 WHERE issuer = '37301'
 GROUP BY coverage_year
 ORDER BY coverage_year;
+
+
+SELECT
+    source,
+    COUNT(DISTINCT enrollee_id) AS Enrollees
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year = 2026
+GROUP BY source
+ORDER BY Enrollees DESC;
+
+SELECT
+    COUNT(DISTINCT COALESCE(
+        NULLIF(policy_id, ''),
+        NULLIF(health_coverage_policy_no, '')
+    )) AS Policies
+FROM dbo.inbound_automation
+WHERE issuer = '37301'
+  AND coverage_year = 2026;
+
+SELECT
+    COUNT(DISTINCT enrollment_id) AS Policies
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year = 2026;
