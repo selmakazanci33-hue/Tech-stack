@@ -199,3 +199,26 @@ WHERE e.hios_issuer_id = 37301
 GROUP BY e.enrollee_id
 HAVING COUNT(DISTINCT e.source) > 1
 ORDER BY Source_Count DESC, e.enrollee_id;
+
+
+WITH raw_members AS (
+    SELECT DISTINCT
+        member_id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+      AND member_id IS NOT NULL
+)
+SELECT
+    e.source,
+    COUNT(DISTINCT e.enrollee_id) AS Business_Enrollees,
+    COUNT(DISTINCT CASE
+        WHEN r.member_id IS NOT NULL THEN e.enrollee_id
+    END) AS Found_In_Raw
+FROM dbo.Enrollments_TEST e
+LEFT JOIN raw_members r
+    ON e.enrollee_id = r.member_id
+WHERE e.hios_issuer_id = 37301
+  AND e.coverage_year = 2026
+GROUP BY e.source
+ORDER BY Business_Enrollees DESC;
