@@ -106,3 +106,12 @@ SELECT
 FROM dbo.inbound_automation
 WHERE issuer = '37301'
   AND coverage_year = 2026;
+
+
+SELECT
+    coverage_year,
+    COUNT(DISTINCT member_id) AS Distinct_Members
+FROM dbo.inbound_automation
+WHERE issuer = '37301'
+GROUP BY coverage_year
+ORDER BY coverage_year;
