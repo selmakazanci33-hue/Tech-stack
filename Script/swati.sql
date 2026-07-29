@@ -165,3 +165,37 @@ WHERE hios_issuer_id = 37301
 GROUP BY enrollee_id
 HAVING COUNT(DISTINCT source) > 1
 ORDER BY Source_Count DESC;
+
+
+SELECT
+    enrollee_id,
+    COUNT(DISTINCT source) AS Source_Count
+FROM dbo.Enrollments_TEST
+WHERE hios_issuer_id = 37301
+  AND coverage_year = 2026
+  AND enrollee_id IS NOT NULL
+GROUP BY enrollee_id
+HAVING COUNT(DISTINCT source) > 1
+ORDER BY Source_Count DESC, enrollee_id;
+
+
+
+SELECT
+    e.enrollee_id,
+    COUNT(DISTINCT e.source) AS Source_Count,
+    STUFF((
+        SELECT DISTINCT ', ' + e2.source
+        FROM dbo.Enrollments_TEST e2
+        WHERE e2.enrollee_id = e.enrollee_id
+          AND e2.hios_issuer_id = 37301
+          AND e2.coverage_year = 2026
+          AND e2.source IS NOT NULL
+        FOR XML PATH(''), TYPE
+    ).value('.', 'VARCHAR(MAX)'), 1, 2, '') AS Sources
+FROM dbo.Enrollments_TEST e
+WHERE e.hios_issuer_id = 37301
+  AND e.coverage_year = 2026
+  AND e.enrollee_id IS NOT NULL
+GROUP BY e.enrollee_id
+HAVING COUNT(DISTINCT e.source) > 1
+ORDER BY Source_Count DESC, e.enrollee_id;
