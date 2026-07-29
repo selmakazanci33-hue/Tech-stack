@@ -222,3 +222,44 @@ WHERE e.hios_issuer_id = 37301
   AND e.coverage_year = 2026
 GROUP BY e.source
 ORDER BY Business_Enrollees DESC;
+
+
+WITH raw_members AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(member_id AS VARCHAR(200)))) AS enrollee_id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+      AND NULLIF(LTRIM(RTRIM(CAST(member_id AS VARCHAR(200)))), '') IS NOT NULL
+),
+business_members AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(enrollee_id AS VARCHAR(200)))) AS enrollee_id
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id = 37301
+      AND coverage_year = 2026
+      AND NULLIF(LTRIM(RTRIM(CAST(enrollee_id AS VARCHAR(200)))), '') IS NOT NULL
+)
+SELECT
+    (SELECT COUNT(*) FROM raw_members) AS Raw_Enrollees,
+    (SELECT COUNT(*) FROM business_members) AS Business_Enrollees,
+    (
+        SELECT COUNT(*)
+        FROM raw_members r
+        INNER JOIN business_members b
+            ON r.enrollee_id = b.enrollee_id
+    ) AS Matched_Enrollees,
+    (
+        SELECT COUNT(*)
+        FROM business_members b
+        LEFT JOIN raw_members r
+            ON b.enrollee_id = r.enrollee_id
+        WHERE r.enrollee_id IS NULL
+    ) AS Business_Only,
+    (
+        SELECT COUNT(*)
+        FROM raw_members r
+        LEFT JOIN business_members b
+            ON r.enrollee_id = b.enrollee_id
+        WHERE b.enrollee_id IS NULL
+    ) AS Raw_Only;
