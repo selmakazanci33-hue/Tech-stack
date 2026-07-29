@@ -69,3 +69,31 @@ WHERE hios_issuer_id = 37301
   AND coverage_year IN (2025, 2026)
 GROUP BY coverage_year
 ORDER BY coverage_year;
+
+
+WITH business_enrollees AS (
+    SELECT DISTINCT
+        CAST(enrollee_id AS VARCHAR(200)) AS enrollee_id
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id = 37301
+      AND coverage_year = 2026
+      AND enrollee_id IS NOT NULL
+),
+raw_enrollees AS (
+    SELECT DISTINCT
+        CAST(COALESCE(
+            NULLIF(member_id, ''),
+            NULLIF(issuer_indiv_identifier, ''),
+            NULLIF(exchg_assigned_enrollee_id, '')
+        ) AS VARCHAR(200)) AS enrollee_id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+)
+SELECT
+    b.enrollee_id
+FROM business_enrollees b
+LEFT JOIN raw_enrollees r
+    ON b.enrollee_id = r.enrollee_id
+WHERE r.enrollee_id IS NULL
+ORDER BY b.enrollee_id;
