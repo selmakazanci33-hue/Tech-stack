@@ -643,4 +643,28 @@ FROM issuer_records
 WHERE rn = 1
 ORDER BY enrollee_id;
 
+-----------------------
 
+
+
+WITH raw_enrollees AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(COALESCE(
+            NULLIF(member_id, ''),
+            NULLIF(issuer_indiv_identifier, ''),
+            NULLIF(exchg_assigned_enrollee_id, '')
+        ))) AS enrollee_id
+    FROM dbo.inbound_automation
+    WHERE issuer = '37301'
+      AND coverage_year = 2026
+)
+
+SELECT
+    e.*
+FROM dbo.Enrollments_TEST e
+LEFT JOIN raw_enrollees r
+    ON LTRIM(RTRIM(CAST(e.enrollee_id AS VARCHAR(100)))) = r.enrollee_id
+WHERE e.hios_issuer_id = 37301
+  AND e.coverage_year = 2026
+  AND r.enrollee_id IS NULL
+ORDER BY e.enrollee_id;
