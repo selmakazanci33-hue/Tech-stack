@@ -668,3 +668,58 @@ WHERE e.hios_issuer_id = 37301
   AND e.coverage_year = 2026
   AND r.enrollee_id IS NULL
 ORDER BY e.enrollee_id;
+
+
+
+--------------
+
+
+WITH swathi_enrollees AS (
+    SELECT DISTINCT
+        LTRIM(RTRIM(CAST(enrollee_id AS VARCHAR(200)))) AS enrollee_id
+    FROM dbo.Enrollments_TEST
+    WHERE hios_issuer_id = 37301
+      AND coverage_year = 2026
+      AND enrollee_id IS NOT NULL
+),
+
+our_records AS (
+    SELECT
+        ia.*,
+
+        LTRIM(RTRIM(COALESCE(
+            NULLIF(ia.member_id, ''),
+            NULLIF(ia.issuer_indiv_identifier, ''),
+            NULLIF(ia.exchg_assigned_enrollee_id, '')
+        ))) AS normalized_enrollee_id,
+
+        ROW_NUMBER() OVER (
+            PARTITION BY LTRIM(RTRIM(COALESCE(
+                NULLIF(ia.member_id, ''),
+                NULLIF(ia.issuer_indiv_identifier, ''),
+                NULLIF(ia.exchg_assigned_enrollee_id, '')
+            )))
+            ORDER BY
+                ia.member_maint_effective_date DESC,
+                ia.loaded_at DESC,
+                ia.row_number_in_file DESC
+        ) AS rn
+
+    FROM dbo.inbound_automation ia
+    WHERE ia.issuer = '37301'
+      AND ia.coverage_year = 2026
+      AND COALESCE(
+            NULLIF(ia.member_id, ''),
+            NULLIF(ia.issuer_indiv_identifier, ''),
+            NULLIF(ia.exchg_assigned_enrollee_id, '')
+          ) IS NOT NULL
+)
+
+SELECT
+    r.*
+FROM our_records r
+LEFT JOIN swathi_enrollees s
+    ON r.normalized_enrollee_id = s.enrollee_id
+WHERE s.enrollee_id IS NULL
+  AND r.rn = 1
+ORDER BY r.normalized_enrollee_id;
