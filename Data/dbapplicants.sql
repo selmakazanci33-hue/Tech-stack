@@ -1,0 +1,37 @@
+
+
+
+SELECT
+    coverage_year,
+    household_id,
+    applicant_guid,
+    first_name,
+    last_name
+FROM dbo.PY242526_Applicants_test
+WHERE household_id IN (
+    97970,98174, 3966
+)
+ORDER BY
+    household_id,
+    applicant_guid;
+
+
+2024	3966	1000006588	Desmond	Crutcher
+2025	3966	1000006588	Desmond	Crutcher
+2026	3966	1000006588	Desmond	Crutcher
+2026	3966	1000006593	Tanisha	Taylor
+2025	3966	1000006593	Tanisha	Taylor
+2025	3966	1000006593	Tanisha	Taylor
+2024	3966	1000006593	Tanisha	Taylor
+2024	97970	1000162209	Richard	Rackley
+2025	97970	1000162209	Richard	Rackley
+2026	97970	1000162209	Richard	Rackley
+2025	98174	1000162542	ADRIENNE	SATTERWHITE
+2026	98174	1000162542	ADRIENNE	SATTERWHITE
+2024	98174	1000162542	ADRIENNE	SATTERWHITE
+2024	98174	1000162543	Thurman	Satterwhite
+2025	98174	1000162543	Thurman	Satterwhite
+2026	98174	1000162543	Thurman	Satterwhite
+2026	98174	1000162544	anton	winfree
+2024	98174	1000162544	anton	winfree
+2025	98174	1000162544	anton	winfree
