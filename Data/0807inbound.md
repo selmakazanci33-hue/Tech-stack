@@ -46,4 +46,14 @@ policy for care source:
  
  
 and this same enrollee in 37301 is cancelled but at a later transaction and thats why it was kept as a final transaction in 37301 834 inbound transactions
+
+Here we have Care source record early record which is confirm status and policy id is 1000041237 and transaction date 
+ 
+02-20-2026 03:01:05
+ 
+and EMI status Cancel and transaction date is the last one: 04-11-2026 03:02:38 enrollee same policy: 
+ 
+1000041237
+ 
+ 
  
