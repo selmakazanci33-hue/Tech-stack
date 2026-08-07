@@ -11,6 +11,11 @@ FFM_Enrollee_ID	 Automation_Match_Status	Automation_Policy_ID	Automation_Issuer	
 1000006964	FOUND	212202305	43802	Jennifer	Norris	2026	2026	1	CONFIRM	1/14/2026	01:29.8	from_43802_GA_834_INDV_20260201013246.xml
 1000006964	FOUND	212202304	58081	JENNIFER	NORRIS	2026	2026	2	CONFIRM	2/1/2026	01:29.8	from_58081_GA_834_INDV_20260202151612.xml
 
+1000143218	FOUND	1000041236	60224	Jhonny	Zuniga Santos	2026	2026	2	CONFIRM	2/15/2026	01:29.8	from_60224_GA_834_INDV_20260218220000.xml
+1000143218	FOUND	1000041237	37301	Jhonny	Zuniga Santos	2026	2026	4	CANCEL	NULL	01:29.8	from_37301_GA_834_INDV_20260409041517.xml
+
+
+
 I have identified one enrollee that appears in issuer 49046 and it is a  re-enrollment in 10/17/2025 and Term in 2026(02-25-2026 03:00:45)
 Now same enrollee exactly appears to be same way enrolled in 37301 and same dates Term (02-09-2026 10:46:17) which means same user even though enrolled for different issuers at the same time and cancelled at the same time, enrollee 37301 834 inbound file not received, but enrollee 834 inbound for 49046 received in UI history and always those end up being terminated or cancelled
  
