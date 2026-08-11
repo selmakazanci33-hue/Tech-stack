@@ -1,22 +1,506 @@
+/* ============================================================
+   FULL INBOUND 834 HISTORY INVESTIGATION
+   Enrollee: 1000264528
+   Table   : dbo.inbound_automation
+
+   PURPOSE:
+   1. Detect actual column names in inbound_automation
+   2. Avoid Invalid Column Name errors
+   3. Pull all inbound 834 transactions for the enrollee
+   4. Show issuer / policy / status / maintenance / dates / file
+   5. Sort chronologically for UI comparison
+   ============================================================ */
+
+SET NOCOUNT ON;
+
+DECLARE @EnrolleeID VARCHAR(100) = '1000264528';
+
+
+/* ============================================================
+   STEP 1 — SHOW RELEVANT COLUMNS AVAILABLE IN THE TABLE
+   ============================================================ */
+
 SELECT
-    id,
-    member_id,
-    policy_id,
-    issuer_id,
-    coverage_year,
-    enrollee_status,
-    member_maint_type_code,
-    member_maint_reason_code,
-    member_maint_effective_date,
-    source_file,
-    folder_year,
-    folder_month,
-    loaded_at
+    c.column_id,
+    c.name AS Column_Name,
+    TYPE_NAME(c.user_type_id) AS Data_Type
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND (
+         LOWER(c.name) LIKE '%issuer%'
+      OR LOWER(c.name) LIKE '%hios%'
+      OR LOWER(c.name) LIKE '%member%'
+      OR LOWER(c.name) LIKE '%enrollee%'
+      OR LOWER(c.name) LIKE '%policy%'
+      OR LOWER(c.name) LIKE '%status%'
+      OR LOWER(c.name) LIKE '%maint%'
+      OR LOWER(c.name) LIKE '%effective%'
+      OR LOWER(c.name) LIKE '%event%'
+      OR LOWER(c.name) LIKE '%file%'
+      OR LOWER(c.name) LIKE '%date%'
+      OR LOWER(c.name) LIKE '%reason%'
+      OR LOWER(c.name) LIKE '%type%'
+  )
+ORDER BY c.column_id;
+
+
+/* ============================================================
+   STEP 2 — AUTO-DETECT ACTUAL COLUMN NAMES
+   ============================================================ */
+
+DECLARE
+    @MemberCol        SYSNAME,
+    @PolicyCol        SYSNAME,
+    @IssuerCol        SYSNAME,
+    @StatusCol        SYSNAME,
+    @MaintTypeCol     SYSNAME,
+    @MaintReasonCol   SYSNAME,
+    @EffectiveDateCol SYSNAME,
+    @EventDateCol     SYSNAME,
+    @FileCol          SYSNAME,
+    @FolderYearCol    SYSNAME,
+    @FolderMonthCol   SYSNAME;
+
+
+/* ------------------------------------------------------------
+   MEMBER / ENROLLEE ID
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @MemberCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'member_id',
+        'memberid',
+        'enrollee_id',
+        'enrolleeid',
+        'exchgindividentifier',
+        'exchange_individual_id'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'member_id' THEN 1
+    WHEN 'memberid' THEN 2
+    WHEN 'enrollee_id' THEN 3
+    WHEN 'enrolleeid' THEN 4
+    WHEN 'exchgindividentifier' THEN 5
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   POLICY ID
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @PolicyCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'policy_id',
+        'policyid',
+        'exchgassignedpolicyid',
+        'exchange_assigned_policy_id',
+        'exchangeassignedpolicyid',
+        'enrollment_id'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'policy_id' THEN 1
+    WHEN 'exchgassignedpolicyid' THEN 2
+    WHEN 'exchange_assigned_policy_id' THEN 3
+    WHEN 'enrollment_id' THEN 4
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   ISSUER
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @IssuerCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND (
+         LOWER(c.name) IN (
+             'hios_issuer_id',
+             'hiosissuerid',
+             'issuer',
+             'issuerid',
+             'issuer_code',
+             'gaa_hios_id'
+         )
+      OR LOWER(c.name) LIKE '%issuer%'
+      OR LOWER(c.name) LIKE '%hios%'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'hios_issuer_id' THEN 1
+    WHEN 'gaa_hios_id' THEN 2
+    WHEN 'issuer' THEN 3
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   STATUS
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @StatusCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'enrolleestatus',
+        'enrollee_status',
+        'status_id',
+        'status',
+        'member_status',
+        'memberstatus',
+        'maintenance_status'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'enrolleestatus' THEN 1
+    WHEN 'status_id' THEN 2
+    WHEN 'status' THEN 3
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   MEMBER MAINTENANCE TYPE
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @MaintTypeCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND (
+         LOWER(c.name) IN (
+             'membermainttypecode',
+             'member_maint_type',
+             'member_maintenance_type',
+             'maintenance_type',
+             'maint_type',
+             'maintenance_type_code'
+         )
+      OR (
+             LOWER(c.name) LIKE '%maint%'
+         AND LOWER(c.name) LIKE '%type%'
+      )
+  )
+ORDER BY c.column_id;
+
+
+/* ------------------------------------------------------------
+   MEMBER MAINTENANCE REASON
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @MaintReasonCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND (
+         LOWER(c.name) IN (
+             'membermaintreasoncode',
+             'member_maint_reason',
+             'member_maintenance_reason',
+             'maintenance_reason',
+             'maint_reason',
+             'maintenance_reason_code'
+         )
+      OR (
+             LOWER(c.name) LIKE '%maint%'
+         AND LOWER(c.name) LIKE '%reason%'
+      )
+  )
+ORDER BY c.column_id;
+
+
+/* ------------------------------------------------------------
+   MEMBER MAINTENANCE EFFECTIVE DATE
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @EffectiveDateCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND (
+         LOWER(c.name) IN (
+             'member_maint_effective_date',
+             'membermainteffectivedate',
+             'member_maintenance_effective_date',
+             'maintenance_effective_date',
+             'effective_date'
+         )
+      OR (
+             LOWER(c.name) LIKE '%maint%'
+         AND LOWER(c.name) LIKE '%effective%'
+      )
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'member_maint_effective_date' THEN 1
+    WHEN 'membermainteffectivedate' THEN 2
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   EVENT / TRANSACTION DATE
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @EventDateCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'event_date',
+        'eventdate',
+        'file_event_date',
+        'transaction_date',
+        'loaded_at',
+        'created_at',
+        'source_file_date'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'event_date' THEN 1
+    WHEN 'file_event_date' THEN 2
+    WHEN 'transaction_date' THEN 3
+    WHEN 'loaded_at' THEN 4
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   SOURCE FILE
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @FileCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'source_file',
+        'source_filename',
+        'file_name',
+        'filename',
+        'source_file_name',
+        'source_path'
+  )
+ORDER BY CASE LOWER(c.name)
+    WHEN 'source_file' THEN 1
+    WHEN 'source_filename' THEN 2
+    WHEN 'file_name' THEN 3
+    WHEN 'filename' THEN 4
+    ELSE 99
+END;
+
+
+/* ------------------------------------------------------------
+   FOLDER YEAR
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @FolderYearCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'folder_year',
+        'folderyear'
+  );
+
+
+/* ------------------------------------------------------------
+   FOLDER MONTH
+   ------------------------------------------------------------ */
+
+SELECT TOP 1 @FolderMonthCol = c.name
+FROM sys.columns c
+WHERE c.object_id = OBJECT_ID('dbo.inbound_automation')
+  AND LOWER(c.name) IN (
+        'folder_month',
+        'foldermonth'
+  );
+
+
+/* ============================================================
+   STEP 3 — DISPLAY WHAT WAS DETECTED
+   ============================================================ */
+
+SELECT
+    @MemberCol        AS Detected_Member_Column,
+    @PolicyCol        AS Detected_Policy_Column,
+    @IssuerCol        AS Detected_Issuer_Column,
+    @StatusCol        AS Detected_Status_Column,
+    @MaintTypeCol     AS Detected_Maintenance_Type_Column,
+    @MaintReasonCol   AS Detected_Maintenance_Reason_Column,
+    @EffectiveDateCol AS Detected_Effective_Date_Column,
+    @EventDateCol     AS Detected_Event_Date_Column,
+    @FileCol          AS Detected_Source_File_Column,
+    @FolderYearCol    AS Detected_Folder_Year_Column,
+    @FolderMonthCol   AS Detected_Folder_Month_Column;
+
+
+/* ============================================================
+   STEP 4 — VALIDATE REQUIRED MEMBER COLUMN
+   ============================================================ */
+
+IF @MemberCol IS NULL
+BEGIN
+    RAISERROR(
+        'Could not automatically locate the member/enrollee ID column in dbo.inbound_automation.',
+        16,
+        1
+    );
+
+    RETURN;
+END;
+
+
+/* ============================================================
+   STEP 5 — BUILD FULL HISTORY QUERY
+   ============================================================ */
+
+DECLARE @SQL NVARCHAR(MAX);
+
+SET @SQL = N'
+SELECT
+    ' + QUOTENAME(@MemberCol) + N' AS Inbound_Enrollee_ID,' +
+
+    CASE
+        WHEN @PolicyCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@PolicyCol) + N' AS Inbound_Policy_ID,'
+        ELSE N'
+    NULL AS Inbound_Policy_ID,'
+    END +
+
+    CASE
+        WHEN @IssuerCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@IssuerCol) + N' AS Inbound_Issuer,'
+        ELSE N'
+    NULL AS Inbound_Issuer,'
+    END +
+
+    CASE
+        WHEN @StatusCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@StatusCol) + N' AS Inbound_Status,'
+        ELSE N'
+    NULL AS Inbound_Status,'
+    END +
+
+    CASE
+        WHEN @MaintTypeCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@MaintTypeCol) + N' AS Member_Maintenance_Type,'
+        ELSE N'
+    NULL AS Member_Maintenance_Type,'
+    END +
+
+    CASE
+        WHEN @MaintReasonCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@MaintReasonCol) + N' AS Member_Maintenance_Reason,'
+        ELSE N'
+    NULL AS Member_Maintenance_Reason,'
+    END +
+
+    CASE
+        WHEN @EffectiveDateCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@EffectiveDateCol) + N' AS Member_Maintenance_Effective_Date,'
+        ELSE N'
+    NULL AS Member_Maintenance_Effective_Date,'
+    END +
+
+    CASE
+        WHEN @EventDateCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@EventDateCol) + N' AS Inbound_Event_Date,'
+        ELSE N'
+    NULL AS Inbound_Event_Date,'
+    END +
+
+    CASE
+        WHEN @FolderYearCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@FolderYearCol) + N' AS Folder_Year,'
+        ELSE N'
+    NULL AS Folder_Year,'
+    END +
+
+    CASE
+        WHEN @FolderMonthCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@FolderMonthCol) + N' AS Folder_Month,'
+        ELSE N'
+    NULL AS Folder_Month,'
+    END +
+
+    CASE
+        WHEN @FileCol IS NOT NULL
+        THEN N'
+    ' + QUOTENAME(@FileCol) + N' AS Source_File'
+        ELSE N'
+    NULL AS Source_File'
+    END +
+
+N'
 FROM dbo.inbound_automation
-WHERE CAST(member_id AS VARCHAR(50)) = '1000264528'
-   OR CAST(policy_id AS VARCHAR(50)) IN
-      ('211716960', '210581079', '26140147')
+WHERE CAST(' + QUOTENAME(@MemberCol) + N' AS VARCHAR(100))
+      = @TargetEnrollee
+';
+
+
+/* ============================================================
+   STEP 6 — CHRONOLOGICAL SORT
+   ============================================================ */
+
+IF @EffectiveDateCol IS NOT NULL AND @EventDateCol IS NOT NULL
+BEGIN
+    SET @SQL += N'
 ORDER BY
-    member_maint_effective_date,
-    loaded_at,
-    source_file;
+    ' + QUOTENAME(@EffectiveDateCol) + N',
+    ' + QUOTENAME(@EventDateCol) + N';';
+END
+ELSE IF @EffectiveDateCol IS NOT NULL
+BEGIN
+    SET @SQL += N'
+ORDER BY
+    ' + QUOTENAME(@EffectiveDateCol) + N';';
+END
+ELSE IF @EventDateCol IS NOT NULL
+BEGIN
+    SET @SQL += N'
+ORDER BY
+    ' + QUOTENAME(@EventDateCol) + N';';
+END
+ELSE
+BEGIN
+    SET @SQL += N'
+ORDER BY
+    ' + QUOTENAME(@MemberCol) + N';';
+END;
+
+
+/* ============================================================
+   STEP 7 — EXECUTE
+   ============================================================ */
+
+EXEC sp_executesql
+    @SQL,
+    N'@TargetEnrollee VARCHAR(100)',
+    @TargetEnrollee = @EnrolleeID;
+
+
+/* ============================================================
+   STEP 8 — OPTIONAL:
+   SHOW EVERY RAW COLUMN FOR THIS ENROLLEE
+
+   Useful if an important 834 attribute exists but was not
+   automatically detected above.
+   ============================================================ */
+
+DECLARE @RawSQL NVARCHAR(MAX);
+
+SET @RawSQL = N'
+SELECT *
+FROM dbo.inbound_automation
+WHERE CAST(' + QUOTENAME(@MemberCol) + N' AS VARCHAR(100))
+      = @TargetEnrollee;';
+
+EXEC sp_executesql
+    @RawSQL,
+    N'@TargetEnrollee VARCHAR(100)',
+    @TargetEnrollee = @EnrolleeID;
