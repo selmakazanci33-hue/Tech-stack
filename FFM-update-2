@@ -734,6 +734,41 @@ cancel_history AS
 ),
 
 
+
+/* ============================================================
+   ADDED: SAME ENROLLEE + SAME POLICY TERM HISTORY LOOKUP
+   ============================================================ */
+term_history_ranked AS
+(
+    SELECT
+        f.FFM_Enrollee_ID, f.FFM_Policy_ID,
+        i.Inbound_Event_Date AS Inbound_Term_Event_Date,
+        i.Inbound_File_Date AS Inbound_Term_File_Date,
+        i.Source_File AS Inbound_Term_Source_File,
+        i.Inbound_Issuer AS Inbound_Term_Issuer,
+        i.Folder_Year AS Inbound_Term_Folder_Year,
+        i.Folder_Month AS Inbound_Term_Folder_Month,
+        i.inbound_row_id,
+        ROW_NUMBER() OVER (
+            PARTITION BY f.FFM_Enrollee_ID, f.FFM_Policy_ID
+            ORDER BY CASE WHEN i.Inbound_Event_Date IS NULL THEN 1 ELSE 0 END,
+                     i.Inbound_Event_Date DESC, i.inbound_row_id DESC
+        ) AS term_rn
+    FROM ffm f
+    INNER JOIN inbound i
+      ON f.FFM_Enrollee_ID=i.Inbound_Enrollee_ID
+     AND f.FFM_Policy_ID=i.Inbound_Policy_ID
+     AND i.Inbound_Status_Norm='TERM'
+),
+term_history AS
+(
+    SELECT FFM_Enrollee_ID, FFM_Policy_ID,
+           Inbound_Term_Event_Date, Inbound_Term_File_Date,
+           Inbound_Term_Source_File, Inbound_Term_Issuer,
+           Inbound_Term_Folder_Year, Inbound_Term_Folder_Month
+    FROM term_history_ranked WHERE term_rn=1
+),
+
 /* ============================================================
    FINAL CLASSIFICATION
    ============================================================ */
@@ -847,6 +882,21 @@ final AS
                 THEN 'CANCEL_FOUND_IN_HISTORY'
             ELSE 'CANCEL_NOT_FOUND_IN_HISTORY'
         END AS Cancel_History_Classification,
+
+        /* ADDED: TERM HISTORY VALIDATION */
+        CASE WHEN f.FFM_Status_Norm <> 'TERM' THEN 'NOT_APPLICABLE'
+             WHEN th.FFM_Enrollee_ID IS NOT NULL THEN 'YES' ELSE 'NO'
+        END AS Inbound_Term_Found_Flag,
+        th.Inbound_Term_Event_Date,
+        th.Inbound_Term_File_Date,
+        th.Inbound_Term_Source_File,
+        th.Inbound_Term_Issuer,
+        th.Inbound_Term_Folder_Year,
+        th.Inbound_Term_Folder_Month,
+        CASE WHEN f.FFM_Status_Norm <> 'TERM' THEN 'NOT_APPLICABLE'
+             WHEN th.FFM_Enrollee_ID IS NOT NULL THEN 'TERM_FOUND_IN_HISTORY'
+             ELSE 'TERM_NOT_FOUND_IN_HISTORY'
+        END AS Term_History_Classification,
 
 
         COALESCE(
@@ -1060,6 +1110,10 @@ final AS
 
        AND f.FFM_Policy_ID
          = ch.FFM_Policy_ID
+
+    LEFT JOIN term_history th
+        ON f.FFM_Enrollee_ID = th.FFM_Enrollee_ID
+       AND f.FFM_Policy_ID = th.FFM_Policy_ID
 )
 
 
@@ -1428,3 +1482,60 @@ ORDER BY
     Cancel_History_Classification,
     FFM_Enrollee_ID,
     FFM_Policy_ID;
+
+/* ============================================================
+   RESULT SET 8 - FINAL CANCEL/TERM LIFECYCLE EVIDENCE SUMMARY
+   ============================================================ */
+SELECT
+    FFM_Status_Norm AS FFM_Lifecycle_Status,
+    CASE WHEN FFM_Status_Norm='CANCEL' THEN Cancel_History_Classification
+         WHEN FFM_Status_Norm='TERM' THEN Term_History_Classification
+    END AS Lifecycle_History_Classification,
+    COUNT(*) AS Record_Count,
+    COUNT(DISTINCT CONCAT(FFM_Enrollee_ID,'|',FFM_Policy_ID)) AS Distinct_FFM_Pairs,
+    COUNT(DISTINCT FFM_Enrollee_ID) AS Distinct_Enrollees,
+    COUNT(DISTINCT FFM_Policy_ID) AS Distinct_FFM_Policies
+FROM #final_results
+WHERE Match_Level='EXACT_ENROLLEE_POLICY_MATCH'
+  AND Policy_Match_Flag='YES'
+  AND Issuer_Match_Flag='YES'
+  AND Status_Match_Flag='NO'
+  AND Inbound_Status_Norm='CONFIRM'
+  AND FFM_Status_Norm IN ('CANCEL','TERM')
+GROUP BY FFM_Status_Norm,
+    CASE WHEN FFM_Status_Norm='CANCEL' THEN Cancel_History_Classification
+         WHEN FFM_Status_Norm='TERM' THEN Term_History_Classification END
+ORDER BY FFM_Lifecycle_Status, Lifecycle_History_Classification;
+
+
+/* ============================================================
+   RESULT SET 9 - FINAL CANCEL/TERM LIFECYCLE EVIDENCE DETAIL
+   Export this result to Excel.
+   ============================================================ */
+SELECT
+    FFM_Enrollee_ID, FFM_Policy_ID, FFM_Issuer, FFM_Coverage_Year,
+    FFM_Enrollment_Status_Raw, FFM_Enrollee_Status_Raw,
+    FFM_Status_Raw, FFM_Status_Norm, FFM_Event_Date,
+    Inbound_Enrollee_ID, Inbound_Policy_ID, Inbound_Issuer,
+    ISSUER, Issuer_Type, Inbound_Coverage_Year,
+    Inbound_Status_Raw, Inbound_Status_Norm, Inbound_Event_Date,
+    Inbound_File_Date, Folder_Year, Folder_Month, Source_File,
+    Policy_Match_Flag, Issuer_Match_Flag, Status_Match_Flag,
+    Date_Difference_Days, Match_Level, Match_Score,
+    Root_Cause_Category, Hari_Root_Cause_Category,
+    Inbound_Cancel_Found_Flag, Cancel_History_Classification,
+    Inbound_Cancel_Event_Date, Inbound_Cancel_File_Date,
+    Inbound_Cancel_Source_File, Inbound_Cancel_Issuer,
+    Inbound_Cancel_Folder_Year, Inbound_Cancel_Folder_Month,
+    Inbound_Term_Found_Flag, Term_History_Classification,
+    Inbound_Term_Event_Date, Inbound_Term_File_Date,
+    Inbound_Term_Source_File, Inbound_Term_Issuer,
+    Inbound_Term_Folder_Year, Inbound_Term_Folder_Month
+FROM #final_results
+WHERE Match_Level='EXACT_ENROLLEE_POLICY_MATCH'
+  AND Policy_Match_Flag='YES'
+  AND Issuer_Match_Flag='YES'
+  AND Status_Match_Flag='NO'
+  AND Inbound_Status_Norm='CONFIRM'
+  AND FFM_Status_Norm IN ('CANCEL','TERM')
+ORDER BY FFM_Status_Norm, FFM_Enrollee_ID, FFM_Policy_ID;
