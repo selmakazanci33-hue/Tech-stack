@@ -1,0 +1,22 @@
+SELECT
+    id,
+    member_id,
+    policy_id,
+    issuer_id,
+    coverage_year,
+    enrollee_status,
+    member_maint_type_code,
+    member_maint_reason_code,
+    member_maint_effective_date,
+    source_file,
+    folder_year,
+    folder_month,
+    loaded_at
+FROM dbo.inbound_automation
+WHERE CAST(member_id AS VARCHAR(50)) = '1000264528'
+   OR CAST(policy_id AS VARCHAR(50)) IN
+      ('211716960', '210581079', '26140147')
+ORDER BY
+    member_maint_effective_date,
+    loaded_at,
+    source_file;
