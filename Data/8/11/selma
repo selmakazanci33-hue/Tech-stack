@@ -1,5 +1,8 @@
 
-
+ 
+FFM_Enrollee_ID	FFM_Policy_ID	FFM_Issuer	FFM_Coverage_Year	FFM_Enrollment_Status_Raw	FFM_Enrollee_Status_Norm	FFM_Status_Raw	FFM_Status_Norm	FFM_Event_Date	household_id	Person_Type	relationship_type	Inbound_Enrollee_ID	Inbound_Policy_ID	Inbound_Issuer	ISSUER	Issuer_Type	Inbound_Coverage_Year	Inbound_Status_Raw	Inbound_Status_Norm	Inbound_Event_Date	member_maint_effective_date	Inbound_File_Date	Folder_Year	Folder_month	Source_File	Policy_Match_Flag	Issuer_match_Flag	Status_Match_Flag	Date_Difference_Days	Match_Level	Match_Score	Root_Cause_Category	Hari_Root_Cause_Category
+ 
+ 
 
 
 
