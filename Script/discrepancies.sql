@@ -1586,3 +1586,59 @@ INNER JOIN #pair_level p
 ORDER BY
     n.FFM_Enrollee_ID,
     n.FFM_Policy_ID;
+
+======================IF NEEDED add end of script for UNIQUE VALUES =============================
+
+
+Append this block to the end of the script. It reads from #disc_detail and uses EXACT_ENROLLEE_POLICY_FOUND:
+
+/* ============================================================
+   OUTPUT A — UNIQUE EXACT ENROLLEE + POLICY PAIRS
+   ============================================================ */
+SELECT DISTINCT
+    FFM_Enrollee_ID,
+    FFM_Policy_ID
+FROM #disc_detail
+WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Policy_ID;
+/* ============================================================
+   OUTPUT B — UNIQUE ENROLLEES (EXACT MATCHES ONLY)
+   ============================================================ */
+SELECT DISTINCT
+    FFM_Enrollee_ID
+FROM #disc_detail
+WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
+ORDER BY
+    FFM_Enrollee_ID;
+/* ============================================================
+   OUTPUT C — UNIQUE POLICIES (EXACT MATCHES ONLY)
+   ============================================================ */
+SELECT DISTINCT
+    FFM_Policy_ID
+FROM #disc_detail
+WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
+ORDER BY
+    FFM_Policy_ID;
+/* ============================================================
+   OUTPUT D — UNIQUE COUNTS SUMMARY (EXACT MATCHES ONLY)
+   ============================================================ */
+SELECT
+    COUNT(DISTINCT CONCAT(FFM_Enrollee_ID, '|', FFM_Policy_ID))
+        AS Unique_Enrollee_Policy_Pairs,
+    COUNT(DISTINCT FFM_Enrollee_ID)
+        AS Unique_Enrollees,
+    COUNT(DISTINCT FFM_Policy_ID)
+        AS Unique_Policies
+FROM #disc_detail
+WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES';
+
+
+
+
+
+
+
+
+
