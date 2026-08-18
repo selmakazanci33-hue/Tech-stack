@@ -2,1231 +2,563 @@
 
 
 /* ============================================================
-   SAME TRANSACTION / DIFFERENT POLICY RECONCILIATION
-   FFM: dbo.Enrollments_TEST
-   Inbound: dbo.inbound_automation
+   NO 834 INBOUND
+   VS
+   2025 + 2026 MONTHLY DISCREPANCY / RECON
 
-   Scope:
-      FFM issuer = 70893
-      ALL coverage years
-      ALL inbound issuers
-      ALL inbound years
+   PURPOSE:
+   Take records classified as NO INBOUND from #final_results
+   and determine whether they exist in Recon / Discrepancy data.
 
-   Matching strategy:
-      Enrollee first
-      Policy is comparison/ranking criteria
+   MATCH LEVELS:
+       1. EXACT_MEMBER_POLICY
+       2. MEMBER_MATCH_DIFFERENT_POLICY
+       3. POLICY_MATCH_DIFFERENT_MEMBER
    ============================================================ */
 
-DROP TABLE IF EXISTS #final_results;
 
-DECLARE @ffm_issuer VARCHAR(20) = '15105';
+DROP TABLE IF EXISTS #no_inbound_recon_matches;
 
 
-;WITH ffm AS
+/* ============================================================
+   STEP 1
+   COMBINE 2025 + 2026 DISCREPANCY TABLES
+   ============================================================ */
+
+;WITH recon_all AS
 (
+
+    /* -------------------------
+       PY2025
+       ------------------------- */
+
     SELECT
+        2025 AS Recon_Table_Year,
 
-        CAST(e.enrollee_id AS VARCHAR(100))
-            AS FFM_Enrollee_ID,
+        Coverage_Year,
+        CAST(GAA_HIOS_ID AS VARCHAR(20)) AS Recon_Issuer,
 
-        CAST(e.enrollment_id AS VARCHAR(100))
-            AS FFM_Policy_ID,
+        GAA_Load_Datetime,
+        GAA_Issuer_File_Name,
+        GAA_Issuer_File_Datetime,
 
-        CAST(e.hios_issuer_id AS VARCHAR(20))
-            AS FFM_Issuer,
+        CAST(Exchange_Assigned_Policy_ID AS VARCHAR(100))
+            AS Recon_Policy_ID,
 
-        e.coverage_year
-            AS FFM_Coverage_Year,
+        Plan_ID,
 
-        e.enrollment_status_description
-            AS FFM_Enrollment_Status_Raw,
+        Member_Last_Name,
+        Member_First_Name,
 
-        e.enrollee_status_description
-            AS FFM_Enrollee_Status_Raw,
+        CAST(Exchange_Assigned_Member_ID AS VARCHAR(100))
+            AS Recon_Member_ID,
 
+        Issuer_Assigned_Member_ID,
 
-        /* ====================================================
-           FFM RAW STATUS
-           Prefer enrollee status, otherwise enrollment status
-           ==================================================== */
+        Subscriber_Last_Name,
+        Subscriber_First_Name,
 
-        COALESCE(
-            e.enrollee_status_description,
-            e.enrollment_status_description
-        ) AS FFM_Status_Raw,
+        Exchange_Assigned_Subscriber_ID,
+        Issuer_Assigned_Subscriber_ID,
 
+        Discrepancy_Reason_Code,
+        Discrepancy_Reason_Text,
 
-        /* ====================================================
-           FFM NORMALIZED STATUS
-           ==================================================== */
+        HIX_Value,
+        Issuer_Value,
 
-        CASE
+        Date_of_Discrepancy,
 
-            WHEN UPPER(
-                LTRIM(RTRIM(
-                    COALESCE(
-                        e.enrollee_status_description,
-                        e.enrollment_status_description
-                    )
-                ))
-            ) = 'ENROLLED'
-                THEN 'CONFIRM'
+        Recon_File_Name,
+
+        Autofixed_by_HIX,
+        Assignee,
+
+        Enrollment_Status
+
+    FROM dbo.monthly_discrepancy_PY2025
 
 
-            WHEN UPPER(
-                LTRIM(RTRIM(
-                    COALESCE(
-                        e.enrollee_status_description,
-                        e.enrollment_status_description
-                    )
-                ))
-            ) IN ('CANCELLED', 'CANCELED')
-                THEN 'CANCEL'
+    UNION ALL
 
 
-            WHEN UPPER(
-                LTRIM(RTRIM(
-                    COALESCE(
-                        e.enrollee_status_description,
-                        e.enrollment_status_description
-                    )
-                ))
-            ) = 'TERMINATED'
-                THEN 'TERM'
+    /* -------------------------
+       PY2026
+       ------------------------- */
 
+    SELECT
+        2026 AS Recon_Table_Year,
 
-            ELSE 'STATUS_MAPPING_REVIEW'
+        Coverage_Year,
+        CAST(GAA_HIOS_ID AS VARCHAR(20)) AS Recon_Issuer,
 
-        END AS FFM_Status_Norm,
+        GAA_Load_Datetime,
+        GAA_Issuer_File_Name,
+        GAA_Issuer_File_Datetime,
 
+        CAST(Exchange_Assigned_Policy_ID AS VARCHAR(100))
+            AS Recon_Policy_ID,
 
-        /* ====================================================
-           FFM DATES
-           ==================================================== */
+        Plan_ID,
 
-        e.benefit_effective_date,
-        e.benefit_end_date,
-        e.enrollment_create_date,
-        e.enrollment_last_update_date,
+        Member_Last_Name,
+        Member_First_Name,
 
+        CAST(Exchange_Assigned_Member_ID AS VARCHAR(100))
+            AS Recon_Member_ID,
 
-        /* ====================================================
-           BEST AVAILABLE FFM BUSINESS EVENT DATE
+        Issuer_Assigned_Member_ID,
 
-           Cursor analysis found:
-           enrollment_last_update_date
-           was the strongest date correlate.
-           ==================================================== */
+        Subscriber_Last_Name,
+        Subscriber_First_Name,
 
-        COALESCE(
+        Exchange_Assigned_Subscriber_ID,
+        Issuer_Assigned_Subscriber_ID,
 
-            e.enrollment_last_update_date,
+        Discrepancy_Reason_Code,
+        Discrepancy_Reason_Text,
 
-            CASE
-                WHEN UPPER(
-                    LTRIM(RTRIM(
-                        COALESCE(
-                            e.enrollee_status_description,
-                            e.enrollment_status_description
-                        )
-                    ))
-                ) IN (
-                    'CANCELLED',
-                    'CANCELED',
-                    'TERMINATED'
-                )
-                THEN e.benefit_end_date
-            END,
+        HIX_Value,
+        Issuer_Value,
 
-            e.enrollment_create_date,
+        Date_of_Discrepancy,
 
-            e.benefit_effective_date
+        Recon_File_Name,
 
-        ) AS FFM_Event_Date,
+        Autofixed_by_HIX,
+        Assignee,
 
+        Enrollment_Status
 
-        /* ====================================================
-           HOUSEHOLD / RELATIONSHIP
-           ==================================================== */
-
-        e.household_id,
-        e.person_type,
-        e.relationship_type,
-
-        e.source AS FFM_Source
-
-    FROM dbo.Enrollments_TEST e
-
-    WHERE CAST(e.hios_issuer_id AS VARCHAR(20))
-          = @ffm_issuer
+    FROM dbo.monthly_discrepancy_PY2026
 ),
 
 
 /* ============================================================
-   INBOUND POPULATION
-   ALL ISSUERS / ALL YEARS
-
-   IMPORTANT FIX:
-   Check THREE possible enrollee identifiers.
+   STEP 2
+   ONLY OUR NO-INBOUND POPULATION
    ============================================================ */
 
-inbound AS
+no_inbound AS
 (
-    SELECT
+    SELECT DISTINCT
 
-        /* ====================================================
-           ENROLLEE IDENTIFIER
-           ==================================================== */
+        FFM_Enrollee_ID,
+        FFM_Policy_ID,
 
-        CAST(
-            COALESCE(
+        FFM_Issuer,
+        FFM_Coverage_Year,
 
-                NULLIF(
-                    LTRIM(RTRIM(
-                        CAST(ia.member_id AS VARCHAR(200))
-                    )),
-                    ''
-                ),
+        FFM_Enrollment_Status_Raw,
+        FFM_Enrollee_Status_Raw,
+        FFM_Status_Norm,
 
-                NULLIF(
-                    LTRIM(RTRIM(
-                        CAST(ia.issuer_indiv_identifier AS VARCHAR(200))
-                    )),
-                    ''
-                ),
+        FFM_Event_Date,
 
-                NULLIF(
-                    LTRIM(RTRIM(
-                        CAST(ia.exchg_assigned_enrollee_id AS VARCHAR(200))
-                    )),
-                    ''
-                )
+        household_id,
+        person_type,
+        relationship_type,
 
-            )
-            AS VARCHAR(100)
-        ) AS Inbound_Enrollee_ID,
+        Match_Level,
+        Match_Score,
 
+        Root_Cause_Category,
+        Hari_Root_Cause_Category
 
-        /* ====================================================
-           POLICY IDENTIFIER
-           ==================================================== */
-
-        CAST(
-            COALESCE(
-
-                NULLIF(
-                    LTRIM(RTRIM(
-                        CAST(ia.policy_id AS VARCHAR(200))
-                    )),
-                    ''
-                ),
-
-                NULLIF(
-                    LTRIM(RTRIM(
-                        CAST(ia.health_coverage_policy_no AS VARCHAR(200))
-                    )),
-                    ''
-                )
-
-            )
-            AS VARCHAR(100)
-        ) AS Inbound_Policy_ID,
-
-
-        CAST(ia.issuer AS VARCHAR(20))
-            AS Inbound_Issuer,
-
-        ia.coverage_year
-            AS Inbound_Coverage_Year,
-
-        ia.enrolleeStatus
-            AS Inbound_Status_Raw,
-
-
-        /* ====================================================
-           INBOUND NORMALIZED STATUS
-           ==================================================== */
-
-        CASE
-
-            WHEN UPPER(
-                LTRIM(RTRIM(ia.enrolleeStatus))
-            ) = 'CONFIRM'
-                THEN 'CONFIRM'
-
-            WHEN UPPER(
-                LTRIM(RTRIM(ia.enrolleeStatus))
-            ) = 'CANCEL'
-                THEN 'CANCEL'
-
-            WHEN UPPER(
-                LTRIM(RTRIM(ia.enrolleeStatus))
-            ) = 'TERM'
-                THEN 'TERM'
-
-            ELSE 'STATUS_MAPPING_REVIEW'
-
-        END AS Inbound_Status_Norm,
-
-
-        /* ====================================================
-           RAW INBOUND DATES
-           ==================================================== */
-
-        ia.member_maint_effective_date,
-
-        ia.benefit_effective_date
-            AS Inbound_Benefit_Effective_Date,
-
-        ia.benefit_end_date
-            AS Inbound_Benefit_End_Date,
-
-
-        /* ====================================================
-           FILE DATE
-
-           Extract YYYYMMDD from source filename where available.
-           ==================================================== */
-
-        CASE
-
-            WHEN PATINDEX(
-                '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%',
-                ia.source_file
-            ) > 0
-
-            THEN TRY_CONVERT(
-                DATE,
-
-                SUBSTRING(
-                    ia.source_file,
-
-                    PATINDEX(
-                        '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%',
-                        ia.source_file
-                    ),
-
-                    8
-                ),
-
-                112
-            )
-
-        END AS Inbound_File_Date,
-
-
-        /* ====================================================
-           BEST AVAILABLE INBOUND BUSINESS EVENT DATE
-
-           loaded_at is intentionally NOT used as business date.
-           ==================================================== */
-
-        COALESCE(
-
-            ia.member_maint_effective_date,
-
-            CASE
-
-                WHEN PATINDEX(
-                    '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%',
-                    ia.source_file
-                ) > 0
-
-                THEN TRY_CONVERT(
-                    DATE,
-
-                    SUBSTRING(
-                        ia.source_file,
-
-                        PATINDEX(
-                            '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]%',
-                            ia.source_file
-                        ),
-
-                        8
-                    ),
-
-                    112
-                )
-
-            END,
-
-            ia.benefit_effective_date
-
-        ) AS Inbound_Event_Date,
-
-
-        ia.folder_year
-            AS Folder_Year,
-
-        ia.folder_month
-            AS Folder_Month,
-
-        ia.source_file
-            AS Source_File,
-
-        ia.household_or_employee_case_id,
-
-        ia.relationship,
-
-        ia.loaded_at,
-
-        ia.id
-            AS inbound_row_id
-
-    FROM dbo.inbound_automation ia
+    FROM #final_results
 
     WHERE
-
-        COALESCE(
-
-            NULLIF(
-                LTRIM(RTRIM(
-                    CAST(ia.member_id AS VARCHAR(200))
-                )),
-                ''
-            ),
-
-            NULLIF(
-                LTRIM(RTRIM(
-                    CAST(ia.issuer_indiv_identifier AS VARCHAR(200))
-                )),
-                ''
-            ),
-
-            NULLIF(
-                LTRIM(RTRIM(
-                    CAST(ia.exchg_assigned_enrollee_id AS VARCHAR(200))
-                )),
-                ''
-            )
-
-        ) IS NOT NULL
+           Root_Cause_Category = 'NO_INBOUND_EVIDENCE'
+        OR Hari_Root_Cause_Category = 'NO INBOUND'
 ),
 
 
 /* ============================================================
-   CANDIDATE MATCHES
+   STEP 3
+   FIND ALL POSSIBLE RECON MATCHES
 
-   JOIN IS ENROLLEE-FIRST.
+   IMPORTANT:
+   We intentionally search BOTH:
+      MEMBER ID
+      POLICY ID
 
-   Policy ID is NOT required to join.
+   because:
+   - policy can change over time
+   - same policy can contain multiple household members
    ============================================================ */
 
-candidates AS
+matches AS
 (
     SELECT
 
-        /* --------------------
-           FFM
-           -------------------- */
+        /* ======================
+           ORIGINAL FFM RECORD
+           ====================== */
 
-        f.FFM_Enrollee_ID,
-        f.FFM_Policy_ID,
-        f.FFM_Issuer,
-        f.FFM_Coverage_Year,
+        n.FFM_Enrollee_ID,
+        n.FFM_Policy_ID,
+        n.FFM_Issuer,
+        n.FFM_Coverage_Year,
 
-        f.FFM_Enrollment_Status_Raw,
-        f.FFM_Enrollee_Status_Raw,
+        n.FFM_Enrollment_Status_Raw,
+        n.FFM_Enrollee_Status_Raw,
+        n.FFM_Status_Norm,
 
-        f.FFM_Status_Raw,
-        f.FFM_Status_Norm,
+        n.FFM_Event_Date,
 
-        f.FFM_Event_Date,
+        n.household_id,
+        n.person_type,
+        n.relationship_type,
 
-        f.benefit_effective_date
-            AS FFM_Benefit_Effective_Date,
-
-        f.benefit_end_date
-            AS FFM_Benefit_End_Date,
-
-        f.enrollment_create_date
-            AS FFM_Create_Date,
-
-        f.enrollment_last_update_date
-            AS FFM_Last_Update_Date,
-
-        f.household_id,
-
-        f.person_type,
-
-        f.relationship_type,
+        n.Root_Cause_Category,
+        n.Hari_Root_Cause_Category,
 
 
-        /* --------------------
-           INBOUND
-           -------------------- */
+        /* ======================
+           RECON MATCH
+           ====================== */
 
-        i.Inbound_Enrollee_ID,
-        i.Inbound_Policy_ID,
-        i.Inbound_Issuer,
-        i.Inbound_Coverage_Year,
+        r.Recon_Table_Year,
 
-        i.Inbound_Status_Raw,
-        i.Inbound_Status_Norm,
+        r.Coverage_Year
+            AS Recon_Coverage_Year,
 
-        i.Inbound_Event_Date,
+        r.Recon_Issuer,
 
-        i.member_maint_effective_date,
+        r.Recon_Policy_ID,
+        r.Recon_Member_ID,
 
-        i.Inbound_File_Date,
+        r.Member_First_Name,
+        r.Member_Last_Name,
 
-        i.Folder_Year,
-        i.Folder_Month,
+        r.Plan_ID,
 
-        i.Source_File,
-
-        i.household_or_employee_case_id,
-
-        i.relationship
-            AS Inbound_Relationship,
+        r.Enrollment_Status
+            AS Recon_Enrollment_Status,
 
 
-        /* ====================================================
-           MATCH FLAGS
-           ==================================================== */
+        /* ======================
+           DISCREPANCY DETAILS
+           ====================== */
 
-        CASE
-            WHEN f.FFM_Policy_ID = i.Inbound_Policy_ID
-                THEN 'YES'
-            ELSE 'NO'
-        END AS Policy_Match_Flag,
+        r.Discrepancy_Reason_Code,
+        r.Discrepancy_Reason_Text,
 
+        r.HIX_Value,
+        r.Issuer_Value,
 
-        CASE
-            WHEN f.FFM_Issuer = i.Inbound_Issuer
-                THEN 'YES'
-            ELSE 'NO'
-        END AS Issuer_Match_Flag,
+        r.Date_of_Discrepancy,
+
+        r.Autofixed_by_HIX,
+        r.Assignee,
 
 
-        CASE
+        /* ======================
+           FILE INFORMATION
+           ====================== */
 
-            WHEN f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
+        r.Recon_File_Name,
 
-                THEN 'YES'
+        r.GAA_Issuer_File_Name,
 
-            ELSE 'NO'
+        r.GAA_Issuer_File_Datetime,
 
-        END AS Status_Match_Flag,
+        r.GAA_Load_Datetime,
 
 
         /* ====================================================
-           DATE DIFFERENCE
+           HOW DID WE FIND IT?
            ==================================================== */
 
         CASE
 
-            WHEN f.FFM_Event_Date IS NOT NULL
-             AND i.Inbound_Event_Date IS NOT NULL
+            WHEN
+                LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                    = LTRIM(RTRIM(r.Recon_Member_ID))
 
-            THEN ABS(
-                DATEDIFF(
-                    DAY,
-                    f.FFM_Event_Date,
-                    i.Inbound_Event_Date
-                )
-            )
+            AND LTRIM(RTRIM(n.FFM_Policy_ID))
+                    = LTRIM(RTRIM(r.Recon_Policy_ID))
 
-        END AS Date_Difference_Days,
+                THEN 'EXACT_MEMBER_POLICY'
 
 
-        /* ====================================================
-           MATCH RANK
+            WHEN
+                LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                    = LTRIM(RTRIM(r.Recon_Member_ID))
 
-           LOWER = BETTER
-           ==================================================== */
+                THEN 'MEMBER_MATCH_DIFFERENT_POLICY'
 
-        CASE
 
-            /* Exact enrollee + policy */
-            WHEN f.FFM_Policy_ID = i.Inbound_Policy_ID
-                THEN 1
+            WHEN
+                LTRIM(RTRIM(n.FFM_Policy_ID))
+                    = LTRIM(RTRIM(r.Recon_Policy_ID))
 
-
-            /* Same issuer/status/exact date */
-            WHEN f.FFM_Issuer = i.Inbound_Issuer
-             AND f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
-             AND f.FFM_Event_Date IS NOT NULL
-             AND i.Inbound_Event_Date IS NOT NULL
-             AND ABS(
-                    DATEDIFF(
-                        DAY,
-                        f.FFM_Event_Date,
-                        i.Inbound_Event_Date
-                    )
-                 ) = 0
-
-                THEN 2
-
-
-            /* Same issuer/status within 7 days */
-            WHEN f.FFM_Issuer = i.Inbound_Issuer
-             AND f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
-             AND f.FFM_Event_Date IS NOT NULL
-             AND i.Inbound_Event_Date IS NOT NULL
-             AND ABS(
-                    DATEDIFF(
-                        DAY,
-                        f.FFM_Event_Date,
-                        i.Inbound_Event_Date
-                    )
-                 ) <= 7
-
-                THEN 3
-
-
-            /* Same issuer + same status */
-            WHEN f.FFM_Issuer = i.Inbound_Issuer
-             AND f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
-
-                THEN 4
-
-
-            /* Same issuer */
-            WHEN f.FFM_Issuer = i.Inbound_Issuer
-                THEN 5
-
-
-            /* Cross issuer + same status + within 30 days */
-            WHEN f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
-             AND f.FFM_Event_Date IS NOT NULL
-             AND i.Inbound_Event_Date IS NOT NULL
-             AND ABS(
-                    DATEDIFF(
-                        DAY,
-                        f.FFM_Event_Date,
-                        i.Inbound_Event_Date
-                    )
-                 ) <= 30
-
-                THEN 6
-
-
-            /* Cross issuer + same status */
-            WHEN f.FFM_Status_Norm = i.Inbound_Status_Norm
-             AND f.FFM_Status_Norm <> 'STATUS_MAPPING_REVIEW'
-
-                THEN 7
-
-
-            /* Same enrollee only */
-            ELSE 8
-
-        END AS rank_priority,
-
-
-        i.inbound_row_id
-
-    FROM ffm f
-
-    INNER JOIN inbound i
-
-        ON f.FFM_Enrollee_ID
-         = i.Inbound_Enrollee_ID
-),
-
-
-/* ============================================================
-   RANK BEST INBOUND CANDIDATE
-   PER FFM ENROLLEE + POLICY
-   ============================================================ */
-
-ranked AS
-(
-    SELECT
-
-        c.*,
-
-        ROW_NUMBER() OVER
-        (
-            PARTITION BY
-                c.FFM_Enrollee_ID,
-                c.FFM_Policy_ID
-
-            ORDER BY
-
-                c.rank_priority ASC,
-
-                CASE
-                    WHEN c.Date_Difference_Days IS NULL
-                        THEN 999999
-                    ELSE c.Date_Difference_Days
-                END ASC,
-
-                c.inbound_row_id DESC
-        ) AS rn
-
-    FROM candidates c
-),
-
-
-best AS
-(
-    SELECT *
-    FROM ranked
-    WHERE rn = 1
-),
-
-
-/* ============================================================
-   FINAL CLASSIFICATION
-   ============================================================ */
-
-final AS
-(
-    SELECT
-
-        f.FFM_Enrollee_ID,
-        f.FFM_Policy_ID,
-        f.FFM_Issuer,
-        f.FFM_Coverage_Year,
-
-        /* ====================================================
-           ADDED: KEEP BOTH ORIGINAL FFM STATUS COLUMNS
-           ==================================================== */
-        f.FFM_Enrollment_Status_Raw,
-        f.FFM_Enrollee_Status_Raw,
-
-        f.FFM_Status_Raw,
-        f.FFM_Status_Norm,
-
-        f.FFM_Event_Date,
-
-        f.household_id,
-        f.person_type,
-        f.relationship_type,
-
-
-        b.Inbound_Enrollee_ID,
-        b.Inbound_Policy_ID,
-        b.Inbound_Issuer,
-
-        /* ====================================================
-           ADDED: HARI DISPLAY ISSUER NAME
-           Based on the matched inbound issuer.
-           ==================================================== */
-        CASE CAST(b.Inbound_Issuer AS VARCHAR(20))
-            WHEN '82824' THEN 'Aetna'
-            WHEN '83761' THEN 'Alliant'
-            WHEN '70893' THEN 'Ambetter'
-            WHEN '45334' THEN 'Anthem'
-            WHEN '49046' THEN 'Anthem'
-            WHEN '83502' THEN 'BEST'
-            WHEN '60224' THEN 'CareSrc'
-            WHEN '15105' THEN 'Cigna'
-            WHEN '86637' THEN 'Delta'
-            WHEN '68806' THEN 'DeltaQ'
-            WHEN '64357' THEN 'Dominion'
-            WHEN '37301' THEN 'EHP Dental'
-            WHEN '37001' THEN 'Humana'
-            WHEN '89942' THEN 'Kaiser'
-            WHEN '58081' THEN 'Oscar'
-            WHEN '13535' THEN 'UHC'
-            WHEN '43802' THEN 'UHC'
-            ELSE NULL
-        END AS ISSUER,
-
-        /* ====================================================
-           ADDED: HARI ISSUER TYPE
-           ==================================================== */
-        CASE
-            WHEN CAST(b.Inbound_Issuer AS VARCHAR(20))
-                 IN ('83502','86637','68806','64357','37301','37001')
-                THEN 'Dental'
-            WHEN b.Inbound_Issuer IS NOT NULL
-                THEN 'Health'
-            ELSE NULL
-        END AS Issuer_Type,
-
-        b.Inbound_Coverage_Year,
-
-        b.Inbound_Status_Raw,
-        b.Inbound_Status_Norm,
-
-        b.Inbound_Event_Date,
-
-        b.member_maint_effective_date,
-
-        b.Inbound_File_Date,
-
-        b.Folder_Year,
-        b.Folder_Month,
-
-        b.Source_File,
-
-
-        COALESCE(
-            b.Policy_Match_Flag,
-            'NO'
-        ) AS Policy_Match_Flag,
-
-
-        COALESCE(
-            b.Issuer_Match_Flag,
-            'NO'
-        ) AS Issuer_Match_Flag,
-
-
-        COALESCE(
-            b.Status_Match_Flag,
-            'NO'
-        ) AS Status_Match_Flag,
-
-
-        b.Date_Difference_Days,
-
-
-        /* ====================================================
-           MATCH LEVEL
-           ==================================================== */
-
-        CASE
-
-            WHEN b.Inbound_Enrollee_ID IS NULL
-
-                THEN 'NO_INBOUND_ENROLLEE_EVIDENCE'
-
-
-            WHEN b.Policy_Match_Flag = 'YES'
-
-                THEN 'EXACT_ENROLLEE_POLICY_MATCH'
-
-
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-             AND b.Date_Difference_Days IS NOT NULL
-             AND b.Date_Difference_Days <= 7
-
-                THEN 'SAME_TRANSACTION_DIFFERENT_POLICY'
-
-
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-
-                THEN 'SAME_LIFECYCLE_DIFFERENT_POLICY'
-
-
-            WHEN b.Issuer_Match_Flag = 'NO'
-             AND b.Status_Match_Flag = 'YES'
-
-                THEN 'CROSS_ISSUER_TRANSITION'
-
-
-            WHEN b.Inbound_Enrollee_ID IS NOT NULL
-
-                THEN 'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'
-
-
-            ELSE 'NO_INBOUND_ENROLLEE_EVIDENCE'
-
-        END AS Match_Level,
-
-
-        /* ====================================================
-           MATCH STRENGTH
-           ==================================================== */
-
-        CASE
-
-            WHEN b.Inbound_Enrollee_ID IS NULL
-                THEN 'NO_MATCH'
-
-
-            WHEN b.Policy_Match_Flag = 'YES'
-                THEN 'VERY_STRONG'
-
-
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-             AND b.Date_Difference_Days IS NOT NULL
-             AND b.Date_Difference_Days <= 7
-
-                THEN 'VERY_STRONG'
-
-
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-             AND b.Date_Difference_Days IS NOT NULL
-             AND b.Date_Difference_Days <= 30
-
-                THEN 'STRONG'
-
-
-            WHEN b.Issuer_Match_Flag = 'NO'
-             AND b.Status_Match_Flag = 'YES'
-
-                THEN 'CROSS_ISSUER'
-
-
-            WHEN b.Inbound_Enrollee_ID IS NOT NULL
-
-                THEN 'WEAK'
+                THEN 'POLICY_MATCH_DIFFERENT_MEMBER'
 
 
             ELSE 'NO_MATCH'
 
-        END AS Match_Score,
+        END AS Recon_Match_Type,
 
 
         /* ====================================================
-           ROOT CAUSE CATEGORY
+           SAME ISSUER?
+           ==================================================== */
+
+        CASE
+            WHEN CAST(n.FFM_Issuer AS VARCHAR(20))
+               = CAST(r.Recon_Issuer AS VARCHAR(20))
+                THEN 'YES'
+            ELSE 'NO'
+        END AS Recon_Issuer_Match,
+
+
+        /* ====================================================
+           SAME COVERAGE YEAR?
+           ==================================================== */
+
+        CASE
+            WHEN n.FFM_Coverage_Year = r.Coverage_Year
+                THEN 'YES'
+            ELSE 'NO'
+        END AS Recon_Coverage_Year_Match,
+
+
+        /* ====================================================
+           BUSINESS INTERPRETATION
            ==================================================== */
 
         CASE
 
-            WHEN b.Inbound_Enrollee_ID IS NULL
+            WHEN r.Recon_Member_ID IS NULL
+             AND r.Recon_Policy_ID IS NULL
 
-                THEN 'NO_INBOUND_EVIDENCE'
-
-
-            WHEN b.Policy_Match_Flag = 'YES'
-
-                THEN 'EXACT_POLICY_MATCH'
+                THEN 'NOT_FOUND_IN_RECON'
 
 
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-             AND b.Date_Difference_Days IS NOT NULL
-             AND b.Date_Difference_Days <= 30
+            WHEN
+                LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                    = LTRIM(RTRIM(r.Recon_Member_ID))
 
-                THEN 'POTENTIAL_POLICY_IDENTIFIER_MISMATCH'
+             AND LTRIM(RTRIM(n.FFM_Policy_ID))
+                    = LTRIM(RTRIM(r.Recon_Policy_ID))
 
+             AND UPPER(LTRIM(RTRIM(
+                    ISNULL(r.Autofixed_by_HIX,'')
+                 ))) IN ('Y','YES')
 
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Policy_Match_Flag = 'NO'
-
-                THEN 'SAME_ISSUER_DIFFERENT_POLICY'
-
-
-            WHEN b.Issuer_Match_Flag = 'NO'
-             AND b.Status_Match_Flag = 'YES'
-
-                THEN 'CROSS_ISSUER_TRANSITION'
+                THEN 'FOUND_IN_RECON_AUTOFIXED'
 
 
-            WHEN b.Inbound_Enrollee_ID IS NOT NULL
+            WHEN
+                LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                    = LTRIM(RTRIM(r.Recon_Member_ID))
 
-                THEN 'DIFFERENT_LIFECYCLE'
+             AND LTRIM(RTRIM(n.FFM_Policy_ID))
+                    = LTRIM(RTRIM(r.Recon_Policy_ID))
+
+                THEN 'FOUND_IN_RECON_EXACT'
 
 
-            ELSE 'NO_INBOUND_EVIDENCE'
+            WHEN
+                LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                    = LTRIM(RTRIM(r.Recon_Member_ID))
 
-        END AS Root_Cause_Category,
+                THEN 'FOUND_IN_RECON_BY_MEMBER'
 
-        /* ====================================================
-           ADDED: HARI BUSINESS-FRIENDLY ROOT CAUSE CATEGORY
-           Original Root_Cause_Category above is preserved.
-           ==================================================== */
-        CASE
-            WHEN b.Inbound_Enrollee_ID IS NULL
-                THEN 'NO INBOUND'
 
-            WHEN b.Policy_Match_Flag = 'YES'
-                THEN 'FULL MATCH'
+            WHEN
+                LTRIM(RTRIM(n.FFM_Policy_ID))
+                    = LTRIM(RTRIM(r.Recon_Policy_ID))
 
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Status_Match_Flag = 'YES'
-             AND b.Date_Difference_Days IS NOT NULL
-             AND b.Date_Difference_Days <= 30
-                THEN 'POLICY ID MISMATCH'
+                THEN 'FOUND_IN_RECON_BY_POLICY'
 
-            WHEN b.Issuer_Match_Flag = 'YES'
-             AND b.Policy_Match_Flag = 'NO'
-                THEN 'Same Issuer, Different Policy'
+            ELSE 'REVIEW'
 
-            WHEN b.Issuer_Match_Flag = 'NO'
-             AND b.Status_Match_Flag = 'YES'
-                THEN 'X Issuer, same Status'
+        END AS Recon_Interpretation
 
-            WHEN b.Issuer_Match_Flag = 'NO'
-             AND b.Status_Match_Flag = 'NO'
-             AND b.Inbound_Enrollee_ID IS NOT NULL
-                THEN 'X Issuer, different Status'
 
-            WHEN b.Inbound_Enrollee_ID IS NOT NULL
-                THEN 'Different Lifecycle'
+    FROM no_inbound n
 
-            ELSE 'NO INBOUND'
-        END AS Hari_Root_Cause_Category
+    INNER JOIN recon_all r
 
-    FROM ffm f
+        ON
+        (
+            LTRIM(RTRIM(n.FFM_Enrollee_ID))
+                = LTRIM(RTRIM(r.Recon_Member_ID))
 
-    LEFT JOIN best b
+            OR
 
-        ON f.FFM_Enrollee_ID
-         = b.FFM_Enrollee_ID
-
-       AND f.FFM_Policy_ID
-         = b.FFM_Policy_ID
+            LTRIM(RTRIM(n.FFM_Policy_ID))
+                = LTRIM(RTRIM(r.Recon_Policy_ID))
+        )
 )
 
 
 /* ============================================================
-   SAVE FINAL RESULTS
-   Allows multiple result sets from one execution
+   SAVE RESULTS
    ============================================================ */
 
 SELECT *
-INTO #final_results
-FROM final;
+INTO #no_inbound_recon_matches
+FROM matches;
+
 
 
 /* ============================================================
-   RESULT SET 1
-   FULL DETAIL
+   RESULT 1
+   ALL NO-INBOUND RECORDS FOUND IN RECON
+   FULL DETAILS
    ============================================================ */
 
 SELECT *
 
-FROM #final_results
+FROM #no_inbound_recon_matches
 
 ORDER BY
 
-    CASE Root_Cause_Category
-
-        WHEN 'EXACT_POLICY_MATCH'
-            THEN 1
-
-        WHEN 'POTENTIAL_POLICY_IDENTIFIER_MISMATCH'
-            THEN 2
-
-        WHEN 'SAME_ISSUER_DIFFERENT_POLICY'
-            THEN 3
-
-        WHEN 'CROSS_ISSUER_TRANSITION'
-            THEN 4
-
-        WHEN 'DIFFERENT_LIFECYCLE'
-            THEN 5
-
-        ELSE 6
-
+    CASE Recon_Match_Type
+        WHEN 'EXACT_MEMBER_POLICY' THEN 1
+        WHEN 'MEMBER_MATCH_DIFFERENT_POLICY' THEN 2
+        WHEN 'POLICY_MATCH_DIFFERENT_MEMBER' THEN 3
+        ELSE 4
     END,
 
     FFM_Enrollee_ID,
+    FFM_Policy_ID,
+    Date_of_Discrepancy;
+
+
+
+/* ============================================================
+   RESULT 2
+   HOW MANY "NO INBOUND" RECORDS WERE ACTUALLY FOUND IN RECON?
+   ============================================================ */
+
+SELECT
+    Recon_Match_Type,
+    Recon_Interpretation,
+
+    COUNT(*) AS Recon_Rows,
+
+    COUNT(
+        DISTINCT CONCAT(
+            FFM_Enrollee_ID,
+            '|',
+            FFM_Policy_ID
+        )
+    ) AS Distinct_FFM_Enrollee_Policy_Pairs,
+
+    COUNT(DISTINCT FFM_Enrollee_ID)
+        AS Distinct_Enrollees,
+
+    COUNT(DISTINCT FFM_Policy_ID)
+        AS Distinct_Policies
+
+FROM #no_inbound_recon_matches
+
+GROUP BY
+    Recon_Match_Type,
+    Recon_Interpretation
+
+ORDER BY
+    Distinct_FFM_Enrollee_Policy_Pairs DESC;
+
+
+
+
+/* ============================================================
+   RESULT 3
+   WHY WERE OUR "NO INBOUND" RECORDS IN RECON?
+   ============================================================ */
+
+SELECT
+    Discrepancy_Reason_Code,
+    Discrepancy_Reason_Text,
+
+    Autofixed_by_HIX,
+
+    COUNT(*) AS Recon_Rows,
+
+    COUNT(
+        DISTINCT CONCAT(
+            FFM_Enrollee_ID,
+            '|',
+            FFM_Policy_ID
+        )
+    ) AS Distinct_FFM_Pairs,
+
+    COUNT(DISTINCT FFM_Enrollee_ID)
+        AS Distinct_Enrollees,
+
+    COUNT(DISTINCT FFM_Policy_ID)
+        AS Distinct_Policies
+
+FROM #no_inbound_recon_matches
+
+GROUP BY
+    Discrepancy_Reason_Code,
+    Discrepancy_Reason_Text,
+    Autofixed_by_HIX
+
+ORDER BY
+    Distinct_FFM_Pairs DESC;
+
+
+
+/* ============================================================
+   RESULT 4
+   CROSS-YEAR RECON ANALYSIS
+   ============================================================ */
+
+SELECT
+    FFM_Coverage_Year,
+    Recon_Table_Year,
+    Recon_Coverage_Year,
+
+    Recon_Coverage_Year_Match,
+
+    COUNT(
+        DISTINCT CONCAT(
+            FFM_Enrollee_ID,
+            '|',
+            FFM_Policy_ID
+        )
+    ) AS Distinct_FFM_Pairs
+
+FROM #no_inbound_recon_matches
+
+GROUP BY
+    FFM_Coverage_Year,
+    Recon_Table_Year,
+    Recon_Coverage_Year,
+    Recon_Coverage_Year_Match
+
+ORDER BY
+    FFM_Coverage_Year,
+    Recon_Table_Year,
+    Recon_Coverage_Year;
+
+
+
+/* ============================================================
+   RESULT 5
+   NO-INBOUND RECORDS THAT WERE AUTO-FIXED BY HIX
+   ============================================================ */
+
+SELECT *
+
+FROM #no_inbound_recon_matches
+
+WHERE UPPER(
+        LTRIM(
+            RTRIM(
+                ISNULL(Autofixed_by_HIX,'')
+            )
+        )
+      ) IN ('Y','YES')
+
+ORDER BY
+    Date_of_Discrepancy,
+    FFM_Enrollee_ID,
     FFM_Policy_ID;
-
-
-/* ============================================================
-   RESULT SET 2
-   MATCH LEVEL SUMMARY
-   ============================================================ */
-
-SELECT
-
-    Match_Level,
-
-    COUNT(
-        DISTINCT CONCAT(
-            FFM_Enrollee_ID,
-            '|',
-            FFM_Policy_ID
-        )
-    ) AS Distinct_FFM_Pairs,
-
-    COUNT(DISTINCT FFM_Enrollee_ID)
-        AS Distinct_Enrollees,
-
-    COUNT(DISTINCT FFM_Policy_ID)
-        AS Distinct_FFM_Policies,
-
-    CAST(
-        100.0
-        *
-        COUNT(
-            DISTINCT CONCAT(
-                FFM_Enrollee_ID,
-                '|',
-                FFM_Policy_ID
-            )
-        )
-        /
-        NULLIF(
-            (
-                SELECT COUNT(
-                    DISTINCT CONCAT(
-                        FFM_Enrollee_ID,
-                        '|',
-                        FFM_Policy_ID
-                    )
-                )
-                FROM #final_results
-            ),
-            0
-        )
-        AS DECIMAL(8,2)
-    ) AS Percentage
-
-FROM #final_results
-
-GROUP BY
-    Match_Level
-
-ORDER BY
-    Distinct_FFM_Pairs DESC;
-
-
-/* ============================================================
-   RESULT SET 3
-   ROOT CAUSE SUMMARY
-   ============================================================ */
-
-SELECT
-
-    Root_Cause_Category,
-
-    COUNT(
-        DISTINCT CONCAT(
-            FFM_Enrollee_ID,
-            '|',
-            FFM_Policy_ID
-        )
-    ) AS Distinct_FFM_Pairs,
-
-    COUNT(DISTINCT FFM_Enrollee_ID)
-        AS Distinct_Enrollees,
-
-    COUNT(DISTINCT FFM_Policy_ID)
-        AS Distinct_FFM_Policies,
-
-    COUNT(DISTINCT Inbound_Policy_ID)
-        AS Distinct_Inbound_Policies,
-
-    CAST(
-        100.0
-        *
-        COUNT(
-            DISTINCT CONCAT(
-                FFM_Enrollee_ID,
-                '|',
-                FFM_Policy_ID
-            )
-        )
-        /
-        NULLIF(
-            (
-                SELECT COUNT(
-                    DISTINCT CONCAT(
-                        FFM_Enrollee_ID,
-                        '|',
-                        FFM_Policy_ID
-                    )
-                )
-                FROM #final_results
-            ),
-            0
-        )
-        AS DECIMAL(8,2)
-    ) AS Percentage
-
-FROM #final_results
-
-GROUP BY
-    Root_Cause_Category
-
-ORDER BY
-    Distinct_FFM_Pairs DESC;
-
-
-/* ============================================================
-   RESULT SET 4
-   POTENTIAL POLICY IDENTIFIER MISMATCH
-
-   Same enrollee
-   Same issuer
-   Compatible status
-   Near event date
-   Different policy
-   ============================================================ */
-
-SELECT
-
-    COUNT(
-        DISTINCT CONCAT(
-            FFM_Enrollee_ID,
-            '|',
-            FFM_Policy_ID
-        )
-    ) AS Matched_Transaction_Relationships,
-
-    COUNT(DISTINCT FFM_Enrollee_ID)
-        AS Distinct_Enrollees,
-
-    COUNT(DISTINCT FFM_Policy_ID)
-        AS Distinct_FFM_Policies,
-
-    COUNT(DISTINCT Inbound_Policy_ID)
-        AS Distinct_Inbound_Policies
-
-FROM #final_results
-
-WHERE Root_Cause_Category =
-      'POTENTIAL_POLICY_IDENTIFIER_MISMATCH';
-
-
-/* ============================================================
-   RESULT SET 5
-   ADDED: HARI BUSINESS ROOT CAUSE SUMMARY
-   Original result sets above are preserved.
-   ============================================================ */
-
-SELECT
-    Hari_Root_Cause_Category,
-
-    COUNT(
-        DISTINCT CONCAT(
-            FFM_Enrollee_ID,
-            '|',
-            FFM_Policy_ID
-        )
-    ) AS Distinct_FFM_Pairs,
-
-    COUNT(DISTINCT FFM_Enrollee_ID)
-        AS Distinct_Enrollees,
-
-    COUNT(DISTINCT FFM_Policy_ID)
-        AS Distinct_FFM_Policies,
-
-    COUNT(DISTINCT Inbound_Policy_ID)
-        AS Distinct_Inbound_Policies,
-
-    CAST(
-        100.0
-        *
-        COUNT(
-            DISTINCT CONCAT(
-                FFM_Enrollee_ID,
-                '|',
-                FFM_Policy_ID
-            )
-        )
-        /
-        NULLIF(
-            (
-                SELECT COUNT(
-                    DISTINCT CONCAT(
-                        FFM_Enrollee_ID,
-                        '|',
-                        FFM_Policy_ID
-                    )
-                )
-                FROM #final_results
-            ),
-            0
-        )
-        AS DECIMAL(8,2)
-    ) AS Percentage
-
-FROM #final_results
-
-GROUP BY
-    Hari_Root_Cause_Category
-
-ORDER BY
-    Distinct_FFM_Pairs DESC;
