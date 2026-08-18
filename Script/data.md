@@ -1,2 +1,15 @@
-Unique_Enrollee_Policy_Pairs	Unique_Enrollees	Unique_Policies
-2975	2958	2784
+
+
+
+
+Root_Cause_Category	Distinct_FFM_Pairs	Distinct_Enrollees	Distinct_FFM_Policies	Distinct_Inbound_Policies	Percentage
+EXACT_POLICY_MATCH	55895	40944	43971	43971	63.06
+SAME_ISSUER_DIFFERENT_POLICY	19263	18030	14441	13973	21.73
+DIFFERENT_LIFECYCLE	5644	5000	4402	4184	6.37
+NO_INBOUND_EVIDENCE	5388	4958	4095	0	6.08
+CROSS_ISSUER_TRANSITION	1274	1191	1242	1168	1.44
+POTENTIAL_POLICY_IDENTIFIER_MISMATCH	1178	1171	941	936	1.33
+
+
+Matched_Transaction_Relationships	Distinct_Enrollees	Distinct_FFM_Policies	Distinct_Inbound_Policies
+1178	1171	941	936
