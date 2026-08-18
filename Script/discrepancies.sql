@@ -1635,6 +1635,40 @@ FROM #disc_detail
 WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES';
 
 
+============================FINAL===================
+
+/* ============================================================
+   EXACT NO-INBOUND MATCHES — DISCREPANCY REASON ANALYSIS
+   ============================================================ */
+
+SELECT
+    Discrepancy_Reason_Code,
+    Discrepancy_Reason_Text,
+    Autofixed_by_HIX,
+
+    COUNT(*) AS Discrepancy_Rows,
+
+    COUNT(DISTINCT CONCAT(
+        FFM_Enrollee_ID, '|', FFM_Policy_ID
+    )) AS Unique_Enrollee_Policy_Pairs,
+
+    COUNT(DISTINCT FFM_Enrollee_ID) AS Unique_Enrollees,
+
+    COUNT(DISTINCT FFM_Policy_ID) AS Unique_Policies
+
+FROM #disc_detail
+
+WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
+
+GROUP BY
+    Discrepancy_Reason_Code,
+    Discrepancy_Reason_Text,
+    Autofixed_by_HIX
+
+ORDER BY
+    Unique_Enrollee_Policy_Pairs DESC;
+
+
 
 
 
