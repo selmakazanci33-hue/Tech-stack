@@ -1587,92 +1587,108 @@ ORDER BY
     n.FFM_Enrollee_ID,
     n.FFM_Policy_ID;
 
-======================IF NEEDED add end of script for UNIQUE VALUES =============================
-
-
-Append this block to the end of the script. It reads from #disc_detail and uses EXACT_ENROLLEE_POLICY_FOUND:
 
 /* ============================================================
-   OUTPUT A — UNIQUE EXACT ENROLLEE + POLICY PAIRS
+   FINAL REPORTING LAYER
+   Unique oldest exact enrollee + policy discrepancy row.
+   Does NOT modify #disc_detail or any prior matching logic.
    ============================================================ */
-SELECT DISTINCT
-    FFM_Enrollee_ID,
-    FFM_Policy_ID
-FROM #disc_detail
-WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
-ORDER BY
-    FFM_Enrollee_ID,
-    FFM_Policy_ID;
-/* ============================================================
-   OUTPUT B — UNIQUE ENROLLEES (EXACT MATCHES ONLY)
-   ============================================================ */
-SELECT DISTINCT
-    FFM_Enrollee_ID
-FROM #disc_detail
-WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
-ORDER BY
-    FFM_Enrollee_ID;
-/* ============================================================
-   OUTPUT C — UNIQUE POLICIES (EXACT MATCHES ONLY)
-   ============================================================ */
-SELECT DISTINCT
-    FFM_Policy_ID
-FROM #disc_detail
-WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
-ORDER BY
-    FFM_Policy_ID;
-/* ============================================================
-   OUTPUT D — UNIQUE COUNTS SUMMARY (EXACT MATCHES ONLY)
-   ============================================================ */
+
+DROP TABLE IF EXISTS #unique_oldest_exact;
+
 SELECT
-    COUNT(DISTINCT CONCAT(FFM_Enrollee_ID, '|', FFM_Policy_ID))
-        AS Unique_Enrollee_Policy_Pairs,
-    COUNT(DISTINCT FFM_Enrollee_ID)
-        AS Unique_Enrollees,
-    COUNT(DISTINCT FFM_Policy_ID)
-        AS Unique_Policies
-FROM #disc_detail
-WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES';
+    x.FFM_Enrollee_ID,
+    x.FFM_Policy_ID,
+    x.FFM_Issuer,
+    x.FFM_Coverage_Year,
+    x.FFM_Enrollment_Status_Raw,
+    x.FFM_Enrollee_Status_Raw,
+    x.FFM_Status_Norm,
+    x.FFM_Event_Date,
+    x.Hari_Root_Cause_Category,
+    x.pair_key,
+    x.EXACT_ENROLLEE_POLICY_FOUND,
+    x.ENROLLEE_FOUND_IN_DISCREPANCY,
+    x.ENROLLEE_DIFFERENT_POLICY_FOUND,
+    x.Discrepancy_Table_Year,
+    x.Discrepancy_Coverage_Year,
+    x.GAA_HIOS_ID,
+    x.Exchange_Assigned_Policy_ID,
+    x.Exchange_Assigned_Member_ID,
+    x.Issuer_Assigned_Member_ID,
+    x.Discrepancy_Reason_Code,
+    x.Discrepancy_Reason_Text,
+    x.HIX_Value,
+    x.Issuer_Value,
+    x.Date_of_Discrepancy,
+    x.Recon_File_Name,
+    x.GAA_Issuer_File_Name,
+    x.GAA_Issuer_File_Datetime,
+    x.Autofixed_by_HIX,
+    x.Assignee,
+    x.Discrepancy_Enrollment_Status
+INTO #unique_oldest_exact
+FROM
+(
+    SELECT
+        d.*,
+        ROW_NUMBER() OVER
+        (
+            PARTITION BY
+                d.FFM_Enrollee_ID,
+                d.FFM_Policy_ID
+            ORDER BY
+                d.Date_of_Discrepancy ASC,
+                d.GAA_Issuer_File_Datetime ASC,
+                d.Recon_File_Name ASC
+        ) AS rn
+    FROM #disc_detail d
+    WHERE d.EXACT_ENROLLEE_POLICY_FOUND = 'YES'
+) x
+WHERE x.rn = 1;
 
-
-============================FINAL===================
 
 /* ============================================================
-   EXACT NO-INBOUND MATCHES — DISCREPANCY REASON ANALYSIS
+   FINAL RESULT SET 1
+   UNIQUE OLDEST EXACT MATCH DETAIL
+   One row per FFM_Enrollee_ID + FFM_Policy_ID
+   ============================================================ */
+
+SELECT *
+FROM #unique_oldest_exact
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Policy_ID;
+
+
+/* ============================================================
+   FINAL RESULT SET 2
+   UNIQUE COUNTS
+   ============================================================ */
+
+SELECT
+    COUNT(*) AS Unique_Enrollee_Policy_Pairs,
+    COUNT(DISTINCT FFM_Enrollee_ID) AS Unique_Enrollees,
+    COUNT(DISTINCT FFM_Policy_ID) AS Unique_Policies
+FROM #unique_oldest_exact;
+
+
+/* ============================================================
+   FINAL RESULT SET 3
+   REASON SUMMARY FROM THE ONE OLDEST ROW PER PAIR
    ============================================================ */
 
 SELECT
     Discrepancy_Reason_Code,
     Discrepancy_Reason_Text,
     Autofixed_by_HIX,
-
-    COUNT(*) AS Discrepancy_Rows,
-
-    COUNT(DISTINCT CONCAT(
-        FFM_Enrollee_ID, '|', FFM_Policy_ID
-    )) AS Unique_Enrollee_Policy_Pairs,
-
+    COUNT(*) AS Unique_Enrollee_Policy_Pairs,
     COUNT(DISTINCT FFM_Enrollee_ID) AS Unique_Enrollees,
-
     COUNT(DISTINCT FFM_Policy_ID) AS Unique_Policies
-
-FROM #disc_detail
-
-WHERE EXACT_ENROLLEE_POLICY_FOUND = 'YES'
-
+FROM #unique_oldest_exact
 GROUP BY
     Discrepancy_Reason_Code,
     Discrepancy_Reason_Text,
     Autofixed_by_HIX
-
 ORDER BY
     Unique_Enrollee_Policy_Pairs DESC;
-
-
-
-
-
-
-
-
-
