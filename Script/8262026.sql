@@ -955,38 +955,350 @@ SELECT *
 INTO #final_results
 FROM final;
 
+/* ============================================================
+   AMBETTER 70893
+   SEPARATE MATCH-LEVEL RESULT SETS
+
+   #final_results has already been created above.
+   Each category is returned independently so that
+   large populations can be exported separately.
+   ============================================================ */
+
 
 /* ============================================================
    RESULT SET 1
-   FULL DETAIL
+   MATCH LEVEL SUMMARY
+   ============================================================ */
+
+SELECT
+    Match_Level,
+
+    COUNT(*) AS Total_Rows,
+
+    COUNT(DISTINCT FFM_Enrollee_ID)
+        AS Distinct_Enrollees,
+
+    COUNT(DISTINCT FFM_Policy_ID)
+        AS Distinct_Policies,
+
+    COUNT(
+        DISTINCT CONCAT(
+            FFM_Enrollee_ID,
+            '|',
+            FFM_Policy_ID
+        )
+    ) AS Distinct_Enrollee_Policy_Pairs,
+
+    CAST(
+        100.0 * COUNT(*) /
+        NULLIF(
+            (SELECT COUNT(*) FROM #final_results),
+            0
+        )
+        AS DECIMAL(10,2)
+    ) AS Percent_Of_Total
+
+FROM #final_results
+
+GROUP BY Match_Level
+
+ORDER BY
+    CASE Match_Level
+
+        WHEN 'EXACT_ENROLLEE_POLICY_MATCH'
+            THEN 1
+
+        WHEN 'SAME_TRANSACTION_DIFFERENT_POLICY'
+            THEN 2
+
+        WHEN 'SAME_LIFECYCLE_DIFFERENT_POLICY'
+            THEN 3
+
+        WHEN 'CROSS_ISSUER_TRANSITION'
+            THEN 4
+
+        WHEN 'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'
+            THEN 5
+
+        WHEN 'NO_INBOUND_ENROLLEE_EVIDENCE'
+            THEN 6
+
+        ELSE 7
+
+    END;
+
+
+/* ============================================================
+   RESULT SET 2
+   EXACT ENROLLEE + POLICY MATCH
    ============================================================ */
 
 SELECT *
 
 FROM #final_results
 
+WHERE Match_Level =
+      'EXACT_ENROLLEE_POLICY_MATCH'
+
 ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Policy_ID,
+    FFM_Event_Date;
 
-    CASE Root_Cause_Category
 
-        WHEN 'EXACT_POLICY_MATCH'
-            THEN 1
+/* ============================================================
+   RESULT SET 3
+   SAME TRANSACTION + DIFFERENT POLICY
+   ============================================================ */
 
-        WHEN 'POTENTIAL_POLICY_IDENTIFIER_MISMATCH'
-            THEN 2
+SELECT *
 
-        WHEN 'SAME_ISSUER_DIFFERENT_POLICY'
-            THEN 3
+FROM #final_results
 
-        WHEN 'CROSS_ISSUER_TRANSITION'
-            THEN 4
+WHERE Match_Level =
+      'SAME_TRANSACTION_DIFFERENT_POLICY'
 
-        WHEN 'DIFFERENT_LIFECYCLE'
-            THEN 5
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Event_Date,
+    Date_Difference_Days,
+    FFM_Policy_ID;
 
-        ELSE 6
 
-    END,
+/* ============================================================
+   RESULT SET 4
+   SAME LIFECYCLE + DIFFERENT POLICY
+   ============================================================ */
+
+SELECT *
+
+FROM #final_results
+
+WHERE Match_Level =
+      'SAME_LIFECYCLE_DIFFERENT_POLICY'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Status_Norm,
+    Date_Difference_Days,
+    FFM_Policy_ID;
+
+
+/* ============================================================
+   RESULT SET 5
+   CROSS ISSUER TRANSITION
+   ============================================================ */
+
+SELECT *
+
+FROM #final_results
+
+WHERE Match_Level =
+      'CROSS_ISSUER_TRANSITION'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Event_Date,
+    Inbound_Event_Date,
+    Inbound_Issuer,
+    FFM_Policy_ID;
+
+
+/* ============================================================
+   RESULT SET 6
+   ENROLLEE FOUND - DIFFERENT LIFECYCLE
+   ============================================================ */
+
+SELECT *
+
+FROM #final_results
+
+WHERE Match_Level =
+      'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Event_Date,
+    Inbound_Event_Date,
+    FFM_Policy_ID;
+
+
+/* ============================================================
+   RESULT SET 7
+   NO INBOUND ENROLLEE EVIDENCE
+   ============================================================ */
+
+SELECT *
+
+FROM #final_results
+
+WHERE Match_Level =
+      'NO_INBOUND_ENROLLEE_EVIDENCE'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Policy_ID,
+    FFM_Event_Date;
+
+
+/* ============================================================
+   RESULT SET 8
+   ROOT CAUSE SUMMARY
+   ============================================================ */
+
+SELECT
+
+    Root_Cause_Category,
+
+    COUNT(*) AS Total_Rows,
+
+    COUNT(DISTINCT FFM_Enrollee_ID)
+        AS Distinct_Enrollees,
+
+    COUNT(DISTINCT FFM_Policy_ID)
+        AS Distinct_FFM_Policies,
+
+    COUNT(DISTINCT Inbound_Policy_ID)
+        AS Distinct_Inbound_Policies,
+
+    CAST(
+        100.0 * COUNT(*) /
+        NULLIF(
+            (SELECT COUNT(*) FROM #final_results),
+            0
+        )
+        AS DECIMAL(10,2)
+    ) AS Percent_Of_Total
+
+FROM #final_results
+
+GROUP BY Root_Cause_Category
+
+ORDER BY Total_Rows DESC;
+
+
+/* ============================================================
+   RESULT SET 9
+   EXACT MATCH - COMPACT EXPORT
+
+   Easier to export than SELECT *
+   ============================================================ */
+
+SELECT
 
     FFM_Enrollee_ID,
+    FFM_Policy_ID,
+    FFM_Issuer,
+    FFM_Coverage_Year,
+    FFM_Status_Norm,
+    FFM_Event_Date,
+
+    Inbound_Enrollee_ID,
+    Inbound_Policy_ID,
+    Inbound_Issuer,
+    ISSUER AS Inbound_Issuer_Name,
+    Inbound_Coverage_Year,
+    Inbound_Status_Norm,
+    Inbound_Event_Date,
+
+    Date_Difference_Days,
+
+    Folder_Year,
+    Folder_Month,
+    Source_File
+
+FROM #final_results
+
+WHERE Match_Level =
+      'EXACT_ENROLLEE_POLICY_MATCH'
+
+ORDER BY
+    FFM_Enrollee_ID,
     FFM_Policy_ID;
+
+
+/* ============================================================
+   RESULT SET 10
+   CROSS ISSUER - COMPACT INVESTIGATION EXPORT
+   ============================================================ */
+
+SELECT
+
+    FFM_Enrollee_ID,
+    FFM_Policy_ID,
+
+    FFM_Issuer,
+    FFM_Coverage_Year,
+    FFM_Status_Norm,
+    FFM_Event_Date,
+
+    Inbound_Policy_ID,
+
+    Inbound_Issuer,
+    ISSUER AS Inbound_Issuer_Name,
+
+    Inbound_Coverage_Year,
+    Inbound_Status_Norm,
+    Inbound_Event_Date,
+
+    Policy_Match_Flag,
+    Issuer_Match_Flag,
+    Status_Match_Flag,
+
+    Date_Difference_Days,
+
+    Folder_Year,
+    Folder_Month,
+    Source_File,
+
+    Match_Level,
+    Root_Cause_Category,
+    Hari_Root_Cause_Category
+
+FROM #final_results
+
+WHERE Match_Level =
+      'CROSS_ISSUER_TRANSITION'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Event_Date,
+    Inbound_Event_Date;
+
+
+/* ============================================================
+   RESULT SET 11
+   NO INBOUND - COMPACT INVESTIGATION EXPORT
+   ============================================================ */
+
+SELECT
+
+    FFM_Enrollee_ID,
+    FFM_Policy_ID,
+
+    FFM_Issuer,
+    FFM_Coverage_Year,
+
+    FFM_Enrollment_Status_Raw,
+    FFM_Enrollee_Status_Raw,
+    FFM_Status_Norm,
+
+    FFM_Event_Date,
+
+    household_id,
+    person_type,
+    relationship_type,
+
+    Match_Level,
+    Root_Cause_Category,
+    Hari_Root_Cause_Category
+
+FROM #final_results
+
+WHERE Match_Level =
+      'NO_INBOUND_ENROLLEE_EVIDENCE'
+
+ORDER BY
+    FFM_Enrollee_ID,
+    FFM_Policy_ID,
+    FFM_Event_Date;
