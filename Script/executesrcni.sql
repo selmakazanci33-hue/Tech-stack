@@ -4,6 +4,9 @@ SELECT
     COUNT(DISTINCT source_file) AS Total_Source_Files
 FROM dbo.rcni_raw;
 
+Total_Discrepancy_Records	Total_Issuers	Total_Source_Files
+48229408	17	244
+
 
 DECLARE @file_hash VARCHAR(64) =
 '791be3df3f97305ddff98879b2d9778bafebc80b8e52baf402a8c45983e19924';
