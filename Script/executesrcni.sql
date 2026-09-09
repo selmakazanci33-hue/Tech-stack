@@ -1,7 +1,27 @@
-SELECT
-    COLUMN_NAME,
-    DATA_TYPE
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = 'dbo'
-  AND TABLE_NAME = 'rcni_file_log'
-ORDER BY ORDINAL_POSITION;
+COLUMN_NAME	DATA_TYPE
+file_id	bigint
+source_file	nvarchar
+source_path	nvarchar
+issuer_id	varchar
+document_type	varchar
+coverage_year	int
+processing_year	int
+processing_month	tinyint
+processing_day	tinyint
+file_timestamp	datetime2
+compression_type	varchar
+file_size_bytes	bigint
+file_hash	char
+rows_read	bigint
+rows_parsed	bigint
+rows_loaded	bigint
+rows_flagged	bigint
+rows_rejected	bigint
+processing_status	varchar
+file_disposition	varchar
+error_message	nvarchar
+load_run_id	uniqueidentifier
+first_seen_at	datetime2
+started_at	datetime2
+completed_at	datetime2
+loaded_at	datetime2
