@@ -1,4 +1,33 @@
+SELECT
+    COUNT(*) AS Total_Discrepancy_Records,
+    COUNT(DISTINCT issuer_id) AS Total_Issuers,
+    COUNT(DISTINCT source_file) AS Total_Source_Files
+FROM dbo.rcni_raw;
 
+
+DECLARE @file_hash VARCHAR(64) =
+'791be3df3f97305ddff98879b2d9778bafebc80b8e52baf402a8c45983e19924';
+
+SELECT
+    COUNT(*) AS Raw_Rows
+FROM dbo.rcni_raw
+WHERE file_hash = @file_hash;
+
+SELECT
+    processing_status,
+    load_run_id,
+    rows_parsed,
+    rows_loaded,
+    rows_rejected,
+    started_at,
+    completed_at,
+    error_message
+FROM dbo.rcni_file_log
+WHERE file_hash = @file_hash
+ORDER BY started_at;
+
+
+==================================
 
 /* ============================================================
    RCNI ISSUER LEVEL EXECUTIVE LOAD REPORT
