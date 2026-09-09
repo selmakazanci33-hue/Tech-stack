@@ -25,7 +25,12 @@ SELECT
 FROM dbo.rcni_file_log
 WHERE file_hash = @file_hash
 ORDER BY started_at;
+processing_status	load_run_id	rows_parsed	rows_loaded	rows_rejected	started_at	completed_at	error_message
+FAILED	C0E9161F-9DE9-40D1-A3B4-642D6630DBCA	2211717	0	0	2026-09-07 21:51:08	2026-09-07 22:08:32	(pyodbc.OperationalError) ('08S01', '[08S01] [Microsoft][ODBC Driver 17 for SQL Server]TCP Provider: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\r\n (10060) (SQLExecDirectW); [08S01] [Microsoft][ODBC Driver 17 for SQL Server]Communication link failure (10060)') [SQL: INSERT INTO [dbo].[rcni_raw] (load_run_id, file_hash, issuer_id, coverage_year, processing_year, processing_month, processing_day, file_timestamp, source_file, source_path, row_number_in_file, quality_status, loaded_at, exchange_assigned_policy_id, plan_id, member_last_name, member_first_name, exchange_assigned_member_id, issuer_assigned_member_id, subscriber_last_name, subscriber_first_name, exchange_assigned_subscriber_id, issuer_assigned_subscriber_id, discrepancy_reason_code, discrepancy_reason_text, hix_value, issuer_value, date_of_discrepancy, recon_file_name, autofixed_by_hix, assignee, enrollment_status) SELECT load_run_id, file_hash, issuer_id, coverage_year, processing_year, processing_month, processing_day, file_timestamp, source_file, source_path, row_number_in_file, quality_status, ? AS loaded_at, exchange_assigned_policy_id, plan_id, member_last_name, member_first_name, exchange_assigned_member_id, issuer_assigned_member_id, subscriber_last_name, subscriber_first_name, exchange_assigned_subscriber_id, issuer_assigned_subscriber_id, discrepancy_reason_code, discrepancy_reason_text, hix_value, issuer_value, date_of_discrepancy, recon_file_name, autofixed_by_hix, assignee, enrollment_status FROM [dbo].[rcni_stage] WHERE load_run_id = ? AND file_hash = ?] [parameters: (datetime.datetime(2026, 9, 7, 21, 51, 8, 441280), UUID('c0e9161f-9de9-40d1-a3b4-642d6630dbca'), '791be3df3f97305ddff98879b2d9778bafebc80b8e52baf402a8c45983e19924')] (Background on this error at: https://sqlalche.me/e/20/e3q8)
+SUCCESS	854E9EAD-CEFC-438D-8B28-AC617841C5E3	2211717	2211717	0	2026-09-08 10:11:03	2026-09-08 11:18:25	NULL
 
+    Raw_Rows
+2211717
 
 ==================================
 
