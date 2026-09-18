@@ -13,8 +13,7 @@ EnrollmentPolicies AS
     SELECT DISTINCT
         LTRIM(RTRIM(CAST(enrollment_id AS VARCHAR(100)))) AS policy_id
     FROM dbo.Enrollments_TEST
-    WHERE coverage_year = 2026
-      AND enrollment_id IS NOT NULL
+    WHERE enrollment_id IS NOT NULL
 )
 SELECT
     i.issuer,
