@@ -1,9 +1,6 @@
 /* ============================================================
-   TASK #2 - SECOND IDENTIFIER CHECK
-   PY2026 inbound vs ALL YEARS Enrollments_TEST
-
-   Missing only when NEITHER inbound policy identifier
-   exists in Enrollments_TEST
+   TASK #2 - POLICY IDENTIFIER CLASSIFICATION
+   PY2026 INBOUND vs ALL YEARS Enrollments_TEST
    ============================================================ */
 
 WITH InboundPolicies AS
@@ -16,6 +13,7 @@ WITH InboundPolicies AS
     FROM dbo.inbound_automation
     WHERE coverage_year = 2026
       AND policy_id IS NOT NULL
+      AND LTRIM(RTRIM(CAST(policy_id AS VARCHAR(100)))) <> ''
 ),
 EnrollmentPolicies AS
 (
@@ -23,22 +21,40 @@ EnrollmentPolicies AS
         LTRIM(RTRIM(CAST(enrollment_id AS VARCHAR(100)))) AS policy_id
     FROM dbo.Enrollments_TEST
     WHERE enrollment_id IS NOT NULL
+),
+Classified AS
+(
+    SELECT
+        i.issuer,
+        i.policy_id,
+        i.health_coverage_policy_no,
+
+        CASE
+            WHEN EXISTS
+            (
+                SELECT 1
+                FROM EnrollmentPolicies e
+                WHERE e.policy_id = i.policy_id
+            )
+            THEN 'MATCH_BY_POLICY_ID'
+
+            WHEN EXISTS
+            (
+                SELECT 1
+                FROM EnrollmentPolicies e
+                WHERE e.policy_id = i.health_coverage_policy_no
+            )
+            THEN 'MATCH_BY_HEALTH_COVERAGE_POLICY_NO'
+
+            ELSE 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+        END AS match_type
+
+    FROM InboundPolicies i
 )
+
 SELECT
-    i.issuer,
-    COUNT(DISTINCT i.policy_id) AS Still_Missing_Policy_Count
-FROM InboundPolicies i
-WHERE NOT EXISTS
-(
-    SELECT 1
-    FROM EnrollmentPolicies e
-    WHERE e.policy_id = i.policy_id
-)
-AND NOT EXISTS
-(
-    SELECT 1
-    FROM EnrollmentPolicies e
-    WHERE e.policy_id = i.health_coverage_policy_no
-)
-GROUP BY i.issuer
-ORDER BY Still_Missing_Policy_Count DESC;
+    match_type,
+    COUNT(DISTINCT policy_id) AS Policy_Count
+FROM Classified
+GROUP BY match_type
+ORDER BY Policy_Count DESC;
