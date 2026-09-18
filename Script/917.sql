@@ -1,53 +1,78 @@
 /* ============================================================
-   VALIDATE THE 173,786 NOT-FOUND POPULATION
-   Separate numeric IDs from non-numeric IDs
+   NEXT VALIDATION
+   For the 173,786 numeric policies missing from PY2026,
+   check whether they exist ANYWHERE in Enrollments_TEST
+   under another coverage year.
    ============================================================ */
 
 SELECT
     CASE
-        WHEN TRY_CONVERT(bigint, inbound_policy_id) IS NOT NULL
-            THEN 'NUMERIC_POLICY_ID'
-        ELSE 'NON_NUMERIC_POLICY_ID'
-    END AS Policy_ID_Type,
+        WHEN e.enrollment_id IS NOT NULL
+            THEN 'FOUND_OTHER_COVERAGE_YEAR'
+        ELSE 'NOT_FOUND_ANYWHERE'
+    END AS validation_status,
 
-    COUNT(*) AS Policy_Count
+    COUNT(DISTINCT p.inbound_policy_id) AS Policy_Count
 
-FROM #PolicyComparison
+FROM #PolicyComparison p
 
-WHERE match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+LEFT JOIN dbo.Enrollments_TEST e
+    ON CONVERT(varchar(100), e.enrollment_id)
+       = p.inbound_policy_id
+
+WHERE p.match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+  AND TRY_CONVERT(bigint, p.inbound_policy_id) IS NOT NULL
 
 GROUP BY
     CASE
-        WHEN TRY_CONVERT(bigint, inbound_policy_id) IS NOT NULL
-            THEN 'NUMERIC_POLICY_ID'
-        ELSE 'NON_NUMERIC_POLICY_ID'
-    END
-
-ORDER BY Policy_Count DESC;
+        WHEN e.enrollment_id IS NOT NULL
+            THEN 'FOUND_OTHER_COVERAGE_YEAR'
+        ELSE 'NOT_FOUND_ANYWHERE'
+    END;
 
 
 /* ============================================================
-   NON-NUMERIC EXAMPLES
+   SHOW COVERAGE YEAR FOR THOSE FOUND ELSEWHERE
    ============================================================ */
 
-SELECT TOP (100)
-    issuer,
-    inbound_policy_id
-FROM #PolicyComparison
-WHERE match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
-  AND TRY_CONVERT(bigint, inbound_policy_id) IS NULL
-ORDER BY issuer, inbound_policy_id;
+SELECT
+    e.coverage_year,
+    COUNT(DISTINCT p.inbound_policy_id) AS Policy_Count
+
+FROM #PolicyComparison p
+
+JOIN dbo.Enrollments_TEST e
+    ON CONVERT(varchar(100), e.enrollment_id)
+       = p.inbound_policy_id
+
+WHERE p.match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+  AND TRY_CONVERT(bigint, p.inbound_policy_id) IS NOT NULL
+
+GROUP BY e.coverage_year
+ORDER BY e.coverage_year;
 
 
 /* ============================================================
-   NUMERIC BUT STILL MISSING EXAMPLES
-   These are much more interesting for Hari's Task #2.
+   ACTUAL POLICIES NOT FOUND ANYWHERE IN Enrollments_TEST
    ============================================================ */
 
-SELECT TOP (100)
-    issuer,
-    inbound_policy_id
-FROM #PolicyComparison
-WHERE match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
-  AND TRY_CONVERT(bigint, inbound_policy_id) IS NOT NULL
-ORDER BY issuer, inbound_policy_id;
+SELECT
+    p.issuer,
+    p.inbound_policy_id
+
+FROM #PolicyComparison p
+
+WHERE p.match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+  AND TRY_CONVERT(bigint, p.inbound_policy_id) IS NOT NULL
+
+  AND NOT EXISTS
+  (
+      SELECT 1
+      FROM dbo.Enrollments_TEST e
+      WHERE CONVERT(varchar(100), e.enrollment_id)
+            = p.inbound_policy_id
+  )
+
+ORDER BY
+    p.issuer,
+    p.inbound_policy_id;
