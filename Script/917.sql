@@ -1,12 +1,19 @@
-SELECT COLUMN_NAME
-FROM INFORMATION_SCHEMA.COLUMNS
-WHERE TABLE_SCHEMA = 'dbo'
-  AND TABLE_NAME = 'Enrollments_TEST'
-  AND (
-       COLUMN_NAME LIKE '%enrol%'
-       OR COLUMN_NAME LIKE '%member%'
-       OR COLUMN_NAME LIKE '%indiv%'
-       OR COLUMN_NAME LIKE '%policy%'
-       OR COLUMN_NAME LIKE '%subscriber%'
-  )
-ORDER BY ORDINAL_POSITION;
+SELECT
+    COUNT(DISTINCT CASE
+        WHEN e.enrollee_id = i.member_id
+        THEN e.enrollee_id END) AS Match_Member_ID,
+
+    COUNT(DISTINCT CASE
+        WHEN e.enrollee_id = i.exchng_assigned_enrollee_id
+        THEN e.enrollee_id END) AS Match_Exchange_Enrollee_ID,
+
+    COUNT(DISTINCT CASE
+        WHEN e.enrollee_id = i.issuer_indiv_identifier
+        THEN e.enrollee_id END) AS Match_Issuer_Individual_ID
+
+FROM dbo.Enrollments_TEST e
+JOIN dbo.inbound_automation i
+    ON e.enrollee_id = i.member_id
+    OR e.enrollee_id = i.exchng_assigned_enrollee_id
+    OR e.enrollee_id = i.issuer_indiv_identifier
+WHERE e.coverage_year = 2026;
