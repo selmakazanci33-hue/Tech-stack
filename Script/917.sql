@@ -1,122 +1,152 @@
-TABLE_NAME	COLUMN_NAME	DATA_TYPE
-Enrollments_TEST	coverage_year	int
-Enrollments_TEST	GAA_Load_Datetime	date
-Enrollments_TEST	household_id	int
-Enrollments_TEST	fpl	numeric
-Enrollments_TEST	ssap_application_id	int
-Enrollments_TEST	external_application_id	varchar
-Enrollments_TEST	application_type	varchar
-Enrollments_TEST	source	varchar
-Enrollments_TEST	application_status	varchar
-Enrollments_TEST	Insurance_Type	varchar
-Enrollments_TEST	enrollment_id	int
-Enrollments_TEST	enrollee_id	int
-Enrollments_TEST	person_type	varchar
-Enrollments_TEST	relationship_type	varchar
-Enrollments_TEST	consumer_category	varchar
-Enrollments_TEST	birth_date	date
-Enrollments_TEST	enrollee_first_name	varchar
-Enrollments_TEST	enrollee_last_name	varchar
-Enrollments_TEST	total_indv_responsibility_amt	numeric
-Enrollments_TEST	gross_premium_amt	numeric
-Enrollments_TEST	net_premium_amt	numeric
-Enrollments_TEST	aptc_amt	numeric
-Enrollments_TEST	csr_amt	numeric
-Enrollments_TEST	exchange_eligibility_status	varchar
-Enrollments_TEST	plan_level_combined_bronze	varchar
-Enrollments_TEST	cms_plan_id	varchar
-Enrollments_TEST	plan_id	int
-Enrollments_TEST	plan_name	varchar
-Enrollments_TEST	hios_issuer_id	int
-Enrollments_TEST	insurer_name	varchar
-Enrollments_TEST	age	int
-Enrollments_TEST	email_address	varchar
-Enrollments_TEST	phone_number	varchar
-Enrollments_TEST	rating_area	tinyint
-Enrollments_TEST	county	varchar
-Enrollments_TEST	zip	int
-Enrollments_TEST	broker_role	varchar
-Enrollments_TEST	broker_id	int
-Enrollments_TEST	assister_broker_id	int
-Enrollments_TEST	npn	varchar
-Enrollments_TEST	first_name	varchar
-Enrollments_TEST	last_name	varchar
-Enrollments_TEST	business_name	varchar
-Enrollments_TEST	technology_provider	varchar
-Enrollments_TEST	enrollment_status_description	varchar
-Enrollments_TEST	enrollee_status_description	varchar
-Enrollments_TEST	benefit_effective_date	date
-Enrollments_TEST	benefit_end_date	date
-Enrollments_TEST	enrollment_confirmation_date	date
-Enrollments_TEST	enrollment_create_date	date
-Enrollments_TEST	enrollment_last_update_date	date
-Enrollments_TEST	enrollee_start_date	date
-Enrollments_TEST	enrollee_end_date	date
-Enrollments_TEST	enrollee_create_date	date
-Enrollments_TEST	enrollee_last_update_date	date
-Enrollments_TEST	application_create_date	date
-Enrollments_TEST	application_last_update_date	date
-inbound_automation	id	bigint
-inbound_automation	load_run_id	nvarchar
-inbound_automation	loaded_at	datetime2
-inbound_automation	folder_year	int
-inbound_automation	folder_month	int
-inbound_automation	filename_file_year	int
-inbound_automation	filename_file_month	int
-inbound_automation	source_file	nvarchar
-inbound_automation	source_file_path	nvarchar
-inbound_automation	file_hash	nvarchar
-inbound_automation	row_number_in_file	int
-inbound_automation	raw_record_hash	nvarchar
-inbound_automation	parser_version	nvarchar
-inbound_automation	runner_version	nvarchar
-inbound_automation	git_commit	nvarchar
-inbound_automation	coverage_year	int
-inbound_automation	coverage_year_source	nvarchar
-inbound_automation	warning_count	int
-inbound_automation	insurance_type	nvarchar
-inbound_automation	enrolleeStatus	nvarchar
-inbound_automation	issuer	nvarchar
-inbound_automation	year	nvarchar
-inbound_automation	month	nvarchar
-inbound_automation	file_name	nvarchar
-inbound_automation	raw_xml_path	nvarchar
-inbound_automation	created_at	nvarchar
-inbound_automation	policy_id	nvarchar
-inbound_automation	member_id	nvarchar
-inbound_automation	subscriber_id	nvarchar
-inbound_automation	exchg_assigned_enrollee_id	nvarchar
-inbound_automation	issuer_subscriber_identifier	nvarchar
-inbound_automation	issuer_indiv_identifier	nvarchar
-inbound_automation	member_first_name	nvarchar
-inbound_automation	member_last_name	nvarchar
-inbound_automation	relationship	nvarchar
-inbound_automation	subscriber_flag	nvarchar
-inbound_automation	enrollee_event_type_code	nvarchar
-inbound_automation	enrollee_event_reason_code	nvarchar
-inbound_automation	action_code	nvarchar
-inbound_automation	action_code_description	nvarchar
-inbound_automation	maintenance_type_code	nvarchar
-inbound_automation	additional_maint_reason_code	nvarchar
-inbound_automation	coverage_status	nvarchar
-inbound_automation	benefit_effective_date	date
-inbound_automation	benefit_end_date	date
-inbound_automation	member_maint_effective_date	date
-inbound_automation	last_premium_paid_date	nvarchar
-inbound_automation	request_submit_timestamp	nvarchar
-inbound_automation	total_premium_amount	decimal
-inbound_automation	individual_responsibility_amount	decimal
-inbound_automation	aptc_amount	decimal
-inbound_automation	user_fee_amount	decimal
-inbound_automation	insurance_type_code	nvarchar
-inbound_automation	health_coverage_policy_no	nvarchar
-inbound_automation	household_or_employee_case_id	nvarchar
-inbound_automation	rating_area	nvarchar
-inbound_automation	source_exchg_id	nvarchar
-inbound_automation	enrollment_action_code	nvarchar
-inbound_automation	insurer_tax_id_number	nvarchar
-inbound_automation	qtyn	nvarchar
-inbound_automation	qtyy	nvarchar
-inbound_automation	qtyt	nvarchar
-inbound_automation	raw_payload	nvarchar
-inbound_automation	raw_json	nvarchar
+/* ============================================================
+   TASK #2
+   PURPOSE:
+   Check whether 2026 Policy IDs found in inbound 834 data
+   exist in dbo.Enrollments_TEST.
+
+   MATCH:
+       inbound_automation.policy_id
+                VS
+       Enrollments_TEST.enrollment_id
+
+   IMPORTANT:
+   policy_id = NVARCHAR
+   enrollment_id = INT
+   Therefore comparison is done as VARCHAR to avoid
+   conversion errors such as ES797169500.
+   ============================================================ */
+
+
+/* ============================================================
+   STEP 1 - Build distinct 2026 inbound policy population
+   ============================================================ */
+
+IF OBJECT_ID('tempdb..#InboundPolicies') IS NOT NULL
+    DROP TABLE #InboundPolicies;
+
+SELECT DISTINCT
+    i.issuer,
+
+    LTRIM(RTRIM(CONVERT(varchar(100), i.policy_id)))
+        AS inbound_policy_id
+
+INTO #InboundPolicies
+
+FROM dbo.inbound_automation i
+
+WHERE i.coverage_year = 2026
+  AND i.policy_id IS NOT NULL
+  AND LTRIM(RTRIM(CONVERT(varchar(100), i.policy_id))) <> '';
+
+
+/* ============================================================
+   STEP 2 - Build distinct 2026 Enrollments_TEST population
+   ============================================================ */
+
+IF OBJECT_ID('tempdb..#EnrollmentPolicies') IS NOT NULL
+    DROP TABLE #EnrollmentPolicies;
+
+SELECT DISTINCT
+
+    LTRIM(RTRIM(CONVERT(varchar(100), e.enrollment_id)))
+        AS enrollment_policy_id
+
+INTO #EnrollmentPolicies
+
+FROM dbo.Enrollments_TEST e
+
+WHERE e.coverage_year = 2026
+  AND e.enrollment_id IS NOT NULL;
+
+
+/* ============================================================
+   STEP 3 - Determine MATCH / NOT FOUND
+   ============================================================ */
+
+IF OBJECT_ID('tempdb..#PolicyComparison') IS NOT NULL
+    DROP TABLE #PolicyComparison;
+
+SELECT
+    i.issuer,
+    i.inbound_policy_id,
+
+    CASE
+        WHEN e.enrollment_policy_id IS NOT NULL
+            THEN 'FOUND_IN_ENROLLMENTS_TEST'
+        ELSE 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+    END AS match_status
+
+INTO #PolicyComparison
+
+FROM #InboundPolicies i
+
+LEFT JOIN #EnrollmentPolicies e
+    ON e.enrollment_policy_id = i.inbound_policy_id;
+
+
+/* ============================================================
+   RESULT 1
+   TOTAL DISTINCT 2026 INBOUND POLICIES
+   ============================================================ */
+
+SELECT
+    COUNT(*) AS Total_Inbound_Policies
+FROM #InboundPolicies;
+
+
+/* ============================================================
+   RESULT 2
+   FOUND vs NOT FOUND
+   ============================================================ */
+
+SELECT
+    match_status,
+    COUNT(*) AS Policy_Count
+FROM #PolicyComparison
+GROUP BY match_status
+ORDER BY match_status;
+
+
+/* ============================================================
+   RESULT 3
+   MISSING POLICIES BY ISSUER
+   ============================================================ */
+
+SELECT
+    issuer,
+    COUNT(*) AS Missing_Policy_Count
+FROM #PolicyComparison
+WHERE match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+GROUP BY issuer
+ORDER BY Missing_Policy_Count DESC;
+
+
+/* ============================================================
+   RESULT 4
+   ACTUAL MISSING POLICY IDs
+   This is the population Hari wants us to investigate.
+   ============================================================ */
+
+SELECT
+    issuer,
+    inbound_policy_id AS Missing_Inbound_Policy_ID
+FROM #PolicyComparison
+WHERE match_status = 'NOT_FOUND_IN_ENROLLMENTS_TEST'
+ORDER BY
+    issuer,
+    inbound_policy_id;
+
+
+/* ============================================================
+   RESULT 5
+   SANITY CHECK - MATCHED POLICIES
+   ============================================================ */
+
+SELECT TOP (100)
+    issuer,
+    inbound_policy_id
+FROM #PolicyComparison
+WHERE match_status = 'FOUND_IN_ENROLLMENTS_TEST'
+ORDER BY
+    issuer,
+    inbound_policy_id;
