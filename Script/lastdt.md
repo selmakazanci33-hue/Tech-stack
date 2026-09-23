@@ -1,2 +1,3 @@
-confirm_2026_entities	exact_excluded	non_exact_export_count	enrollee_different_policy_count	policy_different_enrollee_count	not_in_ffm_target_count	partition_control	category_control
-501369	340180	161189	74439	824	85926	PASS_PARTITION	PASS_CATEGORY_SUM
+
+exact_match_export_count	expected_exact_count	control_status
+755548	755548	PASS
