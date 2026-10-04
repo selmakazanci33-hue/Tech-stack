@@ -1,15 +1,6 @@
-SELECT
-    c.column_id AS Column_Ordinal,
-    c.name AS Column_Name,
-    t.name AS Data_Type
-FROM sys.columns AS c
-JOIN sys.types AS t
-    ON c.user_type_id = t.user_type_id
-WHERE c.object_id = OBJECT_ID('dbo.Enrollments_TEST')
-  AND (
-       LOWER(c.name) LIKE '%premium%'
-       OR LOWER(c.name) LIKE '%responsibility%'
-       OR LOWER(c.name) LIKE '%amount%'
-       OR LOWER(c.name) LIKE '%amt%'
-  )
-ORDER BY c.column_id;
+Column_Ordinal	Column_Name	Data_Type
+19	total_indv_responsibility_amt	numeric
+20	gross_premium_amt	numeric
+21	net_premium_amt	numeric
+22	aptc_amt	numeric
+23	csr_amt	numeric
