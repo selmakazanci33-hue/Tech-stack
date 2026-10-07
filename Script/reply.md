@@ -1,0 +1,3 @@
+Column_Ordinal	Column_Name	Data_Type
+13	person_type	varchar
+14	relationship_type	varchar
