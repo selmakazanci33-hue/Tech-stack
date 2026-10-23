@@ -1,15 +1,7 @@
-Schema_Name	Object_Name	Object_Type	Column_Name	Data_Type	Max_Length	Numeric_Precision	Numeric_Scale	Is_Nullable	Candidate_Reason	Coverage_Year_Column	Candidate_Policy_Key	Candidate_Enrollee_Key	Candidate_Issuer_Column	Joinability_Assessment
-dbo	834_Inbound_test	TABLE	renewalStatus	varchar	25	0	0	1	RENEWAL_NAME	Coverage_Year	exchgAssignedPolicyID	NULL	NULL	NO_OBVIOUS_JOIN_TO_VALIDATED_GRAIN
 
 
-Schema_Name	Object_Name	Object_Type	Column_Name	Data_Type	Coverage_Year_Column	Coverage_Year_Value	Distinct_Indicator_Value	Record_Count	Profile_Status
-dbo	834_Inbound_test	TABLE	renewalStatus	varchar	Coverage_Year	2026	NULL	114	PROFILED
+PHASE2 A1: build complete deduplicated 2026 population
+Msg 50000, Level 16, State 1, Line 122
+STOP A1: COMPLETE_2026_DISTINCT_PAIRS=2644162; expected 2263972.
 
-Schema_Name	Object_Name	Object_Type	Column_Name	Data_Type	Coverage_Year_Column	Profiled_Value_Year_Combinations	Total_Records_Profiled	Distinct_Indicator_Values	Distinct_Coverage_Years
-dbo	834_Inbound_test	TABLE	renewalStatus	varchar	Coverage_Year	1	114	0	1
-
-
-Schema_Name	Object_Name	Object_Type	Match_Reason
-
-Candidate_Column_Count	Candidate_Object_Count	Candidate_Module_Count	Validated_No_Inbound_Control	Business_Reported_Auto_Renewal_Reference	Phase_1_Status
-1	1	0	109776	75390	RENEWAL_CANDIDATE_FOUND_JOIN_OR_SEMANTICS_UNPROVEN
+Completion time: 2026-10-23T06:24:10.3526533-04:00
