@@ -24,45 +24,274 @@ SET XACT_ABORT ON;
 DECLARE @coverage_year INT = 2026;
 DECLARE @expected_current_target BIGINT = 958218;
 
+-- =============================================================================
+-- 0) EXPLICIT TEMP-TABLE SCHEMAS + EARLY COMPILE/SCHEMA SMOKE TESTS
+-- =============================================================================
+DROP TABLE IF EXISTS #master;
+DROP TABLE IF EXISTS #best;
+DROP TABLE IF EXISTS #candidates;
+DROP TABLE IF EXISTS #candidate_hits;
+DROP TABLE IF EXISTS #inbound;
+DROP TABLE IF EXISTS #target;
+
+CREATE TABLE #target (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Issuer VARCHAR(20) NULL,
+    FFM_Policy_ID VARCHAR(100) NULL,
+    FFM_Enrollee_ID VARCHAR(100) NULL,
+    FFM_Enrollment_Status NVARCHAR(500) NULL,
+    FFM_Enrollee_Status NVARCHAR(500) NULL,
+    FFM_Lifecycle VARCHAR(40) NOT NULL,
+    FFM_Event_Date DATETIME2(7) NULL,
+    person_type NVARCHAR(500) NULL,
+    relationship_type NVARCHAR(500) NULL,
+    benefit_effective_date DATETIME2(7) NULL,
+    benefit_end_date DATETIME2(7) NULL,
+    enrollment_create_date DATETIME2(7) NULL,
+    enrollment_last_update_date DATETIME2(7) NULL,
+    enrollee_create_date DATETIME2(7) NULL,
+    enrollee_last_update_date DATETIME2(7) NULL,
+    household_id NVARCHAR(500) NULL,
+    source NVARCHAR(MAX) NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('FFM_Coverage_Year'), ('FFM_Issuer'), ('FFM_Policy_ID'),
+        ('FFM_Enrollee_ID'), ('FFM_Enrollment_Status'),
+        ('FFM_Enrollee_Status'), ('FFM_Lifecycle'), ('FFM_Event_Date'),
+        ('person_type'), ('relationship_type'), ('benefit_effective_date'),
+        ('benefit_end_date'), ('enrollment_create_date'),
+        ('enrollment_last_update_date'), ('enrollee_create_date'),
+        ('enrollee_last_update_date'), ('household_id'), ('source')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#target', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #target schema validation failed.', 16, 1);
+    RETURN;
+END;
+
+CREATE TABLE #inbound (
+    inbound_row_id BIGINT NOT NULL,
+    Inbound_Member_ID VARCHAR(100) NULL,
+    Inbound_Issuer_Indiv_Identifier VARCHAR(100) NULL,
+    Inbound_Exchange_Assigned_Enrollee_ID VARCHAR(100) NULL,
+    Inbound_Policy_ID VARCHAR(100) NULL,
+    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
+    Inbound_Issuer VARCHAR(20) NOT NULL,
+    Inbound_Coverage_Year INT NULL,
+    Inbound_Status_Raw NVARCHAR(50) NULL,
+    Inbound_Lifecycle VARCHAR(40) NOT NULL,
+    Inbound_Event_Date DATE NULL,
+    member_maint_effective_date DATE NULL,
+    Inbound_Benefit_Effective_Date DATE NULL,
+    Inbound_Source_File NVARCHAR(500) NOT NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('inbound_row_id'), ('Inbound_Member_ID'),
+        ('Inbound_Issuer_Indiv_Identifier'),
+        ('Inbound_Exchange_Assigned_Enrollee_ID'), ('Inbound_Policy_ID'),
+        ('Inbound_Health_Coverage_Policy_No'), ('Inbound_Issuer'),
+        ('Inbound_Coverage_Year'), ('Inbound_Status_Raw'),
+        ('Inbound_Lifecycle'), ('Inbound_Event_Date'),
+        ('member_maint_effective_date'),
+        ('Inbound_Benefit_Effective_Date'), ('Inbound_Source_File')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#inbound', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #inbound schema validation failed.', 16, 1);
+    RETURN;
+END;
+
+CREATE TABLE #candidate_hits (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Policy_ID VARCHAR(100) NULL,
+    FFM_Enrollee_ID VARCHAR(100) NOT NULL,
+    inbound_row_id BIGINT NOT NULL,
+    Matched_Inbound_ID_Type VARCHAR(100) NOT NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('FFM_Coverage_Year'), ('FFM_Policy_ID'), ('FFM_Enrollee_ID'),
+        ('inbound_row_id'), ('Matched_Inbound_ID_Type')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#candidate_hits', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #candidate_hits schema validation failed.', 16, 1);
+    RETURN;
+END;
+
+CREATE TABLE #candidates (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Policy_ID VARCHAR(100) NOT NULL,
+    FFM_Enrollee_ID VARCHAR(100) NOT NULL,
+    FFM_Issuer VARCHAR(20) NULL,
+    FFM_Lifecycle VARCHAR(40) NOT NULL,
+    FFM_Event_Date DATETIME2(7) NULL,
+    Matched_Inbound_ID_Type VARCHAR(100) NOT NULL,
+    Inbound_Policy_ID VARCHAR(100) NULL,
+    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
+    Inbound_Issuer VARCHAR(20) NOT NULL,
+    Inbound_Coverage_Year INT NULL,
+    Inbound_Status_Raw NVARCHAR(50) NULL,
+    Inbound_Lifecycle VARCHAR(40) NOT NULL,
+    Inbound_Event_Date DATE NULL,
+    Inbound_Source_File NVARCHAR(500) NOT NULL,
+    inbound_row_id BIGINT NOT NULL,
+    Policy_Match_Flag INT NOT NULL,
+    Issuer_Match_Flag INT NOT NULL,
+    Compatible_Lifecycle_Flag INT NOT NULL,
+    Date_Difference_Days INT NULL,
+    rank_priority INT NOT NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('FFM_Coverage_Year'), ('FFM_Policy_ID'), ('FFM_Enrollee_ID'),
+        ('FFM_Issuer'), ('FFM_Lifecycle'), ('FFM_Event_Date'),
+        ('Matched_Inbound_ID_Type'), ('Inbound_Policy_ID'),
+        ('Inbound_Health_Coverage_Policy_No'), ('Inbound_Issuer'),
+        ('Inbound_Coverage_Year'), ('Inbound_Status_Raw'),
+        ('Inbound_Lifecycle'), ('Inbound_Event_Date'),
+        ('Inbound_Source_File'), ('inbound_row_id'), ('Policy_Match_Flag'),
+        ('Issuer_Match_Flag'), ('Compatible_Lifecycle_Flag'),
+        ('Date_Difference_Days'), ('rank_priority')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#candidates', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #candidates schema validation failed.', 16, 1);
+    RETURN;
+END;
+
+CREATE TABLE #best (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Policy_ID VARCHAR(100) NOT NULL,
+    FFM_Enrollee_ID VARCHAR(100) NOT NULL,
+    FFM_Issuer VARCHAR(20) NULL,
+    FFM_Lifecycle VARCHAR(40) NOT NULL,
+    FFM_Event_Date DATETIME2(7) NULL,
+    Matched_Inbound_ID_Type VARCHAR(100) NOT NULL,
+    Inbound_Policy_ID VARCHAR(100) NULL,
+    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
+    Inbound_Issuer VARCHAR(20) NOT NULL,
+    Inbound_Coverage_Year INT NULL,
+    Inbound_Status_Raw NVARCHAR(50) NULL,
+    Inbound_Lifecycle VARCHAR(40) NOT NULL,
+    Inbound_Event_Date DATE NULL,
+    Inbound_Source_File NVARCHAR(500) NOT NULL,
+    inbound_row_id BIGINT NOT NULL,
+    Policy_Match_Flag INT NOT NULL,
+    Issuer_Match_Flag INT NOT NULL,
+    Compatible_Lifecycle_Flag INT NOT NULL,
+    Date_Difference_Days INT NULL,
+    rank_priority INT NOT NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('FFM_Coverage_Year'), ('FFM_Policy_ID'), ('FFM_Enrollee_ID'),
+        ('FFM_Issuer'), ('FFM_Lifecycle'), ('FFM_Event_Date'),
+        ('Matched_Inbound_ID_Type'), ('Inbound_Policy_ID'),
+        ('Inbound_Health_Coverage_Policy_No'), ('Inbound_Issuer'),
+        ('Inbound_Coverage_Year'), ('Inbound_Status_Raw'),
+        ('Inbound_Lifecycle'), ('Inbound_Event_Date'),
+        ('Inbound_Source_File'), ('inbound_row_id'), ('Policy_Match_Flag'),
+        ('Issuer_Match_Flag'), ('Compatible_Lifecycle_Flag'),
+        ('Date_Difference_Days'), ('rank_priority')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#best', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #best schema validation failed.', 16, 1);
+    RETURN;
+END;
+
+CREATE TABLE #master (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Issuer VARCHAR(20) NULL,
+    FFM_Policy_ID VARCHAR(100) NULL,
+    FFM_Enrollee_ID VARCHAR(100) NULL,
+    FFM_Enrollment_Status NVARCHAR(500) NULL,
+    FFM_Enrollee_Status NVARCHAR(500) NULL,
+    person_type NVARCHAR(500) NULL,
+    relationship_type NVARCHAR(500) NULL,
+    benefit_effective_date DATETIME2(7) NULL,
+    benefit_end_date DATETIME2(7) NULL,
+    enrollment_create_date DATETIME2(7) NULL,
+    enrollment_last_update_date DATETIME2(7) NULL,
+    household_id NVARCHAR(500) NULL,
+    source NVARCHAR(MAX) NULL,
+    Inbound_Evidence_Found INT NOT NULL,
+    Match_Category VARCHAR(50) NOT NULL,
+    Inbound_Coverage_Year INT NULL,
+    Inbound_Issuer VARCHAR(20) NULL,
+    Inbound_Status_Raw NVARCHAR(50) NULL,
+    Inbound_Lifecycle VARCHAR(40) NULL,
+    Inbound_Policy_ID VARCHAR(100) NULL,
+    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
+    Inbound_Event_Date DATE NULL,
+    Inbound_Source_File NVARCHAR(500) NULL,
+    Matched_Inbound_ID_Type VARCHAR(100) NULL,
+    Date_Difference_Days INT NULL,
+    rank_priority INT NULL
+);
+
+IF EXISTS (
+    SELECT 1
+    FROM (VALUES
+        ('FFM_Coverage_Year'), ('FFM_Issuer'), ('FFM_Policy_ID'),
+        ('FFM_Enrollee_ID'), ('FFM_Enrollment_Status'),
+        ('FFM_Enrollee_Status'), ('person_type'), ('relationship_type'),
+        ('benefit_effective_date'), ('benefit_end_date'),
+        ('enrollment_create_date'), ('enrollment_last_update_date'),
+        ('household_id'), ('source'), ('Inbound_Evidence_Found'),
+        ('Match_Category'), ('Inbound_Coverage_Year'), ('Inbound_Issuer'),
+        ('Inbound_Status_Raw'), ('Inbound_Lifecycle'), ('Inbound_Policy_ID'),
+        ('Inbound_Health_Coverage_Policy_No'), ('Inbound_Event_Date'),
+        ('Inbound_Source_File'), ('Matched_Inbound_ID_Type'),
+        ('Date_Difference_Days'), ('rank_priority')
+    ) AS required(column_name)
+    WHERE COL_LENGTH('tempdb..#master', required.column_name) IS NULL
+)
+BEGIN
+    RAISERROR('STOP: #master schema validation failed.', 16, 1);
+    RETURN;
+END;
+
 
 -- =============================================================================
 -- 1) CURRENT FFM TARGET — exact five-field dedup before status filtering
 -- =============================================================================
-IF OBJECT_ID('tempdb..#target') IS NOT NULL DROP TABLE #target;
-
-SELECT
-    e.coverage_year AS FFM_Coverage_Year,
-    CAST(e.hios_issuer_id AS VARCHAR(20)) AS FFM_Issuer,
-    CAST(e.enrollment_id AS VARCHAR(100)) AS FFM_Policy_ID,
-    CAST(e.enrollee_id AS VARCHAR(100)) AS FFM_Enrollee_ID,
-    e.enrollment_status_description AS FFM_Enrollment_Status,
-    e.enrollee_status_description AS FFM_Enrollee_Status,
-    CASE
-        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'ENROLLED'
-            THEN 'CONFIRM'
-        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'PENDING'
-            THEN 'PENDING'
-        ELSE 'STATUS_MAPPING_REVIEW'
-    END AS FFM_Lifecycle,
-    COALESCE(
-        e.enrollment_last_update_date,
-        e.enrollment_create_date,
-        e.benefit_effective_date
-    ) AS FFM_Event_Date,
-    e.person_type,
-    e.relationship_type,
-    e.benefit_effective_date,
-    e.benefit_end_date,
-    e.enrollment_create_date,
-    e.enrollment_last_update_date,
-    e.enrollee_create_date,
-    e.enrollee_last_update_date,
-    e.household_id,
-    e.source
-INTO #target
-FROM (
+;WITH ranked_target AS (
     SELECT
-        src.*,
+        src.coverage_year,
+        src.hios_issuer_id,
+        src.enrollment_id,
+        src.enrollee_id,
+        src.enrollment_status_description,
+        src.enrollee_status_description,
+        src.person_type,
+        src.relationship_type,
+        src.benefit_effective_date,
+        src.benefit_end_date,
+        src.enrollment_create_date,
+        src.enrollment_last_update_date,
+        src.enrollee_create_date,
+        src.enrollee_last_update_date,
+        src.household_id,
+        src.source,
         ROW_NUMBER() OVER (
             PARTITION BY
                 src.coverage_year,
@@ -76,7 +305,67 @@ FROM (
                 src.benefit_effective_date DESC
         ) AS _rn
     FROM dbo.Enrollments_TEST AS src
-) AS e
+)
+INSERT INTO #target (
+    FFM_Coverage_Year,
+    FFM_Issuer,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    FFM_Enrollment_Status,
+    FFM_Enrollee_Status,
+    FFM_Lifecycle,
+    FFM_Event_Date,
+    person_type,
+    relationship_type,
+    benefit_effective_date,
+    benefit_end_date,
+    enrollment_create_date,
+    enrollment_last_update_date,
+    enrollee_create_date,
+    enrollee_last_update_date,
+    household_id,
+    source
+)
+SELECT
+    e.coverage_year AS FFM_Coverage_Year,
+    CAST(e.hios_issuer_id AS VARCHAR(20)) AS FFM_Issuer,
+    CAST(e.enrollment_id AS VARCHAR(100)) AS FFM_Policy_ID,
+    CAST(e.enrollee_id AS VARCHAR(100)) AS FFM_Enrollee_ID,
+    CONVERT(NVARCHAR(500), e.enrollment_status_description)
+        AS FFM_Enrollment_Status,
+    CONVERT(NVARCHAR(500), e.enrollee_status_description)
+        AS FFM_Enrollee_Status,
+    CASE
+        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'ENROLLED'
+            THEN 'CONFIRM'
+        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'PENDING'
+            THEN 'PENDING'
+        ELSE 'STATUS_MAPPING_REVIEW'
+    END AS FFM_Lifecycle,
+    CONVERT(
+        DATETIME2(7),
+        COALESCE(
+            e.enrollment_last_update_date,
+            e.enrollment_create_date,
+            e.benefit_effective_date
+        )
+    ) AS FFM_Event_Date,
+    CONVERT(NVARCHAR(500), e.person_type) AS person_type,
+    CONVERT(NVARCHAR(500), e.relationship_type) AS relationship_type,
+    CONVERT(DATETIME2(7), e.benefit_effective_date)
+        AS benefit_effective_date,
+    CONVERT(DATETIME2(7), e.benefit_end_date) AS benefit_end_date,
+    CONVERT(DATETIME2(7), e.enrollment_create_date)
+        AS enrollment_create_date,
+    CONVERT(DATETIME2(7), e.enrollment_last_update_date)
+        AS enrollment_last_update_date,
+    CONVERT(DATETIME2(7), e.enrollee_create_date)
+        AS enrollee_create_date,
+    CONVERT(DATETIME2(7), e.enrollee_last_update_date)
+        AS enrollee_last_update_date,
+    CONVERT(NVARCHAR(500), e.household_id) AS household_id,
+    CONVERT(NVARCHAR(MAX), e.source) AS source
+FROM ranked_target AS e
 WHERE e._rn = 1
   AND e.coverage_year = @coverage_year
   AND UPPER(LTRIM(RTRIM(e.enrollment_status_description)))
@@ -110,8 +399,22 @@ END;
 -- =============================================================================
 -- 2) FULL AVAILABLE INBOUND HISTORY
 -- =============================================================================
-IF OBJECT_ID('tempdb..#inbound') IS NOT NULL DROP TABLE #inbound;
-
+INSERT INTO #inbound (
+    inbound_row_id,
+    Inbound_Member_ID,
+    Inbound_Issuer_Indiv_Identifier,
+    Inbound_Exchange_Assigned_Enrollee_ID,
+    Inbound_Policy_ID,
+    Inbound_Health_Coverage_Policy_No,
+    Inbound_Issuer,
+    Inbound_Coverage_Year,
+    Inbound_Status_Raw,
+    Inbound_Lifecycle,
+    Inbound_Event_Date,
+    member_maint_effective_date,
+    Inbound_Benefit_Effective_Date,
+    Inbound_Source_File
+)
 SELECT
     ia.id AS inbound_row_id,
     NULLIF(LTRIM(RTRIM(CAST(ia.member_id AS VARCHAR(100)))), '')
@@ -156,7 +459,6 @@ SELECT
     ia.member_maint_effective_date,
     ia.benefit_effective_date AS Inbound_Benefit_Effective_Date,
     ia.source_file AS Inbound_Source_File
-INTO #inbound
 FROM dbo.inbound_automation AS ia
 WHERE NULLIF(LTRIM(RTRIM(ia.member_id)), '') IS NOT NULL
    OR NULLIF(LTRIM(RTRIM(ia.issuer_indiv_identifier)), '') IS NOT NULL
@@ -202,8 +504,6 @@ CREATE NONCLUSTERED INDEX IX_inbound_exchange
 -- =============================================================================
 -- 3) THREE INDEPENDENT ENROLLEE IDENTIFIER PATHS
 -- =============================================================================
-IF OBJECT_ID('tempdb..#candidate_hits') IS NOT NULL DROP TABLE #candidate_hits;
-
 ;WITH hit_raw AS (
     SELECT
         t.FFM_Coverage_Year,
@@ -239,6 +539,13 @@ IF OBJECT_ID('tempdb..#candidate_hits') IS NOT NULL DROP TABLE #candidate_hits;
     INNER JOIN #inbound AS i
         ON i.Inbound_Exchange_Assigned_Enrollee_ID = t.FFM_Enrollee_ID
 )
+INSERT INTO #candidate_hits (
+    FFM_Coverage_Year,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    inbound_row_id,
+    Matched_Inbound_ID_Type
+)
 SELECT
     FFM_Coverage_Year,
     FFM_Policy_ID,
@@ -264,7 +571,6 @@ SELECT
             THEN 'ISSUER_INDIV_IDENTIFIER'
         ELSE 'EXCHG_ASSIGNED_ENROLLEE_ID'
     END AS Matched_Inbound_ID_Type
-INTO #candidate_hits
 FROM hit_raw
 GROUP BY
     FFM_Coverage_Year,
@@ -283,8 +589,29 @@ CREATE CLUSTERED INDEX CX_candidate_hits
 -- =============================================================================
 -- 4) VALIDATED CANDIDATE RANKING
 -- =============================================================================
-IF OBJECT_ID('tempdb..#candidates') IS NOT NULL DROP TABLE #candidates;
-
+INSERT INTO #candidates (
+    FFM_Coverage_Year,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    FFM_Issuer,
+    FFM_Lifecycle,
+    FFM_Event_Date,
+    Matched_Inbound_ID_Type,
+    Inbound_Policy_ID,
+    Inbound_Health_Coverage_Policy_No,
+    Inbound_Issuer,
+    Inbound_Coverage_Year,
+    Inbound_Status_Raw,
+    Inbound_Lifecycle,
+    Inbound_Event_Date,
+    Inbound_Source_File,
+    inbound_row_id,
+    Policy_Match_Flag,
+    Issuer_Match_Flag,
+    Compatible_Lifecycle_Flag,
+    Date_Difference_Days,
+    rank_priority
+)
 SELECT
     t.FFM_Coverage_Year,
     t.FFM_Policy_ID,
@@ -356,7 +683,6 @@ SELECT
             THEN 7
         ELSE 8
     END AS rank_priority
-INTO #candidates
 FROM #candidate_hits AS h
 INNER JOIN #target AS t
     ON t.FFM_Coverage_Year = h.FFM_Coverage_Year
@@ -375,32 +701,6 @@ CREATE CLUSTERED INDEX CX_candidates
 
 
 -- Select exactly one best inbound row per current target pair.
-IF OBJECT_ID('tempdb..#best') IS NOT NULL DROP TABLE #best;
-
-CREATE TABLE #best (
-    FFM_Coverage_Year INT NOT NULL,
-    FFM_Policy_ID VARCHAR(100) NOT NULL,
-    FFM_Enrollee_ID VARCHAR(100) NOT NULL,
-    FFM_Issuer VARCHAR(20) NULL,
-    FFM_Lifecycle VARCHAR(40) NULL,
-    FFM_Event_Date DATETIME2(7) NULL,
-    Matched_Inbound_ID_Type VARCHAR(100) NULL,
-    Inbound_Policy_ID VARCHAR(100) NULL,
-    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
-    Inbound_Issuer VARCHAR(20) NULL,
-    Inbound_Coverage_Year INT NULL,
-    Inbound_Status_Raw NVARCHAR(100) NULL,
-    Inbound_Lifecycle VARCHAR(40) NULL,
-    Inbound_Event_Date DATE NULL,
-    Inbound_Source_File NVARCHAR(500) NULL,
-    inbound_row_id BIGINT NOT NULL,
-    Policy_Match_Flag INT NOT NULL,
-    Issuer_Match_Flag INT NOT NULL,
-    Compatible_Lifecycle_Flag INT NOT NULL,
-    Date_Difference_Days INT NULL,
-    rank_priority INT NOT NULL
-);
-
 ;WITH ranked AS (
     SELECT
         c.FFM_Coverage_Year,
@@ -494,8 +794,35 @@ CREATE UNIQUE CLUSTERED INDEX CX_best
 -- =============================================================================
 -- 5) ONE MUTUALLY EXCLUSIVE MASTER ROW PER CURRENT TARGET PAIR
 -- =============================================================================
-IF OBJECT_ID('tempdb..#master') IS NOT NULL DROP TABLE #master;
-
+INSERT INTO #master (
+    FFM_Coverage_Year,
+    FFM_Issuer,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    FFM_Enrollment_Status,
+    FFM_Enrollee_Status,
+    person_type,
+    relationship_type,
+    benefit_effective_date,
+    benefit_end_date,
+    enrollment_create_date,
+    enrollment_last_update_date,
+    household_id,
+    source,
+    Inbound_Evidence_Found,
+    Match_Category,
+    Inbound_Coverage_Year,
+    Inbound_Issuer,
+    Inbound_Status_Raw,
+    Inbound_Lifecycle,
+    Inbound_Policy_ID,
+    Inbound_Health_Coverage_Policy_No,
+    Inbound_Event_Date,
+    Inbound_Source_File,
+    Matched_Inbound_ID_Type,
+    Date_Difference_Days,
+    rank_priority
+)
 SELECT
     t.FFM_Coverage_Year,
     t.FFM_Issuer,
@@ -542,7 +869,6 @@ SELECT
     b.Matched_Inbound_ID_Type,
     b.Date_Difference_Days,
     b.rank_priority
-INTO #master
 FROM #target AS t
 LEFT JOIN #best AS b
     ON b.FFM_Coverage_Year = t.FFM_Coverage_Year
