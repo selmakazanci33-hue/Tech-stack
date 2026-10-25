@@ -377,11 +377,53 @@ CREATE CLUSTERED INDEX CX_candidates
 -- Select exactly one best inbound row per current target pair.
 IF OBJECT_ID('tempdb..#best') IS NOT NULL DROP TABLE #best;
 
-SELECT *
-INTO #best
-FROM (
+CREATE TABLE #best (
+    FFM_Coverage_Year INT NOT NULL,
+    FFM_Policy_ID VARCHAR(100) NOT NULL,
+    FFM_Enrollee_ID VARCHAR(100) NOT NULL,
+    FFM_Issuer VARCHAR(20) NULL,
+    FFM_Lifecycle VARCHAR(40) NULL,
+    FFM_Event_Date DATETIME2(7) NULL,
+    Matched_Inbound_ID_Type VARCHAR(100) NULL,
+    Inbound_Policy_ID VARCHAR(100) NULL,
+    Inbound_Health_Coverage_Policy_No VARCHAR(100) NULL,
+    Inbound_Issuer VARCHAR(20) NULL,
+    Inbound_Coverage_Year INT NULL,
+    Inbound_Status_Raw NVARCHAR(100) NULL,
+    Inbound_Lifecycle VARCHAR(40) NULL,
+    Inbound_Event_Date DATE NULL,
+    Inbound_Source_File NVARCHAR(500) NULL,
+    inbound_row_id BIGINT NOT NULL,
+    Policy_Match_Flag INT NOT NULL,
+    Issuer_Match_Flag INT NOT NULL,
+    Compatible_Lifecycle_Flag INT NOT NULL,
+    Date_Difference_Days INT NULL,
+    rank_priority INT NOT NULL
+);
+
+;WITH ranked AS (
     SELECT
-        c.*,
+        c.FFM_Coverage_Year,
+        c.FFM_Policy_ID,
+        c.FFM_Enrollee_ID,
+        c.FFM_Issuer,
+        c.FFM_Lifecycle,
+        c.FFM_Event_Date,
+        c.Matched_Inbound_ID_Type,
+        c.Inbound_Policy_ID,
+        c.Inbound_Health_Coverage_Policy_No,
+        c.Inbound_Issuer,
+        c.Inbound_Coverage_Year,
+        c.Inbound_Status_Raw,
+        c.Inbound_Lifecycle,
+        c.Inbound_Event_Date,
+        c.Inbound_Source_File,
+        c.inbound_row_id,
+        c.Policy_Match_Flag,
+        c.Issuer_Match_Flag,
+        c.Compatible_Lifecycle_Flag,
+        c.Date_Difference_Days,
+        c.rank_priority,
         ROW_NUMBER() OVER (
             PARTITION BY
                 c.FFM_Coverage_Year,
@@ -396,7 +438,53 @@ FROM (
                 c.inbound_row_id DESC
         ) AS _best_rn
     FROM #candidates AS c
-) AS ranked
+)
+INSERT INTO #best (
+    FFM_Coverage_Year,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    FFM_Issuer,
+    FFM_Lifecycle,
+    FFM_Event_Date,
+    Matched_Inbound_ID_Type,
+    Inbound_Policy_ID,
+    Inbound_Health_Coverage_Policy_No,
+    Inbound_Issuer,
+    Inbound_Coverage_Year,
+    Inbound_Status_Raw,
+    Inbound_Lifecycle,
+    Inbound_Event_Date,
+    Inbound_Source_File,
+    inbound_row_id,
+    Policy_Match_Flag,
+    Issuer_Match_Flag,
+    Compatible_Lifecycle_Flag,
+    Date_Difference_Days,
+    rank_priority
+)
+SELECT
+    ranked.FFM_Coverage_Year,
+    ranked.FFM_Policy_ID,
+    ranked.FFM_Enrollee_ID,
+    ranked.FFM_Issuer,
+    ranked.FFM_Lifecycle,
+    ranked.FFM_Event_Date,
+    ranked.Matched_Inbound_ID_Type,
+    ranked.Inbound_Policy_ID,
+    ranked.Inbound_Health_Coverage_Policy_No,
+    ranked.Inbound_Issuer,
+    ranked.Inbound_Coverage_Year,
+    ranked.Inbound_Status_Raw,
+    ranked.Inbound_Lifecycle,
+    ranked.Inbound_Event_Date,
+    ranked.Inbound_Source_File,
+    ranked.inbound_row_id,
+    ranked.Policy_Match_Flag,
+    ranked.Issuer_Match_Flag,
+    ranked.Compatible_Lifecycle_Flag,
+    ranked.Date_Difference_Days,
+    ranked.rank_priority
+FROM ranked
 WHERE ranked._best_rn = 1;
 
 CREATE UNIQUE CLUSTERED INDEX CX_best
