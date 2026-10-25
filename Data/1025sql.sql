@@ -1,490 +1,439 @@
+
+
+
 -- =============================================================================
--- DIAGNOSTIC — dbo.inbound_automation freshness
+-- DIAGNOSTIC — Historical enrollment snapshot candidate fingerprint
 -- =============================================================================
 -- Purpose:
---   Establish the current inbound 834 data boundary before any further 2026
---   enrollment reconciliation or Auto-Renewal analysis.
---
--- Repository definitions reused:
---   sql/inbound_automation_ddl.sql
---   docs/inbound_automation_schema.md
---   inbound_automation/filename_utils.py
---   inbound_automation/enrich.py
---   inbound_automation/azure_writer.py
---
--- Date semantics kept separate:
---   Source_File_Date:
---     Derived only from filename layouts supported by filename_utils.py.
---     Exact day is not persisted as a dedicated database column. Unsupported
---     or inconsistent names remain NULL.
---   Source_File_Month:
---     Persisted filename_file_year + filename_file_month from the loader.
---   Load_Ingestion_Date:
---     loaded_at assigned by the inbound automation load.
---   Transaction_Date:
---     member_maint_effective_date from Parser834.
---   Effective_Date:
---     benefit_effective_date from Parser834.
+--   Determine whether a repository-referenced dbo.Enrollments_* table can
+--   reproduce the previously validated 2026 enrollment snapshot.
 --
 -- Safety:
---   READ ONLY on permanent tables. Temp tables/indexes only.
---   Does not query Enrollments_TEST and does not rebuild reconciliation controls.
+--   READ ONLY on permanent objects. Temp tables only.
+--   Does not query dbo.Enrollments_TEST or dbo.inbound_automation.
+--   Does not rebuild No-Inbound or perform reconciliation.
+--
+-- NEAR_MATCH is diagnostic only:
+--   complete and target counts are each within 1% of their historical control,
+--   target issuer count is within 1, and issuer 82824 remains absent.
 -- =============================================================================
 
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
-IF OBJECT_ID(N'dbo.inbound_automation', N'U') IS NULL
-BEGIN
-    RAISERROR('Required table dbo.inbound_automation does not exist.', 16, 1);
-    RETURN;
-END;
+DECLARE @coverage_year INT = 2026;
+DECLARE @expected_complete BIGINT = 2263972;
+DECLARE @expected_target BIGINT = 960531;
+DECLARE @expected_target_issuers INT = 16;
+DECLARE @complete_near_tolerance BIGINT =
+    CEILING(@expected_complete * 0.01);
+DECLARE @target_near_tolerance BIGINT =
+    CEILING(@expected_target * 0.01);
 
 
--- =============================================================================
--- Stage the authoritative inbound freshness fields once.
--- =============================================================================
-IF OBJECT_ID('tempdb..#inbound_freshness') IS NOT NULL
-    DROP TABLE #inbound_freshness;
-
-SELECT
-    CAST(ia.issuer AS VARCHAR(20)) AS issuer,
-    ia.coverage_year,
-    ia.filename_file_year,
-    ia.filename_file_month,
-    ia.source_file,
-    ia.file_hash,
-    ia.loaded_at,
-    ia.member_maint_effective_date,
-    ia.benefit_effective_date,
-    ia.benefit_end_date,
-    parsed.Candidate_Source_File_Date,
-    CASE
-        WHEN parsed.Candidate_Source_File_Date IS NULL THEN NULL
-        WHEN
-            (
-                ia.filename_file_year IS NULL
-                OR ia.filename_file_year = YEAR(parsed.Candidate_Source_File_Date)
-            )
-            AND
-            (
-                ia.filename_file_month IS NULL
-                OR ia.filename_file_month = MONTH(parsed.Candidate_Source_File_Date)
-            )
-            THEN parsed.Candidate_Source_File_Date
-        ELSE NULL
-    END AS Source_File_Date,
-    CASE
-        WHEN ia.filename_file_year BETWEEN 1900 AND 2100
-         AND ia.filename_file_month BETWEEN 1 AND 12
-            THEN DATEFROMPARTS(
-                ia.filename_file_year,
-                ia.filename_file_month,
-                1
-            )
-        ELSE NULL
-    END AS Source_File_Month
-INTO #inbound_freshness
-FROM dbo.inbound_automation AS ia
-OUTER APPLY (
-    SELECT
-        PATINDEX(
-            '%_[12][0-9][0-9][0-9][01][0-9][0-3][0-9]'
-            + '[0-2][0-9][0-5][0-9][0-5][0-9]%',
-            ia.source_file
-        ) AS Compact_Timestamp_Position,
-        PATINDEX(
-            '%_[12][0-9][0-9][0-9]-[01][0-9]-[0-3][0-9]T%',
-            ia.source_file
-        ) AS ISO_Timestamp_Position
-) AS pos
-OUTER APPLY (
-    SELECT
-        CASE
-            WHEN RIGHT(LOWER(ia.source_file), 4) = '.xml'
-             AND pos.Compact_Timestamp_Position > 0
-                THEN TRY_CONVERT(
-                    date,
-                    SUBSTRING(
-                        ia.source_file,
-                        pos.Compact_Timestamp_Position + 1,
-                        8
-                    ),
-                    112
-                )
-            WHEN RIGHT(LOWER(ia.source_file), 4) = '.xml'
-             AND pos.ISO_Timestamp_Position > 0
-                THEN TRY_CONVERT(
-                    date,
-                    SUBSTRING(
-                        ia.source_file,
-                        pos.ISO_Timestamp_Position + 1,
-                        10
-                    ),
-                    23
-                )
-            ELSE NULL
-        END AS Candidate_Source_File_Date
-) AS parsed;
-
-CREATE CLUSTERED INDEX CX_inbound_freshness
-    ON #inbound_freshness (issuer, coverage_year);
-
-CREATE NONCLUSTERED INDEX IX_inbound_freshness_loaded
-    ON #inbound_freshness (loaded_at)
-    INCLUDE (
-        source_file,
-        Source_File_Date,
-        Source_File_Month,
-        member_maint_effective_date,
-        benefit_effective_date
-    );
-
-
--- One row per issuer + physical source-file hash for file-level selection.
-IF OBJECT_ID('tempdb..#inbound_files') IS NOT NULL
-    DROP TABLE #inbound_files;
-
-SELECT
-    issuer,
-    source_file,
-    file_hash,
-    MAX(Source_File_Date) AS Source_File_Date,
-    MAX(Source_File_Month) AS Source_File_Month,
-    MAX(loaded_at) AS Latest_Load_Ingestion_Date,
-    MAX(member_maint_effective_date) AS Latest_Transaction_Date,
-    MAX(benefit_effective_date) AS Latest_Effective_Date,
-    MAX(coverage_year) AS Latest_Coverage_Year,
-    COUNT_BIG(*) AS Record_Count
-INTO #inbound_files
-FROM #inbound_freshness
-GROUP BY
-    issuer,
-    source_file,
-    file_hash;
-
-CREATE CLUSTERED INDEX CX_inbound_files
-    ON #inbound_files (issuer, source_file, file_hash);
-
-
--- =============================================================================
--- RESULT 1 — Overall inbound freshness
--- =============================================================================
-DECLARE @latest_source_file VARCHAR(500);
-DECLARE @latest_loaded_source_file VARCHAR(500);
-
-SELECT TOP (1)
-    @latest_source_file = source_file
-FROM #inbound_files
-ORDER BY
-    CASE WHEN Source_File_Date IS NULL THEN 1 ELSE 0 END,
-    Source_File_Date DESC,
-    Latest_Load_Ingestion_Date DESC,
-    source_file DESC;
-
-SELECT TOP (1)
-    @latest_loaded_source_file = source_file
-FROM #inbound_files
-ORDER BY
-    Latest_Load_Ingestion_Date DESC,
-    Source_File_Date DESC,
-    source_file DESC;
-
-SELECT
-    COUNT_BIG(*) AS Total_Record_Count,
-    COUNT(DISTINCT issuer) AS Distinct_Issuer_Count,
-    COUNT(DISTINCT source_file) AS Distinct_Source_File_Count,
-    COUNT(DISTINCT file_hash) AS Distinct_File_Hash_Count,
-    MIN(Source_File_Date) AS Earliest_Derived_Source_File_Date,
-    MAX(Source_File_Date) AS Latest_Derived_Source_File_Date,
-    @latest_source_file AS Latest_Source_File_By_Derived_Date,
-    MAX(Source_File_Month) AS Latest_Persisted_Source_File_Month,
-    MAX(loaded_at) AS Latest_Load_Ingestion_Date,
-    @latest_loaded_source_file AS Latest_Source_File_By_Load_Date,
-    MAX(member_maint_effective_date) AS Latest_Transaction_Date,
-    MAX(benefit_effective_date) AS Latest_Effective_Date,
-    MAX(benefit_end_date) AS Latest_Benefit_End_Date,
-    MAX(coverage_year) AS Latest_Coverage_Year,
-    COUNT(DISTINCT CASE
-        WHEN Source_File_Date IS NOT NULL THEN file_hash
-    END) AS Files_With_Reliable_Exact_Source_Date,
-    COUNT(DISTINCT CASE
-        WHEN Candidate_Source_File_Date IS NOT NULL
-         AND Source_File_Date IS NULL
-            THEN file_hash
-    END) AS Files_With_Filename_Month_Mismatch
-FROM #inbound_freshness;
-
-
--- RESULT 1B — Latest inbound data by Coverage Year
-SELECT
-    coverage_year AS Coverage_Year,
-    COUNT_BIG(*) AS Inbound_Record_Count,
-    COUNT(DISTINCT issuer) AS Distinct_Issuers,
-    COUNT(DISTINCT source_file) AS Distinct_Source_Files,
-    MIN(Source_File_Date) AS Earliest_Derived_Source_File_Date,
-    MAX(Source_File_Date) AS Latest_Derived_Source_File_Date,
-    MAX(Source_File_Month) AS Latest_Persisted_Source_File_Month,
-    MAX(loaded_at) AS Latest_Load_Ingestion_Date,
-    MAX(member_maint_effective_date) AS Latest_Transaction_Date,
-    MAX(benefit_effective_date) AS Latest_Effective_Date,
-    MAX(benefit_end_date) AS Latest_Benefit_End_Date
-FROM #inbound_freshness
-GROUP BY coverage_year
-ORDER BY coverage_year;
-
-
--- =============================================================================
--- RESULT 2 — Freshness by issuer
--- =============================================================================
-SELECT
-    agg.issuer AS Issuer,
-    latest_source.source_file AS Latest_Source_File,
-    latest_source.Source_File_Date AS Latest_File_Source_Date,
-    agg.Latest_Persisted_Source_File_Month,
-    latest_load.source_file AS Latest_Loaded_Source_File,
-    agg.Latest_Load_Ingestion_Date,
-    agg.Latest_Transaction_Date,
-    agg.Latest_Effective_Date,
-    agg.Latest_Coverage_Year,
-    agg.Total_Record_Count,
-    agg.Distinct_Source_File_Count,
-    agg.Distinct_File_Hash_Count
-FROM (
-    SELECT
-        issuer,
-        MAX(Source_File_Month) AS Latest_Persisted_Source_File_Month,
-        MAX(loaded_at) AS Latest_Load_Ingestion_Date,
-        MAX(member_maint_effective_date) AS Latest_Transaction_Date,
-        MAX(benefit_effective_date) AS Latest_Effective_Date,
-        MAX(coverage_year) AS Latest_Coverage_Year,
-        COUNT_BIG(*) AS Total_Record_Count,
-        COUNT(DISTINCT source_file) AS Distinct_Source_File_Count,
-        COUNT(DISTINCT file_hash) AS Distinct_File_Hash_Count
-    FROM #inbound_freshness
-    GROUP BY issuer
-) AS agg
-OUTER APPLY (
-    SELECT TOP (1)
-        f.source_file,
-        f.Source_File_Date
-    FROM #inbound_files AS f
-    WHERE f.issuer = agg.issuer
-    ORDER BY
-        CASE WHEN f.Source_File_Date IS NULL THEN 1 ELSE 0 END,
-        f.Source_File_Date DESC,
-        f.Latest_Load_Ingestion_Date DESC,
-        f.source_file DESC
-) AS latest_source
-OUTER APPLY (
-    SELECT TOP (1)
-        f.source_file
-    FROM #inbound_files AS f
-    WHERE f.issuer = agg.issuer
-    ORDER BY
-        f.Latest_Load_Ingestion_Date DESC,
-        f.Source_File_Date DESC,
-        f.source_file DESC
-) AS latest_load
-ORDER BY agg.issuer;
-
-
--- =============================================================================
--- RESULT 3 — 2026 monthly inbound coverage
--- Month basis: persisted filename_file_year + filename_file_month.
--- A NULL month row is intentionally retained to expose unparsed filenames.
--- =============================================================================
-SELECT
-    Source_File_Month AS [Month],
-    CASE
-        WHEN Source_File_Month IS NULL
-            THEN 'UNPARSED_FILENAME_MONTH'
-        ELSE 'PERSISTED_FILENAME_MONTH'
-    END AS Month_Basis_Status,
-    COUNT_BIG(*) AS Inbound_Record_Count,
-    COUNT(DISTINCT issuer) AS Distinct_Issuers,
-    COUNT(DISTINCT source_file) AS Distinct_Source_Files
-FROM #inbound_freshness
-WHERE coverage_year = 2026
-GROUP BY Source_File_Month
-ORDER BY
-    CASE WHEN Source_File_Month IS NULL THEN 1 ELSE 0 END,
-    Source_File_Month;
-
-
--- =============================================================================
--- RESULT 4 — File/run-log freshness, when the operational tables exist
--- Dynamic SQL prevents an absent optional log table from breaking compilation.
--- =============================================================================
-DECLARE @file_log_exists BIT =
-    CASE
-        WHEN OBJECT_ID(N'dbo.inbound_automation_file_log', N'U') IS NULL
-            THEN 0
-        ELSE 1
-    END;
-
-DECLARE @run_log_exists BIT =
-    CASE
-        WHEN OBJECT_ID(N'dbo.inbound_automation_run_log', N'U') IS NULL
-            THEN 0
-        ELSE 1
-    END;
-
-SELECT
-    @file_log_exists AS File_Log_Table_Exists,
-    @run_log_exists AS Run_Log_Table_Exists;
-
-DECLARE @latest_successful_file_log_loaded_at DATETIME2(3);
-DECLARE @latest_run_log_completed_at DATETIME2(3);
-
-IF @file_log_exists = 1
-BEGIN
-    EXEC sys.sp_executesql N'
-        SELECT
-            CASE
-                WHEN GROUPING(issuer) = 1 THEN ''OVERALL''
-                ELSE ''ISSUER''
-            END AS Log_Scope,
-            CASE
-                WHEN GROUPING(issuer) = 1 THEN NULL
-                ELSE CAST(issuer AS VARCHAR(20))
-            END AS Issuer,
-            COUNT_BIG(*) AS File_Log_Row_Count,
-            COUNT(DISTINCT source_file) AS Distinct_Source_File_Count,
-            SUM(CASE WHEN parse_status = ''loaded'' THEN 1 ELSE 0 END)
-                AS Loaded_File_Count,
-            SUM(CASE WHEN parse_status = ''failed'' THEN 1 ELSE 0 END)
-                AS Failed_File_Count,
-            SUM(CASE
-                WHEN parse_status = ''loaded'' AND row_count = 0 THEN 1
-                ELSE 0
-            END) AS Zero_Row_Loaded_File_Count,
-            MIN(loaded_at) AS Earliest_File_Log_Loaded_At,
-            MAX(loaded_at) AS Latest_File_Log_Loaded_At,
-            MAX(CASE
-                WHEN filename_file_year BETWEEN 1900 AND 2100
-                 AND filename_file_month BETWEEN 1 AND 12
-                    THEN DATEFROMPARTS(
-                        filename_file_year,
-                        filename_file_month,
-                        1
-                    )
-            END) AS Latest_Persisted_Source_File_Month
-        FROM dbo.inbound_automation_file_log
-        GROUP BY GROUPING SETS ((), (issuer))
-        ORDER BY
-            GROUPING(issuer) DESC,
-            issuer;
-    ';
-
-    EXEC sys.sp_executesql
-        N'
-            SELECT
-                @latest = MAX(loaded_at)
-            FROM dbo.inbound_automation_file_log
-            WHERE parse_status = ''loaded'';
-        ',
-        N'@latest DATETIME2(3) OUTPUT',
-        @latest = @latest_successful_file_log_loaded_at OUTPUT;
-END
-ELSE
-BEGIN
-    SELECT
-        CAST(
-            'dbo.inbound_automation_file_log does not exist.'
-            AS VARCHAR(100)
-        ) AS File_Log_Note;
-END;
-
-IF @run_log_exists = 1
-BEGIN
-    EXEC sys.sp_executesql N'
-        SELECT TOP (25)
-            load_run_id AS Load_Run_ID,
-            started_at AS Run_Started_At,
-            completed_at AS Run_Completed_At,
-            run_mode AS Run_Mode,
-            source_mode AS Source_Mode,
-            year_filter AS Year_Filter,
-            issuer_filter AS Issuer_Filter,
-            month_filter AS Month_Filter,
-            files_discovered AS Files_Discovered,
-            files_loaded AS Files_Loaded,
-            files_failed AS Files_Failed,
-            rows_inserted AS Rows_Inserted,
-            status AS Run_Status,
-            error_summary AS Error_Summary
-        FROM dbo.inbound_automation_run_log
-        ORDER BY
-            COALESCE(completed_at, started_at) DESC,
-            load_run_id DESC;
-    ';
-
-    EXEC sys.sp_executesql
-        N'
-            SELECT
-                @latest = MAX(completed_at)
-            FROM dbo.inbound_automation_run_log;
-        ',
-        N'@latest DATETIME2(3) OUTPUT',
-        @latest = @latest_run_log_completed_at OUTPUT;
-END
-ELSE
-BEGIN
-    SELECT
-        CAST(
-            'dbo.inbound_automation_run_log does not exist.'
-            AS VARCHAR(100)
-        ) AS Run_Log_Note;
-END;
-
-
--- =============================================================================
--- RESULT 5 — Diagnostic summary / latest reliable inbound boundaries
--- No missing-834, Auto-Renewal, or business conclusion is made here.
--- =============================================================================
-DECLARE @total_file_hashes BIGINT = (
-    SELECT COUNT(DISTINCT file_hash)
-    FROM #inbound_freshness
+-- Candidate list comes from azure_reconciliation/azure_client.py.
+CREATE TABLE #candidates (
+    candidate_order INT NOT NULL,
+    schema_name SYSNAME NOT NULL,
+    table_name SYSNAME NOT NULL,
+    object_id INT NULL,
+    object_type NVARCHAR(60) NULL,
+    required_columns_found INT NOT NULL DEFAULT 0,
+    missing_required_columns NVARCHAR(MAX) NULL,
+    supports_exact_logic BIT NOT NULL DEFAULT 0,
+    PRIMARY KEY (candidate_order)
 );
 
-DECLARE @dated_file_hashes BIGINT = (
-    SELECT COUNT(DISTINCT file_hash)
-    FROM #inbound_freshness
-    WHERE Source_File_Date IS NOT NULL
+INSERT INTO #candidates (candidate_order, schema_name, table_name)
+VALUES
+    (1, N'dbo', N'Enrollments_PY2026'),
+    (2, N'dbo', N'Enrollments_PY2526_01312026'),
+    (3, N'dbo', N'Enrollments_PY2526_02272026'),
+    (4, N'dbo', N'Enrollments_PY2526_03312026'),
+    (5, N'dbo', N'Enrollments_PY2526_04302026'),
+    (6, N'dbo', N'Enrollments_PY2526_FEB10'),
+    (7, N'dbo', N'Enrollments_PY2526_DEC31');
+
+UPDATE c
+SET
+    object_id = o.object_id,
+    object_type = o.type_desc
+FROM #candidates AS c
+INNER JOIN sys.schemas AS s
+    ON s.name = c.schema_name
+INNER JOIN sys.objects AS o
+    ON o.schema_id = s.schema_id
+   AND o.name = c.table_name
+   AND o.type IN ('U', 'V');
+
+
+CREATE TABLE #required_columns (
+    required_order INT NOT NULL,
+    column_name SYSNAME NOT NULL,
+    PRIMARY KEY (required_order)
 );
 
-SELECT
-    MAX(Source_File_Date) AS Latest_Reliable_Source_File_Date,
-    MAX(Source_File_Month) AS Latest_Persisted_Source_File_Month,
-    MAX(loaded_at) AS Latest_Database_Ingestion_Date,
-    MAX(member_maint_effective_date) AS Latest_Transaction_Date,
-    MAX(benefit_effective_date) AS Latest_Effective_Date,
-    MAX(coverage_year) AS Latest_Coverage_Year,
-    @dated_file_hashes AS Files_With_Reliable_Exact_Source_Date,
-    @total_file_hashes AS Total_Distinct_File_Hashes,
-    CAST(
-        100.0 * @dated_file_hashes / NULLIF(@total_file_hashes, 0)
-        AS DECIMAL(10, 2)
-    ) AS Exact_Source_Date_File_Percent,
-    @latest_successful_file_log_loaded_at
-        AS Latest_Successful_File_Log_Loaded_At,
-    @latest_run_log_completed_at AS Latest_Run_Log_Completed_At,
-    CAST(
+INSERT INTO #required_columns (required_order, column_name)
+VALUES
+    (1, N'coverage_year'),
+    (2, N'enrollment_id'),
+    (3, N'enrollee_id'),
+    (4, N'hios_issuer_id'),
+    (5, N'enrollment_status_description'),
+    (6, N'enrollee_status_description'),
+    (7, N'enrollment_last_update_date'),
+    (8, N'enrollee_last_update_date'),
+    (9, N'enrollment_create_date'),
+    (10, N'enrollee_create_date'),
+    (11, N'benefit_effective_date');
+
+UPDATE c
+SET
+    required_columns_found = profile.required_columns_found,
+    missing_required_columns = profile.missing_required_columns,
+    supports_exact_logic =
         CASE
-            WHEN @dated_file_hashes = @total_file_hashes
-                THEN
-                    'Exact source-file date parsed for every distinct loaded file hash.'
-            WHEN @dated_file_hashes > 0
-                THEN
-                    'Exact source-file date is partial; use persisted file month, load, transaction, and effective boundaries separately.'
-            ELSE
-                'No exact source-file day was reliably parsed; use persisted file month, load, transaction, and effective boundaries separately.'
+            WHEN c.object_id IS NOT NULL
+             AND profile.required_columns_found = 11
+                THEN 1
+            ELSE 0
         END
-        AS VARCHAR(220)
-    ) AS Source_Date_Reliability_Note,
+FROM #candidates AS c
+CROSS APPLY (
+    SELECT
+        SUM(CASE WHEN sc.column_id IS NOT NULL THEN 1 ELSE 0 END)
+            AS required_columns_found,
+        STRING_AGG(
+            CONVERT(
+                NVARCHAR(MAX),
+                CASE WHEN sc.column_id IS NULL THEN r.column_name END
+            ),
+            N', '
+        ) WITHIN GROUP (ORDER BY r.required_order)
+            AS missing_required_columns
+    FROM #required_columns AS r
+    LEFT JOIN sys.columns AS sc
+        ON sc.object_id = c.object_id
+       AND sc.name = r.column_name
+) AS profile;
+
+
+-- RESULT 1 — Candidate existence and exact-logic support
+SELECT
+    QUOTENAME(schema_name) + N'.' + QUOTENAME(table_name) AS Table_Name,
+    CASE WHEN object_id IS NULL THEN 0 ELSE 1 END AS Object_Exists,
+    object_type AS Object_Type,
+    required_columns_found AS Required_Columns_Found,
+    supports_exact_logic AS Supports_Exact_Five_Field_Logic,
+    CASE
+        WHEN object_id IS NULL THEN N'OBJECT_NOT_FOUND'
+        WHEN supports_exact_logic = 0 THEN missing_required_columns
+        ELSE NULL
+    END AS Missing_Required_Columns
+FROM #candidates
+ORDER BY candidate_order;
+
+
+-- RESULT 1B — Required-field schema matrix
+SELECT
+    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
+    r.column_name AS Required_Field,
+    CASE WHEN sc.column_id IS NULL THEN 0 ELSE 1 END AS Field_Present,
+    ty.name AS Data_Type,
+    sc.max_length AS Max_Length,
+    sc.precision AS Numeric_Precision,
+    sc.scale AS Numeric_Scale,
+    sc.is_nullable AS Is_Nullable
+FROM #candidates AS c
+CROSS JOIN #required_columns AS r
+LEFT JOIN sys.columns AS sc
+    ON sc.object_id = c.object_id
+   AND sc.name = r.column_name
+LEFT JOIN sys.types AS ty
+    ON ty.user_type_id = sc.user_type_id
+ORDER BY
+    c.candidate_order,
+    r.required_order;
+
+
+CREATE TABLE #candidate_dedup (
+    coverage_year NVARCHAR(100) NULL,
+    enrollment_id NVARCHAR(200) NULL,
+    enrollee_id NVARCHAR(200) NULL,
+    hios_issuer_id NVARCHAR(100) NULL,
+    enrollment_status_description NVARCHAR(500) NULL,
+    enrollee_status_description NVARCHAR(500) NULL
+);
+
+CREATE TABLE #fingerprints (
+    candidate_order INT NOT NULL,
+    complete_2026_pairs BIGINT NULL,
+    enrolled_pending_2026_pairs BIGINT NULL,
+    target_distinct_issuers INT NULL,
+    has_issuer_82824_in_target BIT NULL,
+    difference_from_2263972 BIGINT NULL,
+    difference_from_960531 BIGINT NULL,
+    fingerprint_status VARCHAR(50) NOT NULL,
+    diagnostic_reason NVARCHAR(4000) NULL,
+    PRIMARY KEY (candidate_order)
+);
+
+CREATE TABLE #issuer_target_counts (
+    candidate_order INT NOT NULL,
+    issuer NVARCHAR(100) NULL,
+    target_pair_count BIGINT NOT NULL
+);
+
+-- Unsupported/missing candidates are reported without executing alternate logic.
+INSERT INTO #fingerprints (
+    candidate_order,
+    fingerprint_status,
+    diagnostic_reason
+)
+SELECT
+    candidate_order,
+    'UNSUPPORTED_FOR_EXACT_REPRODUCTION',
+    COALESCE(missing_required_columns, N'OBJECT_NOT_FOUND')
+FROM #candidates
+WHERE supports_exact_logic = 0;
+
+
+DECLARE
+    @candidate_order INT,
+    @schema_name SYSNAME,
+    @table_name SYSNAME,
+    @sql NVARCHAR(MAX),
+    @complete_pairs BIGINT,
+    @target_pairs BIGINT,
+    @target_issuers INT,
+    @has_82824 BIT;
+
+DECLARE candidate_cursor CURSOR LOCAL FAST_FORWARD FOR
+SELECT candidate_order, schema_name, table_name
+FROM #candidates
+WHERE supports_exact_logic = 1
+ORDER BY candidate_order;
+
+OPEN candidate_cursor;
+
+FETCH NEXT FROM candidate_cursor
+INTO @candidate_order, @schema_name, @table_name;
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    TRUNCATE TABLE #candidate_dedup;
+
+    -- Exact five-field ordering; no missing-field fallback or substitution.
+    SET @sql = N'
+        ;WITH ranked AS (
+            SELECT
+                coverage_year,
+                enrollment_id,
+                enrollee_id,
+                hios_issuer_id,
+                enrollment_status_description,
+                enrollee_status_description,
+                ROW_NUMBER() OVER (
+                    PARTITION BY
+                        coverage_year,
+                        enrollment_id,
+                        enrollee_id
+                    ORDER BY
+                        enrollment_last_update_date DESC,
+                        enrollee_last_update_date DESC,
+                        enrollment_create_date DESC,
+                        enrollee_create_date DESC,
+                        benefit_effective_date DESC
+                ) AS _rn
+            FROM ' + QUOTENAME(@schema_name) + N'.'
+                      + QUOTENAME(@table_name) + N'
+            WHERE coverage_year = @p_coverage_year
+        )
+        INSERT INTO #candidate_dedup (
+            coverage_year,
+            enrollment_id,
+            enrollee_id,
+            hios_issuer_id,
+            enrollment_status_description,
+            enrollee_status_description
+        )
+        SELECT
+            CONVERT(NVARCHAR(100), coverage_year),
+            CONVERT(NVARCHAR(200), enrollment_id),
+            CONVERT(NVARCHAR(200), enrollee_id),
+            CONVERT(NVARCHAR(100), hios_issuer_id),
+            CONVERT(NVARCHAR(500), enrollment_status_description),
+            CONVERT(NVARCHAR(500), enrollee_status_description)
+        FROM ranked
+        WHERE _rn = 1;';
+
+    BEGIN TRY
+        EXEC sys.sp_executesql
+            @sql,
+            N'@p_coverage_year INT',
+            @p_coverage_year = @coverage_year;
+
+        SELECT
+            @complete_pairs = COUNT_BIG(*),
+            @target_pairs = COALESCE(SUM(
+                CASE
+                    WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
+                         IN ('ENROLLED', 'PENDING')
+                        THEN CONVERT(BIGINT, 1)
+                    ELSE CONVERT(BIGINT, 0)
+                END
+            ), 0),
+            @target_issuers = COUNT(DISTINCT CASE
+                WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
+                     IN ('ENROLLED', 'PENDING')
+                    THEN hios_issuer_id
+            END),
+            @has_82824 = CONVERT(BIT, COALESCE(MAX(
+                CASE
+                    WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
+                         IN ('ENROLLED', 'PENDING')
+                     AND LTRIM(RTRIM(hios_issuer_id)) = '82824'
+                        THEN 1
+                    ELSE 0
+                END
+            ), 0))
+        FROM #candidate_dedup;
+
+        INSERT INTO #fingerprints (
+            candidate_order,
+            complete_2026_pairs,
+            enrolled_pending_2026_pairs,
+            target_distinct_issuers,
+            has_issuer_82824_in_target,
+            difference_from_2263972,
+            difference_from_960531,
+            fingerprint_status
+        )
+        VALUES (
+            @candidate_order,
+            @complete_pairs,
+            @target_pairs,
+            @target_issuers,
+            @has_82824,
+            @complete_pairs - @expected_complete,
+            @target_pairs - @expected_target,
+            'PENDING_CLASSIFICATION'
+        );
+
+        INSERT INTO #issuer_target_counts (
+            candidate_order,
+            issuer,
+            target_pair_count
+        )
+        SELECT
+            @candidate_order,
+            hios_issuer_id,
+            COUNT_BIG(*)
+        FROM #candidate_dedup
+        WHERE UPPER(LTRIM(RTRIM(enrollment_status_description)))
+              IN ('ENROLLED', 'PENDING')
+        GROUP BY hios_issuer_id;
+    END TRY
+    BEGIN CATCH
+        INSERT INTO #fingerprints (
+            candidate_order,
+            fingerprint_status,
+            diagnostic_reason
+        )
+        VALUES (
+            @candidate_order,
+            'UNSUPPORTED_FOR_EXACT_REPRODUCTION',
+            CONCAT(
+                'Exact query could not execute: ',
+                ERROR_MESSAGE()
+            )
+        );
+    END CATCH;
+
+    FETCH NEXT FROM candidate_cursor
+    INTO @candidate_order, @schema_name, @table_name;
+END;
+
+CLOSE candidate_cursor;
+DEALLOCATE candidate_cursor;
+
+
+UPDATE f
+SET fingerprint_status =
+    CASE
+        WHEN f.complete_2026_pairs = @expected_complete
+         AND f.enrolled_pending_2026_pairs = @expected_target
+         AND f.target_distinct_issuers = @expected_target_issuers
+         AND f.has_issuer_82824_in_target = 0
+            THEN 'EXACT_MATCH'
+        WHEN ABS(f.difference_from_2263972) <= @complete_near_tolerance
+         AND ABS(f.difference_from_960531) <= @target_near_tolerance
+         AND ABS(f.target_distinct_issuers - @expected_target_issuers) <= 1
+         AND f.has_issuer_82824_in_target = 0
+            THEN 'NEAR_MATCH'
+        ELSE 'NO_MATCH'
+    END
+FROM #fingerprints AS f
+WHERE f.fingerprint_status = 'PENDING_CLASSIFICATION';
+
+
+-- RESULT 2 — Historical fingerprint comparison
+SELECT
+    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
+    f.complete_2026_pairs AS Complete_2026_Pairs,
+    f.enrolled_pending_2026_pairs AS Enrolled_Pending_2026_Pairs,
+    f.target_distinct_issuers AS Target_Distinct_Issuers,
+    f.has_issuer_82824_in_target AS Has_Issuer_82824_In_Target,
+    f.difference_from_2263972 AS Difference_From_2263972,
+    f.difference_from_960531 AS Difference_From_960531,
+    f.fingerprint_status AS Fingerprint_Status,
+    CASE
+        WHEN f.fingerprint_status = 'UNSUPPORTED_FOR_EXACT_REPRODUCTION'
+            THEN COALESCE(
+                f.diagnostic_reason,
+                c.missing_required_columns,
+                N'OBJECT_NOT_FOUND'
+            )
+        ELSE NULL
+    END AS Unsupported_Reason
+FROM #candidates AS c
+INNER JOIN #fingerprints AS f
+    ON f.candidate_order = c.candidate_order
+ORDER BY c.candidate_order;
+
+
+-- RESULT 3 — Issuer target counts for EXACT_MATCH / strong NEAR_MATCH only
+SELECT
+    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
+    f.fingerprint_status AS Fingerprint_Status,
+    i.issuer AS Issuer,
+    i.target_pair_count AS Enrolled_Pending_Target_Pairs
+FROM #issuer_target_counts AS i
+INNER JOIN #candidates AS c
+    ON c.candidate_order = i.candidate_order
+INNER JOIN #fingerprints AS f
+    ON f.candidate_order = i.candidate_order
+WHERE f.fingerprint_status IN ('EXACT_MATCH', 'NEAR_MATCH')
+ORDER BY
+    c.candidate_order,
+    i.target_pair_count DESC,
+    i.issuer;
+
+
+-- RESULT 4 — Diagnostic disposition only; no reconciliation conclusion
+SELECT
+    SUM(CASE WHEN fingerprint_status = 'EXACT_MATCH' THEN 1 ELSE 0 END)
+        AS Exact_Match_Candidate_Count,
+    SUM(CASE WHEN fingerprint_status = 'NEAR_MATCH' THEN 1 ELSE 0 END)
+        AS Near_Match_Candidate_Count,
+    SUM(CASE
+        WHEN fingerprint_status = 'UNSUPPORTED_FOR_EXACT_REPRODUCTION'
+            THEN 1 ELSE 0
+    END) AS Unsupported_Candidate_Count,
+    @complete_near_tolerance AS Complete_Pair_Near_Tolerance,
+    @target_near_tolerance AS Target_Pair_Near_Tolerance,
     CAST(
-        'Freshness boundaries only. Do not infer missing 834 records or change validated reconciliation controls.'
-        AS VARCHAR(180)
-    ) AS Diagnostic_Scope_Note
-FROM #inbound_freshness;
+        'Fingerprint discovery only. Do not rebuild No-Inbound or continue reconciliation.'
+        AS VARCHAR(120)
+    ) AS Diagnostic_Note
+FROM #fingerprints;
