@@ -1,439 +1,727 @@
-
-
-
 -- =============================================================================
--- DIAGNOSTIC — Historical enrollment snapshot candidate fingerprint
+-- CURRENT 2026 ENROLLMENT vs FULL-HISTORY INBOUND 834 BREAKDOWN
 -- =============================================================================
--- Purpose:
---   Determine whether a repository-referenced dbo.Enrollments_* table can
---   reproduce the previously validated 2026 enrollment snapshot.
+-- NEW CURRENT BASELINE ONLY.
+--
+-- Enrollment target:
+--   dbo.Enrollments_TEST
+--   grain = coverage_year + enrollment_id + enrollee_id
+--   exact five-field latest-row dedup, then Enrollment Status Enrolled/Pending
+--   hard control = 958,218
+--
+-- Inbound evidence:
+--   dbo.inbound_automation, all available coverage years/statuses
+--   three independent enrollee identifier paths; no identifier COALESCE
 --
 -- Safety:
---   READ ONLY on permanent objects. Temp tables only.
---   Does not query dbo.Enrollments_TEST or dbo.inbound_automation.
---   Does not rebuild No-Inbound or perform reconciliation.
---
--- NEAR_MATCH is diagnostic only:
---   complete and target counts are each within 1% of their historical control,
---   target issuer count is within 1, and issuer 82824 remains absent.
+--   READ ONLY on permanent tables. Temp tables/indexes only.
+--   No historical controls, RCNI, Auto-Renewal, or permanent writes.
 -- =============================================================================
 
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
 
 DECLARE @coverage_year INT = 2026;
-DECLARE @expected_complete BIGINT = 2263972;
-DECLARE @expected_target BIGINT = 960531;
-DECLARE @expected_target_issuers INT = 16;
-DECLARE @complete_near_tolerance BIGINT =
-    CEILING(@expected_complete * 0.01);
-DECLARE @target_near_tolerance BIGINT =
-    CEILING(@expected_target * 0.01);
+DECLARE @expected_current_target BIGINT = 958218;
 
 
--- Candidate list comes from azure_reconciliation/azure_client.py.
-CREATE TABLE #candidates (
-    candidate_order INT NOT NULL,
-    schema_name SYSNAME NOT NULL,
-    table_name SYSNAME NOT NULL,
-    object_id INT NULL,
-    object_type NVARCHAR(60) NULL,
-    required_columns_found INT NOT NULL DEFAULT 0,
-    missing_required_columns NVARCHAR(MAX) NULL,
-    supports_exact_logic BIT NOT NULL DEFAULT 0,
-    PRIMARY KEY (candidate_order)
-);
+-- =============================================================================
+-- 1) CURRENT FFM TARGET — exact five-field dedup before status filtering
+-- =============================================================================
+IF OBJECT_ID('tempdb..#target') IS NOT NULL DROP TABLE #target;
 
-INSERT INTO #candidates (candidate_order, schema_name, table_name)
-VALUES
-    (1, N'dbo', N'Enrollments_PY2026'),
-    (2, N'dbo', N'Enrollments_PY2526_01312026'),
-    (3, N'dbo', N'Enrollments_PY2526_02272026'),
-    (4, N'dbo', N'Enrollments_PY2526_03312026'),
-    (5, N'dbo', N'Enrollments_PY2526_04302026'),
-    (6, N'dbo', N'Enrollments_PY2526_FEB10'),
-    (7, N'dbo', N'Enrollments_PY2526_DEC31');
-
-UPDATE c
-SET
-    object_id = o.object_id,
-    object_type = o.type_desc
-FROM #candidates AS c
-INNER JOIN sys.schemas AS s
-    ON s.name = c.schema_name
-INNER JOIN sys.objects AS o
-    ON o.schema_id = s.schema_id
-   AND o.name = c.table_name
-   AND o.type IN ('U', 'V');
-
-
-CREATE TABLE #required_columns (
-    required_order INT NOT NULL,
-    column_name SYSNAME NOT NULL,
-    PRIMARY KEY (required_order)
-);
-
-INSERT INTO #required_columns (required_order, column_name)
-VALUES
-    (1, N'coverage_year'),
-    (2, N'enrollment_id'),
-    (3, N'enrollee_id'),
-    (4, N'hios_issuer_id'),
-    (5, N'enrollment_status_description'),
-    (6, N'enrollee_status_description'),
-    (7, N'enrollment_last_update_date'),
-    (8, N'enrollee_last_update_date'),
-    (9, N'enrollment_create_date'),
-    (10, N'enrollee_create_date'),
-    (11, N'benefit_effective_date');
-
-UPDATE c
-SET
-    required_columns_found = profile.required_columns_found,
-    missing_required_columns = profile.missing_required_columns,
-    supports_exact_logic =
-        CASE
-            WHEN c.object_id IS NOT NULL
-             AND profile.required_columns_found = 11
-                THEN 1
-            ELSE 0
-        END
-FROM #candidates AS c
-CROSS APPLY (
-    SELECT
-        SUM(CASE WHEN sc.column_id IS NOT NULL THEN 1 ELSE 0 END)
-            AS required_columns_found,
-        STRING_AGG(
-            CONVERT(
-                NVARCHAR(MAX),
-                CASE WHEN sc.column_id IS NULL THEN r.column_name END
-            ),
-            N', '
-        ) WITHIN GROUP (ORDER BY r.required_order)
-            AS missing_required_columns
-    FROM #required_columns AS r
-    LEFT JOIN sys.columns AS sc
-        ON sc.object_id = c.object_id
-       AND sc.name = r.column_name
-) AS profile;
-
-
--- RESULT 1 — Candidate existence and exact-logic support
 SELECT
-    QUOTENAME(schema_name) + N'.' + QUOTENAME(table_name) AS Table_Name,
-    CASE WHEN object_id IS NULL THEN 0 ELSE 1 END AS Object_Exists,
-    object_type AS Object_Type,
-    required_columns_found AS Required_Columns_Found,
-    supports_exact_logic AS Supports_Exact_Five_Field_Logic,
+    e.coverage_year AS FFM_Coverage_Year,
+    CAST(e.hios_issuer_id AS VARCHAR(20)) AS FFM_Issuer,
+    CAST(e.enrollment_id AS VARCHAR(100)) AS FFM_Policy_ID,
+    CAST(e.enrollee_id AS VARCHAR(100)) AS FFM_Enrollee_ID,
+    e.enrollment_status_description AS FFM_Enrollment_Status,
+    e.enrollee_status_description AS FFM_Enrollee_Status,
     CASE
-        WHEN object_id IS NULL THEN N'OBJECT_NOT_FOUND'
-        WHEN supports_exact_logic = 0 THEN missing_required_columns
-        ELSE NULL
-    END AS Missing_Required_Columns
-FROM #candidates
-ORDER BY candidate_order;
+        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'ENROLLED'
+            THEN 'CONFIRM'
+        WHEN UPPER(LTRIM(RTRIM(e.enrollment_status_description))) = 'PENDING'
+            THEN 'PENDING'
+        ELSE 'STATUS_MAPPING_REVIEW'
+    END AS FFM_Lifecycle,
+    COALESCE(
+        e.enrollment_last_update_date,
+        e.enrollment_create_date,
+        e.benefit_effective_date
+    ) AS FFM_Event_Date,
+    e.person_type,
+    e.relationship_type,
+    e.benefit_effective_date,
+    e.benefit_end_date,
+    e.enrollment_create_date,
+    e.enrollment_last_update_date,
+    e.enrollee_create_date,
+    e.enrollee_last_update_date,
+    e.household_id,
+    e.source
+INTO #target
+FROM (
+    SELECT
+        src.*,
+        ROW_NUMBER() OVER (
+            PARTITION BY
+                src.coverage_year,
+                src.enrollment_id,
+                src.enrollee_id
+            ORDER BY
+                src.enrollment_last_update_date DESC,
+                src.enrollee_last_update_date DESC,
+                src.enrollment_create_date DESC,
+                src.enrollee_create_date DESC,
+                src.benefit_effective_date DESC
+        ) AS _rn
+    FROM dbo.Enrollments_TEST AS src
+) AS e
+WHERE e._rn = 1
+  AND e.coverage_year = @coverage_year
+  AND UPPER(LTRIM(RTRIM(e.enrollment_status_description)))
+      IN ('ENROLLED', 'PENDING');
 
+CREATE UNIQUE CLUSTERED INDEX CX_target
+    ON #target (FFM_Coverage_Year, FFM_Policy_ID, FFM_Enrollee_ID);
 
--- RESULT 1B — Required-field schema matrix
-SELECT
-    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
-    r.column_name AS Required_Field,
-    CASE WHEN sc.column_id IS NULL THEN 0 ELSE 1 END AS Field_Present,
-    ty.name AS Data_Type,
-    sc.max_length AS Max_Length,
-    sc.precision AS Numeric_Precision,
-    sc.scale AS Numeric_Scale,
-    sc.is_nullable AS Is_Nullable
-FROM #candidates AS c
-CROSS JOIN #required_columns AS r
-LEFT JOIN sys.columns AS sc
-    ON sc.object_id = c.object_id
-   AND sc.name = r.column_name
-LEFT JOIN sys.types AS ty
-    ON ty.user_type_id = sc.user_type_id
-ORDER BY
-    c.candidate_order,
-    r.required_order;
+CREATE NONCLUSTERED INDEX IX_target_enrollee
+    ON #target (FFM_Enrollee_ID)
+    INCLUDE (FFM_Policy_ID, FFM_Issuer, FFM_Lifecycle, FFM_Event_Date);
 
+DECLARE @target_count BIGINT = (SELECT COUNT_BIG(*) FROM #target);
 
-CREATE TABLE #candidate_dedup (
-    coverage_year NVARCHAR(100) NULL,
-    enrollment_id NVARCHAR(200) NULL,
-    enrollee_id NVARCHAR(200) NULL,
-    hios_issuer_id NVARCHAR(100) NULL,
-    enrollment_status_description NVARCHAR(500) NULL,
-    enrollee_status_description NVARCHAR(500) NULL
-);
-
-CREATE TABLE #fingerprints (
-    candidate_order INT NOT NULL,
-    complete_2026_pairs BIGINT NULL,
-    enrolled_pending_2026_pairs BIGINT NULL,
-    target_distinct_issuers INT NULL,
-    has_issuer_82824_in_target BIT NULL,
-    difference_from_2263972 BIGINT NULL,
-    difference_from_960531 BIGINT NULL,
-    fingerprint_status VARCHAR(50) NOT NULL,
-    diagnostic_reason NVARCHAR(4000) NULL,
-    PRIMARY KEY (candidate_order)
-);
-
-CREATE TABLE #issuer_target_counts (
-    candidate_order INT NOT NULL,
-    issuer NVARCHAR(100) NULL,
-    target_pair_count BIGINT NOT NULL
-);
-
--- Unsupported/missing candidates are reported without executing alternate logic.
-INSERT INTO #fingerprints (
-    candidate_order,
-    fingerprint_status,
-    diagnostic_reason
-)
-SELECT
-    candidate_order,
-    'UNSUPPORTED_FOR_EXACT_REPRODUCTION',
-    COALESCE(missing_required_columns, N'OBJECT_NOT_FOUND')
-FROM #candidates
-WHERE supports_exact_logic = 0;
-
-
-DECLARE
-    @candidate_order INT,
-    @schema_name SYSNAME,
-    @table_name SYSNAME,
-    @sql NVARCHAR(MAX),
-    @complete_pairs BIGINT,
-    @target_pairs BIGINT,
-    @target_issuers INT,
-    @has_82824 BIT;
-
-DECLARE candidate_cursor CURSOR LOCAL FAST_FORWARD FOR
-SELECT candidate_order, schema_name, table_name
-FROM #candidates
-WHERE supports_exact_logic = 1
-ORDER BY candidate_order;
-
-OPEN candidate_cursor;
-
-FETCH NEXT FROM candidate_cursor
-INTO @candidate_order, @schema_name, @table_name;
-
-WHILE @@FETCH_STATUS = 0
+IF @target_count <> @expected_current_target
 BEGIN
-    TRUNCATE TABLE #candidate_dedup;
+    SELECT
+        @target_count AS Observed_Current_Target,
+        @expected_current_target AS Required_Current_Target,
+        @target_count - @expected_current_target AS Difference,
+        CAST('FAIL_STOP' AS VARCHAR(20)) AS Control_Status;
 
-    -- Exact five-field ordering; no missing-field fallback or substitution.
-    SET @sql = N'
-        ;WITH ranked AS (
-            SELECT
-                coverage_year,
-                enrollment_id,
-                enrollee_id,
-                hios_issuer_id,
-                enrollment_status_description,
-                enrollee_status_description,
-                ROW_NUMBER() OVER (
-                    PARTITION BY
-                        coverage_year,
-                        enrollment_id,
-                        enrollee_id
-                    ORDER BY
-                        enrollment_last_update_date DESC,
-                        enrollee_last_update_date DESC,
-                        enrollment_create_date DESC,
-                        enrollee_create_date DESC,
-                        benefit_effective_date DESC
-                ) AS _rn
-            FROM ' + QUOTENAME(@schema_name) + N'.'
-                      + QUOTENAME(@table_name) + N'
-            WHERE coverage_year = @p_coverage_year
-        )
-        INSERT INTO #candidate_dedup (
-            coverage_year,
-            enrollment_id,
-            enrollee_id,
-            hios_issuer_id,
-            enrollment_status_description,
-            enrollee_status_description
-        )
-        SELECT
-            CONVERT(NVARCHAR(100), coverage_year),
-            CONVERT(NVARCHAR(200), enrollment_id),
-            CONVERT(NVARCHAR(200), enrollee_id),
-            CONVERT(NVARCHAR(100), hios_issuer_id),
-            CONVERT(NVARCHAR(500), enrollment_status_description),
-            CONVERT(NVARCHAR(500), enrollee_status_description)
-        FROM ranked
-        WHERE _rn = 1;';
-
-    BEGIN TRY
-        EXEC sys.sp_executesql
-            @sql,
-            N'@p_coverage_year INT',
-            @p_coverage_year = @coverage_year;
-
-        SELECT
-            @complete_pairs = COUNT_BIG(*),
-            @target_pairs = COALESCE(SUM(
-                CASE
-                    WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
-                         IN ('ENROLLED', 'PENDING')
-                        THEN CONVERT(BIGINT, 1)
-                    ELSE CONVERT(BIGINT, 0)
-                END
-            ), 0),
-            @target_issuers = COUNT(DISTINCT CASE
-                WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
-                     IN ('ENROLLED', 'PENDING')
-                    THEN hios_issuer_id
-            END),
-            @has_82824 = CONVERT(BIT, COALESCE(MAX(
-                CASE
-                    WHEN UPPER(LTRIM(RTRIM(enrollment_status_description)))
-                         IN ('ENROLLED', 'PENDING')
-                     AND LTRIM(RTRIM(hios_issuer_id)) = '82824'
-                        THEN 1
-                    ELSE 0
-                END
-            ), 0))
-        FROM #candidate_dedup;
-
-        INSERT INTO #fingerprints (
-            candidate_order,
-            complete_2026_pairs,
-            enrolled_pending_2026_pairs,
-            target_distinct_issuers,
-            has_issuer_82824_in_target,
-            difference_from_2263972,
-            difference_from_960531,
-            fingerprint_status
-        )
-        VALUES (
-            @candidate_order,
-            @complete_pairs,
-            @target_pairs,
-            @target_issuers,
-            @has_82824,
-            @complete_pairs - @expected_complete,
-            @target_pairs - @expected_target,
-            'PENDING_CLASSIFICATION'
-        );
-
-        INSERT INTO #issuer_target_counts (
-            candidate_order,
-            issuer,
-            target_pair_count
-        )
-        SELECT
-            @candidate_order,
-            hios_issuer_id,
-            COUNT_BIG(*)
-        FROM #candidate_dedup
-        WHERE UPPER(LTRIM(RTRIM(enrollment_status_description)))
-              IN ('ENROLLED', 'PENDING')
-        GROUP BY hios_issuer_id;
-    END TRY
-    BEGIN CATCH
-        INSERT INTO #fingerprints (
-            candidate_order,
-            fingerprint_status,
-            diagnostic_reason
-        )
-        VALUES (
-            @candidate_order,
-            'UNSUPPORTED_FOR_EXACT_REPRODUCTION',
-            CONCAT(
-                'Exact query could not execute: ',
-                ERROR_MESSAGE()
-            )
-        );
-    END CATCH;
-
-    FETCH NEXT FROM candidate_cursor
-    INTO @candidate_order, @schema_name, @table_name;
+    RAISERROR(
+        'STOP: current target count is %I64d; required hard control is %I64d.',
+        16, 1, @target_count, @expected_current_target
+    );
+    RETURN;
 END;
 
-CLOSE candidate_cursor;
-DEALLOCATE candidate_cursor;
 
+-- =============================================================================
+-- 2) FULL AVAILABLE INBOUND HISTORY
+-- =============================================================================
+IF OBJECT_ID('tempdb..#inbound') IS NOT NULL DROP TABLE #inbound;
 
-UPDATE f
-SET fingerprint_status =
+SELECT
+    ia.id AS inbound_row_id,
+    NULLIF(LTRIM(RTRIM(CAST(ia.member_id AS VARCHAR(100)))), '')
+        AS Inbound_Member_ID,
+    NULLIF(LTRIM(RTRIM(CAST(ia.issuer_indiv_identifier AS VARCHAR(100)))), '')
+        AS Inbound_Issuer_Indiv_Identifier,
+    NULLIF(LTRIM(RTRIM(CAST(ia.exchg_assigned_enrollee_id AS VARCHAR(100)))), '')
+        AS Inbound_Exchange_Assigned_Enrollee_ID,
+    NULLIF(LTRIM(RTRIM(CAST(ia.policy_id AS VARCHAR(100)))), '')
+        AS Inbound_Policy_ID,
+    NULLIF(LTRIM(RTRIM(CAST(ia.health_coverage_policy_no AS VARCHAR(100)))), '')
+        AS Inbound_Health_Coverage_Policy_No,
+    CAST(ia.issuer AS VARCHAR(20)) AS Inbound_Issuer,
+    ia.coverage_year AS Inbound_Coverage_Year,
+    ia.enrolleeStatus AS Inbound_Status_Raw,
     CASE
-        WHEN f.complete_2026_pairs = @expected_complete
-         AND f.enrolled_pending_2026_pairs = @expected_target
-         AND f.target_distinct_issuers = @expected_target_issuers
-         AND f.has_issuer_82824_in_target = 0
-            THEN 'EXACT_MATCH'
-        WHEN ABS(f.difference_from_2263972) <= @complete_near_tolerance
-         AND ABS(f.difference_from_960531) <= @target_near_tolerance
-         AND ABS(f.target_distinct_issuers - @expected_target_issuers) <= 1
-         AND f.has_issuer_82824_in_target = 0
-            THEN 'NEAR_MATCH'
-        ELSE 'NO_MATCH'
-    END
-FROM #fingerprints AS f
-WHERE f.fingerprint_status = 'PENDING_CLASSIFICATION';
+        WHEN UPPER(LTRIM(RTRIM(ia.enrolleeStatus))) = 'CONFIRM' THEN 'CONFIRM'
+        WHEN UPPER(LTRIM(RTRIM(ia.enrolleeStatus))) = 'CANCEL' THEN 'CANCEL'
+        WHEN UPPER(LTRIM(RTRIM(ia.enrolleeStatus))) = 'TERM' THEN 'TERM'
+        ELSE 'STATUS_MAPPING_REVIEW'
+    END AS Inbound_Lifecycle,
+    COALESCE(
+        ia.member_maint_effective_date,
+        TRY_CONVERT(
+            date,
+            SUBSTRING(
+                ia.source_file,
+                NULLIF(
+                    PATINDEX(
+                        '%[0-9][0-9][0-9][0-9][0-9][0-9][0-9]'
+                        + '[0-9][0-9][0-9][0-9][0-9][0-9][0-9]%.xml',
+                        ia.source_file
+                    ),
+                    0
+                ),
+                8
+            ),
+            112
+        ),
+        ia.benefit_effective_date
+    ) AS Inbound_Event_Date,
+    ia.member_maint_effective_date,
+    ia.benefit_effective_date AS Inbound_Benefit_Effective_Date,
+    ia.source_file AS Inbound_Source_File
+INTO #inbound
+FROM dbo.inbound_automation AS ia
+WHERE NULLIF(LTRIM(RTRIM(ia.member_id)), '') IS NOT NULL
+   OR NULLIF(LTRIM(RTRIM(ia.issuer_indiv_identifier)), '') IS NOT NULL
+   OR NULLIF(LTRIM(RTRIM(ia.exchg_assigned_enrollee_id)), '') IS NOT NULL;
+
+CREATE UNIQUE CLUSTERED INDEX CX_inbound
+    ON #inbound (inbound_row_id);
+
+CREATE NONCLUSTERED INDEX IX_inbound_member
+    ON #inbound (Inbound_Member_ID)
+    INCLUDE (
+        Inbound_Policy_ID,
+        Inbound_Health_Coverage_Policy_No,
+        Inbound_Issuer,
+        Inbound_Coverage_Year,
+        Inbound_Lifecycle,
+        Inbound_Event_Date
+    );
+
+CREATE NONCLUSTERED INDEX IX_inbound_issuer_indiv
+    ON #inbound (Inbound_Issuer_Indiv_Identifier)
+    INCLUDE (
+        Inbound_Policy_ID,
+        Inbound_Health_Coverage_Policy_No,
+        Inbound_Issuer,
+        Inbound_Coverage_Year,
+        Inbound_Lifecycle,
+        Inbound_Event_Date
+    );
+
+CREATE NONCLUSTERED INDEX IX_inbound_exchange
+    ON #inbound (Inbound_Exchange_Assigned_Enrollee_ID)
+    INCLUDE (
+        Inbound_Policy_ID,
+        Inbound_Health_Coverage_Policy_No,
+        Inbound_Issuer,
+        Inbound_Coverage_Year,
+        Inbound_Lifecycle,
+        Inbound_Event_Date
+    );
 
 
--- RESULT 2 — Historical fingerprint comparison
+-- =============================================================================
+-- 3) THREE INDEPENDENT ENROLLEE IDENTIFIER PATHS
+-- =============================================================================
+IF OBJECT_ID('tempdb..#candidate_hits') IS NOT NULL DROP TABLE #candidate_hits;
+
+;WITH hit_raw AS (
+    SELECT
+        t.FFM_Coverage_Year,
+        t.FFM_Policy_ID,
+        t.FFM_Enrollee_ID,
+        i.inbound_row_id,
+        CAST('MEMBER_ID' AS VARCHAR(40)) AS hit_type
+    FROM #target AS t
+    INNER JOIN #inbound AS i
+        ON i.Inbound_Member_ID = t.FFM_Enrollee_ID
+
+    UNION ALL
+
+    SELECT
+        t.FFM_Coverage_Year,
+        t.FFM_Policy_ID,
+        t.FFM_Enrollee_ID,
+        i.inbound_row_id,
+        CAST('ISSUER_INDIV_IDENTIFIER' AS VARCHAR(40))
+    FROM #target AS t
+    INNER JOIN #inbound AS i
+        ON i.Inbound_Issuer_Indiv_Identifier = t.FFM_Enrollee_ID
+
+    UNION ALL
+
+    SELECT
+        t.FFM_Coverage_Year,
+        t.FFM_Policy_ID,
+        t.FFM_Enrollee_ID,
+        i.inbound_row_id,
+        CAST('EXCHG_ASSIGNED_ENROLLEE_ID' AS VARCHAR(40))
+    FROM #target AS t
+    INNER JOIN #inbound AS i
+        ON i.Inbound_Exchange_Assigned_Enrollee_ID = t.FFM_Enrollee_ID
+)
 SELECT
-    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
-    f.complete_2026_pairs AS Complete_2026_Pairs,
-    f.enrolled_pending_2026_pairs AS Enrolled_Pending_2026_Pairs,
-    f.target_distinct_issuers AS Target_Distinct_Issuers,
-    f.has_issuer_82824_in_target AS Has_Issuer_82824_In_Target,
-    f.difference_from_2263972 AS Difference_From_2263972,
-    f.difference_from_960531 AS Difference_From_960531,
-    f.fingerprint_status AS Fingerprint_Status,
+    FFM_Coverage_Year,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    inbound_row_id,
     CASE
-        WHEN f.fingerprint_status = 'UNSUPPORTED_FOR_EXACT_REPRODUCTION'
-            THEN COALESCE(
-                f.diagnostic_reason,
-                c.missing_required_columns,
-                N'OBJECT_NOT_FOUND'
-            )
-        ELSE NULL
-    END AS Unsupported_Reason
-FROM #candidates AS c
-INNER JOIN #fingerprints AS f
-    ON f.candidate_order = c.candidate_order
-ORDER BY c.candidate_order;
+        WHEN MAX(CASE WHEN hit_type = 'MEMBER_ID' THEN 1 ELSE 0 END) = 1
+         AND MAX(CASE WHEN hit_type = 'ISSUER_INDIV_IDENTIFIER' THEN 1 ELSE 0 END) = 1
+         AND MAX(CASE WHEN hit_type = 'EXCHG_ASSIGNED_ENROLLEE_ID' THEN 1 ELSE 0 END) = 1
+            THEN 'ALL_THREE'
+        WHEN MAX(CASE WHEN hit_type = 'MEMBER_ID' THEN 1 ELSE 0 END) = 1
+         AND MAX(CASE WHEN hit_type = 'ISSUER_INDIV_IDENTIFIER' THEN 1 ELSE 0 END) = 1
+            THEN 'MEMBER_ID+ISSUER_INDIV_IDENTIFIER'
+        WHEN MAX(CASE WHEN hit_type = 'MEMBER_ID' THEN 1 ELSE 0 END) = 1
+         AND MAX(CASE WHEN hit_type = 'EXCHG_ASSIGNED_ENROLLEE_ID' THEN 1 ELSE 0 END) = 1
+            THEN 'MEMBER_ID+EXCHG_ASSIGNED_ENROLLEE_ID'
+        WHEN MAX(CASE WHEN hit_type = 'ISSUER_INDIV_IDENTIFIER' THEN 1 ELSE 0 END) = 1
+         AND MAX(CASE WHEN hit_type = 'EXCHG_ASSIGNED_ENROLLEE_ID' THEN 1 ELSE 0 END) = 1
+            THEN 'ISSUER_INDIV_IDENTIFIER+EXCHG_ASSIGNED_ENROLLEE_ID'
+        WHEN MAX(CASE WHEN hit_type = 'MEMBER_ID' THEN 1 ELSE 0 END) = 1
+            THEN 'MEMBER_ID'
+        WHEN MAX(CASE WHEN hit_type = 'ISSUER_INDIV_IDENTIFIER' THEN 1 ELSE 0 END) = 1
+            THEN 'ISSUER_INDIV_IDENTIFIER'
+        ELSE 'EXCHG_ASSIGNED_ENROLLEE_ID'
+    END AS Matched_Inbound_ID_Type
+INTO #candidate_hits
+FROM hit_raw
+GROUP BY
+    FFM_Coverage_Year,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    inbound_row_id;
+
+CREATE CLUSTERED INDEX CX_candidate_hits
+    ON #candidate_hits (
+        FFM_Enrollee_ID,
+        FFM_Policy_ID,
+        inbound_row_id
+    );
 
 
--- RESULT 3 — Issuer target counts for EXACT_MATCH / strong NEAR_MATCH only
+-- =============================================================================
+-- 4) VALIDATED CANDIDATE RANKING
+-- =============================================================================
+IF OBJECT_ID('tempdb..#candidates') IS NOT NULL DROP TABLE #candidates;
+
 SELECT
-    QUOTENAME(c.schema_name) + N'.' + QUOTENAME(c.table_name) AS Table_Name,
-    f.fingerprint_status AS Fingerprint_Status,
-    i.issuer AS Issuer,
-    i.target_pair_count AS Enrolled_Pending_Target_Pairs
-FROM #issuer_target_counts AS i
-INNER JOIN #candidates AS c
-    ON c.candidate_order = i.candidate_order
-INNER JOIN #fingerprints AS f
-    ON f.candidate_order = i.candidate_order
-WHERE f.fingerprint_status IN ('EXACT_MATCH', 'NEAR_MATCH')
-ORDER BY
-    c.candidate_order,
-    i.target_pair_count DESC,
-    i.issuer;
+    t.FFM_Coverage_Year,
+    t.FFM_Policy_ID,
+    t.FFM_Enrollee_ID,
+    t.FFM_Issuer,
+    t.FFM_Lifecycle,
+    t.FFM_Event_Date,
+    h.Matched_Inbound_ID_Type,
+    i.Inbound_Policy_ID,
+    i.Inbound_Health_Coverage_Policy_No,
+    i.Inbound_Issuer,
+    i.Inbound_Coverage_Year,
+    i.Inbound_Status_Raw,
+    i.Inbound_Lifecycle,
+    i.Inbound_Event_Date,
+    i.Inbound_Source_File,
+    i.inbound_row_id,
+    CASE
+        WHEN t.FFM_Policy_ID = i.Inbound_Policy_ID
+          OR t.FFM_Policy_ID = i.Inbound_Health_Coverage_Policy_No
+            THEN 1
+        ELSE 0
+    END AS Policy_Match_Flag,
+    CASE WHEN t.FFM_Issuer = i.Inbound_Issuer THEN 1 ELSE 0 END
+        AS Issuer_Match_Flag,
+    CASE
+        WHEN t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+            THEN 1
+        ELSE 0
+    END AS Compatible_Lifecycle_Flag,
+    CASE
+        WHEN t.FFM_Event_Date IS NOT NULL
+         AND i.Inbound_Event_Date IS NOT NULL
+            THEN ABS(DATEDIFF(day, t.FFM_Event_Date, i.Inbound_Event_Date))
+    END AS Date_Difference_Days,
+    CASE
+        WHEN t.FFM_Policy_ID = i.Inbound_Policy_ID
+          OR t.FFM_Policy_ID = i.Inbound_Health_Coverage_Policy_No
+            THEN 1
+        WHEN t.FFM_Issuer = i.Inbound_Issuer
+         AND t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+         AND t.FFM_Event_Date IS NOT NULL
+         AND i.Inbound_Event_Date IS NOT NULL
+         AND ABS(DATEDIFF(day, t.FFM_Event_Date, i.Inbound_Event_Date)) = 0
+            THEN 2
+        WHEN t.FFM_Issuer = i.Inbound_Issuer
+         AND t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+         AND t.FFM_Event_Date IS NOT NULL
+         AND i.Inbound_Event_Date IS NOT NULL
+         AND ABS(DATEDIFF(day, t.FFM_Event_Date, i.Inbound_Event_Date)) <= 7
+            THEN 3
+        WHEN t.FFM_Issuer = i.Inbound_Issuer
+         AND t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+            THEN 4
+        WHEN t.FFM_Issuer = i.Inbound_Issuer
+            THEN 5
+        WHEN t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+         AND t.FFM_Event_Date IS NOT NULL
+         AND i.Inbound_Event_Date IS NOT NULL
+         AND ABS(DATEDIFF(day, t.FFM_Event_Date, i.Inbound_Event_Date)) <= 30
+            THEN 6
+        WHEN t.FFM_Lifecycle = 'CONFIRM'
+         AND i.Inbound_Lifecycle = 'CONFIRM'
+            THEN 7
+        ELSE 8
+    END AS rank_priority
+INTO #candidates
+FROM #candidate_hits AS h
+INNER JOIN #target AS t
+    ON t.FFM_Coverage_Year = h.FFM_Coverage_Year
+   AND t.FFM_Policy_ID = h.FFM_Policy_ID
+   AND t.FFM_Enrollee_ID = h.FFM_Enrollee_ID
+INNER JOIN #inbound AS i
+    ON i.inbound_row_id = h.inbound_row_id;
+
+CREATE CLUSTERED INDEX CX_candidates
+    ON #candidates (
+        FFM_Enrollee_ID,
+        FFM_Policy_ID,
+        rank_priority,
+        inbound_row_id
+    );
 
 
--- RESULT 4 — Diagnostic disposition only; no reconciliation conclusion
+-- Select exactly one best inbound row per current target pair.
+IF OBJECT_ID('tempdb..#best') IS NOT NULL DROP TABLE #best;
+
+SELECT *
+INTO #best
+FROM (
+    SELECT
+        c.*,
+        ROW_NUMBER() OVER (
+            PARTITION BY
+                c.FFM_Coverage_Year,
+                c.FFM_Policy_ID,
+                c.FFM_Enrollee_ID
+            ORDER BY
+                c.rank_priority,
+                CASE
+                    WHEN c.Date_Difference_Days IS NULL THEN 999999
+                    ELSE c.Date_Difference_Days
+                END,
+                c.inbound_row_id DESC
+        ) AS _best_rn
+    FROM #candidates AS c
+) AS ranked
+WHERE ranked._best_rn = 1;
+
+CREATE UNIQUE CLUSTERED INDEX CX_best
+    ON #best (FFM_Coverage_Year, FFM_Policy_ID, FFM_Enrollee_ID);
+
+
+-- =============================================================================
+-- 5) ONE MUTUALLY EXCLUSIVE MASTER ROW PER CURRENT TARGET PAIR
+-- =============================================================================
+IF OBJECT_ID('tempdb..#master') IS NOT NULL DROP TABLE #master;
+
 SELECT
-    SUM(CASE WHEN fingerprint_status = 'EXACT_MATCH' THEN 1 ELSE 0 END)
-        AS Exact_Match_Candidate_Count,
-    SUM(CASE WHEN fingerprint_status = 'NEAR_MATCH' THEN 1 ELSE 0 END)
-        AS Near_Match_Candidate_Count,
-    SUM(CASE
-        WHEN fingerprint_status = 'UNSUPPORTED_FOR_EXACT_REPRODUCTION'
-            THEN 1 ELSE 0
-    END) AS Unsupported_Candidate_Count,
-    @complete_near_tolerance AS Complete_Pair_Near_Tolerance,
-    @target_near_tolerance AS Target_Pair_Near_Tolerance,
+    t.FFM_Coverage_Year,
+    t.FFM_Issuer,
+    t.FFM_Policy_ID,
+    t.FFM_Enrollee_ID,
+    t.FFM_Enrollment_Status,
+    t.FFM_Enrollee_Status,
+    t.person_type,
+    t.relationship_type,
+    t.benefit_effective_date,
+    t.benefit_end_date,
+    t.enrollment_create_date,
+    t.enrollment_last_update_date,
+    t.household_id,
+    t.source,
+    CASE WHEN b.FFM_Enrollee_ID IS NULL THEN 0 ELSE 1 END
+        AS Inbound_Evidence_Found,
+    CASE
+        WHEN b.FFM_Enrollee_ID IS NULL
+            THEN 'NO_INBOUND_ENROLLEE_EVIDENCE'
+        WHEN b.Policy_Match_Flag = 1
+            THEN 'EXACT_ENROLLEE_POLICY_MATCH'
+        WHEN b.Issuer_Match_Flag = 1
+         AND b.Compatible_Lifecycle_Flag = 1
+         AND b.Date_Difference_Days IS NOT NULL
+         AND b.Date_Difference_Days <= 7
+            THEN 'SAME_TRANSACTION_DIFFERENT_POLICY'
+        WHEN b.Issuer_Match_Flag = 1
+         AND b.Compatible_Lifecycle_Flag = 1
+            THEN 'SAME_LIFECYCLE_DIFFERENT_POLICY'
+        WHEN b.Issuer_Match_Flag = 0
+         AND b.Compatible_Lifecycle_Flag = 1
+            THEN 'CROSS_ISSUER_TRANSITION'
+        ELSE 'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'
+    END AS Match_Category,
+    b.Inbound_Coverage_Year,
+    b.Inbound_Issuer,
+    b.Inbound_Status_Raw,
+    b.Inbound_Lifecycle,
+    b.Inbound_Policy_ID,
+    b.Inbound_Health_Coverage_Policy_No,
+    b.Inbound_Event_Date,
+    b.Inbound_Source_File,
+    b.Matched_Inbound_ID_Type,
+    b.Date_Difference_Days,
+    b.rank_priority
+INTO #master
+FROM #target AS t
+LEFT JOIN #best AS b
+    ON b.FFM_Coverage_Year = t.FFM_Coverage_Year
+   AND b.FFM_Policy_ID = t.FFM_Policy_ID
+   AND b.FFM_Enrollee_ID = t.FFM_Enrollee_ID;
+
+CREATE UNIQUE CLUSTERED INDEX CX_master
+    ON #master (FFM_Coverage_Year, FFM_Policy_ID, FFM_Enrollee_ID);
+
+CREATE NONCLUSTERED INDEX IX_master_category
+    ON #master (Match_Category, FFM_Issuer);
+
+DECLARE @master_count BIGINT = (SELECT COUNT_BIG(*) FROM #master);
+DECLARE @found_count BIGINT = (
+    SELECT COUNT_BIG(*) FROM #master WHERE Inbound_Evidence_Found = 1
+);
+DECLARE @no_inbound_count BIGINT = @master_count - @found_count;
+DECLARE @category_count BIGINT = (
+    SELECT SUM(pair_count)
+    FROM (
+        SELECT COUNT_BIG(*) AS pair_count
+        FROM #master
+        GROUP BY Match_Category
+    ) AS category_totals
+);
+
+IF @master_count <> @expected_current_target
+   OR @category_count <> @expected_current_target
+   OR (@found_count + @no_inbound_count) <> @expected_current_target
+BEGIN
+    SELECT
+        @target_count AS Current_Target,
+        @master_count AS Final_Master_Row_Count,
+        @found_count AS Inbound_Evidence_Found,
+        @no_inbound_count AS No_Inbound_Evidence,
+        @category_count AS Category_Sum,
+        CAST('FAIL_STOP' AS VARCHAR(20)) AS Control_Status;
+
+    RAISERROR(
+        'STOP: master controls failed. target=%I64d master=%I64d categories=%I64d.',
+        16, 1, @target_count, @master_count, @category_count
+    );
+    RETURN;
+END;
+
+
+-- =============================================================================
+-- RESULT 1 — MASTER CONTROL
+-- =============================================================================
+SELECT
+    @target_count AS Current_Target,
+    @found_count AS Inbound_Evidence_Found,
+    @no_inbound_count AS No_Inbound_Evidence,
     CAST(
-        'Fingerprint discovery only. Do not rebuild No-Inbound or continue reconciliation.'
-        AS VARCHAR(120)
-    ) AS Diagnostic_Note
-FROM #fingerprints;
+        100.0 * @found_count / NULLIF(@target_count, 0)
+        AS DECIMAL(10, 4)
+    ) AS Found_Percentage,
+    CAST(
+        100.0 * @no_inbound_count / NULLIF(@target_count, 0)
+        AS DECIMAL(10, 4)
+    ) AS No_Inbound_Percentage,
+    CAST('PASS' AS VARCHAR(10)) AS Control_Status;
+
+
+-- =============================================================================
+-- RESULT 2 — MATCH CATEGORY BREAKDOWN
+-- =============================================================================
+IF OBJECT_ID('tempdb..#category_order') IS NOT NULL DROP TABLE #category_order;
+
+CREATE TABLE #category_order (
+    category_order INT NOT NULL,
+    Match_Category VARCHAR(50) NOT NULL,
+    PRIMARY KEY (category_order)
+);
+
+INSERT INTO #category_order (category_order, Match_Category)
+VALUES
+    (1, 'EXACT_ENROLLEE_POLICY_MATCH'),
+    (2, 'SAME_TRANSACTION_DIFFERENT_POLICY'),
+    (3, 'SAME_LIFECYCLE_DIFFERENT_POLICY'),
+    (4, 'CROSS_ISSUER_TRANSITION'),
+    (5, 'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'),
+    (6, 'NO_INBOUND_ENROLLEE_EVIDENCE');
+
+SELECT
+    o.Match_Category,
+    COUNT_BIG(m.FFM_Coverage_Year) AS Pair_Count,
+    CAST(
+        100.0 * COUNT_BIG(m.FFM_Coverage_Year) / NULLIF(@target_count, 0)
+        AS DECIMAL(10, 4)
+    ) AS Percentage_Of_Target
+FROM #category_order AS o
+LEFT JOIN #master AS m
+    ON m.Match_Category = o.Match_Category
+GROUP BY
+    o.category_order,
+    o.Match_Category
+ORDER BY o.category_order;
+
+
+-- =============================================================================
+-- RESULT 3 — ISSUER BREAKDOWN, INCLUDING TOTAL
+-- =============================================================================
+;WITH issuer_summary AS (
+    SELECT
+        CASE
+            WHEN GROUPING(FFM_Issuer) = 1 THEN 'TOTAL'
+            ELSE FFM_Issuer
+        END AS FFM_Issuer,
+        GROUPING(FFM_Issuer) AS Is_Total,
+        COUNT_BIG(*) AS Target_Pairs,
+        SUM(CONVERT(BIGINT, Inbound_Evidence_Found)) AS Inbound_Found,
+        SUM(CASE
+            WHEN Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS No_Inbound,
+        SUM(CASE
+            WHEN Match_Category = 'EXACT_ENROLLEE_POLICY_MATCH'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS Exact_Match,
+        SUM(CASE
+            WHEN Match_Category = 'SAME_TRANSACTION_DIFFERENT_POLICY'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS Same_Transaction_Different_Policy,
+        SUM(CASE
+            WHEN Match_Category = 'SAME_LIFECYCLE_DIFFERENT_POLICY'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS Same_Lifecycle_Different_Policy,
+        SUM(CASE
+            WHEN Match_Category = 'CROSS_ISSUER_TRANSITION'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS Cross_Issuer,
+        SUM(CASE
+            WHEN Match_Category = 'ENROLLEE_FOUND_DIFFERENT_LIFECYCLE'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) AS Different_Lifecycle
+    FROM #master
+    GROUP BY GROUPING SETS ((FFM_Issuer), ())
+)
+SELECT
+    FFM_Issuer,
+    Target_Pairs,
+    Inbound_Found,
+    No_Inbound,
+    CAST(
+        100.0 * Inbound_Found / NULLIF(Target_Pairs, 0)
+        AS DECIMAL(10, 4)
+    ) AS Found_Percentage,
+    CAST(
+        100.0 * No_Inbound / NULLIF(Target_Pairs, 0)
+        AS DECIMAL(10, 4)
+    ) AS No_Inbound_Percentage,
+    Exact_Match,
+    Same_Transaction_Different_Policy,
+    Same_Lifecycle_Different_Policy,
+    Cross_Issuer,
+    Different_Lifecycle
+FROM issuer_summary
+ORDER BY
+    Is_Total DESC,
+    No_Inbound DESC,
+    FFM_Issuer;
+
+
+-- =============================================================================
+-- RESULT 4 — ENROLLMENT STATUS BREAKDOWN
+-- =============================================================================
+SELECT
+    FFM_Enrollment_Status,
+    COUNT_BIG(*) AS Target_Pairs,
+    SUM(CONVERT(BIGINT, Inbound_Evidence_Found)) AS Inbound_Found,
+    SUM(CASE
+        WHEN Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+            THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+    END) AS No_Inbound,
+    CAST(
+        100.0 * SUM(CASE
+            WHEN Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+                THEN CONVERT(BIGINT, 1) ELSE CONVERT(BIGINT, 0)
+        END) / NULLIF(COUNT_BIG(*), 0)
+        AS DECIMAL(10, 4)
+    ) AS No_Inbound_Percentage
+FROM #master
+GROUP BY FFM_Enrollment_Status
+ORDER BY FFM_Enrollment_Status;
+
+
+-- =============================================================================
+-- RESULT 5 — PERSON / RELATIONSHIP BREAKDOWN OF NO-INBOUND
+-- =============================================================================
+SELECT
+    person_type,
+    relationship_type,
+    COUNT_BIG(*) AS No_Inbound_Pairs,
+    CAST(
+        100.0 * COUNT_BIG(*) / NULLIF(@no_inbound_count, 0)
+        AS DECIMAL(10, 4)
+    ) AS Percentage_Of_No_Inbound
+FROM #master
+WHERE Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+GROUP BY
+    person_type,
+    relationship_type
+ORDER BY
+    No_Inbound_Pairs DESC,
+    person_type,
+    relationship_type;
+
+
+-- =============================================================================
+-- RESULT 6 — NO-INBOUND BY ISSUER + PERSON TYPE
+-- =============================================================================
+SELECT
+    FFM_Issuer,
+    person_type,
+    relationship_type,
+    COUNT_BIG(*) AS No_Inbound_Pairs
+FROM #master
+WHERE Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+GROUP BY
+    FFM_Issuer,
+    person_type,
+    relationship_type
+ORDER BY
+    FFM_Issuer,
+    No_Inbound_Pairs DESC,
+    person_type,
+    relationship_type;
+
+
+-- =============================================================================
+-- RESULT 7 — SELECTED/BEST INBOUND EVIDENCE YEAR
+-- =============================================================================
+SELECT
+    Inbound_Coverage_Year,
+    COUNT_BIG(*) AS Pair_Count,
+    CAST(
+        100.0 * COUNT_BIG(*) / NULLIF(@found_count, 0)
+        AS DECIMAL(10, 4)
+    ) AS Percentage_Of_Found
+FROM #master
+WHERE Inbound_Evidence_Found = 1
+GROUP BY Inbound_Coverage_Year
+ORDER BY Inbound_Coverage_Year;
+
+
+-- =============================================================================
+-- RESULT 8 — CURRENT NO-INBOUND ROW-LEVEL DETAIL
+-- =============================================================================
+SELECT
+    FFM_Coverage_Year,
+    FFM_Issuer,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID,
+    FFM_Enrollment_Status,
+    FFM_Enrollee_Status,
+    person_type,
+    relationship_type,
+    benefit_effective_date,
+    benefit_end_date,
+    enrollment_create_date,
+    enrollment_last_update_date,
+    household_id,
+    source
+FROM #master
+WHERE Match_Category = 'NO_INBOUND_ENROLLEE_EVIDENCE'
+ORDER BY
+    FFM_Issuer,
+    FFM_Policy_ID,
+    FFM_Enrollee_ID;
