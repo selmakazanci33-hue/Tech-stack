@@ -2,26 +2,34 @@
 
 
 
+
+WITH Pair_Status AS
+(
+    SELECT
+        enrollment_id,
+        enrollee_id,
+        COUNT(*) AS Raw_Rows,
+        COUNT(DISTINCT enrollment_status_description) AS Status_Count
+    FROM dbo.Enrollments_PY2526_DEC31
+    WHERE coverage_year = 2026
+    GROUP BY
+        enrollment_id,
+        enrollee_id
+)
 SELECT
-    'NOV30' AS Snapshot,
-    enrollment_status_description,
-    COUNT(*) AS Raw_Rows,
-    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
-    COUNT(DISTINCT enrollee_id) AS Distinct_Enrollees
-FROM dbo.Enrollments_PY2526_NOV30
-WHERE coverage_year = 2026
-GROUP BY enrollment_status_description
+    COUNT(*) AS Distinct_Enrollment_Enrollee_Pairs,
 
-UNION ALL
+    SUM(CASE
+            WHEN Raw_Rows > 1 THEN 1
+            ELSE 0
+        END) AS Pairs_With_Multiple_Rows,
 
-SELECT
-    'DEC31' AS Snapshot,
-    enrollment_status_description,
-    COUNT(*) AS Raw_Rows,
-    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
-    COUNT(DISTINCT enrollee_id) AS Distinct_Enrollees
-FROM dbo.Enrollments_PY2526_DEC31
-WHERE coverage_year = 2026
-GROUP BY enrollment_status_description
+    SUM(CASE
+            WHEN Status_Count > 1 THEN 1
+            ELSE 0
+        END) AS Pairs_With_Multiple_Statuses,
 
-ORDER BY Snapshot, enrollment_status_description;
+    MAX(Raw_Rows) AS Max_Rows_Per_Pair,
+
+    MAX(Status_Count) AS Max_Statuses_Per_Pair
+FROM Pair_Status;
