@@ -1,4 +1,2 @@
-enrollee_status_description	Raw_Rows	Distinct_Enrollments	Distinct_Enrollees
-Enrolled	1208656	934931	1156266
-Terminated	558	438	523
-Cancelled	184	151	171
+Enrolled_People	Benefit_Started_By_Dec31	Future_Benefit_Start	Min_Benefit_Effective_Date	Max_Benefit_Effective_Date
+1156266	0	1156266	2026-01-01	2026-02-01
