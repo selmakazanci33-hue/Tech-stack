@@ -1,34 +1,32 @@
-WITH Person_First_OE_Confirmation AS
-(
-    SELECT
-        enrollee_id,
-        MIN(enrollment_confirmation_date) AS First_OE_Confirmation_Date
-    FROM dbo.Enrollments_PY2526_NOV30
-    WHERE coverage_year = 2026
-      AND application_type = 'OE'
-      AND enrollment_status_description = 'Enrolled'
-      AND enrollee_status_description = 'Enrolled'
-      AND enrollment_confirmation_date IS NOT NULL
-      AND enrollment_confirmation_date >= '2025-10-01'
-    GROUP BY enrollee_id
-),
-Daily AS
-(
-    SELECT
-        First_OE_Confirmation_Date,
-        COUNT(*) AS New_Unique_People
-    FROM Person_First_OE_Confirmation
-    GROUP BY First_OE_Confirmation_Date
-)
+
+
+
 SELECT
-    First_OE_Confirmation_Date AS Confirmation_Date,
-    New_Unique_People,
+    enrollment_status_description,
 
-    SUM(New_Unique_People) OVER
-    (
-        ORDER BY First_OE_Confirmation_Date
-        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-    ) AS Cumulative_Unique_People
+    COUNT(*) AS Raw_Rows,
 
-FROM Daily
-ORDER BY First_OE_Confirmation_Date;
+    COUNT(DISTINCT enrollment_id) AS Distinct_Policies,
+
+    COUNT(DISTINCT enrollee_id) AS Distinct_People,
+
+    MIN(enrollment_last_update_date) AS Min_Enrollment_Last_Update,
+
+    MAX(enrollment_last_update_date) AS Max_Enrollment_Last_Update,
+
+    MIN(enrollee_end_date) AS Min_Enrollee_End_Date,
+
+    MAX(enrollee_end_date) AS Max_Enrollee_End_Date,
+
+    MIN(benefit_end_date) AS Min_Benefit_End_Date,
+
+    MAX(benefit_end_date) AS Max_Benefit_End_Date
+
+FROM dbo.Enrollments_PY2526_DEC31
+
+WHERE coverage_year = 2026
+  AND enrollment_status_description IN ('Cancelled', 'Terminated')
+
+GROUP BY enrollment_status_description
+
+ORDER BY enrollment_status_description;
