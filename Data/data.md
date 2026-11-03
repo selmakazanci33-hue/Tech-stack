@@ -1,9 +1,14 @@
 
 
-Dataset	coverage_year	Raw_Rows
-PY24252627_Applicants_test	2024	1724771
-PY24252627_Applicants_test	2025	4387522
-PY24252627_Applicants_test	2026	3582905
-PY24252627_Applicants_test	2027	1109466
-PY2627_PAC_NEW	2026	1048575
-PY2627_PAC_NEW2	2026	2272760
+
+ORDINAL_POSITION	COLUMN_NAME	DATA_TYPE
+1	coverage_year	int
+2	household_id	int
+3	applicant_guid	int
+4	ssn	varchar
+5	birth_date	date
+6	first_name	varchar
+7	last_name	varchar
+8	gender	varchar
+9	age	int
+10	MAX_id	bigint
