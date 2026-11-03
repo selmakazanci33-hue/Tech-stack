@@ -2,14 +2,8 @@
 
 
 
-
-Msg 207, Level 16, State 1, Line 11
-Invalid column name 'GAA_Load_Datetime'.
-Msg 207, Level 16, State 1, Line 12
-Invalid column name 'GAA_Load_Datetime'.
-Msg 207, Level 16, State 1, Line 24
-Invalid column name 'GAA_Load_Datetime'.
-Msg 207, Level 16, State 1, Line 25
-Invalid column name 'GAA_Load_Datetime'.
-
-Completion time: 2026-11-03T02:18:43.4843923-05:00
+Snapshot	coverage_year	Raw_Rows	Distinct_Enrollments	Distinct_Enrollees
+DEC31	2025	2884143	2130656	1861694
+DEC31	2026	1958568	1454823	1315065
+NOV30	2025	2884268	2130968	1862039
+NOV30	2026	1560860	1180712	1265392
