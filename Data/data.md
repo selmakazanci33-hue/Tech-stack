@@ -1,57 +1,6 @@
 
 
-TABLE_NAME	ORDINAL_POSITION	COLUMN_NAME	DATA_TYPE
-PY2627_PAC_NEW	1	coverage_year	int
-PY2627_PAC_NEW	2	houshold_id	int
-PY2627_PAC_NEW	3	ssap_application_id	int
-PY2627_PAC_NEW	4	enrollment_id	bigint
-PY2627_PAC_NEW	5	enrollment_status_description	varchar
-PY2627_PAC_NEW	6	exchg_indiv_identifier	bigint
-PY2627_PAC_NEW	7	first_name	varchar
-PY2627_PAC_NEW	8	last_name	varchar
-PY2627_PAC_NEW	9	fn	varchar
-PY2627_PAC_NEW	10	ln	varchar
-PY2627_PAC_NEW	11	age	int
-PY2627_PAC_NEW	12	person_type_description	varchar
-PY2627_PAC_NEW	13	enrollee_status_description	varchar
-PY2627_PAC_NEW	14	text_me	varchar
-PY2627_PAC_NEW	15	phone_number	varchar
-PY2627_PAC_NEW	16	prefer_contact_method_description	varchar
-PY2627_PAC_NEW	17	prefer_spoken_lang_description	varchar
-PY2627_PAC_NEW	18	email_address	varchar
-PY2627_PAC_NEW	19	hios_issuer_id	int
-PY2627_PAC_NEW	20	insurer_name	varchar
-PY2627_PAC_NEW	21	cms_plan_id	varchar
-PY2627_PAC_NEW	22	plan_name	varchar
-PY2627_PAC_NEW	23	plan_level_combined_bronze	varchar
-PY2627_PAC_NEW	24	benefit_effective_date	date
-PY2627_PAC_NEW	25	benefit_end_date	date
-PY2627_PAC_NEW	26	enrollee_effective_start_date	date
-PY2627_PAC_NEW	27	enrollee_effective_end_date	date
-PY2627_PAC_NEW2	1	coverage_year	int
-PY2627_PAC_NEW2	2	houshold_id	int
-PY2627_PAC_NEW2	3	ssap_application_id	int
-PY2627_PAC_NEW2	4	enrollment_id	bigint
-PY2627_PAC_NEW2	5	enrollment_status_description	varchar
-PY2627_PAC_NEW2	6	exchg_indiv_identifier	bigint
-PY2627_PAC_NEW2	7	first_name	varchar
-PY2627_PAC_NEW2	8	last_name	varchar
-PY2627_PAC_NEW2	9	fn	varchar
-PY2627_PAC_NEW2	10	ln	varchar
-PY2627_PAC_NEW2	11	age	int
-PY2627_PAC_NEW2	12	person_type_description	varchar
-PY2627_PAC_NEW2	13	enrollee_status_description	varchar
-PY2627_PAC_NEW2	14	text_me	bit
-PY2627_PAC_NEW2	15	phone_number	varchar
-PY2627_PAC_NEW2	16	prefer_contact_method_description	varchar
-PY2627_PAC_NEW2	17	prefer_spoken_lang_description	varchar
-PY2627_PAC_NEW2	18	email_address	varchar
-PY2627_PAC_NEW2	19	hios_issuer_id	int
-PY2627_PAC_NEW2	20	insurer_name	varchar
-PY2627_PAC_NEW2	21	cms_plan_id	varchar
-PY2627_PAC_NEW2	22	plan_name	varchar
-PY2627_PAC_NEW2	23	plan_level_combined_bronze	varchar
-PY2627_PAC_NEW2	24	benefit_effective_date	date
-PY2627_PAC_NEW2	25	benefit_end_date	date
-PY2627_PAC_NEW2	26	enrollee_effective_start_date	date
-PY2627_PAC_NEW2	27	enrollee_effective_end_date	date
+
+
+coverage_year	Raw_Rows	Distinct_Enrollment_IDs	Distinct_Individual_IDs	Distinct_Applications	Distinct_Households	Null_Enrollment_ID	Null_Individual_ID	Null_Application_ID
+2026	2272760	1654471	1459558	1070841	1070805	0	0	0
