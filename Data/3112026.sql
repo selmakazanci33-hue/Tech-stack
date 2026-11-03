@@ -1,57 +1,38 @@
 
 
 
+
+WITH Person_First_OE_Confirmation AS
+(
+    SELECT
+        enrollee_id,
+        MIN(enrollment_confirmation_date) AS First_OE_Confirmation_Date
+    FROM dbo.Enrollments_PY2526_DEC31
+    WHERE coverage_year = 2026
+      AND application_type = 'OE'
+      AND enrollment_status_description = 'Enrolled'
+      AND enrollee_status_description = 'Enrolled'
+      AND enrollment_confirmation_date IS NOT NULL
+    GROUP BY enrollee_id
+),
+Daily AS
+(
+    SELECT
+        First_OE_Confirmation_Date,
+        COUNT(*) AS New_Unique_People
+    FROM Person_First_OE_Confirmation
+    GROUP BY First_OE_Confirmation_Date
+)
 SELECT
-    enrollment_confirmation_date,
+    First_OE_Confirmation_Date AS Confirmation_Date,
+    New_Unique_People,
 
-    CASE
-        WHEN enrollment_create_date < enrollment_confirmation_date
-            THEN 'CREATED_BEFORE_CONFIRMATION'
+    SUM(New_Unique_People) OVER
+    (
+        ORDER BY First_OE_Confirmation_Date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS Cumulative_Unique_People
 
-        WHEN enrollment_create_date = enrollment_confirmation_date
-            THEN 'CREATED_SAME_DAY'
+FROM Daily
 
-        WHEN enrollment_create_date > enrollment_confirmation_date
-            THEN 'CREATED_AFTER_CONFIRMATION'
-
-        WHEN enrollment_create_date IS NULL
-            THEN 'CREATE_DATE_NULL'
-    END AS Create_vs_Confirmation,
-
-    COUNT(*) AS Raw_Rows,
-
-    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
-
-    COUNT(DISTINCT enrollee_id) AS Distinct_People,
-
-    MIN(enrollment_create_date) AS Min_Create_Date,
-
-    MAX(enrollment_create_date) AS Max_Create_Date
-
-FROM dbo.Enrollments_PY2526_DEC31
-
-WHERE coverage_year = 2026
-  AND enrollment_status_description = 'Enrolled'
-  AND enrollee_status_description = 'Enrolled'
-  AND application_type = 'OE'
-  AND enrollment_confirmation_date IN ('2025-10-16', '2025-10-17')
-
-GROUP BY
-    enrollment_confirmation_date,
-    CASE
-        WHEN enrollment_create_date < enrollment_confirmation_date
-            THEN 'CREATED_BEFORE_CONFIRMATION'
-
-        WHEN enrollment_create_date = enrollment_confirmation_date
-            THEN 'CREATED_SAME_DAY'
-
-        WHEN enrollment_create_date > enrollment_confirmation_date
-            THEN 'CREATED_AFTER_CONFIRMATION'
-
-        WHEN enrollment_create_date IS NULL
-            THEN 'CREATE_DATE_NULL'
-    END
-
-ORDER BY
-    enrollment_confirmation_date,
-    Distinct_People DESC;
+ORDER BY First_OE_Confirmation_Date;
