@@ -2,5 +2,14 @@
 
 
 
-coverage_year	Raw_Rows	Distinct_Enrollment_IDs	Distinct_Individual_IDs	Distinct_Applications	Distinct_Households	Null_Enrollment_ID	Null_Individual_ID	Null_Application_ID
-2026	2272760	1654471	1459558	1070841	1070805	0	0	0
+
+Msg 207, Level 16, State 1, Line 11
+Invalid column name 'GAA_Load_Datetime'.
+Msg 207, Level 16, State 1, Line 12
+Invalid column name 'GAA_Load_Datetime'.
+Msg 207, Level 16, State 1, Line 24
+Invalid column name 'GAA_Load_Datetime'.
+Msg 207, Level 16, State 1, Line 25
+Invalid column name 'GAA_Load_Datetime'.
+
+Completion time: 2026-11-03T02:18:43.4843923-05:00
