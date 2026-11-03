@@ -1,5 +1,2 @@
-
-
-
-Direct_OE_Enrolled_People	OE_People_With_Confirmation_Date	OE_People_Without_Confirmation_Date
-949559	949559	0
+NOV30_OE_Enrolled_People	Min_Confirmation_Date	Max_Confirmation_Date
+1061718	2024-10-23	2025-11-30
