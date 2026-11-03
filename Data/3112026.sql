@@ -1,29 +1,28 @@
-WITH Person_Dates AS
-(
-    SELECT
-        enrollee_id,
-        COUNT(DISTINCT enrollment_confirmation_date) AS Confirmation_Date_Count,
-        MIN(enrollment_confirmation_date) AS First_Confirmation_Date,
-        MAX(enrollment_confirmation_date) AS Last_Confirmation_Date
-    FROM dbo.Enrollments_PY2526_DEC31
-    WHERE coverage_year = 2026
-      AND enrollment_status_description = 'Enrolled'
-      AND enrollee_status_description = 'Enrolled'
-    GROUP BY enrollee_id
-)
 SELECT
-    COUNT(*) AS Total_Distinct_People,
+    enrollment_confirmation_date,
+    application_type,
+    source,
+    Insurance_Type,
 
-    SUM(CASE
-        WHEN Confirmation_Date_Count = 1 THEN 1
-        ELSE 0
-    END) AS People_With_One_Confirmation_Date,
+    COUNT(*) AS Raw_Rows,
 
-    SUM(CASE
-        WHEN Confirmation_Date_Count > 1 THEN 1
-        ELSE 0
-    END) AS People_With_Multiple_Confirmation_Dates,
+    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
 
-    MAX(Confirmation_Date_Count) AS Max_Confirmation_Dates_Per_Person
+    COUNT(DISTINCT enrollee_id) AS Distinct_People
 
-FROM Person_Dates;
+FROM dbo.Enrollments_PY2526_DEC31
+
+WHERE coverage_year = 2026
+  AND enrollment_status_description = 'Enrolled'
+  AND enrollee_status_description = 'Enrolled'
+  AND enrollment_confirmation_date IN ('2025-10-16', '2025-10-17')
+
+GROUP BY
+    enrollment_confirmation_date,
+    application_type,
+    source,
+    Insurance_Type
+
+ORDER BY
+    enrollment_confirmation_date,
+    Distinct_People DESC;
