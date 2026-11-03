@@ -1,8 +1,58 @@
-
-
-
-
-Dataset	Raw_Rows	Distinct_Enrollments	Distinct_Enrollees	Min_Load_Date	Max_Load_Date	Min_Coverage_Year	Max_Coverage_Year
-09/30/2026	5531562	4056567	2088051	2026-10-01	2026-10-01	2025	2026
-10/31/2026	5212489	3817522	2069875	2026-11-01	2026-11-01	2025	2026
-CURRENT	5212489	3817522	2069875	2026-11-01	2026-11-01	2025	2026
+schema_name	object_name	type_desc	column_name	data_type
+dbo	834_Inbound_test	USER_TABLE	Coverage_Year	int
+dbo	concurrent_ALL	USER_TABLE	coverage_year	smallint
+dbo	concurrent_ALL_NEW	USER_TABLE	coverage_year	smallint
+dbo	Consolidated_Full_list	USER_TABLE	coverage_year	int
+dbo	Demographics_Premium	USER_TABLE	coverage_year	int
+dbo	DMIDetails	USER_TABLE	Coverage_Year	int
+dbo	Enrollments_AETNA	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_01312026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_02272026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_03312026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_04302026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_05302026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_05312026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_06312026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_07302026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_08302026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_09302026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_10312026	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_DEC31	USER_TABLE	coverage_year	int
+dbo	Enrollments_PY2526_NOV30	USER_TABLE	coverage_year	int
+dbo	Enrollments_TEST	USER_TABLE	coverage_year	int
+dbo	Enrollments_TEST_TEMP	USER_TABLE	coverage_year	int
+dbo	FPL_Dental_ALL	USER_TABLE	coverage_year	smallint
+dbo	FPL_Health_ALL	USER_TABLE	coverage_year	smallint
+dbo	FPL_PY2025_PY2026	USER_TABLE	coverage_year	smallint
+dbo	hh_brokers	USER_TABLE	coverage_year	int
+dbo	hh_demograohics_fraudanalysis	USER_TABLE	coverage_year	int
+dbo	hh_demographics	USER_TABLE	coverage_year	bigint
+dbo	HH_SSAP_AT2026	USER_TABLE	coverage_year	int
+dbo	inbound_automation	USER_TABLE	coverage_year	int
+dbo	monthly_discrepancy	USER_TABLE	Coverage_Year	int
+dbo	monthly_discrepancy_PY2025	USER_TABLE	Coverage_Year	int
+dbo	monthly_discrepancy_PY2026	USER_TABLE	Coverage_Year	int
+dbo	monthly_discrepancy_test	USER_TABLE	Coverage_Year	int
+dbo	PY2025_DUPSSN	USER_TABLE	coverage_year	int
+dbo	PY2025_Fraud_Analysis	USER_TABLE	coverage_year	int
+dbo	PY2026_Applicants_PAC	USER_TABLE	coverage_year	int
+dbo	PY2026_DUPSSN	USER_TABLE	coverage_year	int
+dbo	PY2026_DUPSSN_OCT	USER_TABLE	coverage_year	int
+dbo	PY2026_DUPSSN_OCT_MIS	USER_TABLE	coverage_year	int
+dbo	PY2026_DUPSSN_SEP	USER_TABLE	coverage_year	int
+dbo	PY2026_DUPSSN_TEST	USER_TABLE	coverage_year	int
+dbo	PY2026_Fraud_Analysis	USER_TABLE	coverage_year	int
+dbo	PY2026_PAC	USER_TABLE	coverage_year	int
+dbo	PY2026_PAC_E	USER_TABLE	coverage_year	int
+dbo	PY2026_PAC_S1	USER_TABLE	coverage_year	int
+dbo	PY2026_PAC_S2	USER_TABLE	coverage_year	int
+dbo	PY2026Applicants_with_tobacco_usage	USER_TABLE	coverage_year	int
+dbo	PY2026-Enrollments_All	USER_TABLE	coverage_year	smallint
+dbo	PY242526_enrollment_lastupdate_test	USER_TABLE	coverage_year	int
+dbo	PY24252627_Applicants_test	USER_TABLE	coverage_year	int
+dbo	PY2627_PAC_NEW	USER_TABLE	coverage_year	int
+dbo	PY2627_PAC_NEW2	USER_TABLE	coverage_year	int
+dbo	rcni_data_quality_issue	USER_TABLE	coverage_year	int
+dbo	rcni_file_log	USER_TABLE	coverage_year	int
+dbo	rcni_raw	USER_TABLE	coverage_year	int
+dbo	rcni_stage	USER_TABLE	coverage_year	int
