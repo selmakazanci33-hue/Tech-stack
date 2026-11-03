@@ -1,2 +1,2 @@
-Enrolled_People	Benefit_Started_By_Dec31	Future_Benefit_Start	Min_Benefit_Effective_Date	Max_Benefit_Effective_Date
-1156266	0	1156266	2026-01-01	2026-02-01
+Raw_Rows	Distinct_Enrolled_People	Min_Confirmation_Date	Max_Confirmation_Date	Null_Confirmation_Date_Rows	People_With_Null_Confirmation_Date
+1208656	1156266	2025-10-16	2026-01-01	0	0
