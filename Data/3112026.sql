@@ -3,37 +3,27 @@
 
 
 SELECT
+    'NOV30' AS Snapshot,
     coverage_year,
-
     COUNT(*) AS Raw_Rows,
-
-    COUNT(DISTINCT enrollment_id)
-        AS Distinct_Enrollment_IDs,
-
-    COUNT(DISTINCT exchg_indiv_identifier)
-        AS Distinct_Individual_IDs,
-
-    COUNT(DISTINCT ssap_application_id)
-        AS Distinct_Applications,
-
-    COUNT(DISTINCT houshold_id)
-        AS Distinct_Households,
-
-    SUM(CASE
-            WHEN enrollment_id IS NULL THEN 1
-            ELSE 0
-        END) AS Null_Enrollment_ID,
-
-    SUM(CASE
-            WHEN exchg_indiv_identifier IS NULL THEN 1
-            ELSE 0
-        END) AS Null_Individual_ID,
-
-    SUM(CASE
-            WHEN ssap_application_id IS NULL THEN 1
-            ELSE 0
-        END) AS Null_Application_ID
-
-FROM dbo.PY2627_PAC_NEW2
+    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
+    COUNT(DISTINCT enrollee_id) AS Distinct_Enrollees,
+    MIN(GAA_Load_Datetime) AS Min_Load_Date,
+    MAX(GAA_Load_Datetime) AS Max_Load_Date
+FROM dbo.Enrollments_PY2526_NOV30
 GROUP BY coverage_year
-ORDER BY coverage_year;
+
+UNION ALL
+
+SELECT
+    'DEC31',
+    coverage_year,
+    COUNT(*) AS Raw_Rows,
+    COUNT(DISTINCT enrollment_id),
+    COUNT(DISTINCT enrollee_id),
+    MIN(GAA_Load_Datetime),
+    MAX(GAA_Load_Datetime)
+FROM dbo.Enrollments_PY2526_DEC31
+GROUP BY coverage_year
+
+ORDER BY Snapshot, coverage_year;
