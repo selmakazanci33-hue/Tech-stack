@@ -1,27 +1,26 @@
 SELECT
-    enrollment_last_update_date AS Activity_Date,
+    application_type,
+    Insurance_Type,
 
-    COUNT(DISTINCT CASE
-        WHEN enrollment_status_description = 'Cancelled'
-        THEN enrollment_id
-    END) AS Cancelled_Policies,
+    COUNT(*) AS Raw_Rows,
 
-    COUNT(DISTINCT CASE
-        WHEN enrollment_status_description = 'Terminated'
-        THEN enrollment_id
-    END) AS Terminated_Policies,
+    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
 
-    COUNT(DISTINCT CASE
-        WHEN enrollment_status_description IN ('Cancelled', 'Terminated')
-        THEN enrollment_id
-    END) AS Cancelled_Or_Terminated_Policies
+    COUNT(DISTINCT enrollee_id) AS Distinct_People,
+
+    MIN(enrollment_confirmation_date) AS Min_Confirmation_Date,
+
+    MAX(enrollment_confirmation_date) AS Max_Confirmation_Date
 
 FROM dbo.Enrollments_PY2526_DEC31
 
 WHERE coverage_year = 2026
-  AND enrollment_status_description IN ('Cancelled', 'Terminated')
-  AND enrollment_last_update_date IS NOT NULL
+  AND source = 'EDE'
 
-GROUP BY enrollment_last_update_date
+GROUP BY
+    application_type,
+    Insurance_Type
 
-ORDER BY Activity_Date;
+ORDER BY
+    application_type,
+    Insurance_Type;
