@@ -1,5 +1,6 @@
 
 
+
 TABLE_NAME	ORDINAL_POSITION	COLUMN_NAME	DATA_TYPE
 2025_GASBE_enrollments	1	gasbe_enrollment_id	bigint
 Enrollments_PY2526_09302026	1	coverage_year	int
