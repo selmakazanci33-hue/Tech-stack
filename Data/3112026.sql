@@ -1,26 +1,34 @@
+WITH Person_First_OE_Confirmation AS
+(
+    SELECT
+        enrollee_id,
+        MIN(enrollment_confirmation_date) AS Metric_Date
+    FROM dbo.Enrollments_PY2526_NOV30
+    WHERE coverage_year = 2026
+      AND application_type = 'OE'
+      AND enrollment_status_description = 'Enrolled'
+      AND enrollee_status_description = 'Enrolled'
+      AND enrollment_confirmation_date IS NOT NULL
+      AND enrollment_confirmation_date >= '2025-10-01'
+    GROUP BY enrollee_id
+),
+Daily AS
+(
+    SELECT
+        Metric_Date,
+        COUNT(*) AS Daily_Count
+    FROM Person_First_OE_Confirmation
+    GROUP BY Metric_Date
+)
 SELECT
-    application_type,
-    Insurance_Type,
-
-    COUNT(*) AS Raw_Rows,
-
-    COUNT(DISTINCT enrollment_id) AS Distinct_Enrollments,
-
-    COUNT(DISTINCT enrollee_id) AS Distinct_People,
-
-    MIN(enrollment_confirmation_date) AS Min_Confirmation_Date,
-
-    MAX(enrollment_confirmation_date) AS Max_Confirmation_Date
-
-FROM dbo.Enrollments_PY2526_DEC31
-
-WHERE coverage_year = 2026
-  AND source = 'EDE'
-
-GROUP BY
-    application_type,
-    Insurance_Type
-
-ORDER BY
-    application_type,
-    Insurance_Type;
+    2026 AS Plan_Year,
+    Metric_Date,
+    'Enrollment' AS Metric,
+    Daily_Count,
+    SUM(Daily_Count) OVER
+    (
+        ORDER BY Metric_Date
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+    ) AS Cumulative_Count
+FROM Daily
+ORDER BY Metric_Date;
