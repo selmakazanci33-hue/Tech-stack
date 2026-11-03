@@ -1,20 +1,27 @@
 
 
-
 SELECT
     s.name AS schema_name,
     o.name AS object_name,
-    o.type_desc
+    o.type_desc,
+    c.column_id,
+    c.name AS column_name,
+    t.name AS data_type
 FROM sys.objects o
 JOIN sys.schemas s
     ON o.schema_id = s.schema_id
+JOIN sys.columns c
+    ON o.object_id = c.object_id
+JOIN sys.types t
+    ON c.user_type_id = t.user_type_id
 WHERE o.type IN ('U', 'V')
   AND (
-       LOWER(o.name) LIKE '%2027%'
-    OR LOWER(o.name) LIKE '%py27%'
-    OR LOWER(o.name) LIKE '%2627%'
-    OR LOWER(o.name) LIKE '%252627%'
+       LOWER(c.name) LIKE '%enrollment%'
+    OR LOWER(c.name) LIKE '%enrollee%'
+    OR LOWER(c.name) LIKE '%policy%'
+    OR LOWER(c.name) LIKE '%coverage%'
   )
 ORDER BY
     s.name,
-    o.name;
+    o.name,
+    c.column_id;
