@@ -1,24 +1,26 @@
 
 
-
-
 SELECT
-    COUNT(DISTINCT enrollee_id) AS Enrolled_People,
+    COUNT(*) AS Raw_Rows,
+
+    COUNT(DISTINCT enrollee_id) AS Distinct_Enrolled_People,
+
+    MIN(enrollment_confirmation_date) AS Min_Confirmation_Date,
+
+    MAX(enrollment_confirmation_date) AS Max_Confirmation_Date,
+
+    SUM(CASE
+        WHEN enrollment_confirmation_date IS NULL
+        THEN 1 ELSE 0
+    END) AS Null_Confirmation_Date_Rows,
 
     COUNT(DISTINCT CASE
-        WHEN benefit_effective_date <= '2025-12-31'
+        WHEN enrollment_confirmation_date IS NULL
         THEN enrollee_id
-    END) AS Benefit_Started_By_Dec31,
-
-    COUNT(DISTINCT CASE
-        WHEN benefit_effective_date > '2025-12-31'
-        THEN enrollee_id
-    END) AS Future_Benefit_Start,
-
-    MIN(benefit_effective_date) AS Min_Benefit_Effective_Date,
-    MAX(benefit_effective_date) AS Max_Benefit_Effective_Date
+    END) AS People_With_Null_Confirmation_Date
 
 FROM dbo.Enrollments_PY2526_DEC31
+
 WHERE coverage_year = 2026
   AND enrollment_status_description = 'Enrolled'
   AND enrollee_status_description = 'Enrolled';
