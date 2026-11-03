@@ -1,2 +1,6 @@
-NOV30_OE_Enrolled_People	Not_Found_In_DEC31	Still_Enrolled_In_DEC31	Cancelled_By_DEC31	Terminated_By_DEC31	Found_Other_Status_In_DEC31
-1061718	63483	927931	62524	10814	0
+Confirmation_Month	Distinct_People	Distinct_Enrollments
+2024-10-01	1	1
+2025-01-01	2	2
+2025-06-01	1	1
+2025-10-01	972518	796516
+2025-11-01	91554	72321
