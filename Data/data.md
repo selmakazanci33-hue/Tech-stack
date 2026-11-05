@@ -1,50 +1,57 @@
 
 
 
- .\.venv\Scripts\python.exe main.py
-2026-11-05 08:15:19,147 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=False)
-2026-11-05 08:15:19,654 [INFO] sisense.auth: Saved session found; verifying
-2026-11-05 08:15:31,202 [INFO] sisense.auth: Dashboard navigation landed on: dashboard
-2026-11-05 08:15:31,253 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-05 08:15:31,253 [INFO] sisense.auth: Sisense session verified (saved state)
-2026-11-05 08:15:31,253 [INFO] oe_trend_pipeline: [debug] Authenticated BrowserContext ready (reused saved state: True)
-2026-11-05 08:15:38,462 [INFO] sisense.diagnostics: [debug] Dashboard sent 37 JAQL POST(s); 1 finished and kept for inspection
-2026-11-05 08:15:38,470 [INFO] sisense.diagnostics: [debug] Inspected 1 dashboard JAQL POST(s); statuses: ['200']
-2026-11-05 08:15:38,470 [INFO] sisense.diagnostics: [debug] Header names on every HTTP 200 dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 08:15:38,471 [INFO] sisense.diagnostics: [debug] Cookie names sent on every HTTP 200 dashboard JAQL POST: ['XSRF-TOKEN', 'server.session']
-2026-11-05 08:15:38,471 [INFO] sisense.diagnostics: [debug] Header names seen on any dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 08:15:38,478 [INFO] sisense.diagnostics: [debug] Context cookies: 3 total
-2026-11-05 08:15:38,479 [INFO] sisense.diagnostics: [debug] Cookie domains: ['.candu.ai', 'gahixreports.getinsured.com']
-2026-11-05 08:15:38,479 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 2
-2026-11-05 08:15:38,479 [INFO] sisense.diagnostics: [debug]   server.session domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=False
-2026-11-05 08:15:38,479 [INFO] sisense.diagnostics: [debug]   XSRF-TOKEN domain=gahixreports.getinsured.com path=/ secure=True httpOnly=False sameSite=Lax session=False
-2026-11-05 08:15:38,479 [INFO] sisense.diagnostics: [debug]   not sent to JAQL: cdn-allocation domain=.candu.ai path=/ secure=True httpOnly=True sameSite=None session=True
-2026-11-05 08:15:38,488 [INFO] oe_trend_pipeline: Request metadata taken from observed dashboard JAQL request: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 08:15:38,488 [INFO] oe_trend_pipeline: CSRF header matches current BrowserContext cookie: True
-2026-11-05 08:15:54,091 [INFO] oe_trend_pipeline: Passive proof: 37 dashboard JAQL POST(s) seen, 1 for the verified widget; parse PASS
-2026-11-05 08:15:54,143 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated EXTRACTED, applications_started EXTRACTED, submitted_applications EXTRACTED, new_enrolled EXTRACTED, active_enrolled EXTRACTED, passive_enrolled EXTRACTED
+.\.venv\Scripts\python.exe main.py
+2026-11-05 08:32:11,550 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=False)
+2026-11-05 08:32:12,191 [INFO] sisense.auth: Saved session found; verifying
+2026-11-05 08:32:18,736 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-05 08:32:18,736 [INFO] sisense.auth: Saved session is expired or invalid; discarding it
+2026-11-05 08:32:24,009 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-05 08:32:24,082 [INFO] sisense.auth: Login form detected; credentials required
+Sisense password: 
+2026-11-05 08:32:29,409 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-05 08:32:32,850 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-05 08:32:32,850 [INFO] sisense.auth: Authentication successful
+2026-11-05 08:32:32,851 [INFO] sisense.auth: Sisense session verified
+2026-11-05 08:32:32,865 [INFO] sisense.auth: Session state saved to runtime\auth\sisense_state.json
+2026-11-05 08:32:32,866 [INFO] oe_trend_pipeline: [debug] Authenticated BrowserContext ready (reused saved state: False)
+2026-11-05 08:32:36,437 [INFO] sisense.diagnostics: [debug] Dashboard sent 37 JAQL POST(s); 1 finished and kept for inspection
+2026-11-05 08:32:36,469 [INFO] sisense.diagnostics: [debug] Inspected 1 dashboard JAQL POST(s); statuses: ['200']
+2026-11-05 08:32:36,469 [INFO] sisense.diagnostics: [debug] Header names on every HTTP 200 dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 08:32:36,469 [INFO] sisense.diagnostics: [debug] Cookie names sent on every HTTP 200 dashboard JAQL POST: ['XSRF-TOKEN', 'server.session']
+2026-11-05 08:32:36,469 [INFO] sisense.diagnostics: [debug] Header names seen on any dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 08:32:36,476 [INFO] sisense.diagnostics: [debug] Context cookies: 3 total
+2026-11-05 08:32:36,476 [INFO] sisense.diagnostics: [debug] Cookie domains: ['.candu.ai', 'gahixreports.getinsured.com']
+2026-11-05 08:32:36,476 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 2
+2026-11-05 08:32:36,476 [INFO] sisense.diagnostics: [debug]   server.session domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=False
+2026-11-05 08:32:36,477 [INFO] sisense.diagnostics: [debug]   XSRF-TOKEN domain=gahixreports.getinsured.com path=/ secure=True httpOnly=False sameSite=Lax session=False
+2026-11-05 08:32:36,477 [INFO] sisense.diagnostics: [debug]   not sent to JAQL: cdn-allocation domain=.candu.ai path=/ secure=True httpOnly=True sameSite=None session=True
+2026-11-05 08:32:36,500 [INFO] oe_trend_pipeline: Request metadata taken from observed dashboard JAQL request: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 08:32:36,501 [INFO] oe_trend_pipeline: CSRF header matches current BrowserContext cookie: True
+2026-11-05 08:32:50,084 [INFO] oe_trend_pipeline: Passive proof: 37 dashboard JAQL POST(s) seen, 1 for the verified widget; parse PASS
+2026-11-05 08:32:50,164 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated EXTRACTED, applications_started EXTRACTED, submitted_applications EXTRACTED, new_enrolled EXTRACTED, active_enrolled EXTRACTED, passive_enrolled EXTRACTED
 Passive observation window is active.
-2026-11-05 08:15:54,144 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-05 08:32:50,165 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-05 08:15:54,145 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-05 08:32:50,165 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-05 08:15:54,145 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-05 08:32:50,166 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-05 08:15:54,145 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-05 08:32:50,166 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
 
-2026-11-05 08:19:13,489 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-05 08:19:13,489 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-05 08:19:13,490 [INFO] sisense.client: Forwarding observed request metadata headers: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 08:19:14,025 [INFO] sisense.client: HTTP 200 (0.54 sec)
-2026-11-05 08:19:14,026 [INFO] sisense.client: Value cells: 2
-2026-11-05 08:19:14,027 [INFO] sisense.client: Duration: 0.54 sec
-2026-11-05 08:19:14,160 [INFO] oe_trend_pipeline: Wave 1 discovery: 168 dashboard JAQL POST(s), 28 widget(s); VERIFIED 7, DISCOVERED 1, PENDING 6
-2026-11-05 08:19:14,171 [INFO] oe_trend_pipeline: Wave 1 discovery report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
-2026-11-05 08:19:14,236 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 7, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 4, PENDING 2
-2026-11-05 08:19:14,773 [INFO] oe_trend_pipeline: Current PY2027 value: 793517
-2026-11-05 08:19:14,773 [INFO] oe_trend_pipeline: Manual baseline: 791826
-2026-11-05 08:19:14,773 [INFO] oe_trend_pipeline: Difference: 793517 - 791826 = +1691
-2026-11-05 08:19:14,774 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 793517, "retrieved_at": "2026-11-05T13:19:14+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
+2026-11-05 08:34:48,155 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-05 08:34:48,156 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-05 08:34:48,156 [INFO] sisense.client: Forwarding observed request metadata headers: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 08:34:48,630 [INFO] sisense.client: HTTP 200 (0.47 sec)
+2026-11-05 08:34:48,630 [INFO] sisense.client: Value cells: 2
+2026-11-05 08:34:48,630 [INFO] sisense.client: Duration: 0.47 sec
+2026-11-05 08:34:48,793 [INFO] oe_trend_pipeline: Wave 1 discovery: 174 dashboard JAQL POST(s), 28 widget(s), 49 definition(s); VERIFIED 7, DISCOVERED 1, PENDING 6
+2026-11-05 08:34:48,805 [INFO] oe_trend_pipeline: Wave 1 discovery report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
+2026-11-05 08:34:48,897 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 7, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 4, PENDING 2
+2026-11-05 08:34:49,454 [INFO] oe_trend_pipeline: Current PY2027 value: 793517
+2026-11-05 08:34:49,455 [INFO] oe_trend_pipeline: Manual baseline: 791826
+2026-11-05 08:34:49,455 [INFO] oe_trend_pipeline: Difference: 793517 - 791826 = +1691
+2026-11-05 08:34:49,455 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 793517, "retrieved_at": "2026-11-05T13:34:49+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
 
 ============================================================
 Georgia Access — PY2027 Sisense Retrieval
@@ -57,7 +64,7 @@ Metric                Currently Enrolled People
 Coverage Year         2027
 Current Value         793,517
 Manual Baseline       791,826
-Retrieved             2026-11-05T13:19:14+00:00
+Retrieved             2026-11-05T13:34:49+00:00
 JAQL Status           PASS
 
 ============================================================
@@ -79,7 +86,7 @@ Difference: 0
 Passive Validation: PASS
 
 ============================================================
-2026-11-05 08:19:14,776 [INFO] oe_trend_pipeline: Passive Validation: PASS
+2026-11-05 08:34:49,458 [INFO] oe_trend_pipeline: Passive Validation: PASS
 
 Wave 1 discovery (developer review only — not used for snapshots or the executive report)
   VERIFIED    7
@@ -91,7 +98,7 @@ Wave 1 discovery (developer review only — not used for snapshots or the execut
 
 Wave 1 runtime validation (developer review only — not stored, not in the executive report)
   Applications Started        VALUE_EXTRACTED     566,051
-  Submitted Applications      VALUE_EXTRACTED     565,200
+  Submitted Applications      VALUE_EXTRACTED     565,223
   Total Applicants            VALUE_EXTRACTED     832,839
   % Effectuated               VALUE_EXTRACTED     95.72% (raw 0.957228)
   New                         VALUE_EXTRACTED     2,510
@@ -116,7 +123,7 @@ Wave 1 runtime validation (developer review only — not stored, not in the exec
   Report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\validation\wave1_runtime_validation.html
 
 ============================================================
-2026-11-05 08:19:14,829 [INFO] oe_trend_pipeline: Currently Enrolled control: EXACT_VALUE_MATCH (IDENTITY_PASS)
+2026-11-05 08:34:49,492 [INFO] oe_trend_pipeline: Currently Enrolled control: EXACT_VALUE_MATCH (IDENTITY_PASS)
 Currently Enrolled    793,517
 Snapshot              SKIPPED (DUPLICATE_SLOT: kept existing snapshot from Nov 05, 2026 13:09 UTC)
 Historical Snapshots  7
@@ -131,8 +138,8 @@ Report                C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_
 ============================================================
 Verified dashboard metrics (passive, zero additional requests)
   % Effectuated               LIVE           95.72%  snapshot DUPLICATE_SLOT
-  Applications Started        LIVE           566,051  snapshot DUPLICATE_SLOT
-  Submitted Applications      LIVE           565,200  snapshot DUPLICATE_SLOT
+  Applications Started        LIVE           566,070  snapshot DUPLICATE_SLOT
+  Submitted Applications      LIVE           565,223  snapshot DUPLICATE_SLOT
   New                         LIVE           2,510  snapshot DUPLICATE_SLOT
   Active                      LIVE           35,336  snapshot DUPLICATE_SLOT
   Passive                     LIVE           755,947  snapshot DUPLICATE_SLOT
