@@ -1,4 +1,4 @@
-
+Query 1
 
 application_status	source	application_type	row_count	distinct_applications	first_create_date	last_create_date	first_update_date	last_update_date
 EN	CN	OE	1464881	844654	2024-09-30	2025-10-04	2024-10-22	2025-10-30
@@ -13,3 +13,9 @@ EN	EDE	OE	66926	2693	2024-11-01	2025-01-15	2024-11-01	2025-10-30
 EN	CN	QEP	186	186	2024-09-30	2025-09-27	2024-10-24	2025-10-04
 EN	RR	QEP	1018	50	2024-11-07	2025-10-30	2024-11-21	2025-10-30
 EN	RR	OE	449	0	2024-11-07	2025-01-15	2024-11-08	2025-10-30
+
+
+Query 2:
+
+coverage_year	rows	households	applications	enrollments	enrollees	first_application_date	latest_application_date	first_applicant_update	latest_applicant_update
+2025	814254	534024	534026	609473	734134	2024-09-30	2025-08-26	2025-01-01	2025-08-26
