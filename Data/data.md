@@ -1,148 +1,121 @@
 
-Query 1
-schema_name	table_name	coverage_year_column
-dbo	834_Inbound_test	Coverage_Year
-dbo	concurrent_ALL	coverage_year
-dbo	concurrent_ALL_NEW	coverage_year
-dbo	Consolidated_Full_list	coverage_year
-dbo	Demographics_Premium	coverage_year
-dbo	DMIDetails	Coverage_Year
-dbo	Enrollments_AETNA	coverage_year
-dbo	Enrollments_PY2526_01312026	coverage_year
-dbo	Enrollments_PY2526_02272026	coverage_year
-dbo	Enrollments_PY2526_03312026	coverage_year
-dbo	Enrollments_PY2526_04302026	coverage_year
-dbo	Enrollments_PY2526_05302026	coverage_year
-dbo	Enrollments_PY2526_05312026	coverage_year
-dbo	Enrollments_PY2526_06312026	coverage_year
-dbo	Enrollments_PY2526_07302026	coverage_year
-dbo	Enrollments_PY2526_08302026	coverage_year
-dbo	Enrollments_PY2526_09302026	coverage_year
-dbo	Enrollments_PY2526_10312026	coverage_year
-dbo	Enrollments_PY2526_DEC31	coverage_year
-dbo	Enrollments_PY2526_NOV30	coverage_year
-dbo	Enrollments_TEST	coverage_year
-dbo	Enrollments_TEST_TEMP	coverage_year
-dbo	FPL_Dental_ALL	coverage_year
-dbo	FPL_Health_ALL	coverage_year
-dbo	FPL_PY2025_PY2026	coverage_year
-dbo	hh_brokers	coverage_year
-dbo	hh_demograohics_fraudanalysis	coverage_year
-dbo	hh_demographics	coverage_year
-dbo	HH_SSAP_AT2026	coverage_year
-dbo	inbound_automation	coverage_year
-dbo	monthly_discrepancy	Coverage_Year
-dbo	monthly_discrepancy_PY2025	Coverage_Year
-dbo	monthly_discrepancy_PY2026	Coverage_Year
-dbo	monthly_discrepancy_test	Coverage_Year
-dbo	PY2025_DUPSSN	coverage_year
-dbo	PY2025_Fraud_Analysis	coverage_year
-dbo	PY2026_Applicants_PAC	coverage_year
-dbo	PY2026_DUPSSN	coverage_year
-dbo	PY2026_DUPSSN_OCT	coverage_year
-dbo	PY2026_DUPSSN_OCT_MIS	coverage_year
-dbo	PY2026_DUPSSN_SEP	coverage_year
-dbo	PY2026_DUPSSN_TEST	coverage_year
-dbo	PY2026_Fraud_Analysis	coverage_year
-dbo	PY2026_PAC	coverage_year
-dbo	PY2026_PAC_E	coverage_year
-dbo	PY2026_PAC_S1	coverage_year
-dbo	PY2026_PAC_S2	coverage_year
-dbo	PY2026Applicants_with_tobacco_usage	coverage_year
-dbo	PY2026-Enrollments_All	coverage_year
-dbo	PY242526_enrollment_lastupdate_test	coverage_year
-dbo	PY24252627_Applicants_test	coverage_year
-dbo	PY2627_PAC_NEW	coverage_year
-dbo	PY2627_PAC_NEW2	coverage_year
-dbo	rcni_data_quality_issue	coverage_year
-dbo	rcni_file_log	coverage_year
-dbo	rcni_raw	coverage_year
-dbo	rcni_stage	coverage_year
 
-query 2:
-schema_name	table_name	application_fields	enrollment_fields	status_fields	submitted_fields	date_fields
-dbo	Enrollments_PY2526_08302026	6	13	4	0	13
-dbo	Enrollments_PY2526_01312026	6	13	4	0	13
-dbo	Enrollments_PY2526_10312026	6	13	4	0	13
-dbo	Enrollments_PY2526_07302026	6	13	4	0	13
-dbo	Enrollments_PY2526_05312026	6	13	4	0	13
-dbo	Enrollments_PY2526_DEC31	6	13	4	0	13
-dbo	Enrollments_PY2526_03312026	6	13	4	0	13
-dbo	Enrollments_PY2526_04302026	6	13	4	0	13
-dbo	Enrollments_TEST_TEMP	6	13	4	0	13
-dbo	Enrollments_PY2526_05302026	6	13	4	0	13
-dbo	Enrollments_TEST	6	13	4	0	13
-dbo	Enrollments_PY2526_09302026	6	13	4	0	13
-dbo	Enrollments_PY2526_06312026	6	13	4	0	13
-dbo	Enrollments_PY2526_02272026	6	13	4	0	13
-dbo	concurrent_ALL_NEW	4	4	4	0	6
-dbo	concurrent_ALL	4	4	4	0	6
-dbo	HH_SSAP_AT2026	4	0	2	0	5
-dbo	Enrollments_PY2526_NOV30	3	12	4	0	10
-dbo	Enrollments_AETNA	3	12	4	0	10
-dbo	hh_brokers	3	0	2	0	2
-dbo	AT_external_applications	3	0	1	0	2
-dbo	834_Inbound_test	2	2	5	0	17
-dbo	834_Inbound_header_test	2	2	0	0	6
-dbo	test_834_in	2	2	0	0	14
-dbo	GW_Inbound	2	0	2	0	1
-dbo	GW_Inbound_test	2	0	2	0	1
-dbo	DMIDetails	2	0	2	0	3
-dbo	GW_Outbound	2	0	2	0	0
-dbo	GW_Outbound_test	2	0	2	0	0
-dbo	Demographics_Premium	1	9	2	0	7
-dbo	Consolidated_Full_list	1	8	3	0	5
-dbo	PY2627_PAC_NEW	1	5	2	0	4
-dbo	PY2026_PAC	1	5	2	0	4
-dbo	PY2627_PAC_NEW2	1	5	2	0	4
-dbo	PY2026_PAC_E	1	5	2	0	4
-dbo	PY2026_PAC_S1	1	5	2	0	4
-dbo	PY2026_PAC_S2	1	5	2	0	4
-dbo	Enrollments_Agent	1	2	1	0	3
-dbo	PY2026_Medical_Prescription_PAC	1	1	0	0	0
-dbo	GI_Inbound	1	0	1	0	1
-dbo	GI_Inbound_test	1	0	1	0	1
-dbo	hh_demograohics_fraudanalysis	0	16	0	0	0
-dbo	PY2026_Fraud_Analysis	0	15	0	0	0
-dbo	PY2025_Fraud_Analysis	0	15	0	0	0
-dbo	hh_demographics	0	11	0	0	0
-dbo	PY2026_DUPSSN_OCT	0	10	3	0	7
-dbo	PY2025_DUPSSN	0	10	3	0	7
-dbo	PY2026_DUPSSN	0	10	3	0	7
-dbo	PY2026_DUPSSN_OCT_MIS	0	10	3	0	7
-dbo	PY2026_DUPSSN_SEP	0	10	3	0	7
-dbo	PY2026_DUPSSN_TEST	0	10	3	0	7
-dbo	PY242526_enrollment_lastupdate_test	0	8	0	0	7
-dbo	Enrollment_Enrollee_Premium	0	6	0	0	2
-dbo	concurrent_GI_2	0	6	0	0	2
-dbo	concurrent_GI	0	6	0	0	2
-dbo	concurrent_GI_1	0	6	0	0	2
-dbo	concurrent_RESULTS	0	5	3	0	6
-dbo	Reinsurance_APR_PY2026	0	5	2	0	4
-dbo	inbound_automation	0	5	2	1	6
-dbo	Enrollee_Premium_Summary	0	5	0	0	0
-dbo	CarrierInvoice_All_test	0	4	0	0	8
-dbo	CarrierInvoice_test	0	4	0	0	8
-dbo	CarrierInvoice	0	4	0	0	8
-dbo	agent_lms_test_pp	0	2	1	0	4
-dbo	FPL_Health_ALL	0	2	1	0	0
-dbo	FPL_Dental_ALL	0	2	1	0	0
-dbo	PY2026-Enrollments_All	0	2	1	0	0
-dbo	FPL_PY2025_PY2026	0	2	1	0	0
-dbo	agent_lms_test	0	2	1	0	4
-dbo	Enrollee_Premium	0	2	0	0	1
-dbo	rcni_raw	0	1	2	0	2
-dbo	rcni_stage	0	1	2	0	2
-dbo	arpa_household_fpl	0	1	1	0	0
-dbo	arpa_household_fpl_with_income_new2	0	1	1	0	1
-dbo	monthly_discrepancy_PY2025	0	1	1	0	3
-dbo	monthly_discrepancy_PY2026	0	1	1	0	3
-dbo	monthly_discrepancy_test	0	1	1	0	3
-dbo	monthly_discrepancy	0	1	1	0	3
-dbo	arpa_household_fpl_with_income	0	1	1	0	0
-dbo	arpa_household_fpl_with_income_new	0	1	1	0	1
-dbo	2025_GASBE_enrollments	0	1	0	0	0
-dbo	Enrollment_Premium	0	1	0	0	1
-dbo	arpa_household_premium	0	1	0	0	1
-dbo	PY2026_Relationship_Category	0	1	0	0	0
-dbo	arpa_household_premium_new	0	1	0	0	1
+TABLE_NAME	COLUMN_NAME	DATA_TYPE	ORDINAL_POSITION
+AT_external_applications	external_application_id	bigint	1
+AT_external_applications	source	nvarchar	2
+AT_external_applications	application_type	nvarchar	3
+AT_external_applications	application_status	nvarchar	4
+AT_external_applications	create_date	date	5
+AT_external_applications	last_update_date	date	6
+concurrent_ALL_NEW	coverage_year	smallint	1
+concurrent_ALL_NEW	Household_ID	int	2
+concurrent_ALL_NEW	Application_ID	int	3
+concurrent_ALL_NEW	Application_Create_Date	date	4
+concurrent_ALL_NEW	source	varchar	5
+concurrent_ALL_NEW	application_type	varchar	6
+concurrent_ALL_NEW	application_status	varchar	7
+concurrent_ALL_NEW	Enrollment_ID	int	8
+concurrent_ALL_NEW	insurance_type_description	varchar	9
+concurrent_ALL_NEW	Enrollee_ID	int	10
+concurrent_ALL_NEW	Person_Type	varchar	11
+concurrent_ALL_NEW	Enrollment_Status	varchar	12
+concurrent_ALL_NEW	exchange_eligibility_status	varchar	13
+concurrent_ALL_NEW	account_category	varchar	14
+concurrent_ALL_NEW	action_category	varchar	15
+concurrent_ALL_NEW	first_name	varchar	16
+concurrent_ALL_NEW	last_name	varchar	17
+concurrent_ALL_NEW	ssn	int	18
+concurrent_ALL_NEW	birth_date	date	19
+concurrent_ALL_NEW	enrollee_status_description	varchar	20
+concurrent_ALL_NEW	relationship	varchar	21
+concurrent_ALL_NEW	benefit_effective_date	date	22
+concurrent_ALL_NEW	benefit_end_date	date	23
+concurrent_ALL_NEW	id	int	24
+concurrent_ALL_NEW	applicant_create_date	date	25
+concurrent_ALL_NEW	applicant_update_date	date	26
+HH_SSAP_AT2026	coverage_year	int	1
+HH_SSAP_AT2026	household_id	int	2
+HH_SSAP_AT2026	ffm_household_id	varchar	3
+HH_SSAP_AT2026	external_household_case_id	varchar	4
+HH_SSAP_AT2026	external_application_id	varchar	5
+HH_SSAP_AT2026	case_number	int	6
+HH_SSAP_AT2026	ssap_applications_id	int	7
+HH_SSAP_AT2026	create_date	date	8
+HH_SSAP_AT2026	last_update_date	date	9
+HH_SSAP_AT2026	source	varchar	10
+HH_SSAP_AT2026	application_type	varchar	11
+HH_SSAP_AT2026	application_status	varchar	12
+HH_SSAP_AT2026	applicant_guid	int	13
+HH_SSAP_AT2026	external_applicant_id	varchar	14
+HH_SSAP_AT2026	applying_for_coverage	varchar	15
+HH_SSAP_AT2026	eligibility_status	varchar	16
+HH_SSAP_AT2026	applicant_birth_date	date	17
+HH_SSAP_AT2026	first_name	varchar	18
+HH_SSAP_AT2026	last_name	varchar	19
+HH_SSAP_AT2026	gender	varchar	20
+HH_SSAP_AT2026	aaplicant_start_date	date	21
+HH_SSAP_AT2026	applicant_end_date	date	22
+inbound_automation	id	bigint	1
+inbound_automation	load_run_id	nvarchar	2
+inbound_automation	loaded_at	datetime2	3
+inbound_automation	folder_year	int	4
+inbound_automation	folder_month	int	5
+inbound_automation	filename_file_year	int	6
+inbound_automation	filename_file_month	int	7
+inbound_automation	source_file	nvarchar	8
+inbound_automation	source_file_path	nvarchar	9
+inbound_automation	file_hash	nvarchar	10
+inbound_automation	row_number_in_file	int	11
+inbound_automation	raw_record_hash	nvarchar	12
+inbound_automation	parser_version	nvarchar	13
+inbound_automation	runner_version	nvarchar	14
+inbound_automation	git_commit	nvarchar	15
+inbound_automation	coverage_year	int	16
+inbound_automation	coverage_year_source	nvarchar	17
+inbound_automation	warning_count	int	18
+inbound_automation	insurance_type	nvarchar	19
+inbound_automation	enrolleeStatus	nvarchar	20
+inbound_automation	issuer	nvarchar	21
+inbound_automation	year	nvarchar	22
+inbound_automation	month	nvarchar	23
+inbound_automation	file_name	nvarchar	24
+inbound_automation	raw_xml_path	nvarchar	25
+inbound_automation	created_at	nvarchar	26
+inbound_automation	policy_id	nvarchar	27
+inbound_automation	member_id	nvarchar	28
+inbound_automation	subscriber_id	nvarchar	29
+inbound_automation	exchg_assigned_enrollee_id	nvarchar	30
+inbound_automation	issuer_subscriber_identifier	nvarchar	31
+inbound_automation	issuer_indiv_identifier	nvarchar	32
+inbound_automation	member_first_name	nvarchar	33
+inbound_automation	member_last_name	nvarchar	34
+inbound_automation	relationship	nvarchar	35
+inbound_automation	subscriber_flag	nvarchar	36
+inbound_automation	enrollee_event_type_code	nvarchar	37
+inbound_automation	enrollee_event_reason_code	nvarchar	38
+inbound_automation	action_code	nvarchar	39
+inbound_automation	action_code_description	nvarchar	40
+inbound_automation	maintenance_type_code	nvarchar	41
+inbound_automation	additional_maint_reason_code	nvarchar	42
+inbound_automation	coverage_status	nvarchar	43
+inbound_automation	benefit_effective_date	date	44
+inbound_automation	benefit_end_date	date	45
+inbound_automation	member_maint_effective_date	date	46
+inbound_automation	last_premium_paid_date	nvarchar	47
+inbound_automation	request_submit_timestamp	nvarchar	48
+inbound_automation	total_premium_amount	decimal	49
+inbound_automation	individual_responsibility_amount	decimal	50
+inbound_automation	aptc_amount	decimal	51
+inbound_automation	user_fee_amount	decimal	52
+inbound_automation	insurance_type_code	nvarchar	53
+inbound_automation	health_coverage_policy_no	nvarchar	54
+inbound_automation	household_or_employee_case_id	nvarchar	55
+inbound_automation	rating_area	nvarchar	56
+inbound_automation	source_exchg_id	nvarchar	57
+inbound_automation	enrollment_action_code	nvarchar	58
+inbound_automation	insurer_tax_id_number	nvarchar	59
+inbound_automation	qtyn	nvarchar	60
+inbound_automation	qtyy	nvarchar	61
+inbound_automation	qtyt	nvarchar	62
+inbound_automation	raw_payload	nvarchar	63
+inbound_automation	raw_json	nvarchar	64
