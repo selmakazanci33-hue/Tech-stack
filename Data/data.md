@@ -1,121 +1,15 @@
 
 
-TABLE_NAME	COLUMN_NAME	DATA_TYPE	ORDINAL_POSITION
-AT_external_applications	external_application_id	bigint	1
-AT_external_applications	source	nvarchar	2
-AT_external_applications	application_type	nvarchar	3
-AT_external_applications	application_status	nvarchar	4
-AT_external_applications	create_date	date	5
-AT_external_applications	last_update_date	date	6
-concurrent_ALL_NEW	coverage_year	smallint	1
-concurrent_ALL_NEW	Household_ID	int	2
-concurrent_ALL_NEW	Application_ID	int	3
-concurrent_ALL_NEW	Application_Create_Date	date	4
-concurrent_ALL_NEW	source	varchar	5
-concurrent_ALL_NEW	application_type	varchar	6
-concurrent_ALL_NEW	application_status	varchar	7
-concurrent_ALL_NEW	Enrollment_ID	int	8
-concurrent_ALL_NEW	insurance_type_description	varchar	9
-concurrent_ALL_NEW	Enrollee_ID	int	10
-concurrent_ALL_NEW	Person_Type	varchar	11
-concurrent_ALL_NEW	Enrollment_Status	varchar	12
-concurrent_ALL_NEW	exchange_eligibility_status	varchar	13
-concurrent_ALL_NEW	account_category	varchar	14
-concurrent_ALL_NEW	action_category	varchar	15
-concurrent_ALL_NEW	first_name	varchar	16
-concurrent_ALL_NEW	last_name	varchar	17
-concurrent_ALL_NEW	ssn	int	18
-concurrent_ALL_NEW	birth_date	date	19
-concurrent_ALL_NEW	enrollee_status_description	varchar	20
-concurrent_ALL_NEW	relationship	varchar	21
-concurrent_ALL_NEW	benefit_effective_date	date	22
-concurrent_ALL_NEW	benefit_end_date	date	23
-concurrent_ALL_NEW	id	int	24
-concurrent_ALL_NEW	applicant_create_date	date	25
-concurrent_ALL_NEW	applicant_update_date	date	26
-HH_SSAP_AT2026	coverage_year	int	1
-HH_SSAP_AT2026	household_id	int	2
-HH_SSAP_AT2026	ffm_household_id	varchar	3
-HH_SSAP_AT2026	external_household_case_id	varchar	4
-HH_SSAP_AT2026	external_application_id	varchar	5
-HH_SSAP_AT2026	case_number	int	6
-HH_SSAP_AT2026	ssap_applications_id	int	7
-HH_SSAP_AT2026	create_date	date	8
-HH_SSAP_AT2026	last_update_date	date	9
-HH_SSAP_AT2026	source	varchar	10
-HH_SSAP_AT2026	application_type	varchar	11
-HH_SSAP_AT2026	application_status	varchar	12
-HH_SSAP_AT2026	applicant_guid	int	13
-HH_SSAP_AT2026	external_applicant_id	varchar	14
-HH_SSAP_AT2026	applying_for_coverage	varchar	15
-HH_SSAP_AT2026	eligibility_status	varchar	16
-HH_SSAP_AT2026	applicant_birth_date	date	17
-HH_SSAP_AT2026	first_name	varchar	18
-HH_SSAP_AT2026	last_name	varchar	19
-HH_SSAP_AT2026	gender	varchar	20
-HH_SSAP_AT2026	aaplicant_start_date	date	21
-HH_SSAP_AT2026	applicant_end_date	date	22
-inbound_automation	id	bigint	1
-inbound_automation	load_run_id	nvarchar	2
-inbound_automation	loaded_at	datetime2	3
-inbound_automation	folder_year	int	4
-inbound_automation	folder_month	int	5
-inbound_automation	filename_file_year	int	6
-inbound_automation	filename_file_month	int	7
-inbound_automation	source_file	nvarchar	8
-inbound_automation	source_file_path	nvarchar	9
-inbound_automation	file_hash	nvarchar	10
-inbound_automation	row_number_in_file	int	11
-inbound_automation	raw_record_hash	nvarchar	12
-inbound_automation	parser_version	nvarchar	13
-inbound_automation	runner_version	nvarchar	14
-inbound_automation	git_commit	nvarchar	15
-inbound_automation	coverage_year	int	16
-inbound_automation	coverage_year_source	nvarchar	17
-inbound_automation	warning_count	int	18
-inbound_automation	insurance_type	nvarchar	19
-inbound_automation	enrolleeStatus	nvarchar	20
-inbound_automation	issuer	nvarchar	21
-inbound_automation	year	nvarchar	22
-inbound_automation	month	nvarchar	23
-inbound_automation	file_name	nvarchar	24
-inbound_automation	raw_xml_path	nvarchar	25
-inbound_automation	created_at	nvarchar	26
-inbound_automation	policy_id	nvarchar	27
-inbound_automation	member_id	nvarchar	28
-inbound_automation	subscriber_id	nvarchar	29
-inbound_automation	exchg_assigned_enrollee_id	nvarchar	30
-inbound_automation	issuer_subscriber_identifier	nvarchar	31
-inbound_automation	issuer_indiv_identifier	nvarchar	32
-inbound_automation	member_first_name	nvarchar	33
-inbound_automation	member_last_name	nvarchar	34
-inbound_automation	relationship	nvarchar	35
-inbound_automation	subscriber_flag	nvarchar	36
-inbound_automation	enrollee_event_type_code	nvarchar	37
-inbound_automation	enrollee_event_reason_code	nvarchar	38
-inbound_automation	action_code	nvarchar	39
-inbound_automation	action_code_description	nvarchar	40
-inbound_automation	maintenance_type_code	nvarchar	41
-inbound_automation	additional_maint_reason_code	nvarchar	42
-inbound_automation	coverage_status	nvarchar	43
-inbound_automation	benefit_effective_date	date	44
-inbound_automation	benefit_end_date	date	45
-inbound_automation	member_maint_effective_date	date	46
-inbound_automation	last_premium_paid_date	nvarchar	47
-inbound_automation	request_submit_timestamp	nvarchar	48
-inbound_automation	total_premium_amount	decimal	49
-inbound_automation	individual_responsibility_amount	decimal	50
-inbound_automation	aptc_amount	decimal	51
-inbound_automation	user_fee_amount	decimal	52
-inbound_automation	insurance_type_code	nvarchar	53
-inbound_automation	health_coverage_policy_no	nvarchar	54
-inbound_automation	household_or_employee_case_id	nvarchar	55
-inbound_automation	rating_area	nvarchar	56
-inbound_automation	source_exchg_id	nvarchar	57
-inbound_automation	enrollment_action_code	nvarchar	58
-inbound_automation	insurer_tax_id_number	nvarchar	59
-inbound_automation	qtyn	nvarchar	60
-inbound_automation	qtyy	nvarchar	61
-inbound_automation	qtyt	nvarchar	62
-inbound_automation	raw_payload	nvarchar	63
-inbound_automation	raw_json	nvarchar	64
+application_status	source	application_type	row_count	distinct_applications	first_create_date	last_create_date	first_update_date	last_update_date
+EN	CN	OE	1464881	844654	2024-09-30	2025-10-04	2024-10-22	2025-10-30
+EN	EDE	SEP	182648	147657	2024-11-01	2025-10-29	2024-11-02	2025-10-30
+EN	ON	SEP	177756	145763	2024-11-01	2025-10-30	2024-11-01	2025-10-30
+EN	EDE	QEP	102693	12777	2024-11-03	2025-10-30	2024-11-05	2025-10-30
+EN	RR	SEP	17913	12079	2024-11-07	2025-10-30	2024-11-07	2025-10-30
+EN	ON	QEP	41590	10250	2024-11-01	2025-10-30	2024-11-01	2025-10-30
+EN	ON	OE	39575	5742	2024-09-30	2025-01-15	2024-11-01	2025-10-29
+EN	CN	SEP	4734	4734	2024-09-30	2025-10-28	2025-02-14	2025-10-30
+EN	EDE	OE	66926	2693	2024-11-01	2025-01-15	2024-11-01	2025-10-30
+EN	CN	QEP	186	186	2024-09-30	2025-09-27	2024-10-24	2025-10-04
+EN	RR	QEP	1018	50	2024-11-07	2025-10-30	2024-11-21	2025-10-30
+EN	RR	OE	449	0	2024-11-07	2025-01-15	2024-11-08	2025-10-30
