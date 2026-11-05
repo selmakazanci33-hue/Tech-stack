@@ -1,37 +1,24 @@
-
-
-
-/* ============================================================
-   DISCOVERY #6
-   Test AT_external_applications against Sisense PY2027 metrics
-
-   Sisense reference:
-   Applications Started     = 564,433
-   Submitted Applications   = 563,516
-   ============================================================ */
-
 SELECT
-    application_status,
-    source,
-    application_type,
+    coverage_year,
 
-    COUNT(*) AS row_count,
+    COUNT(*) AS rows,
 
-    COUNT(DISTINCT external_application_id)
-        AS distinct_applications,
+    COUNT(DISTINCT Household_ID) AS households,
 
-    MIN(create_date) AS first_create_date,
-    MAX(create_date) AS last_create_date,
+    COUNT(DISTINCT Application_ID) AS applications,
 
-    MIN(last_update_date) AS first_update_date,
-    MAX(last_update_date) AS last_update_date
+    COUNT(DISTINCT Enrollment_ID) AS enrollments,
 
-FROM dbo.AT_external_applications
+    COUNT(DISTINCT Enrollee_ID) AS enrollees,
 
-GROUP BY
-    application_status,
-    source,
-    application_type
+    MIN(Application_Create_Date) AS first_application_date,
+    MAX(Application_Create_Date) AS latest_application_date,
 
-ORDER BY
-    distinct_applications DESC;
+    MIN(applicant_update_date) AS first_applicant_update,
+    MAX(applicant_update_date) AS latest_applicant_update
+
+FROM dbo.concurrent_ALL_NEW
+
+GROUP BY coverage_year
+
+ORDER BY coverage_year;
