@@ -1,45 +1,41 @@
-.\.venv\Scripts\python.exe main.py
-2026-11-05 06:38:30,785 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=False)
-2026-11-05 06:38:31,206 [INFO] sisense.auth: Saved session found; verifying
-2026-11-05 06:38:35,322 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-05 06:38:35,322 [INFO] sisense.auth: Saved session is expired or invalid; discarding it
-2026-11-05 06:38:38,972 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-05 06:38:38,977 [INFO] sisense.auth: Login form detected; credentials required
-Sisense password: 
-2026-11-05 06:38:45,339 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-05 06:38:47,799 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-05 06:38:47,799 [INFO] sisense.auth: Authentication successful
-2026-11-05 06:38:47,799 [INFO] sisense.auth: Sisense session verified
-2026-11-05 06:38:47,812 [INFO] sisense.auth: Session state saved to runtime\auth\sisense_state.json
-2026-11-05 06:38:47,812 [INFO] oe_trend_pipeline: [debug] Authenticated BrowserContext ready (reused saved state: False)
-2026-11-05 06:38:52,150 [INFO] sisense.diagnostics: [debug] Dashboard sent 37 JAQL POST(s); 1 finished and kept for inspection
-2026-11-05 06:38:52,175 [INFO] sisense.diagnostics: [debug] Inspected 1 dashboard JAQL POST(s); statuses: ['200']
-2026-11-05 06:38:52,175 [INFO] sisense.diagnostics: [debug] Header names on every HTTP 200 dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 06:38:52,176 [INFO] sisense.diagnostics: [debug] Cookie names sent on every HTTP 200 dashboard JAQL POST: ['XSRF-TOKEN', 'server.session']
-2026-11-05 06:38:52,176 [INFO] sisense.diagnostics: [debug] Header names seen on any dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug] Context cookies: 3 total
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug] Cookie domains: ['.candu.ai', 'gahixreports.getinsured.com']
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 2
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug]   server.session domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=False
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug]   XSRF-TOKEN domain=gahixreports.getinsured.com path=/ secure=True httpOnly=False sameSite=Lax session=False
-2026-11-05 06:38:52,181 [INFO] sisense.diagnostics: [debug]   not sent to JAQL: cdn-allocation domain=.candu.ai path=/ secure=True httpOnly=True sameSite=None session=True
-2026-11-05 06:38:52,205 [INFO] oe_trend_pipeline: Request metadata taken from observed dashboard JAQL request: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 06:38:52,205 [INFO] oe_trend_pipeline: CSRF header matches current BrowserContext cookie: True
-2026-11-05 06:39:06,120 [INFO] oe_trend_pipeline: Wave 1 discovery: 37 dashboard JAQL POST(s), 28 widget(s); VERIFIED 7, DISCOVERED 1, PENDING 6
-2026-11-05 06:39:06,126 [INFO] oe_trend_pipeline: Wave 1 discovery report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
-2026-11-05 06:39:06,150 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 7, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 4, PENDING 2
-2026-11-05 06:39:06,164 [INFO] oe_trend_pipeline: Passive proof: 37 dashboard JAQL POST(s) seen, 1 for the verified widget; parse PASS
-2026-11-05 06:39:06,198 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated EXTRACTED, applications_started EXTRACTED, submitted_applications EXTRACTED, new_enrolled EXTRACTED, active_enrolled EXTRACTED, passive_enrolled EXTRACTED
-2026-11-05 06:39:06,198 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-05 06:39:06,198 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-05 06:39:06,198 [INFO] sisense.client: Forwarding observed request metadata headers: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-05 06:39:06,535 [INFO] sisense.client: HTTP 200 (0.34 sec)
-2026-11-05 06:39:06,535 [INFO] sisense.client: Value cells: 2
-2026-11-05 06:39:06,535 [INFO] sisense.client: Duration: 0.34 sec
-2026-11-05 06:39:06,806 [INFO] oe_trend_pipeline: Current PY2027 value: 793512
-2026-11-05 06:39:06,806 [INFO] oe_trend_pipeline: Manual baseline: 791826
-2026-11-05 06:39:06,806 [INFO] oe_trend_pipeline: Difference: 793512 - 791826 = +1686
-2026-11-05 06:39:06,807 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 793512, "retrieved_at": "2026-11-05T11:39:06+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
+
+
+
+ .\.venv\Scripts\python.exe main.py
+2026-11-05 06:51:12,750 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=False)
+2026-11-05 06:51:13,220 [INFO] sisense.auth: Saved session found; verifying
+2026-11-05 06:51:19,443 [INFO] sisense.auth: Dashboard navigation landed on: dashboard
+2026-11-05 06:51:19,462 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-05 06:51:19,462 [INFO] sisense.auth: Sisense session verified (saved state)
+2026-11-05 06:51:19,462 [INFO] oe_trend_pipeline: [debug] Authenticated BrowserContext ready (reused saved state: True)
+2026-11-05 06:51:23,481 [INFO] sisense.diagnostics: [debug] Dashboard sent 37 JAQL POST(s); 1 finished and kept for inspection
+2026-11-05 06:51:23,498 [INFO] sisense.diagnostics: [debug] Inspected 1 dashboard JAQL POST(s); statuses: ['200']
+2026-11-05 06:51:23,498 [INFO] sisense.diagnostics: [debug] Header names on every HTTP 200 dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 06:51:23,498 [INFO] sisense.diagnostics: [debug] Cookie names sent on every HTTP 200 dashboard JAQL POST: ['XSRF-TOKEN', 'server.session']
+2026-11-05 06:51:23,498 [INFO] sisense.diagnostics: [debug] Header names seen on any dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 06:51:23,502 [INFO] sisense.diagnostics: [debug] Context cookies: 3 total
+2026-11-05 06:51:23,502 [INFO] sisense.diagnostics: [debug] Cookie domains: ['.candu.ai', 'gahixreports.getinsured.com']
+2026-11-05 06:51:23,502 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 2
+2026-11-05 06:51:23,502 [INFO] sisense.diagnostics: [debug]   server.session domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=False
+2026-11-05 06:51:23,502 [INFO] sisense.diagnostics: [debug]   XSRF-TOKEN domain=gahixreports.getinsured.com path=/ secure=True httpOnly=False sameSite=Lax session=False
+2026-11-05 06:51:23,503 [INFO] sisense.diagnostics: [debug]   not sent to JAQL: cdn-allocation domain=.candu.ai path=/ secure=True httpOnly=True sameSite=None session=True
+2026-11-05 06:51:23,520 [INFO] oe_trend_pipeline: Request metadata taken from observed dashboard JAQL request: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 06:51:23,520 [INFO] oe_trend_pipeline: CSRF header matches current BrowserContext cookie: True
+2026-11-05 06:51:35,910 [INFO] oe_trend_pipeline: Wave 1 discovery: 37 dashboard JAQL POST(s), 28 widget(s); VERIFIED 7, DISCOVERED 1, PENDING 6
+2026-11-05 06:51:35,918 [INFO] oe_trend_pipeline: Wave 1 discovery report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
+2026-11-05 06:51:35,933 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 7, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 4, PENDING 2
+2026-11-05 06:51:35,951 [INFO] oe_trend_pipeline: Passive proof: 37 dashboard JAQL POST(s) seen, 1 for the verified widget; parse PASS
+2026-11-05 06:51:35,982 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated EXTRACTED, applications_started EXTRACTED, submitted_applications EXTRACTED, new_enrolled EXTRACTED, active_enrolled EXTRACTED, passive_enrolled EXTRACTED
+2026-11-05 06:51:35,982 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-05 06:51:35,982 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-05 06:51:35,982 [INFO] sisense.client: Forwarding observed request metadata headers: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
+2026-11-05 06:51:36,247 [INFO] sisense.client: HTTP 200 (0.26 sec)
+2026-11-05 06:51:36,247 [INFO] sisense.client: Value cells: 2
+2026-11-05 06:51:36,247 [INFO] sisense.client: Duration: 0.26 sec
+2026-11-05 06:51:36,562 [INFO] oe_trend_pipeline: Current PY2027 value: 793512
+2026-11-05 06:51:36,562 [INFO] oe_trend_pipeline: Manual baseline: 791826
+2026-11-05 06:51:36,562 [INFO] oe_trend_pipeline: Difference: 793512 - 791826 = +1686
+2026-11-05 06:51:36,562 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 793512, "retrieved_at": "2026-11-05T11:51:36+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
 
 ============================================================
 Georgia Access — PY2027 Sisense Retrieval
@@ -52,7 +48,7 @@ Metric                Currently Enrolled People
 Coverage Year         2027
 Current Value         793,512
 Manual Baseline       791,826
-Retrieved             2026-11-05T11:39:06+00:00
+Retrieved             2026-11-05T11:51:36+00:00
 JAQL Status           PASS
 
 ============================================================
@@ -74,7 +70,7 @@ Difference: 0
 Passive Validation: PASS
 
 ============================================================
-2026-11-05 06:39:06,808 [INFO] oe_trend_pipeline: Passive Validation: PASS
+2026-11-05 06:51:36,563 [INFO] oe_trend_pipeline: Passive Validation: PASS
 
 Wave 1 discovery (developer review only — not used for snapshots or the executive report)
   VERIFIED    7
@@ -110,7 +106,7 @@ Wave 1 runtime validation (developer review only — not stored, not in the exec
   Report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\validation\wave1_runtime_validation.html
 
 ============================================================
-2026-11-05 06:39:06,815 [INFO] oe_trend_pipeline: Currently Enrolled control: PASS
+2026-11-05 06:51:36,571 [INFO] oe_trend_pipeline: Currently Enrolled control: PASS
 Currently Enrolled    793,512
 Snapshot              SKIPPED (DUPLICATE_SLOT: kept existing snapshot from Nov 05, 2026 11:01 UTC)
 Historical Snapshots  5
