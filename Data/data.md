@@ -1,62 +1,68 @@
 
 
 
-schema_name	object_name	type_desc	column_name
-dbo	834_Inbound_test	USER_TABLE	Coverage_Year
-dbo	concurrent_ALL	USER_TABLE	coverage_year
-dbo	concurrent_ALL_NEW	USER_TABLE	coverage_year
-dbo	Consolidated_Full_list	USER_TABLE	coverage_year
-dbo	Demographics_Premium	USER_TABLE	coverage_year
-dbo	DMIDetails	USER_TABLE	Coverage_Year
-dbo	Enrollments_AETNA	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_01312026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_02272026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_03312026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_04302026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_05302026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_05312026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_06312026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_07302026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_08302026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_09302026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_10312026	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_DEC31	USER_TABLE	coverage_year
-dbo	Enrollments_PY2526_NOV30	USER_TABLE	coverage_year
-dbo	Enrollments_TEST	USER_TABLE	coverage_year
-dbo	Enrollments_TEST_TEMP	USER_TABLE	coverage_year
-dbo	FPL_Dental_ALL	USER_TABLE	coverage_year
-dbo	FPL_Health_ALL	USER_TABLE	coverage_year
-dbo	FPL_PY2025_PY2026	USER_TABLE	coverage_year
-dbo	hh_brokers	USER_TABLE	coverage_year
-dbo	hh_demograohics_fraudanalysis	USER_TABLE	coverage_year
-dbo	hh_demographics	USER_TABLE	coverage_year
-dbo	HH_SSAP_AT2026	USER_TABLE	coverage_year
-dbo	inbound_automation	USER_TABLE	coverage_year
-dbo	inbound_automation	USER_TABLE	coverage_year_source
-dbo	monthly_discrepancy	USER_TABLE	Coverage_Year
-dbo	monthly_discrepancy_PY2025	USER_TABLE	Coverage_Year
-dbo	monthly_discrepancy_PY2026	USER_TABLE	Coverage_Year
-dbo	monthly_discrepancy_test	USER_TABLE	Coverage_Year
-dbo	PY2025_DUPSSN	USER_TABLE	coverage_year
-dbo	PY2025_Fraud_Analysis	USER_TABLE	coverage_year
-dbo	PY2026_Applicants_PAC	USER_TABLE	coverage_year
-dbo	PY2026_DUPSSN	USER_TABLE	coverage_year
-dbo	PY2026_DUPSSN_OCT	USER_TABLE	coverage_year
-dbo	PY2026_DUPSSN_OCT_MIS	USER_TABLE	coverage_year
-dbo	PY2026_DUPSSN_SEP	USER_TABLE	coverage_year
-dbo	PY2026_DUPSSN_TEST	USER_TABLE	coverage_year
-dbo	PY2026_Fraud_Analysis	USER_TABLE	coverage_year
-dbo	PY2026_PAC	USER_TABLE	coverage_year
-dbo	PY2026_PAC_E	USER_TABLE	coverage_year
-dbo	PY2026_PAC_S1	USER_TABLE	coverage_year
-dbo	PY2026_PAC_S2	USER_TABLE	coverage_year
-dbo	PY2026Applicants_with_tobacco_usage	USER_TABLE	coverage_year
-dbo	PY2026-Enrollments_All	USER_TABLE	coverage_year
-dbo	PY242526_enrollment_lastupdate_test	USER_TABLE	coverage_year
-dbo	PY24252627_Applicants_test	USER_TABLE	coverage_year
-dbo	PY2627_PAC_NEW	USER_TABLE	coverage_year
-dbo	PY2627_PAC_NEW2	USER_TABLE	coverage_year
-dbo	rcni_data_quality_issue	USER_TABLE	coverage_year
-dbo	rcni_file_log	USER_TABLE	coverage_year
-dbo	rcni_raw	USER_TABLE	coverage_year
-dbo	rcni_stage	USER_TABLE	coverage_year
+TABLE_SCHEMA	TABLE_NAME	COLUMN_NAME	DATA_TYPE	ORDINAL_POSITION
+dbo	PY24252627_Applicants_test	coverage_year	int	1
+dbo	PY24252627_Applicants_test	household_id	int	2
+dbo	PY24252627_Applicants_test	applicant_guid	int	3
+dbo	PY24252627_Applicants_test	ssn	varchar	4
+dbo	PY24252627_Applicants_test	birth_date	date	5
+dbo	PY24252627_Applicants_test	first_name	varchar	6
+dbo	PY24252627_Applicants_test	last_name	varchar	7
+dbo	PY24252627_Applicants_test	gender	varchar	8
+dbo	PY24252627_Applicants_test	age	int	9
+dbo	PY24252627_Applicants_test	MAX_id	bigint	10
+dbo	PY2627_PAC_NEW	coverage_year	int	1
+dbo	PY2627_PAC_NEW	houshold_id	int	2
+dbo	PY2627_PAC_NEW	ssap_application_id	int	3
+dbo	PY2627_PAC_NEW	enrollment_id	bigint	4
+dbo	PY2627_PAC_NEW	enrollment_status_description	varchar	5
+dbo	PY2627_PAC_NEW	exchg_indiv_identifier	bigint	6
+dbo	PY2627_PAC_NEW	first_name	varchar	7
+dbo	PY2627_PAC_NEW	last_name	varchar	8
+dbo	PY2627_PAC_NEW	fn	varchar	9
+dbo	PY2627_PAC_NEW	ln	varchar	10
+dbo	PY2627_PAC_NEW	age	int	11
+dbo	PY2627_PAC_NEW	person_type_description	varchar	12
+dbo	PY2627_PAC_NEW	enrollee_status_description	varchar	13
+dbo	PY2627_PAC_NEW	text_me	varchar	14
+dbo	PY2627_PAC_NEW	phone_number	varchar	15
+dbo	PY2627_PAC_NEW	prefer_contact_method_description	varchar	16
+dbo	PY2627_PAC_NEW	prefer_spoken_lang_description	varchar	17
+dbo	PY2627_PAC_NEW	email_address	varchar	18
+dbo	PY2627_PAC_NEW	hios_issuer_id	int	19
+dbo	PY2627_PAC_NEW	insurer_name	varchar	20
+dbo	PY2627_PAC_NEW	cms_plan_id	varchar	21
+dbo	PY2627_PAC_NEW	plan_name	varchar	22
+dbo	PY2627_PAC_NEW	plan_level_combined_bronze	varchar	23
+dbo	PY2627_PAC_NEW	benefit_effective_date	date	24
+dbo	PY2627_PAC_NEW	benefit_end_date	date	25
+dbo	PY2627_PAC_NEW	enrollee_effective_start_date	date	26
+dbo	PY2627_PAC_NEW	enrollee_effective_end_date	date	27
+dbo	PY2627_PAC_NEW2	coverage_year	int	1
+dbo	PY2627_PAC_NEW2	houshold_id	int	2
+dbo	PY2627_PAC_NEW2	ssap_application_id	int	3
+dbo	PY2627_PAC_NEW2	enrollment_id	bigint	4
+dbo	PY2627_PAC_NEW2	enrollment_status_description	varchar	5
+dbo	PY2627_PAC_NEW2	exchg_indiv_identifier	bigint	6
+dbo	PY2627_PAC_NEW2	first_name	varchar	7
+dbo	PY2627_PAC_NEW2	last_name	varchar	8
+dbo	PY2627_PAC_NEW2	fn	varchar	9
+dbo	PY2627_PAC_NEW2	ln	varchar	10
+dbo	PY2627_PAC_NEW2	age	int	11
+dbo	PY2627_PAC_NEW2	person_type_description	varchar	12
+dbo	PY2627_PAC_NEW2	enrollee_status_description	varchar	13
+dbo	PY2627_PAC_NEW2	text_me	bit	14
+dbo	PY2627_PAC_NEW2	phone_number	varchar	15
+dbo	PY2627_PAC_NEW2	prefer_contact_method_description	varchar	16
+dbo	PY2627_PAC_NEW2	prefer_spoken_lang_description	varchar	17
+dbo	PY2627_PAC_NEW2	email_address	varchar	18
+dbo	PY2627_PAC_NEW2	hios_issuer_id	int	19
+dbo	PY2627_PAC_NEW2	insurer_name	varchar	20
+dbo	PY2627_PAC_NEW2	cms_plan_id	varchar	21
+dbo	PY2627_PAC_NEW2	plan_name	varchar	22
+dbo	PY2627_PAC_NEW2	plan_level_combined_bronze	varchar	23
+dbo	PY2627_PAC_NEW2	benefit_effective_date	date	24
+dbo	PY2627_PAC_NEW2	benefit_end_date	date	25
+dbo	PY2627_PAC_NEW2	enrollee_effective_start_date	date	26
+dbo	PY2627_PAC_NEW2	enrollee_effective_end_date	date	27
