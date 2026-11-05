@@ -1,51 +1,69 @@
 
 
 
-/* ============================================================
-   DISCOVERY #4 — PY2027 Applicant Population
-   Goal: understand the 1.109M population and find the
-         relationship to Sisense Total Applicants = 830,512
-   ============================================================ */
 
 SELECT
-    coverage_year,
-
-    COUNT(*) AS total_rows,
-
-    COUNT(DISTINCT applicant_guid) AS distinct_applicants,
-
-    COUNT(DISTINCT household_id) AS distinct_households,
-
-    COUNT(DISTINCT MAX_id) AS distinct_max_ids,
-
-    COUNT(DISTINCT ssn) AS distinct_ssn,
-
-    SUM(CASE WHEN applicant_guid IS NULL THEN 1 ELSE 0 END)
-        AS null_applicant_guid,
-
-    SUM(CASE WHEN household_id IS NULL THEN 1 ELSE 0 END)
-        AS null_household_id,
-
-    SUM(CASE WHEN MAX_id IS NULL THEN 1 ELSE 0 END)
-        AS null_max_id
-
-FROM dbo.PY24252627_Applicants_test
-
-WHERE coverage_year = 2027
-
-GROUP BY coverage_year;
+    s.name AS schema_name,
+    t.name AS table_name,
+    c.name AS coverage_year_column
+FROM sys.tables t
+JOIN sys.schemas s
+    ON t.schema_id = s.schema_id
+JOIN sys.columns c
+    ON t.object_id = c.object_id
+WHERE LOWER(c.name) IN (
+    'coverage_year',
+    'coverageyear',
+    'plan_year',
+    'planyear'
+)
+ORDER BY s.name, t.name;
 
 
-====================
+========
 
-SELECT TOP 30
-    coverage_year,
-    household_id,
-    applicant_guid,
-    MAX_id,
-    first_name,
-    last_name,
-    age
-FROM dbo.PY24252627_Applicants_test
-WHERE coverage_year = 2027
-ORDER BY MAX_id, household_id, applicant_guid;
+
+
+/* Find candidate tables that contain fields relevant
+   to the Sisense OE Executive Dashboard */
+
+SELECT
+    s.name AS schema_name,
+    t.name AS table_name,
+
+    SUM(CASE WHEN LOWER(c.name) LIKE '%applicat%' THEN 1 ELSE 0 END)
+        AS application_fields,
+
+    SUM(CASE WHEN LOWER(c.name) LIKE '%enroll%' THEN 1 ELSE 0 END)
+        AS enrollment_fields,
+
+    SUM(CASE WHEN LOWER(c.name) LIKE '%status%' THEN 1 ELSE 0 END)
+        AS status_fields,
+
+    SUM(CASE WHEN LOWER(c.name) LIKE '%submit%' THEN 1 ELSE 0 END)
+        AS submitted_fields,
+
+    SUM(CASE WHEN LOWER(c.name) LIKE '%created%'
+              OR LOWER(c.name) LIKE '%date%'
+              OR LOWER(c.name) LIKE '%time%'
+        THEN 1 ELSE 0 END)
+        AS date_fields
+
+FROM sys.tables t
+JOIN sys.schemas s
+    ON t.schema_id = s.schema_id
+JOIN sys.columns c
+    ON t.object_id = c.object_id
+
+GROUP BY
+    s.name,
+    t.name
+
+HAVING
+       SUM(CASE WHEN LOWER(c.name) LIKE '%applicat%' THEN 1 ELSE 0 END) > 0
+    OR SUM(CASE WHEN LOWER(c.name) LIKE '%enroll%' THEN 1 ELSE 0 END) > 0
+
+ORDER BY
+    application_fields DESC,
+    enrollment_fields DESC,
+    status_fields DESC;
