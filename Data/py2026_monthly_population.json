@@ -1,0 +1,1345 @@
+{
+  "report_kind": "PY2026_MONTHLY_POPULATION",
+  "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+  "lifecycle_equivalent": false,
+  "py2026_equivalent_lifecycle_date": "2025-11-08",
+  "alignment_note": "PY2026 snapshot dates are filename-inferred historical points. They are not lifecycle-aligned with the current PY2027 Currently Enrolled People observation. Do not read snapshot-to-current differences as year-over-year change.",
+  "dataset_snapshot_population": [
+    {
+      "snapshot_date": "2026-01-31",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_01312026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1314678,
+      "enrolled_people": 1251653,
+      "pending_people": 77127,
+      "cancelled_people": 23015,
+      "terminated_people": 477,
+      "other_people": 2039,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 521
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1518
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 23015,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 77127,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 521,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1251653,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1518,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 477,
+          "category": "TERMINATED"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 23318,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 77051,
+          "category": "PENDING"
+        },
+        {
+          "status_value": null,
+          "people_count": 1,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 521,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1250302,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1518,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 1945,
+          "category": "TERMINATED"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 38261,
+        "people_with_multiple_enrollee_statuses": 38593,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-02-27",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_02272026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1264829,
+      "enrolled_people": 1191744,
+      "pending_people": 40224,
+      "cancelled_people": 5584,
+      "terminated_people": 69896,
+      "other_people": 3865,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 624
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 3241
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 5584,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 40224,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 624,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1191744,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 69896,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 3241,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 6082,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 40129,
+          "category": "PENDING"
+        },
+        {
+          "status_value": null,
+          "people_count": 1,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 624,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1187829,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 74210,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 3241,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 1,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 41487,
+        "people_with_multiple_enrollee_statuses": 42272,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-03-31",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_03312026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1257468,
+      "enrolled_people": 1147720,
+      "pending_people": 30680,
+      "cancelled_people": 489063,
+      "terminated_people": 192511,
+      "other_people": 5282,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 416
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 4866
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 489063,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 30680,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 416,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1147720,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 192511,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 4866,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 489915,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 30668,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 418,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 1142166,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 198082,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 4866,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 12,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 552914,
+        "people_with_multiple_enrollee_statuses": 553317,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-04-30",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_04302026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1268228,
+      "enrolled_people": 944469,
+      "pending_people": 21516,
+      "cancelled_people": 499113,
+      "terminated_people": 425855,
+      "other_people": 6510,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 467
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 6043
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 499113,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 21516,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 467,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 944469,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 425855,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 6043,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 500114,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 21480,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 467,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 938043,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 432416,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 6043,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 12,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 566062,
+        "people_with_multiple_enrollee_statuses": 566573,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-05-30",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_05302026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1295031,
+      "enrolled_people": 912582,
+      "pending_people": 17070,
+      "cancelled_people": 511686,
+      "terminated_people": 506585,
+      "other_people": 8087,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 293
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 7794
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 511686,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 17070,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 293,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 912582,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 506585,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 7794,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 512905,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 17024,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 293,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 900104,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 518558,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 7794,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 24,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 585116,
+        "people_with_multiple_enrollee_statuses": 585527,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-05-31",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_05312026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 0,
+      "enrolled_people": 0,
+      "pending_people": 0,
+      "cancelled_people": 0,
+      "terminated_people": 0,
+      "other_people": 0,
+      "unknown_status_values": [],
+      "enrollment_status_values": [],
+      "enrollee_status_values": [],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 0,
+        "people_with_multiple_enrollee_statuses": 0,
+        "status_counts_additive": true,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-07-30",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_07302026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1308455,
+      "enrolled_people": 910091,
+      "pending_people": 16400,
+      "cancelled_people": 516978,
+      "terminated_people": 530367,
+      "other_people": 8853,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 230
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 8623
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 516978,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 16400,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 230,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 910091,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 530367,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 8623,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 518314,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 16351,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 230,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 897378,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 542431,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 8623,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 25,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 594076,
+        "people_with_multiple_enrollee_statuses": 594545,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-08-30",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_08302026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1298829,
+      "enrolled_people": 888718,
+      "pending_people": 14872,
+      "cancelled_people": 521968,
+      "terminated_people": 548283,
+      "other_people": 9472,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 240
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 9232
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 521968,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 14872,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 240,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 888718,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 548283,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 9232,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 523408,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 14840,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 240,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 875813,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 560488,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 9232,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 26,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 601135,
+        "people_with_multiple_enrollee_statuses": 601688,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-09-30",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_09302026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1592976,
+      "enrolled_people": 886565,
+      "pending_people": 16135,
+      "cancelled_people": 794594,
+      "terminated_people": 581211,
+      "other_people": 17202,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 1121
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 16081
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 794594,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 16135,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 1121,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 886565,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 581211,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 16081,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 798617,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 16057,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 1121,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 869699,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 593548,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 16081,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 30,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 617477,
+        "people_with_multiple_enrollee_statuses": 617016,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    },
+    {
+      "snapshot_date": "2026-10-31",
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "source_table": "Enrollments_PY2526_10312026",
+      "schema_name": "dbo",
+      "duplicate_inferred_date": false,
+      "total_people": 1320502,
+      "enrolled_people": 871095,
+      "pending_people": 11322,
+      "cancelled_people": 529245,
+      "terminated_people": 596598,
+      "other_people": 10498,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 193
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 10305
+        }
+      ],
+      "enrollment_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 529245,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 11322,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 193,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 871095,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 596598,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 10305,
+          "category": "OTHER"
+        }
+      ],
+      "enrollee_status_values": [
+        {
+          "status_value": "Cancelled",
+          "people_count": 530883,
+          "category": "CANCELLED"
+        },
+        {
+          "status_value": "Pending",
+          "people_count": 11251,
+          "category": "PENDING"
+        },
+        {
+          "status_value": "Pend",
+          "people_count": 193,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Enrolled",
+          "people_count": 856553,
+          "category": "ENROLLED"
+        },
+        {
+          "status_value": "Terminated",
+          "people_count": 609857,
+          "category": "TERMINATED"
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 10305,
+          "category": "OTHER"
+        },
+        {
+          "status_value": "Aborted",
+          "people_count": 27,
+          "category": "OTHER"
+        }
+      ],
+      "status_overlap": {
+        "people_with_multiple_enrollment_statuses": 612931,
+        "people_with_multiple_enrollee_statuses": 613383,
+        "status_counts_additive": false,
+        "note": "Status category counts are not automatically additive. A person may appear under more than one status in the same snapshot."
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "person_identity_status": "PERSON_IDENTIFIER_EQUIVALENCE_UNPROVEN",
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "status": "NOT_APPLIED_COLUMN_UNAVAILABLE",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "filter_notes": [
+        "Plan year",
+        "Benefit effective date",
+        "Person type: NOT_APPLIED_COLUMN_UNAVAILABLE",
+        "Insurance type: NOT_APPLIED_COLUMN_UNAVAILABLE"
+      ]
+    }
+  ],
+  "dataset_monthly_enrollment_activity": [
+    {
+      "activity_month": "2025-10",
+      "newly_confirmed_people": 1007287,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2025-11",
+      "newly_confirmed_people": 35085,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2025-12",
+      "newly_confirmed_people": 86263,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-01",
+      "newly_confirmed_people": 71088,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-02",
+      "newly_confirmed_people": 18406,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-03",
+      "newly_confirmed_people": 13975,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-04",
+      "newly_confirmed_people": 13734,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-05",
+      "newly_confirmed_people": 13719,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-06",
+      "newly_confirmed_people": 12541,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-07",
+      "newly_confirmed_people": 11737,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-08",
+      "newly_confirmed_people": 12058,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-09",
+      "newly_confirmed_people": 10500,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-10",
+      "newly_confirmed_people": 9906,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    },
+    {
+      "activity_month": "2026-11",
+      "newly_confirmed_people": 505,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "date_field": "enrollment_confirmation_date",
+      "definition": "MONTHLY_ENROLLMENT_ACTIVITY"
+    }
+  ],
+  "activity_source": {
+    "schema_name": "dbo",
+    "table": "Enrollments_PY2526_10312026",
+    "snapshot_date": "2026-10-31",
+    "definition": "COUNT DISTINCT people whose MIN(enrollment_confirmation_date) falls in the calendar month, after the same base population filters. This is not snapshot population."
+  },
+  "dataset_py2027_current_reference": {
+    "plan_year": 2027,
+    "observation_date": "2026-11-08",
+    "currently_enrolled_people": 797301,
+    "source": "metric_snapshots.retrieved_at_utc",
+    "metric_definition": "Count(enrollee.exchg_indiv_identifier)",
+    "label": "PY2027_CURRENT_REFERENCE",
+    "retrieved_at_utc": "2026-11-08T19:04:58Z",
+    "metric_id": "currently_enrolled_people"
+  },
+  "py2026_latest_snapshot_summary": {
+    "selected": "Enrollments_PY2526_10312026",
+    "snapshot_date": "2026-10-31",
+    "total_people": 1320502,
+    "enrolled_people": 871095,
+    "pending_people": 11322,
+    "cancelled_people": 529245,
+    "terminated_people": 596598,
+    "other_people": 10498,
+    "historical_minimum_total": {
+      "total_people": 0,
+      "snapshot_date": "2026-05-31",
+      "source_table": "Enrollments_PY2526_05312026"
+    },
+    "historical_maximum_total": {
+      "total_people": 1592976,
+      "snapshot_date": "2026-09-30",
+      "source_table": "Enrollments_PY2526_09302026"
+    },
+    "reason": "Latest unique FILENAME_INFERRED_SNAPSHOT_DATE with a successful total."
+  },
+  "py2027_cancelled_metric_status": "NOT_VERIFIED",
+  "py2027_terminated_metric_status": "NOT_VERIFIED",
+  "undated_objects": [
+    {
+      "schema_name": "dbo",
+      "table": "Enrollments_PY2526_06312026",
+      "table_type": "BASE TABLE",
+      "inferred_filename_date": null,
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE"
+    },
+    {
+      "schema_name": "dbo",
+      "table": "Enrollments_PY2526_DEC31",
+      "table_type": "BASE TABLE",
+      "inferred_filename_date": null,
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE"
+    },
+    {
+      "schema_name": "dbo",
+      "table": "Enrollments_PY2526_NOV30",
+      "table_type": "BASE TABLE",
+      "inferred_filename_date": null,
+      "snapshot_date_evidence": "FILENAME_INFERRED_SNAPSHOT_DATE"
+    }
+  ],
+  "failures": [
+    {
+      "step": "undated",
+      "table": "Enrollments_PY2526_06312026",
+      "error": "No inferred filename date"
+    },
+    {
+      "step": "undated",
+      "table": "Enrollments_PY2526_DEC31",
+      "error": "No inferred filename date"
+    },
+    {
+      "step": "undated",
+      "table": "Enrollments_PY2526_NOV30",
+      "error": "No inferred filename date"
+    }
+  ],
+  "assumptions": [
+    "Filename dates are FILENAME_INFERRED_SNAPSHOT_DATE, not proven as-of dates.",
+    "Status categories map only Enrolled, Pending, Cancelled/Canceled, and Terminated. Other labels stay OTHER.",
+    "Status counts are DISTINCT people per label and are not automatically additive.",
+    "MONTHLY_ENROLLMENT_ACTIVITY uses MIN(enrollment_confirmation_date) per person. It is not snapshot population.",
+    "PY2027 Cancelled and Terminated remain NOT_VERIFIED. No JAQL was sent for them.",
+    "COUNT(*) and enrollment_id were not used for the people series."
+  ]
+}
