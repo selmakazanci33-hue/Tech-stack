@@ -1,0 +1,823 @@
+{
+  "report_kind": "LATEST_STATE_DIAGNOSTIC",
+  "concepts_preserved": [
+    "SNAPSHOT POPULATION",
+    "MONTHLY ENROLLMENT ACTIVITY",
+    "LATEST STATE POPULATION"
+  ],
+  "lifecycle_equivalent": false,
+  "py2026_equivalent_lifecycle_date": "2025-11-08",
+  "date_evidence": [
+    {
+      "table": "Enrollments_PY2526_NOV30",
+      "schema_name": "dbo",
+      "token": "NOV30",
+      "filename_status": "MONTH_DAY_TOKEN",
+      "semantic_status": "SEMANTICALLY_SUPPORTED_SNAPSHOT_DATE",
+      "snapshot_date": "2025-11-30",
+      "matching_fields": [
+        {
+          "field": "enrollment_confirmation_date",
+          "max_date": "2025-11-30"
+        }
+      ],
+      "reason": "MAX(enrollment_confirmation_date) is 2025-11-30, which matches the NOV30 month-day. The year comes from that timestamp, not from PY2526.",
+      "coverage_year_distribution": {
+        "rows_2025": 2884268,
+        "rows_2026": 1560860,
+        "people_2025": 1862039,
+        "people_2026": 1265392
+      },
+      "extrema": {
+        "min_enrollment_last_update_date": "2024-10-22",
+        "max_enrollment_last_update_date": "2025-12-01",
+        "min_enrollment_confirmation_date": "2024-10-22",
+        "max_enrollment_confirmation_date": "2025-11-30",
+        "min_benefit_effective_date": "2025-01-01",
+        "max_benefit_effective_date": "2026-01-01",
+        "min_benefit_end_date": "2025-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "status_columns": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_DEC31",
+      "schema_name": "dbo",
+      "token": "DEC31",
+      "filename_status": "MONTH_DAY_TOKEN",
+      "semantic_status": "UNRESOLVED_SNAPSHOT_DATE",
+      "snapshot_date": null,
+      "matching_fields": [],
+      "reason": "No last-update, create, or confirmation max matches the token month-day.",
+      "coverage_year_distribution": {
+        "rows_2025": 2884143,
+        "rows_2026": 1958568,
+        "people_2025": 1861694,
+        "people_2026": 1315065
+      },
+      "extrema": {
+        "min_enrollment_last_update_date": "2024-10-22",
+        "max_enrollment_last_update_date": "2026-01-01",
+        "min_enrollment_create_date": "2024-10-22",
+        "max_enrollment_create_date": "2026-01-01",
+        "min_enrollment_confirmation_date": "2024-10-22",
+        "max_enrollment_confirmation_date": "2026-01-01",
+        "min_benefit_effective_date": "2025-01-01",
+        "max_benefit_effective_date": "2026-02-01",
+        "min_benefit_end_date": "2025-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "status_columns": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ]
+    }
+  ],
+  "invalid_filename_dates": [
+    {
+      "table": "Enrollments_PY2526_06312026",
+      "filename_status": "INVALID_FILENAME_DATE",
+      "invalid_suffix": "06312026",
+      "inferred_date": null,
+      "month_day": null,
+      "reason": "06312026 is not a valid calendar date.",
+      "schema_name": "dbo",
+      "table_type": "BASE TABLE"
+    }
+  ],
+  "latest_state_population": [
+    {
+      "table": "Enrollments_PY2526_NOV30",
+      "schema_name": "dbo",
+      "date_status": "SEMANTICALLY_SUPPORTED_SNAPSHOT_DATE",
+      "snapshot_date": "2025-11-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2025-11-30",
+        "distance_days": 22,
+        "distance_days_absolute": 22,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1265392,
+      "enrolled_people": 1135151,
+      "pending_people": 128524,
+      "cancelled_people": 1717,
+      "terminated_people": 0,
+      "other_people": 0,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_DEC31",
+      "schema_name": "dbo",
+      "date_status": "UNRESOLVED_SNAPSHOT_DATE",
+      "snapshot_date": null,
+      "lifecycle_proximity": null,
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1315065,
+      "enrolled_people": 1144574,
+      "pending_people": 165665,
+      "cancelled_people": 3794,
+      "terminated_people": 1032,
+      "other_people": 0,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_01312026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-01-31",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-01-31",
+        "distance_days": 84,
+        "distance_days_absolute": 84,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1314678,
+      "enrolled_people": 1245612,
+      "pending_people": 65584,
+      "cancelled_people": 2415,
+      "terminated_people": 403,
+      "other_people": 664,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 518
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 146
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_02272026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-02-27",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-02-27",
+        "distance_days": 111,
+        "distance_days_absolute": 111,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1264829,
+      "enrolled_people": 1188678,
+      "pending_people": 35996,
+      "cancelled_people": 1135,
+      "terminated_people": 37974,
+      "other_people": 1046,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 620
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 426
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_03312026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-03-31",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-03-31",
+        "distance_days": 143,
+        "distance_days_absolute": 143,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1257468,
+      "enrolled_people": 1112030,
+      "pending_people": 27530,
+      "cancelled_people": 34023,
+      "terminated_people": 82719,
+      "other_people": 1166,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 404
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 762
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_04302026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-04-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-04-30",
+        "distance_days": 173,
+        "distance_days_absolute": 173,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1268228,
+      "enrolled_people": 888708,
+      "pending_people": 18746,
+      "cancelled_people": 33788,
+      "terminated_people": 325777,
+      "other_people": 1209,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 401
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 808
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_05302026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-05-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-05-30",
+        "distance_days": 203,
+        "distance_days_absolute": 203,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1295031,
+      "enrolled_people": 857195,
+      "pending_people": 15413,
+      "cancelled_people": 37708,
+      "terminated_people": 383056,
+      "other_people": 1659,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 277
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1382
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_05312026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-05-31",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-05-31",
+        "distance_days": 204,
+        "distance_days_absolute": 204,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 0,
+      "enrolled_people": 0,
+      "pending_people": 0,
+      "cancelled_people": 0,
+      "terminated_people": 0,
+      "other_people": 0,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_07302026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-07-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-07-30",
+        "distance_days": 264,
+        "distance_days_absolute": 264,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1308455,
+      "enrolled_people": 853710,
+      "pending_people": 14792,
+      "cancelled_people": 39595,
+      "terminated_people": 398600,
+      "other_people": 1758,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 217
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1541
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_08302026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-08-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-08-30",
+        "distance_days": 295,
+        "distance_days_absolute": 295,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1298829,
+      "enrolled_people": 831370,
+      "pending_people": 13330,
+      "cancelled_people": 40863,
+      "terminated_people": 411414,
+      "other_people": 1852,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 225
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1627
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_09302026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-09-30",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-09-30",
+        "distance_days": 326,
+        "distance_days_absolute": 326,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1592976,
+      "enrolled_people": 827013,
+      "pending_people": 14421,
+      "cancelled_people": 304352,
+      "terminated_people": 438625,
+      "other_people": 8565,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 1089
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 7476
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    },
+    {
+      "table": "Enrollments_PY2526_10312026",
+      "schema_name": "dbo",
+      "date_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+      "snapshot_date": "2026-10-31",
+      "lifecycle_proximity": {
+        "lifecycle_target": "2025-11-08",
+        "snapshot_date": "2026-10-31",
+        "distance_days": 357,
+        "distance_days_absolute": 357,
+        "position": "after"
+      },
+      "person_identifier": "ENROLLEE_ID_PROXY",
+      "ordering": {
+        "primary": "enrollment_last_update_date",
+        "tiebreakers": [
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "precedence": [
+          "enrollment_last_update_date",
+          "enrollment_create_date",
+          "enrollment_id"
+        ],
+        "reason": "ROW_NUMBER per person ordered by enrollment_last_update_date DESC, enrollment_create_date DESC, enrollment_id DESC. Nulls sort last. enrollment_id is a tiebreaker only."
+      },
+      "filters_applied": [
+        "Plan year",
+        "Benefit effective date"
+      ],
+      "filters_unavailable": [
+        {
+          "sisense_concept": "Person type",
+          "reason": "person_type_description is not on the selected snapshot."
+        },
+        {
+          "sisense_concept": "Insurance type",
+          "reason": "insurance_type_description is not on the selected snapshot."
+        }
+      ],
+      "latest_state_status": "LATEST_STATE_DIAGNOSTIC",
+      "latest_state_total_people": 1320502,
+      "enrolled_people": 814195,
+      "pending_people": 9868,
+      "cancelled_people": 41576,
+      "terminated_people": 452834,
+      "other_people": 2029,
+      "reconciles": true,
+      "discrepancy": 0,
+      "unknown_status_values": [
+        {
+          "status_value": "Pend",
+          "people_count": 181
+        },
+        {
+          "status_value": "Pend canceled",
+          "people_count": 1848
+        }
+      ],
+      "status_column": "enrollment_status_description",
+      "reason": "One latest qualifying row per person."
+    }
+  ],
+  "dataset_py2027_current_reference": {
+    "plan_year": 2027,
+    "observation_date": "2026-11-08",
+    "currently_enrolled_people": 797301,
+    "source": "metric_snapshots.retrieved_at_utc",
+    "metric_definition": "Count(enrollee.exchg_indiv_identifier)",
+    "label": "PY2027_CURRENT_REFERENCE",
+    "retrieved_at_utc": "2026-11-08T19:04:58Z",
+    "metric_id": "currently_enrolled_people"
+  },
+  "failures": [],
+  "assumptions": [
+    "This is LATEST_STATE_POPULATION. It does not replace Phase 4D snapshot-population counts.",
+    "NOV30/DEC31 dates are SEMANTICALLY_SUPPORTED only when a timestamp max matches that month-day.",
+    "The year of a semantic date comes from the matching timestamp, not from PY2526.",
+    "06312026 is INVALID_FILENAME_DATE and is not a June snapshot.",
+    "Latest state uses one row per person. Category counts should reconcile to total people.",
+    "PY2027 Cancelled and Terminated are not produced here."
+  ]
+}
