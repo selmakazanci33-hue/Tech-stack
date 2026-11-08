@@ -2,58 +2,33 @@
 
 
 
-{"datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"metadata":[{"jaql":{"table":"enrollment","column":"benefit_end_date","dim":"[enrollment.benefit_end_date (Calendar)]","datatype":"datetime","columnTitle":"benefit_end_date","tableTitle":"enrollment","merged":true,"level":"months","title":"Months in benefit_end_date"},"instanceid":"CD659-BDAD-98","panel":"measures","hierarchies":["calendar"],"format":{"mask":{"years":"yyyy","quarters":"yyyy Q","months":"MM/yyyy","weeks":"ww yyyy","days":"shortDate","minutes":"HH:mm","seconds":"MM/dd/yyyy HH:mm:ss","dateAndTime":"MM/dd/yyyy HH:mm","isdefault":true}}},{"jaql":{"table":"enrollment","column":"id","dim":"[enrollment.id]","datatype":"numeric","columnTitle":"id","tableTitle":"enrollment","merged":true,"title":"Count","agg":"count"},"instanceid":"907D0-F089-33","panel":"measures","format":{"mask":{"abbreviations":{"t":false,"b":false,"m":false,"k":false},"decimals":"auto","number":{"separated":true},"abbreviateAll":false},"color":{"color":"#03738C","colorIndex":0,"type":"color"}}},{"jaql":{"table":"enrollment","column":"enrollment_status_description","dim":"[enrollment.enrollment_status_description]","datatype":"text","columnTitle":"enrollment_status_description","tableTitle":"enrollment","merged":true,"isPrimary":false,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","title":"enrollment_status_description","collapsed":true,"filter":{"explicit":true,"multiSelection":true,"members":["Terminated"]}},"instanceid":"F4F27-C806-CA","panel":"scope"},{"jaql":{"table":"enrollment","column":"benefit_end_date","dim":"[enrollment.benefit_end_date (Calendar)]","datatype":"datetime","columnTitle":"benefit_end_date","tableTitle":"enrollment","merged":true,"level":"days","title":"Months in benefit_end_date","datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"firstday":"mon","locale":"en-us","collapsed":true,"filter":{"from":"2026-11-01","to":"2028-01-01","multiSelection":true}},"instanceid":"65C91-DFB3-D4","panel":"scope","format":{"mask":{"years":"yyyy","quarters":"yyyy Q","months":"MM/yyyy","weeks":"ww yyyy","days":"shortDate","minutes":"HH:mm","seconds":"MM/dd/yyyy HH:mm:ss","dateAndTime":"MM/dd/yyyy HH:mm","isdefault":true}},"title":"Months in benefit_end_date"},{"jaql":{"table":"ssap_applications","column":"coverage_year","dim":"[ssap_applications.coverage_year]","datatype":"numeric","datasource":{"address":"LocalHost","title":"MAIN","id":"localhost_aMAIN","database":"aMAIN","fullname":"localhost/MAIN","live":false},"firstday":"mon","locale":"en-us","title":"coverage_year","collapsed":true,"isDashboardFilter":true,"columnTitle":"coverage_year","tableTitle":"ssap_applications","filter":{"explicit":true,"multiSelection":true,"members":["2027"]}},"disabled":falShow more
+{"datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"metadata":[{"jaql":{"type":"measure","formula":"([48C99-5C0])","context":{"[48C99-5C0]":{"table":"enrollment","column":"id","dim":"[enrollment.id]","datatype":"numeric","title":"# of unique id","merged":true,"agg":"count"}},"columnTitle":"([# of unique id])","title":"Agent Assisted Enrollments"},"instanceid":"C795D-A70B-86","format":{"mask":{"type":"number","abbreviations":{"t":true,"b":true,"m":true,"k":false},"separated":true,"decimals":"auto","abbreviateAll":false,"isdefault":true},"color":{"color":"#03738C","colorIndex":0,"type":"color"}},"source":"value"},{"jaql":{"table":"enrollment","column":"broker_role","dim":"[enrollment.broker_role]","datatype":"text","title":"broker_role","merged":true,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","collapsed":true,"filter":{"explicit":true,"multiSelection":true,"members":["AGENT"]}},"instanceid":"43C8D-E747-46","panel":"scope"},{"jaql":{"table":"brokers","column":"broker_name","dim":"[brokers.broker_name]","datatype":"text","title":"Agent Name (Designations/Certs)","merged":true,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","collapsed":true,"filter":{"explicit":false,"multiSelection":true,"all":true}},"instanceid":"6B2A8-68B2-11","panel":"scope"},{"jaql":{"table":"brokers","column":"npn","dim":"[brokers.npn]","datatype":"text","title":"NPN (Designations/Certs)","merged":true,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","collapsed":true,"filter":{"explicit":false,"multiSelection":true,"all":true}},"instanceid":"01231-F161-D6","panel":"scope"},{"jaql":{"table":"enrollment","column":"agent_broker_name","dim":"[enrollment.agent_broker_name]","datatype":"text","title":"Agent Name (Enrollments)","merged":true,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","collapsed":true,"filter":{"explicit":false,"multiSelection":true,"all":true}},"instanceid":"EA474-6336-91","panel":"scope"},{"jaql":{"table":"enrollment","column":"enrollment_status_description","dim":"[enrollment.enrollment_status_description]","datatype":"text","title":"Enrollment Status","merged":true,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","collapsed":true,"filter":{"explicit":true,"multiSelection":true,"members":["Enrolled","Pending","Terminated"],"filter":{"turnedOff":true,"exclude":{"members":["Terminated"]}}}},"instanceid":"3D068-Show more
+
 
 {
     "headers": [
-        "Months in benefit_end_date",
-        "Count"
+        "Agent Assisted Enrollments"
     ],
     "metadata": [
         {
             "jaql": {
-                "datatype": "datetime",
-                "level": "months",
-                "column": "benefit_end_date",
-                "merged": true,
-                "dim": "[enrollment.benefit_end_date (Calendar)]",
-                "title": "Months in benefit_end_date",
-                "columnTitle": "benefit_end_date",
-                "table": "enrollment",
-                "tableTitle": "enrollment"
+                "context": {
+                    "[48C99-5C0]": {
+                        "agg": "count",
+                        "datatype": "numeric",
+                        "column": "id",
+                        "merged": true,
+                        "dim": "[enrollment.id]",
+                        "title": "# of unique id",
+                        "table": "enrollment"
+                    }
+                },
+                "formula": "([48C99-5C0])",
+                "type": "measure",
+                "title": "Agent Assisted Enrollments",
+                "columnTitle": "([# of unique id])"
             },
-            "instanceid": "CD659-BDAD-98",
-            "hierarchies": [
-                "calendar"
-            ],
-            "format": {
-                "mask": {
-                    "seconds": "MM/dd/yyyy HH:mm:ss",
-                    "months": "MM/yyyy",
-                    "weeks": "ww yyyy",
-                    "dateAndTime": "MM/dd/yyyy HH:mm",
-                    "minutes": "HH:mm",
-                    "quarters": "yyyy Q",
-                    "days": "shortDate",
-                    "isdefault": true,
-                    "years": "yyyy"
-                }
-            },
-            "panel": "measures"
-        },
-        {
-            "jaql": {
-                "agg": "count",
-                "datatype": "numeric",
-                "column": "id",
-                "merged": true,
-                "dim": "[enrollment.id]",
-                "title": "Count",
-                "columnTitle": "id",
-                "table": "enrollment",
-                "tableTitle": "enrollment"
-            },
-            "instanceid": "907D0-F089-33",
+            "instanceid": "C795D-A70B-86",
             "format": {
                 "color": {
                     "color": "#03738C",
@@ -61,20 +36,20 @@
                     "type": "color"
                 },
                 "mask": {
-                    "number": {
-                        "separated": true
-                    },
                     "decimals": "auto",
+                    "separated": true,
+                    "isdefault": true,
+                    "type": "number",
                     "abbreviateAll": false,
                     "abbreviations": {
-                        "b": false,
-                        "t": false,
+                        "b": true,
+                        "t": true,
                         "k": false,
-                        "m": false
+                        "m": true
                     }
                 }
             },
-            "panel": "measures"
+            "source": "value"
         }
     ],
     "datasource": {
@@ -83,7 +58,7 @@
     },
     "processingInfo": {
         "cacheType": "none",
-        "cacheTime": "2026-11-08T21:32:38.411Z"
+        "cacheTime": "2026-11-08T21:32:38.615Z"
     },
     "translationInfo": {
         "translationServiceProvider": "NewTranslationService",
@@ -91,8 +66,13 @@
         "isQueryFallback": false,
         "isAeMode": false,
         "translationStrategy": "NEW_THEN_OLD",
-        "translationDuration": 0.001,
-        "sqlFromCache": true
+        "translationDuration": 0.229,
+        "sqlFromCache": false
     },
-    "values": []
+    "values": [
+        {
+            "data": 38255,
+            "text": "38255"
+        }
+    ]
 }
