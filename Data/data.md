@@ -1,3 +1,3 @@
-ci\Downloads\project\oe_trend_pipeline_automation> .\.venv\Scripts\python.exe -m database.check_connection
-Database connection: FAILED
-('HY000', '[HY000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server "georgiaaccess.ga.gov" requested by the login.  The login failed. (40532) (SQLDriverConnect); [HY000] [Microsoft][ODBC Driver 17 for SQL Server]Invalid connection string attribute (0); [HY000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Cannot open server "georgiaaccess.ga.gov" requested by the login.  The login failed. (40532); [HY000] [Microsoft][ODBC Driver 17 for SQL Server]Invalid connection string attribute (0)')
+
+
+.\.venv\Scripts\python.exe -m database.discovery.enrollment_source
