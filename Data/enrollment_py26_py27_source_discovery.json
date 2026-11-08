@@ -1,0 +1,986 @@
+{
+  "application_type_profile": [],
+  "confirmation_month_profile": {
+    "enrollment_first": [],
+    "meaning": "Calendar year and month of enrollment_confirmation_date. Not a production month definition and not Month 1.",
+    "person_first": [],
+    "row_level": []
+  },
+  "excluded_inbound_objects": [
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "834_Inbound_test",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "inbound_automation",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "rcni_data_quality_issue",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "rcni_file_log",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "rcni_raw",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "834/inbound name; rows were not read",
+      "schema_name": "dbo",
+      "table_name": "rcni_stage",
+      "table_type": "BASE TABLE"
+    }
+  ],
+  "failures": [],
+  "issuer_profile": [],
+  "not_probed": [
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_fpl",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_fpl_with_income",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_fpl_with_income_new",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_fpl_with_income_new2",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_premium",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "arpa_household_premium_new",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "application_type"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "AT_external_applications",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "CarrierInvoice",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "CarrierInvoice_All_test",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "CarrierInvoice_test",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "concurrent_GI",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "concurrent_GI_1",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "concurrent_GI_2",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "DMIDetails",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Enrollee_Premium",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Enrollee_Premium_Summary",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Enrollment_Enrollee_Premium",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Enrollment_Premium",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id",
+        "enrollment_status_description"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Enrollments_Agent",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "hh_brokers",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "application_type",
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "HH_SSAP_AT2026",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "monthly_discrepancy",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "monthly_discrepancy_PY2025",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "monthly_discrepancy_PY2026",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "monthly_discrepancy_test",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "PY2026_Applicants_PAC",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollment_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "PY2026_Medical_Prescription_PAC",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "enrollee_id"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "PY2026_Relationship_Category",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "PY2026Applicants_with_tobacco_usage",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "PY24252627_Applicants_test",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "enrollee_status_description",
+        "enrollment_create_date",
+        "enrollment_id",
+        "enrollment_status_description"
+      ],
+      "reason": "missing coverage_year or both enrollment_id and enrollee_id",
+      "schema_name": "dbo",
+      "table_name": "Reinsurance_APR_PY2026",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_confirmation_date",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_DUPSSN_OCT_MIS",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_confirmation_date",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_DUPSSN_SEP",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_confirmation_date",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_DUPSSN_TEST",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "application_type",
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "concurrent_ALL",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "application_type",
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "concurrent_ALL_NEW",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_id",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "Demographics_Premium",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_PAC_E",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_PAC_S1",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_PAC_S2",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2627_PAC_NEW",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollee_status_description",
+        "enrollment_id",
+        "enrollment_status_description",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2627_PAC_NEW2",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "FPL_Dental_ALL",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "FPL_Health_ALL",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id",
+        "hios_issuer_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "FPL_PY2025_PY2026",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "benefit_effective_date",
+        "benefit_end_date",
+        "coverage_year",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_PAC",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "hh_demograohics_fraudanalysis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "hh_demographics",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2025_Fraud_Analysis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollment_id",
+        "enrollment_status_description"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026-Enrollments_All",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY2026_Fraud_Analysis",
+      "table_type": "BASE TABLE"
+    },
+    {
+      "columns_present": [
+        "coverage_year",
+        "enrollee_id",
+        "enrollment_id"
+      ],
+      "reason": "not probed; limit is 20 objects",
+      "schema_name": "dbo",
+      "table_name": "PY242526_enrollment_lastupdate_test",
+      "table_type": "BASE TABLE"
+    }
+  ],
+  "notes": [
+    "Discovery only. These counts are not production Enrollment Count or Enrollee Count definitions.",
+    "Plan year is coverage_year. Calendar year, table name, snapshot date, and confirmation year are not plan year.",
+    "The historical October 1 confirmation floor is not applied.",
+    "Month 1 of the enrollment season is not defined.",
+    "834 and inbound objects are listed and not aggregated.",
+    "Historical table names are not treated as the authoritative source.",
+    "No probed object has both coverage years, so profiles were not run."
+  ],
+  "nulls": [],
+  "overlap": {
+    "enrollee_id_in_both_years": null,
+    "enrollment_id_in_both_years": null
+  },
+  "plan_year_field": "coverage_year",
+  "plan_years": [
+    2026,
+    2027
+  ],
+  "queries_executed": [
+    {
+      "name": "catalog",
+      "parameter_count": 0,
+      "sql": "-- Phase 4B metadata only. No enrollment rows are read.\n-- Historical table names are not referenced. Plan year is not inferred here.\nSELECT\n    c.TABLE_SCHEMA AS table_schema,\n    c.TABLE_NAME AS table_name,\n    t.TABLE_TYPE AS table_type,\n    c.COLUMN_NAME AS column_name,\n    c.DATA_TYPE AS data_type,\n    c.CHARACTER_MAXIMUM_LENGTH AS character_maximum_length,\n    c.NUMERIC_PRECISION AS numeric_precision,\n    c.NUMERIC_SCALE AS numeric_scale,\n    c.DATETIME_PRECISION AS datetime_precision\nFROM INFORMATION_SCHEMA.COLUMNS AS c\nINNER JOIN INFORMATION_SCHEMA.TABLES AS t\n    ON t.TABLE_SCHEMA = c.TABLE_SCHEMA\n   AND t.TABLE_NAME = c.TABLE_NAME\nWHERE t.TABLE_TYPE IN ('BASE TABLE', 'VIEW')\n  AND c.TABLE_SCHEMA NOT IN ('INFORMATION_SCHEMA', 'sys')\n  AND c.COLUMN_NAME IN (\n        'coverage_year',\n        'enrollment_id',\n        'enrollee_id',\n        'hios_issuer_id',\n        'enrollment_status_description',\n        'enrollee_status_description',\n        'application_type',\n        'enrollment_confirmation_date',\n        'enrollment_create_date',\n        'enrollment_last_update_date',\n        'benefit_effective_date',\n        'benefit_end_date'\n  )\nORDER BY c.TABLE_SCHEMA, c.TABLE_NAME, c.COLUMN_NAME;\n"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_01312026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_01312026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_02272026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_02272026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_03312026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_03312026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_04302026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_04302026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_05302026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_05302026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_05312026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_05312026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_06312026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_06312026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_07302026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_07302026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_08302026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_08302026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_09302026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_09302026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_10312026",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_10312026]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_DEC31",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_DEC31]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_TEST",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_TEST]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_TEST_TEMP",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_TEST_TEMP]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_AETNA",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_AETNA]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Enrollments_PY2526_NOV30",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Enrollments_PY2526_NOV30]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.Consolidated_Full_list",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[Consolidated_Full_list]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.PY2025_DUPSSN",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[PY2025_DUPSSN]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.PY2026_DUPSSN",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[PY2026_DUPSSN]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    },
+    {
+      "name": "year_presence:dbo.PY2026_DUPSSN_OCT",
+      "parameter_count": 2,
+      "sql": "SELECT\n    [coverage_year] AS coverage_year,\n    COUNT_BIG(*) AS raw_rows\nFROM [dbo].[PY2026_DUPSSN_OCT]\nWHERE [coverage_year] IN (?, ?)\nGROUP BY [coverage_year]\nORDER BY [coverage_year]"
+    }
+  ],
+  "schema": [],
+  "selected_source": null,
+  "skipped": [],
+  "status_profile": {
+    "enrollee_status": [],
+    "enrollment_status": []
+  },
+  "year_matrix": [
+    {
+      "py2026": true,
+      "py2026_raw_rows": 1434580,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_01312026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 1386643,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_02272026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2082666,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_03312026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2126592,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_04302026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2213576,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_05302026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": false,
+      "py2026_raw_rows": 0,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_05312026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2213576,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_06312026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2254172,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_07302026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2268819,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_08302026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2649680,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_09302026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2330683,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_10312026",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 1958568,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_DEC31",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2330683,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_TEST",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 2330683,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_TEST_TEMP",
+      "table_type": "BASE TABLE",
+      "target_column_count": 12
+    },
+    {
+      "py2026": false,
+      "py2026_raw_rows": 0,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_AETNA",
+      "table_type": "BASE TABLE",
+      "target_column_count": 11
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 1560860,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Enrollments_PY2526_NOV30",
+      "table_type": "BASE TABLE",
+      "target_column_count": 11
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 11765,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "Consolidated_Full_list",
+      "table_type": "BASE TABLE",
+      "target_column_count": 10
+    },
+    {
+      "py2026": false,
+      "py2026_raw_rows": 0,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "PY2025_DUPSSN",
+      "table_type": "BASE TABLE",
+      "target_column_count": 9
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 286932,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "PY2026_DUPSSN",
+      "table_type": "BASE TABLE",
+      "target_column_count": 9
+    },
+    {
+      "py2026": true,
+      "py2026_raw_rows": 326309,
+      "py2027": false,
+      "py2027_raw_rows": 0,
+      "schema_name": "dbo",
+      "table_name": "PY2026_DUPSSN_OCT",
+      "table_type": "BASE TABLE",
+      "target_column_count": 9
+    }
+  ],
+  "year_profile": []
+}
