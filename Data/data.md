@@ -1,28 +1,29 @@
 
 
 
-{"datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"metadata":[{"jaql":{"table":"enrollment","column":"benefit_end_date","dim":"[enrollment.benefit_end_date (Calendar)]","datatype":"datetime","columnTitle":"benefit_end_date","tableTitle":"enrollment","merged":true,"level":"months","title":"Months in benefit_end_date"},"instanceid":"CD659-BDAD-98","panel":"measures","hierarchies":["calendar"],"format":{"mask":{"years":"yyyy","quarters":"yyyy Q","months":"MM/yyyy","weeks":"ww yyyy","days":"shortDate","minutes":"HH:mm","seconds":"MM/dd/yyyy HH:mm:ss","dateAndTime":"MM/dd/yyyy HH:mm","isdefault":true}}},{"jaql":{"table":"enrollment","column":"id","dim":"[enrollment.id]","datatype":"numeric","columnTitle":"id","tableTitle":"enrollment","merged":true,"title":"Count","agg":"count"},"instanceid":"907D0-F089-33","panel":"measures","format":{"mask":{"abbreviations":{"t":false,"b":false,"m":false,"k":false},"decimals":"auto","number":{"separated":true},"abbreviateAll":false},"color":{"color":"#03738C","colorIndex":0,"type":"color"}}},{"jaql":{"table":"enrollment","column":"enrollment_status_description","dim":"[enrollment.enrollment_status_description]","datatype":"text","columnTitle":"enrollment_status_description","tableTitle":"enrollment","merged":true,"isPrimary":false,"isDashboardFilter":false,"datasource":{"title":"MAIN","fullname":"LocalHost/MAIN","id":"aLOCALHOST_aMAIN","address":"LocalHost","database":"aMAIN"},"locale":"en-us","title":"enrollment_status_description","collapsed":true,"filter":{"explicit":true,"multiSelection":true,"members":["Terminated"]}},"instanceid":"F4F27-C806-CA","panel":"scope"},{"jaql":{"table":"enrollment","column":"benefit_end_date","dim":"[enrollment.benefit_end_date (Calendar)]","datatype":"datetime","columnTitle":"benefit_end_date","tableTitle":"enrollment","merged":true,"level":"days","title":"Months in benefit_end_date","datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"firstday":"mon","locale":"en-us","collapsed":true,"filter":{"from":"2026-11-01","to":"2028-01-01","multiSelection":true}},"instanceid":"65C91-DFB3-D4","panel":"scope","format":{"mask":{"years":"yyyy","quarters":"yyyy Q","months":"MM/yyyy","weeks":"ww yyyy","days":"shortDate","minutes":"HH:mm","seconds":"MM/dd/yyyy HH:mm:ss","dateAndTime":"MM/dd/yyyy HH:mm","isdefault":true}},"title":"Months in benefit_end_date"},{"jaql":{"table":"ssap_applications","column":"coverage_year","dim":"[ssap_applications.coverage_year]","datatype":"numeric","datasource":{"address":"LocalHost","title":"MAIN","id":"localhost_aMAIN","database":"aMAIN","fullname":"localhost/MAIN","live":false},"firstday":"mon","locale":"en-us","title":"coverage_year","collapsed":true,"isDashboardFilter":true,"columnTitle":"coverage_year","tableTitle":"ssap_applications","filter":{"explicit":true,"multiSelection":true,"members":["2027"]}},"disabled":falShow more
+{"datasource":{"address":"LocalHost","title":"MAIN","id":"aLOCALHOST_aMAIN","database":"aMAIN","fullname":"LocalHost/MAIN"},"metadata":[{"jaql":{"table":"enrollment","column":"last_update_timestamp","dim":"[enrollment.last_update_timestamp (Calendar)]","datatype":"datetime","columnTitle":"last_update_timestamp","tableTitle":"enrollment","merged":true,"level":"days","title":"Date"},"instanceid":"C5D1C-321B-FB","panel":"rows","format":{"mask":{"years":"yyyy","quarters":"yyyy Q","months":"MM/yyyy","weeks":"ww yyyy","days":"shortDate","minutes":"HH:mm","seconds":"MM/dd/yyyy HH:mm:ss","dateAndTime":"MM/dd/yyyy HH:mm","isdefault":true}},"hierarchies":["calendar"]},{"jaql":{"type":"measure","formula":"(count([C51CF-4C5]),[ADECC-EB1])","context":{"[ADECC-EB1]":{"dimension":{"table":"enrollment","column":"last_update_timestamp","dim":"[enrollment.last_update_timestamp (Calendar)]","datatype":"datetime","merged":true,"level":"days","title":"Days in last_update_timestamp","sort":"desc","sortDetails":{"field":0,"dir":"desc","sortingLastDimension":true,"initialized":true,"isLastApplied":true}},"table":"enrollment","column":"enrollment_status_description","dim":"[enrollment.enrollment_status_description]","datatype":"text","merged":true,"title":"enrollment_status_description","datasource":{"fullname":"localhost/MAIN","id":"localhost_aMAIN","address":"LocalHost","database":"aMAIN","live":false,"title":"MAIN"},"firstday":"mon","locale":"en-us","filter":{"explicit":true,"multiSelection":true,"members":["Cancelled"]}},"[C51CF-4C5]":{"table":"enrollment","column":"id","dim":"[enrollment.id]","datatype":"numeric","merged":true,"title":"Id"}},"title":"Cancelled Policies","columnTitle":"(count([Id]),[enrollment_status_description])"},"instanceid":"F6EB0-A440-16","panel":"measures","format":{"mask":{"abbreviations":{"t":false,"b":false,"m":false,"k":false},"decimals":"auto","number":{"separated":true},"abbreviateAll":false},"color":{"color":"#03738C","colorIndex":0,"type":"color"}},"disabled":false},{"jaql":{"type":"measure","formula":"(count([321CA-B85]),[60349-AFB])","context":{"[60349-AFB]":{"dimension":{"table":"enrollment","column":"last_update_timestamp","dim":"[enrollment.last_update_timestamp (Calendar)]","datatype":"datetime","merged":true,"level":"days","title":"Days in last_update_timestamp","sort":"desc","sortDetails":{"field":0,"dir":"desc","sortingLastDimension":true,"initialized":true,"isLastApplied":true}},"table":"enrollment","column":"enrollment_status_description","dim":"[enrollment.enrollment_status_description]","datatype":"text","merged":true,"title":"enrollment_status_description","datasource":{"fullname":"localhost/MAIN","id":"localhost_aMAIN","address":"LocalHost","database":"aMAIN","live":false,"title":"MAIN"},"firstday":"mon","locale":"en-us","filter":{"startsWith":"Term","isBetween":false}},"[321CA-B85]":{"table":"enrollment","column":"id","dim":"[enrollment.id]","datatype":"numeric","merged":true,"title":"Id"}},"title":"Terminated Policies"Show more
 
 
 {
     "headers": [
-        "Months in benefit_end_date",
-        "Count"
+        "Date",
+        "Cancelled Policies",
+        "Terminated Policies"
     ],
     "metadata": [
         {
             "jaql": {
                 "datatype": "datetime",
-                "level": "months",
-                "column": "benefit_end_date",
+                "level": "days",
+                "column": "last_update_timestamp",
                 "merged": true,
-                "dim": "[enrollment.benefit_end_date (Calendar)]",
-                "title": "Months in benefit_end_date",
-                "columnTitle": "benefit_end_date",
+                "dim": "[enrollment.last_update_timestamp (Calendar)]",
+                "title": "Date",
+                "columnTitle": "last_update_timestamp",
                 "table": "enrollment",
                 "tableTitle": "enrollment"
             },
-            "instanceid": "CD659-BDAD-98",
+            "instanceid": "C5D1C-321B-FB",
             "hierarchies": [
                 "calendar"
             ],
@@ -39,25 +40,152 @@
                     "years": "yyyy"
                 }
             },
-            "panel": "measures"
+            "panel": "rows"
         },
         {
             "jaql": {
-                "agg": "count",
-                "datatype": "numeric",
-                "column": "id",
-                "merged": true,
-                "dim": "[enrollment.id]",
-                "title": "Count",
-                "columnTitle": "id",
-                "table": "enrollment",
-                "tableTitle": "enrollment"
+                "context": {
+                    "[C51CF-4C5]": {
+                        "datatype": "numeric",
+                        "column": "id",
+                        "merged": true,
+                        "dim": "[enrollment.id]",
+                        "title": "Id",
+                        "table": "enrollment"
+                    },
+                    "[ADECC-EB1]": {
+                        "filter": {
+                            "explicit": true,
+                            "members": [
+                                "Cancelled"
+                            ],
+                            "multiSelection": true
+                        },
+                        "datatype": "text",
+                        "firstday": "mon",
+                        "datasource": {
+                            "database": "aMAIN",
+                            "address": "LocalHost",
+                            "fullname": "localhost/MAIN",
+                            "id": "localhost_aMAIN",
+                            "title": "MAIN",
+                            "live": false
+                        },
+                        "column": "enrollment_status_description",
+                        "merged": true,
+                        "dim": "[enrollment.enrollment_status_description]",
+                        "title": "enrollment_status_description",
+                        "locale": "en-us",
+                        "dimension": {
+                            "sortDetails": {
+                                "field": 0,
+                                "isLastApplied": true,
+                                "initialized": true,
+                                "dir": "desc",
+                                "sortingLastDimension": true
+                            },
+                            "datatype": "datetime",
+                            "level": "days",
+                            "column": "last_update_timestamp",
+                            "merged": true,
+                            "dim": "[enrollment.last_update_timestamp (Calendar)]",
+                            "sort": "desc",
+                            "title": "Days in last_update_timestamp",
+                            "table": "enrollment"
+                        },
+                        "table": "enrollment"
+                    }
+                },
+                "formula": "(count([C51CF-4C5]),[ADECC-EB1])",
+                "type": "measure",
+                "title": "Cancelled Policies",
+                "columnTitle": "(count([Id]),[enrollment_status_description])"
             },
-            "instanceid": "907D0-F089-33",
+            "instanceid": "F6EB0-A440-16",
             "format": {
                 "color": {
                     "color": "#03738C",
                     "colorIndex": 0,
+                    "type": "color"
+                },
+                "mask": {
+                    "number": {
+                        "separated": true
+                    },
+                    "decimals": "auto",
+                    "abbreviateAll": false,
+                    "abbreviations": {
+                        "b": false,
+                        "t": false,
+                        "k": false,
+                        "m": false
+                    }
+                }
+            },
+            "disabled": false,
+            "panel": "measures"
+        },
+        {
+            "jaql": {
+                "context": {
+                    "[60349-AFB]": {
+                        "filter": {
+                            "isBetween": false,
+                            "startsWith": "Term"
+                        },
+                        "datatype": "text",
+                        "firstday": "mon",
+                        "datasource": {
+                            "database": "aMAIN",
+                            "address": "LocalHost",
+                            "fullname": "localhost/MAIN",
+                            "id": "localhost_aMAIN",
+                            "title": "MAIN",
+                            "live": false
+                        },
+                        "column": "enrollment_status_description",
+                        "merged": true,
+                        "dim": "[enrollment.enrollment_status_description]",
+                        "title": "enrollment_status_description",
+                        "locale": "en-us",
+                        "dimension": {
+                            "sortDetails": {
+                                "field": 0,
+                                "isLastApplied": true,
+                                "initialized": true,
+                                "dir": "desc",
+                                "sortingLastDimension": true
+                            },
+                            "datatype": "datetime",
+                            "level": "days",
+                            "column": "last_update_timestamp",
+                            "merged": true,
+                            "dim": "[enrollment.last_update_timestamp (Calendar)]",
+                            "sort": "desc",
+                            "title": "Days in last_update_timestamp",
+                            "table": "enrollment"
+                        },
+                        "table": "enrollment"
+                    },
+                    "[321CA-B85]": {
+                        "datatype": "numeric",
+                        "column": "id",
+                        "merged": true,
+                        "dim": "[enrollment.id]",
+                        "title": "Id",
+                        "table": "enrollment"
+                    }
+                },
+                "formula": "(count([321CA-B85]),[60349-AFB])",
+                "type": "measure",
+                "title": "Terminated Policies",
+                "columnTitle": "(count([Id]),[enrollment_status_description])"
+            },
+            "instanceid": "698E5-5749-72",
+            "format": {
+                "color": {
+                    "color": "#03A65A",
+                    "colorIndex": 1,
                     "type": "color"
                 },
                 "mask": {
@@ -83,7 +211,7 @@
     },
     "processingInfo": {
         "cacheType": "none",
-        "cacheTime": "2026-11-08T21:32:38.411Z"
+        "cacheTime": "2026-11-08T21:32:38.434Z"
     },
     "translationInfo": {
         "translationServiceProvider": "NewTranslationService",
@@ -94,5 +222,118 @@
         "translationDuration": 0.001,
         "sqlFromCache": true
     },
-    "values": []
+    "values": [
+        [
+            {
+                "data": "2026-11-01T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 2534,
+                "text": "2534"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-02T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 5724,
+                "text": "5724"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-03T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 6752,
+                "text": "6752"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-04T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 6011,
+                "text": "6011"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-05T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 6057,
+                "text": "6057"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-06T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 5465,
+                "text": "5465"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-07T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 2802,
+                "text": "2802"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ],
+        [
+            {
+                "data": "2026-11-08T00:00:00",
+                "text": "012orADaAe"
+            },
+            {
+                "data": 871,
+                "text": "871"
+            },
+            {
+                "data": "N\\A",
+                "text": "N\\A"
+            }
+        ]
+    ]
 }
