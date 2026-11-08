@@ -1,0 +1,3566 @@
+{
+  "report_kind": "PY2026_EVENT_DATE_VALIDATION",
+  "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+  "not_official_py2026_cancellation_activity": true,
+  "queries_py2027_enrollment": false,
+  "visualization_created": false,
+  "py2027_field": "enrollment.last_update_timestamp",
+  "historical_candidate_name": "enrollment_last_update_date",
+  "states": {
+    "FIELD_EXISTS": true,
+    "FIELD_SEMANTICS_SUPPORTED": false,
+    "FULL_METRIC_COMPARABLE": false,
+    "note": "These are three different states. A field can exist without supported event semantics. Supported event semantics would still not make the full Cancelled or Terminated metric COMPARABLE."
+  },
+  "event_date_candidate": {
+    "py2026_candidate": "enrollment_last_update_date",
+    "sql_datatype": "date",
+    "confidence": "NAME_SIMILAR_UNPROVEN",
+    "datetime_compatible": true,
+    "reason": "Column name and date/time SQL datatype both match. Semantic equivalence to Sisense enrollment.last_update_timestamp is unproven."
+  },
+  "event_date_evidence": {
+    "candidate_field": "enrollment_last_update_date",
+    "sql_datatype": "date",
+    "null_rate": 0.0,
+    "date_range": {
+      "min": "2025-10-16",
+      "max": "2026-02-01",
+      "source_table": "Enrollments_PY2526_01312026"
+    },
+    "cancelled_coverage": 1.0,
+    "terminated_coverage": 1.0,
+    "multi_date_identifier_rate": 0.0,
+    "future_date_anomaly_count": 11,
+    "cross_snapshot_repeat_rate": 0.459882,
+    "event_behavior_status": "UNPROVEN_EVENT_VS_RECORD_UPDATE",
+    "confidence": "LOW",
+    "decision": "UNRESOLVED",
+    "reason": "The column exists and has a date/time SQL datatype. That is not proof it is a cancellation/termination event timestamp rather than a generic record-update timestamp. SUPPORTED is not assigned automatically.",
+    "states": {
+      "FIELD_EXISTS": true,
+      "FIELD_SEMANTICS_SUPPORTED": false,
+      "FULL_METRIC_COMPARABLE": false
+    }
+  },
+  "snapshot_overview": [
+    {
+      "table": "Enrollments_PY2526_01312026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_01312026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-01-31",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 1434580,
+      "non_null_enrollment_keys": 1434580,
+      "distinct_enrollment_keys": 1090773,
+      "non_null_event_dates": 1434580,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-02-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_02272026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_02272026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-02-27",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 1386643,
+      "non_null_enrollment_keys": 1386643,
+      "distinct_enrollment_keys": 1048472,
+      "non_null_event_dates": 1386643,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-02-28",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_03312026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_03312026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-03-31",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2082666,
+      "non_null_enrollment_keys": 2082666,
+      "distinct_enrollment_keys": 1524729,
+      "non_null_event_dates": 2082666,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-04-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_04302026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_04302026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-04-30",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2126592,
+      "non_null_enrollment_keys": 2126592,
+      "distinct_enrollment_keys": 1554283,
+      "non_null_event_dates": 2126592,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-05-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_05302026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_05302026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-05-30",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2213576,
+      "non_null_enrollment_keys": 2213576,
+      "distinct_enrollment_keys": 1613161,
+      "non_null_event_dates": 2213576,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-07-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_05312026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_05312026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-05-31",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 0,
+      "non_null_enrollment_keys": 0,
+      "distinct_enrollment_keys": 0,
+      "non_null_event_dates": 0,
+      "null_event_dates": 0,
+      "null_percentage": null,
+      "min_event_date": null,
+      "max_event_date": null,
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_06312026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_06312026",
+        "filename_status": "INVALID_FILENAME_DATE",
+        "snapshot_date": null,
+        "month_day": null,
+        "relative_date_comparison": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2213576,
+      "non_null_enrollment_keys": 2213576,
+      "distinct_enrollment_keys": 1613161,
+      "non_null_event_dates": 2213576,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-07-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_07302026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_07302026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-07-30",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2254172,
+      "non_null_enrollment_keys": 2254172,
+      "distinct_enrollment_keys": 1640939,
+      "non_null_event_dates": 2254172,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-08-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_08302026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_08302026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-08-30",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2268819,
+      "non_null_enrollment_keys": 2268819,
+      "distinct_enrollment_keys": 1645980,
+      "non_null_event_dates": 2268819,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-09-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_09302026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_09302026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-09-30",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2649680,
+      "non_null_enrollment_keys": 2649680,
+      "distinct_enrollment_keys": 1927681,
+      "non_null_event_dates": 2649680,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2024-12-10",
+      "max_event_date": "2026-10-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_10312026",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_10312026",
+        "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+        "snapshot_date": "2026-10-31",
+        "month_day": null,
+        "relative_date_comparison": "RUN"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 2330683,
+      "non_null_enrollment_keys": 2330683,
+      "distinct_enrollment_keys": 1688696,
+      "non_null_event_dates": 2330683,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-11-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_DEC31",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_DEC31",
+        "filename_status": "MONTH_DAY_TOKEN",
+        "snapshot_date": null,
+        "month_day": {
+          "month": 12,
+          "day": 31
+        },
+        "relative_date_comparison": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 1958568,
+      "non_null_enrollment_keys": 1958568,
+      "distinct_enrollment_keys": 1454823,
+      "non_null_event_dates": 1958568,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2026-01-01",
+      "skip_reason": null
+    },
+    {
+      "table": "Enrollments_PY2526_NOV30",
+      "snapshot_date": {
+        "table": "Enrollments_PY2526_NOV30",
+        "filename_status": "MONTH_DAY_TOKEN",
+        "snapshot_date": null,
+        "month_day": {
+          "month": 11,
+          "day": 30
+        },
+        "relative_date_comparison": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+      },
+      "event_date_candidate": "enrollment_last_update_date",
+      "sql_datatype": "date",
+      "total_rows": 1560860,
+      "non_null_enrollment_keys": 1560860,
+      "distinct_enrollment_keys": 1180712,
+      "non_null_event_dates": 1560860,
+      "null_event_dates": 0,
+      "null_percentage": 0.0,
+      "min_event_date": "2025-10-16",
+      "max_event_date": "2025-12-01",
+      "skip_reason": null
+    }
+  ],
+  "selected_snapshots": [
+    "Enrollments_PY2526_01312026",
+    "Enrollments_PY2526_02272026",
+    "Enrollments_PY2526_DEC31",
+    "Enrollments_PY2526_NOV30"
+  ],
+  "missing_selected_snapshots": [],
+  "status_families": [
+    {
+      "table": "Enrollments_PY2526_01312026",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "family_row_count": 28188,
+          "family_distinct_enrollment_keys": 20059,
+          "family_non_null_event_dates": 28188,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2025-12-16",
+          "family_max_event_date": "2026-02-01",
+          "family_distinct_event_dates": 48,
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "family_row_count": 492,
+          "family_distinct_enrollment_keys": 373,
+          "family_non_null_event_dates": 492,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2025-12-18",
+          "family_max_event_date": "2026-02-01",
+          "family_distinct_event_dates": 32,
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_02272026",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "family_row_count": 6377,
+          "family_distinct_enrollment_keys": 4488,
+          "family_non_null_event_dates": 6377,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2026-01-21",
+          "family_max_event_date": "2026-02-28",
+          "family_distinct_event_dates": 36,
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "family_row_count": 70885,
+          "family_distinct_enrollment_keys": 52189,
+          "family_non_null_event_dates": 70885,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2026-01-01",
+          "family_max_event_date": "2026-02-28",
+          "family_distinct_event_dates": 57,
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_DEC31",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "family_row_count": 537312,
+          "family_distinct_enrollment_keys": 370412,
+          "family_non_null_event_dates": 537312,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2025-10-17",
+          "family_max_event_date": "2026-01-01",
+          "family_distinct_event_dates": 74,
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "family_row_count": 23570,
+          "family_distinct_enrollment_keys": 18444,
+          "family_non_null_event_dates": 23570,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2025-12-02",
+          "family_max_event_date": "2026-01-01",
+          "family_distinct_event_dates": 18,
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_NOV30",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "family_row_count": 232839,
+          "family_distinct_enrollment_keys": 163007,
+          "family_non_null_event_dates": 232839,
+          "family_null_event_dates": 0,
+          "family_min_event_date": "2025-10-21",
+          "family_max_event_date": "2025-12-01",
+          "family_distinct_event_dates": 41,
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "family_row_count": 0,
+          "family_distinct_enrollment_keys": 0,
+          "family_non_null_event_dates": 0,
+          "family_null_event_dates": 0,
+          "family_min_event_date": null,
+          "family_max_event_date": null,
+          "family_distinct_event_dates": 0,
+          "skip_reason": null
+        }
+      ]
+    }
+  ],
+  "event_behavior": [
+    {
+      "table": "Enrollments_PY2526_01312026",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "one_date_enrollment_keys": 20059,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 20059,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": "2026-01-31",
+            "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+            "event_dates_after_snapshot": 11,
+            "event_dates_before_snapshot": 27443,
+            "event_dates_on_snapshot": 734,
+            "event_dates_more_than_lookback_days_before_snapshot": 0,
+            "lookback_days": 90,
+            "skip_reason": null
+          },
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "one_date_enrollment_keys": 373,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 373,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": "2026-01-31",
+            "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+            "event_dates_after_snapshot": 40,
+            "event_dates_before_snapshot": 405,
+            "event_dates_on_snapshot": 47,
+            "event_dates_more_than_lookback_days_before_snapshot": 0,
+            "lookback_days": 90,
+            "skip_reason": null
+          },
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_02272026",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "one_date_enrollment_keys": 4488,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 4488,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": "2026-02-27",
+            "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+            "event_dates_after_snapshot": 24,
+            "event_dates_before_snapshot": 5650,
+            "event_dates_on_snapshot": 703,
+            "event_dates_more_than_lookback_days_before_snapshot": 0,
+            "lookback_days": 90,
+            "skip_reason": null
+          },
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "one_date_enrollment_keys": 52189,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 52189,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": "2026-02-27",
+            "filename_status": "FILENAME_INFERRED_SNAPSHOT_DATE",
+            "event_dates_after_snapshot": 114,
+            "event_dates_before_snapshot": 67306,
+            "event_dates_on_snapshot": 3465,
+            "event_dates_more_than_lookback_days_before_snapshot": 0,
+            "lookback_days": 90,
+            "skip_reason": null
+          },
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_DEC31",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "one_date_enrollment_keys": 370412,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 370412,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": null,
+            "filename_status": "MONTH_DAY_TOKEN",
+            "event_dates_after_snapshot": null,
+            "event_dates_before_snapshot": null,
+            "event_dates_on_snapshot": null,
+            "event_dates_more_than_lookback_days_before_snapshot": null,
+            "lookback_days": 90,
+            "skip_reason": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+          },
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "one_date_enrollment_keys": 18444,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 18444,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": null,
+            "filename_status": "MONTH_DAY_TOKEN",
+            "event_dates_after_snapshot": null,
+            "event_dates_before_snapshot": null,
+            "event_dates_on_snapshot": null,
+            "event_dates_more_than_lookback_days_before_snapshot": null,
+            "lookback_days": 90,
+            "skip_reason": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+          },
+          "skip_reason": null
+        }
+      ]
+    },
+    {
+      "table": "Enrollments_PY2526_NOV30",
+      "families": [
+        {
+          "status_family": "Cancelled",
+          "one_date_enrollment_keys": 163007,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 163007,
+          "multi_date_identifier_rate": 0.0,
+          "relative": {
+            "snapshot_date": null,
+            "filename_status": "MONTH_DAY_TOKEN",
+            "event_dates_after_snapshot": null,
+            "event_dates_before_snapshot": null,
+            "event_dates_on_snapshot": null,
+            "event_dates_more_than_lookback_days_before_snapshot": null,
+            "lookback_days": 90,
+            "skip_reason": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+          },
+          "skip_reason": null
+        },
+        {
+          "status_family": "Terminated",
+          "one_date_enrollment_keys": 0,
+          "multi_date_enrollment_keys": 0,
+          "no_date_enrollment_keys": 0,
+          "enrollment_keys_in_family": 0,
+          "multi_date_identifier_rate": null,
+          "relative": {
+            "snapshot_date": null,
+            "filename_status": "MONTH_DAY_TOKEN",
+            "event_dates_after_snapshot": null,
+            "event_dates_before_snapshot": null,
+            "event_dates_on_snapshot": null,
+            "event_dates_more_than_lookback_days_before_snapshot": null,
+            "lookback_days": 90,
+            "skip_reason": "SKIPPED_NO_PROVEN_SNAPSHOT_DATE"
+          },
+          "skip_reason": null
+        }
+      ]
+    }
+  ],
+  "cross_snapshot": [
+    {
+      "earlier": "Enrollments_PY2526_NOV30",
+      "later": "Enrollments_PY2526_DEC31",
+      "not_activity": true,
+      "modes": [
+        {
+          "earlier": "Enrollments_PY2526_NOV30",
+          "later": "Enrollments_PY2526_DEC31",
+          "mode": "all",
+          "present_in_both": 830228,
+          "only_earlier_snapshot": 350484,
+          "only_later_snapshot": 624595,
+          "repeat_rate": 0.459882,
+          "status": "RAN",
+          "not_activity": true
+        },
+        {
+          "earlier": "Enrollments_PY2526_NOV30",
+          "later": "Enrollments_PY2526_DEC31",
+          "mode": "Cancelled",
+          "present_in_both": 147862,
+          "only_earlier_snapshot": 15145,
+          "only_later_snapshot": 222550,
+          "repeat_rate": 0.383502,
+          "status": "RAN",
+          "not_activity": true
+        },
+        {
+          "earlier": "Enrollments_PY2526_NOV30",
+          "later": "Enrollments_PY2526_DEC31",
+          "mode": "Terminated",
+          "present_in_both": 0,
+          "only_earlier_snapshot": 0,
+          "only_later_snapshot": 18444,
+          "repeat_rate": 0.0,
+          "status": "RAN",
+          "not_activity": true
+        }
+      ]
+    },
+    {
+      "earlier": "Enrollments_PY2526_01312026",
+      "later": "Enrollments_PY2526_02272026",
+      "not_activity": true,
+      "modes": [
+        {
+          "earlier": "Enrollments_PY2526_01312026",
+          "later": "Enrollments_PY2526_02272026",
+          "mode": "all",
+          "present_in_both": 882939,
+          "only_earlier_snapshot": 207834,
+          "only_later_snapshot": 165533,
+          "repeat_rate": 0.702806,
+          "status": "RAN",
+          "not_activity": true
+        },
+        {
+          "earlier": "Enrollments_PY2526_01312026",
+          "later": "Enrollments_PY2526_02272026",
+          "mode": "Cancelled",
+          "present_in_both": 18,
+          "only_earlier_snapshot": 20041,
+          "only_later_snapshot": 4470,
+          "repeat_rate": 0.000734,
+          "status": "RAN",
+          "not_activity": true
+        },
+        {
+          "earlier": "Enrollments_PY2526_01312026",
+          "later": "Enrollments_PY2526_02272026",
+          "mode": "Terminated",
+          "present_in_both": 301,
+          "only_earlier_snapshot": 72,
+          "only_later_snapshot": 51888,
+          "repeat_rate": 0.00576,
+          "status": "RAN",
+          "not_activity": true
+        }
+      ]
+    }
+  ],
+  "daily_distribution": {
+    "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+    "not_official_activity": true,
+    "rows": [
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 631,
+        "diagnostic_distinct_enrollment_keys": 393
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 539,
+        "diagnostic_distinct_enrollment_keys": 361
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 527,
+        "diagnostic_distinct_enrollment_keys": 334
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-18",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 425,
+        "diagnostic_distinct_enrollment_keys": 291
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 163,
+        "diagnostic_distinct_enrollment_keys": 99
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 77,
+        "diagnostic_distinct_enrollment_keys": 49
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 591,
+        "diagnostic_distinct_enrollment_keys": 399
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 461,
+        "diagnostic_distinct_enrollment_keys": 334
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 217,
+        "diagnostic_distinct_enrollment_keys": 143
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 53,
+        "diagnostic_distinct_enrollment_keys": 41
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 332,
+        "diagnostic_distinct_enrollment_keys": 235
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 257,
+        "diagnostic_distinct_enrollment_keys": 152
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 177,
+        "diagnostic_distinct_enrollment_keys": 122
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 842,
+        "diagnostic_distinct_enrollment_keys": 562
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 943,
+        "diagnostic_distinct_enrollment_keys": 617
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-31",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1009,
+        "diagnostic_distinct_enrollment_keys": 658
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 150,
+        "diagnostic_distinct_enrollment_keys": 114
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-01",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-02",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 561,
+        "diagnostic_distinct_enrollment_keys": 412
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-02",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-03",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 265,
+        "diagnostic_distinct_enrollment_keys": 186
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-03",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-04",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 162,
+        "diagnostic_distinct_enrollment_keys": 120
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-04",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-05",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 811,
+        "diagnostic_distinct_enrollment_keys": 576
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-05",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 4
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-06",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 955,
+        "diagnostic_distinct_enrollment_keys": 693
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-06",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-07",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 932,
+        "diagnostic_distinct_enrollment_keys": 671
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-07",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 10,
+        "diagnostic_distinct_enrollment_keys": 8
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-08",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 944,
+        "diagnostic_distinct_enrollment_keys": 686
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-08",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 8
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-09",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 784,
+        "diagnostic_distinct_enrollment_keys": 582
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-09",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 6,
+        "diagnostic_distinct_enrollment_keys": 6
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-10",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 355,
+        "diagnostic_distinct_enrollment_keys": 279
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-11",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 281,
+        "diagnostic_distinct_enrollment_keys": 201
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-11",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-12",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1217,
+        "diagnostic_distinct_enrollment_keys": 930
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-12",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-13",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1440,
+        "diagnostic_distinct_enrollment_keys": 1044
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-13",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-14",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2029,
+        "diagnostic_distinct_enrollment_keys": 1450
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-14",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 16,
+        "diagnostic_distinct_enrollment_keys": 14
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-15",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3365,
+        "diagnostic_distinct_enrollment_keys": 2463
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-15",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 18,
+        "diagnostic_distinct_enrollment_keys": 13
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 603,
+        "diagnostic_distinct_enrollment_keys": 468
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-16",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 20,
+        "diagnostic_distinct_enrollment_keys": 12
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 80,
+        "diagnostic_distinct_enrollment_keys": 60
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-17",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 76,
+        "diagnostic_distinct_enrollment_keys": 61
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-18",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 13,
+        "diagnostic_distinct_enrollment_keys": 11
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 204,
+        "diagnostic_distinct_enrollment_keys": 149
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-19",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 15,
+        "diagnostic_distinct_enrollment_keys": 13
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 436,
+        "diagnostic_distinct_enrollment_keys": 307
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-20",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 26,
+        "diagnostic_distinct_enrollment_keys": 23
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 460,
+        "diagnostic_distinct_enrollment_keys": 335
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-21",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 39,
+        "diagnostic_distinct_enrollment_keys": 28
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 415,
+        "diagnostic_distinct_enrollment_keys": 303
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-22",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 15,
+        "diagnostic_distinct_enrollment_keys": 14
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 454,
+        "diagnostic_distinct_enrollment_keys": 303
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-23",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 29,
+        "diagnostic_distinct_enrollment_keys": 23
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 72,
+        "diagnostic_distinct_enrollment_keys": 60
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-24",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 59,
+        "diagnostic_distinct_enrollment_keys": 37
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-25",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 474,
+        "diagnostic_distinct_enrollment_keys": 330
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-26",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 26,
+        "diagnostic_distinct_enrollment_keys": 23
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 532,
+        "diagnostic_distinct_enrollment_keys": 385
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-27",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 37,
+        "diagnostic_distinct_enrollment_keys": 23
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 578,
+        "diagnostic_distinct_enrollment_keys": 427
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-28",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 35,
+        "diagnostic_distinct_enrollment_keys": 22
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 678,
+        "diagnostic_distinct_enrollment_keys": 486
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-29",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 13,
+        "diagnostic_distinct_enrollment_keys": 13
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 827,
+        "diagnostic_distinct_enrollment_keys": 617
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-30",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 33,
+        "diagnostic_distinct_enrollment_keys": 20
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-31",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 734,
+        "diagnostic_distinct_enrollment_keys": 524
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-31",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 47,
+        "diagnostic_distinct_enrollment_keys": 34
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 11,
+        "diagnostic_distinct_enrollment_keys": 10
+      },
+      {
+        "table": "Enrollments_PY2526_01312026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-01",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 40,
+        "diagnostic_distinct_enrollment_keys": 26
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-01",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-02",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-03",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-05",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 4
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-06",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-07",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 5
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-08",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 8,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-09",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 5,
+        "diagnostic_distinct_enrollment_keys": 5
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-11",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-12",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-13",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 7,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-14",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 15,
+        "diagnostic_distinct_enrollment_keys": 13
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-15",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 14,
+        "diagnostic_distinct_enrollment_keys": 9
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-16",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 18,
+        "diagnostic_distinct_enrollment_keys": 11
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-17",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-18",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 10,
+        "diagnostic_distinct_enrollment_keys": 8
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-19",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 11,
+        "diagnostic_distinct_enrollment_keys": 9
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-20",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 24,
+        "diagnostic_distinct_enrollment_keys": 21
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-21",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 29,
+        "diagnostic_distinct_enrollment_keys": 21
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-22",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 13,
+        "diagnostic_distinct_enrollment_keys": 12
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-23",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 27,
+        "diagnostic_distinct_enrollment_keys": 21
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-24",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-25",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 6,
+        "diagnostic_distinct_enrollment_keys": 6
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-26",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 23,
+        "diagnostic_distinct_enrollment_keys": 21
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-27",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 31,
+        "diagnostic_distinct_enrollment_keys": 18
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8,
+        "diagnostic_distinct_enrollment_keys": 4
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-28",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 29,
+        "diagnostic_distinct_enrollment_keys": 18
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-29",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 9
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-30",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 23,
+        "diagnostic_distinct_enrollment_keys": 15
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-31",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 31,
+        "diagnostic_distinct_enrollment_keys": 23
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 16,
+        "diagnostic_distinct_enrollment_keys": 12
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-01",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 237,
+        "diagnostic_distinct_enrollment_keys": 180
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-02",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 113,
+        "diagnostic_distinct_enrollment_keys": 82
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-02",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1381,
+        "diagnostic_distinct_enrollment_keys": 1088
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-03",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 107,
+        "diagnostic_distinct_enrollment_keys": 81
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-03",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1720,
+        "diagnostic_distinct_enrollment_keys": 1326
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-04",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 120,
+        "diagnostic_distinct_enrollment_keys": 80
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-04",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1587,
+        "diagnostic_distinct_enrollment_keys": 1239
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-05",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 118,
+        "diagnostic_distinct_enrollment_keys": 93
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-05",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1482,
+        "diagnostic_distinct_enrollment_keys": 1142
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-06",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 124,
+        "diagnostic_distinct_enrollment_keys": 96
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-06",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1508,
+        "diagnostic_distinct_enrollment_keys": 1165
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-07",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 35,
+        "diagnostic_distinct_enrollment_keys": 21
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-07",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 312,
+        "diagnostic_distinct_enrollment_keys": 229
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-08",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8,
+        "diagnostic_distinct_enrollment_keys": 7
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-08",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 151,
+        "diagnostic_distinct_enrollment_keys": 111
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-09",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 140,
+        "diagnostic_distinct_enrollment_keys": 89
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-09",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1783,
+        "diagnostic_distinct_enrollment_keys": 1368
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-10",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 164,
+        "diagnostic_distinct_enrollment_keys": 116
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-10",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1744,
+        "diagnostic_distinct_enrollment_keys": 1354
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-11",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 139,
+        "diagnostic_distinct_enrollment_keys": 100
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-11",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1662,
+        "diagnostic_distinct_enrollment_keys": 1301
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-12",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 185,
+        "diagnostic_distinct_enrollment_keys": 130
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-12",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1675,
+        "diagnostic_distinct_enrollment_keys": 1285
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-13",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 134,
+        "diagnostic_distinct_enrollment_keys": 102
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-13",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1330,
+        "diagnostic_distinct_enrollment_keys": 1050
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-14",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 35,
+        "diagnostic_distinct_enrollment_keys": 22
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-14",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1172,
+        "diagnostic_distinct_enrollment_keys": 862
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-15",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 143,
+        "diagnostic_distinct_enrollment_keys": 89
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-15",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 24873,
+        "diagnostic_distinct_enrollment_keys": 18471
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 264,
+        "diagnostic_distinct_enrollment_keys": 188
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-16",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1878,
+        "diagnostic_distinct_enrollment_keys": 1411
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 359,
+        "diagnostic_distinct_enrollment_keys": 255
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-17",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2431,
+        "diagnostic_distinct_enrollment_keys": 1755
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 378,
+        "diagnostic_distinct_enrollment_keys": 278
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-18",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2601,
+        "diagnostic_distinct_enrollment_keys": 1886
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 389,
+        "diagnostic_distinct_enrollment_keys": 274
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-19",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2652,
+        "diagnostic_distinct_enrollment_keys": 1889
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 383,
+        "diagnostic_distinct_enrollment_keys": 269
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-20",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2408,
+        "diagnostic_distinct_enrollment_keys": 1694
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 95,
+        "diagnostic_distinct_enrollment_keys": 65
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-21",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 630,
+        "diagnostic_distinct_enrollment_keys": 442
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 41,
+        "diagnostic_distinct_enrollment_keys": 27
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-22",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 332,
+        "diagnostic_distinct_enrollment_keys": 221
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 471,
+        "diagnostic_distinct_enrollment_keys": 311
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-23",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2745,
+        "diagnostic_distinct_enrollment_keys": 1971
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 533,
+        "diagnostic_distinct_enrollment_keys": 389
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-24",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2723,
+        "diagnostic_distinct_enrollment_keys": 1929
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 547,
+        "diagnostic_distinct_enrollment_keys": 398
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-25",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2901,
+        "diagnostic_distinct_enrollment_keys": 2031
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 588,
+        "diagnostic_distinct_enrollment_keys": 394
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-26",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3020,
+        "diagnostic_distinct_enrollment_keys": 2090
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 703,
+        "diagnostic_distinct_enrollment_keys": 487
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-27",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 3465,
+        "diagnostic_distinct_enrollment_keys": 2347
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 24,
+        "diagnostic_distinct_enrollment_keys": 17
+      },
+      {
+        "table": "Enrollments_PY2526_02272026",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-02-28",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 114,
+        "diagnostic_distinct_enrollment_keys": 70
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4,
+        "diagnostic_distinct_enrollment_keys": 4
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-31",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 40,
+        "diagnostic_distinct_enrollment_keys": 19
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5371,
+        "diagnostic_distinct_enrollment_keys": 3648
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-02",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3397,
+        "diagnostic_distinct_enrollment_keys": 2335
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-03",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8243,
+        "diagnostic_distinct_enrollment_keys": 5559
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-04",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9372,
+        "diagnostic_distinct_enrollment_keys": 6384
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-05",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9133,
+        "diagnostic_distinct_enrollment_keys": 6251
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-06",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9270,
+        "diagnostic_distinct_enrollment_keys": 6227
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-07",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8761,
+        "diagnostic_distinct_enrollment_keys": 6121
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-08",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5198,
+        "diagnostic_distinct_enrollment_keys": 3653
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-09",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3482,
+        "diagnostic_distinct_enrollment_keys": 2537
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-10",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9310,
+        "diagnostic_distinct_enrollment_keys": 6534
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-11",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9343,
+        "diagnostic_distinct_enrollment_keys": 6542
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-12",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10157,
+        "diagnostic_distinct_enrollment_keys": 7104
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-13",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9796,
+        "diagnostic_distinct_enrollment_keys": 6839
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-14",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9082,
+        "diagnostic_distinct_enrollment_keys": 6403
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-15",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5237,
+        "diagnostic_distinct_enrollment_keys": 3722
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3745,
+        "diagnostic_distinct_enrollment_keys": 2704
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10663,
+        "diagnostic_distinct_enrollment_keys": 7379
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9421,
+        "diagnostic_distinct_enrollment_keys": 6433
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10581,
+        "diagnostic_distinct_enrollment_keys": 7344
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10302,
+        "diagnostic_distinct_enrollment_keys": 7084
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9222,
+        "diagnostic_distinct_enrollment_keys": 6433
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5096,
+        "diagnostic_distinct_enrollment_keys": 3476
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3018,
+        "diagnostic_distinct_enrollment_keys": 2113
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10187,
+        "diagnostic_distinct_enrollment_keys": 7025
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10396,
+        "diagnostic_distinct_enrollment_keys": 7332
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 7575,
+        "diagnostic_distinct_enrollment_keys": 5122
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2618,
+        "diagnostic_distinct_enrollment_keys": 1654
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6077,
+        "diagnostic_distinct_enrollment_keys": 4017
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4505,
+        "diagnostic_distinct_enrollment_keys": 2997
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4309,
+        "diagnostic_distinct_enrollment_keys": 3070
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 13376,
+        "diagnostic_distinct_enrollment_keys": 9078
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-02",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 14363,
+        "diagnostic_distinct_enrollment_keys": 9886
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-02",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-03",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 14721,
+        "diagnostic_distinct_enrollment_keys": 10097
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-04",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 13441,
+        "diagnostic_distinct_enrollment_keys": 9193
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-05",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 12197,
+        "diagnostic_distinct_enrollment_keys": 8318
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-06",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 7876,
+        "diagnostic_distinct_enrollment_keys": 5322
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-07",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5787,
+        "diagnostic_distinct_enrollment_keys": 3831
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-08",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 13367,
+        "diagnostic_distinct_enrollment_keys": 9123
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-09",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 19833,
+        "diagnostic_distinct_enrollment_keys": 13567
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-10",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 19482,
+        "diagnostic_distinct_enrollment_keys": 13401
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-11",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 20082,
+        "diagnostic_distinct_enrollment_keys": 13816
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-12",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 22511,
+        "diagnostic_distinct_enrollment_keys": 15237
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-13",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 15486,
+        "diagnostic_distinct_enrollment_keys": 10672
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-14",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 17533,
+        "diagnostic_distinct_enrollment_keys": 11814
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-15",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 47581,
+        "diagnostic_distinct_enrollment_keys": 32341
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6040,
+        "diagnostic_distinct_enrollment_keys": 4221
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-16",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2495,
+        "diagnostic_distinct_enrollment_keys": 1883
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4243,
+        "diagnostic_distinct_enrollment_keys": 3042
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-17",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2053,
+        "diagnostic_distinct_enrollment_keys": 1654
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4420,
+        "diagnostic_distinct_enrollment_keys": 3213
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-18",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1876,
+        "diagnostic_distinct_enrollment_keys": 1497
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3774,
+        "diagnostic_distinct_enrollment_keys": 2704
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-19",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1632,
+        "diagnostic_distinct_enrollment_keys": 1277
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1329,
+        "diagnostic_distinct_enrollment_keys": 953
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-20",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 678,
+        "diagnostic_distinct_enrollment_keys": 536
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 892,
+        "diagnostic_distinct_enrollment_keys": 672
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-21",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 353,
+        "diagnostic_distinct_enrollment_keys": 278
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4542,
+        "diagnostic_distinct_enrollment_keys": 3402
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-22",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1872,
+        "diagnostic_distinct_enrollment_keys": 1500
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3828,
+        "diagnostic_distinct_enrollment_keys": 2756
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-23",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1469,
+        "diagnostic_distinct_enrollment_keys": 1155
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1500,
+        "diagnostic_distinct_enrollment_keys": 1068
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-24",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 614,
+        "diagnostic_distinct_enrollment_keys": 466
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 418,
+        "diagnostic_distinct_enrollment_keys": 297
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-25",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 372,
+        "diagnostic_distinct_enrollment_keys": 234
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2754,
+        "diagnostic_distinct_enrollment_keys": 1982
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-26",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 1461,
+        "diagnostic_distinct_enrollment_keys": 1140
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1790,
+        "diagnostic_distinct_enrollment_keys": 1227
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-27",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 725,
+        "diagnostic_distinct_enrollment_keys": 568
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1434,
+        "diagnostic_distinct_enrollment_keys": 1054
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-28",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 513,
+        "diagnostic_distinct_enrollment_keys": 405
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6410,
+        "diagnostic_distinct_enrollment_keys": 4533
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-29",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2506,
+        "diagnostic_distinct_enrollment_keys": 2011
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6720,
+        "diagnostic_distinct_enrollment_keys": 4789
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-30",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2562,
+        "diagnostic_distinct_enrollment_keys": 2018
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-31",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6598,
+        "diagnostic_distinct_enrollment_keys": 4690
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-31",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 2233,
+        "diagnostic_distinct_enrollment_keys": 1715
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 34,
+        "diagnostic_distinct_enrollment_keys": 32
+      },
+      {
+        "table": "Enrollments_PY2526_DEC31",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2026-01-01",
+        "status_family": "Terminated",
+        "diagnostic_row_count": 155,
+        "diagnostic_distinct_enrollment_keys": 106
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 1,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4,
+        "diagnostic_distinct_enrollment_keys": 1
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9,
+        "diagnostic_distinct_enrollment_keys": 3
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2,
+        "diagnostic_distinct_enrollment_keys": 2
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-10-31",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 34,
+        "diagnostic_distinct_enrollment_keys": 15
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5290,
+        "diagnostic_distinct_enrollment_keys": 3621
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-02",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3392,
+        "diagnostic_distinct_enrollment_keys": 2322
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-03",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8326,
+        "diagnostic_distinct_enrollment_keys": 5630
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-04",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9323,
+        "diagnostic_distinct_enrollment_keys": 6408
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-05",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9481,
+        "diagnostic_distinct_enrollment_keys": 6563
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-06",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9602,
+        "diagnostic_distinct_enrollment_keys": 6520
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-07",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8790,
+        "diagnostic_distinct_enrollment_keys": 6185
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-08",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5364,
+        "diagnostic_distinct_enrollment_keys": 3811
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-09",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3567,
+        "diagnostic_distinct_enrollment_keys": 2625
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-10",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9726,
+        "diagnostic_distinct_enrollment_keys": 6907
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-11",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9936,
+        "diagnostic_distinct_enrollment_keys": 7032
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-12",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10804,
+        "diagnostic_distinct_enrollment_keys": 7659
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-13",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10348,
+        "diagnostic_distinct_enrollment_keys": 7321
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-14",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9515,
+        "diagnostic_distinct_enrollment_keys": 6796
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-15",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5518,
+        "diagnostic_distinct_enrollment_keys": 3959
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-16",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3914,
+        "diagnostic_distinct_enrollment_keys": 2837
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-17",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 11078,
+        "diagnostic_distinct_enrollment_keys": 7774
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-18",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9779,
+        "diagnostic_distinct_enrollment_keys": 6755
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-19",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 11300,
+        "diagnostic_distinct_enrollment_keys": 7927
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-20",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10842,
+        "diagnostic_distinct_enrollment_keys": 7545
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-21",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 9798,
+        "diagnostic_distinct_enrollment_keys": 6970
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-22",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 5352,
+        "diagnostic_distinct_enrollment_keys": 3701
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-23",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 3152,
+        "diagnostic_distinct_enrollment_keys": 2245
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-24",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 10766,
+        "diagnostic_distinct_enrollment_keys": 7534
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-25",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 11280,
+        "diagnostic_distinct_enrollment_keys": 8137
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-26",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 8090,
+        "diagnostic_distinct_enrollment_keys": 5565
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-27",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 2616,
+        "diagnostic_distinct_enrollment_keys": 1684
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-28",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 6531,
+        "diagnostic_distinct_enrollment_keys": 4405
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-29",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4671,
+        "diagnostic_distinct_enrollment_keys": 3152
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-11-30",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 4565,
+        "diagnostic_distinct_enrollment_keys": 3347
+      },
+      {
+        "table": "Enrollments_PY2526_NOV30",
+        "label": "EVENT_DATE_CANDIDATE_DIAGNOSTIC",
+        "not_official_activity": true,
+        "event_calendar_date": "2025-12-01",
+        "status_family": "Cancelled",
+        "diagnostic_row_count": 53,
+        "diagnostic_distinct_enrollment_keys": 38
+      }
+    ]
+  },
+  "lookback_bin": {
+    "days": 90,
+    "note": "Descriptive reporting bin for dates before the filename-inferred snapshot date. Not a business definition of far-before."
+  },
+  "cancelled_policies": {
+    "metric_id": "cancelled_policies",
+    "metric_name": "Cancelled Policies",
+    "comparison_status": "DIAGNOSTIC",
+    "full_metric_comparable": false,
+    "reason": "Independent semantic checks are not all PASS. FIELD EXISTS and even FIELD SEMANTICS SUPPORTED would not make this COMPARABLE.",
+    "checks": [
+      {
+        "check": "enrollment_identifier",
+        "status": "PASS",
+        "detail": "enrollment_id is present."
+      },
+      {
+        "check": "count_semantics",
+        "status": "UNRESOLVED",
+        "detail": "Sisense COUNT(enrollment.id) is not proven equivalent to historical COUNT or COUNT DISTINCT."
+      },
+      {
+        "check": "status_cancelled",
+        "status": "PASS",
+        "detail": "Exact Cancelled. Canceled is not treated as Cancelled."
+      },
+      {
+        "check": "event_date_semantics",
+        "status": "UNRESOLVED",
+        "detail": "Event-date semantics require a separate SUPPORTED decision. Date presence is not enough."
+      },
+      {
+        "check": "coverage_year",
+        "status": "UNRESOLVED",
+        "detail": "coverage_year = 2026 is applied when the column exists. Equivalence to Sisense ssap_applications.coverage_year is unproven."
+      },
+      {
+        "check": "relevant_filters",
+        "status": "UNRESOLVED",
+        "detail": "Verified Currently Enrolled filters are not applied to this activity diagnostic."
+      },
+      {
+        "check": "aggregation",
+        "status": "UNRESOLVED",
+        "detail": "One snapshot at a time. Snapshots are not summed. Daily grain is diagnostic only."
+      }
+    ]
+  },
+  "terminated_policies": {
+    "metric_id": "terminated_policies",
+    "metric_name": "Terminated Policies",
+    "comparison_status": "DIAGNOSTIC",
+    "full_metric_comparable": false,
+    "reason": "Independent semantic checks are not all PASS. FIELD EXISTS and even FIELD SEMANTICS SUPPORTED would not make this COMPARABLE.",
+    "checks": [
+      {
+        "check": "enrollment_identifier",
+        "status": "PASS",
+        "detail": "enrollment_id is present."
+      },
+      {
+        "check": "count_semantics",
+        "status": "UNRESOLVED",
+        "detail": "Sisense COUNT(enrollment.id) is not proven equivalent to historical COUNT or COUNT DISTINCT."
+      },
+      {
+        "check": "status_term_prefix",
+        "status": "PASS",
+        "detail": "Terminated family uses LIKE 'Term%'. Exact member mapping is unproven."
+      },
+      {
+        "check": "event_date_semantics",
+        "status": "UNRESOLVED",
+        "detail": "Event-date semantics require a separate SUPPORTED decision. Date presence is not enough."
+      },
+      {
+        "check": "coverage_year",
+        "status": "UNRESOLVED",
+        "detail": "coverage_year = 2026 is applied when the column exists. Equivalence to Sisense ssap_applications.coverage_year is unproven."
+      },
+      {
+        "check": "relevant_filters",
+        "status": "UNRESOLVED",
+        "detail": "Verified Currently Enrolled filters are not applied to this activity diagnostic."
+      },
+      {
+        "check": "aggregation",
+        "status": "UNRESOLVED",
+        "detail": "One snapshot at a time. Snapshots are not summed. Daily grain is diagnostic only."
+      }
+    ]
+  },
+  "out_of_scope_this_phase": {
+    "currently_enrolled_people": "unchanged",
+    "new_active_passive": "unchanged",
+    "applications": "unchanged",
+    "pending_people": "unchanged"
+  },
+  "activity_extractor": {
+    "still_requires_last_update_timestamp_exact_name": true,
+    "enrollment_last_update_date_not_auto_promoted": true,
+    "must_use_one_snapshot_unless_dedup_proven": true
+  },
+  "comparable": [],
+  "failures": [],
+  "command": ".\\.venv\\Scripts\\python.exe -m database.comparison.event_date_validation"
+}
