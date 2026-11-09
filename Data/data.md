@@ -1,278 +1,216 @@
 
 
 
-.\.venv\Scripts\python.exe -m unittest discover -s tests -t .             
-.................................................................................................................................................2026-11-08 20:00:43,545 [WARNING] metrics.fingerprint_evidence: Production metric applications_started not bound: No observation history directory
-2026-11-08 20:00:43,545 [WARNING] metrics.fingerprint_evidence: Production metric submitted_applications not bound: No observation history directory
-2026-11-08 20:00:43,545 [WARNING] metrics.fingerprint_evidence: Production metric new_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,546 [WARNING] metrics.fingerprint_evidence: Production metric active_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,546 [WARNING] metrics.fingerprint_evidence: Production metric passive_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,546 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:00:43,546 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 20:00:43,546 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:00:43,546 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 20:00:43,546 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:00:43,547 [INFO] sisense.auth: Authentication successful
-2026-11-08 20:00:43,547 [INFO] sisense.auth: Sisense session verified
-2026-11-08 20:00:43,548 [INFO] sisense.auth: Session state saved to tmpcoc658pv\auth\sisense_state.json
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug] Dashboard sent 0 JAQL POST(s); 0 finished and kept for inspection
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug] No finished dashboard JAQL POSTs could be inspected
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug] Context cookies: 1 total
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug] Cookie domains: ['gahixreports.getinsured.com']
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 1
-2026-11-08 20:00:43,549 [INFO] sisense.diagnostics: [debug]   sid domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=True
-.2026-11-08 20:00:43,552 [WARNING] metrics.fingerprint_evidence: Production metric applications_started not bound: No observation history directory
-2026-11-08 20:00:43,552 [WARNING] metrics.fingerprint_evidence: Production metric submitted_applications not bound: No observation history directory
-2026-11-08 20:00:43,553 [WARNING] metrics.fingerprint_evidence: Production metric new_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,553 [WARNING] metrics.fingerprint_evidence: Production metric active_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,553 [WARNING] metrics.fingerprint_evidence: Production metric passive_enrolled not bound: No observation history directory
-2026-11-08 20:00:43,553 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Authentication successful
-2026-11-08 20:00:43,553 [INFO] sisense.auth: Sisense session verified
-2026-11-08 20:00:43,556 [INFO] sisense.auth: Session state saved to tmp2x44nm3v\auth\sisense_state.json
-2026-11-08 20:00:43,556 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated FAILED, applications_started FAILED, submitted_applications FAILED, new_enrolled FAILED, active_enrolled FAILED, passive_enrolled FAILED
-2026-11-08 20:00:43,556 [INFO] oe_trend_pipeline: Current PY2027 value: 812345
-2026-11-08 20:00:43,557 [INFO] oe_trend_pipeline: Manual baseline: 791826
-2026-11-08 20:00:43,557 [INFO] oe_trend_pipeline: Difference: 812345 - 791826 = +20519
-2026-11-08 20:00:43,557 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 812345, "retrieved_at": "2026-11-09T01:00:43+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
-................................................................................................................................2026-11-08 20:00:48,977 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:00:48,977 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-.2026-11-08 20:00:48,978 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:00:48,978 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-.2026-11-08 20:00:48,978 [INFO] sisense.auth: Login form detected; credentials required
-.2026-11-08 20:00:48,978 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:00:48,978 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-......................................................................................................................................................................................................FF.....2026-11-08 20:02:19,298 [INFO] oe_trend_pipeline: Wave 1 discovery: 2 dashboard JAQL POST(s), 2 widget(s), 2 definition(s); VERIFIED 7, DISCOVERED 1, PENDING 6
-2026-11-08 20:02:19,298 [INFO] oe_trend_pipeline: Cancellation source identification: DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (w-cancelled-policies)
-..E................Passive observation window is active.
-2026-11-08 20:02:19,493 [INFO] oe_trend_pipeline: Passive observation window is active.
+
+
+
+.\.venv\Scripts\python.exe -m unittest discover -s tests -t .
+.................................................................................................................................................2026-11-08 20:18:43,259 [WARNING] metrics.fingerprint_evidence: Production metric applications_started not bound: No observation history directory
+2026-11-08 20:18:43,259 [WARNING] metrics.fingerprint_evidence: Production metric submitted_applications not bound: No observation history directory
+2026-11-08 20:18:43,259 [WARNING] metrics.fingerprint_evidence: Production metric new_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,260 [WARNING] metrics.fingerprint_evidence: Production metric active_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,260 [WARNING] metrics.fingerprint_evidence: Production metric passive_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,260 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:18:43,260 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-08 20:18:43,260 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:18:43,261 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-08 20:18:43,261 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:18:43,261 [INFO] sisense.auth: Authentication successful
+2026-11-08 20:18:43,261 [INFO] sisense.auth: Sisense session verified
+2026-11-08 20:18:43,262 [INFO] sisense.auth: Session state saved to tmpkg_5b5d3\auth\sisense_state.json
+2026-11-08 20:18:43,262 [INFO] sisense.diagnostics: [debug] Dashboard sent 0 JAQL POST(s); 0 finished and kept for inspection
+2026-11-08 20:18:43,263 [INFO] sisense.diagnostics: [debug] No finished dashboard JAQL POSTs could be inspected
+2026-11-08 20:18:43,263 [INFO] sisense.diagnostics: [debug] Context cookies: 1 total
+2026-11-08 20:18:43,263 [INFO] sisense.diagnostics: [debug] Cookie domains: ['gahixreports.getinsured.com']
+2026-11-08 20:18:43,263 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 1
+2026-11-08 20:18:43,263 [INFO] sisense.diagnostics: [debug]   sid domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=True
+.2026-11-08 20:18:43,267 [WARNING] metrics.fingerprint_evidence: Production metric applications_started not bound: No observation history directory
+2026-11-08 20:18:43,267 [WARNING] metrics.fingerprint_evidence: Production metric submitted_applications not bound: No observation history directory
+2026-11-08 20:18:43,267 [WARNING] metrics.fingerprint_evidence: Production metric new_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,267 [WARNING] metrics.fingerprint_evidence: Production metric active_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,267 [WARNING] metrics.fingerprint_evidence: Production metric passive_enrolled not bound: No observation history directory
+2026-11-08 20:18:43,267 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:18:43,267 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-08 20:18:43,267 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:18:43,268 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-08 20:18:43,268 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:18:43,268 [INFO] sisense.auth: Authentication successful
+2026-11-08 20:18:43,268 [INFO] sisense.auth: Sisense session verified
+2026-11-08 20:18:43,269 [INFO] sisense.auth: Session state saved to tmp8b8mne1y\auth\sisense_state.json
+2026-11-08 20:18:43,269 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated FAILED, applications_started FAILED, submitted_applications FAILED, new_enrolled FAILED, active_enrolled FAILED, passive_enrolled FAILED
+2026-11-08 20:18:43,269 [INFO] oe_trend_pipeline: Current PY2027 value: 812345
+2026-11-08 20:18:43,269 [INFO] oe_trend_pipeline: Manual baseline: 791826
+2026-11-08 20:18:43,269 [INFO] oe_trend_pipeline: Difference: 812345 - 791826 = +20519
+2026-11-08 20:18:43,269 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 812345, "retrieved_at": "2026-11-09T01:18:43+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
+................................................................................................................................2026-11-08 20:18:48,237 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:18:48,237 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+.2026-11-08 20:18:48,238 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:18:48,238 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+.2026-11-08 20:18:48,238 [INFO] sisense.auth: Login form detected; credentials required
+.2026-11-08 20:18:48,239 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:18:48,239 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+.............................................................................................................................................................................................................2026-11-08 20:20:17,876 [INFO] oe_trend_pipeline: Wave 1 discovery: 2 dashboard JAQL POST(s), 2 widget(s), 2 definition(s); VERIFIED 7, DISCOVERED 1, PENDING 6
+2026-11-08 20:20:17,876 [INFO] oe_trend_pipeline: Cancellation source identification: DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (w-cancelled-policies)
+...................Passive observation window is active.
+2026-11-08 20:20:18,036 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,493 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,037 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,494 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,037 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,494 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,495 [INFO] oe_trend_pipeline: Wave 1 discovery: 1 dashboard JAQL POST(s), 1 widget(s), 1 definition(s); VERIFIED 7, DISCOVERED 1, PENDING 6
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 1, NOT_AVAILABLE 0, VALIDATION_FAILED 10, PENDING 2
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: Cancellation source identification: DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (w-cancelled-policies)
+2026-11-08 20:20:18,037 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-08 20:20:18,039 [INFO] oe_trend_pipeline: Wave 1 discovery: 1 dashboard JAQL POST(s), 1 widget(s), 1 definition(s); VERIFIED 7, DISCOVERED 1, PENDING 6
+2026-11-08 20:20:18,040 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 1, NOT_AVAILABLE 0, VALIDATION_FAILED 10, PENDING 2
+2026-11-08 20:20:18,040 [INFO] oe_trend_pipeline: Cancellation source identification: DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (w-cancelled-policies)
 .Passive observation window is active.
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-08 20:20:18,041 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,041 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,041 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,496 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,498 [INFO] oe_trend_pipeline: Wave 1 discovery: 1 dashboard JAQL POST(s), 1 widget(s), 1 definition(s); VERIFIED 7, DISCOVERED 0, PENDING 7
-2026-11-08 20:02:19,499 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 11, PENDING 2
+2026-11-08 20:20:18,041 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-08 20:20:18,044 [INFO] oe_trend_pipeline: Wave 1 discovery: 1 dashboard JAQL POST(s), 1 widget(s), 1 definition(s); VERIFIED 7, DISCOVERED 0, PENDING 7
+2026-11-08 20:20:18,044 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 11, PENDING 2
 ..Passive observation window is active.
-2026-11-08 20:02:19,500 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-08 20:20:18,047 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,500 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,047 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,500 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,047 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,500 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-08 20:20:18,047 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
 .Passive observation window is active.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-08 20:20:18,048 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,048 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,048 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-08 20:20:18,048 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
 .Passive observation window is active.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-08 20:20:18,049 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,049 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,049 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,501 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,503 [INFO] oe_trend_pipeline: Wave 1 discovery: 0 dashboard JAQL POST(s), 0 widget(s), 0 definition(s); VERIFIED 7, DISCOVERED 0, PENDING 7
-2026-11-08 20:02:19,503 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 11, PENDING 2
+2026-11-08 20:20:18,049 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+2026-11-08 20:20:18,051 [INFO] oe_trend_pipeline: Wave 1 discovery: 0 dashboard JAQL POST(s), 0 widget(s), 0 definition(s); VERIFIED 7, DISCOVERED 0, PENDING 7
+2026-11-08 20:20:18,051 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 0, SERIES_EXTRACTED 0, NOT_AVAILABLE 0, VALIDATION_FAILED 11, PENDING 2
 .Passive observation window is active.
-2026-11-08 20:02:19,503 [INFO] oe_trend_pipeline: Passive observation window is active.
+2026-11-08 20:20:18,053 [INFO] oe_trend_pipeline: Passive observation window is active.
 Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 20:02:19,504 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
+2026-11-08 20:20:18,053 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
 No additional application JAQL requests will be generated.
-2026-11-08 20:02:19,504 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
+2026-11-08 20:20:18,053 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
 Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 20:02:19,504 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
-..C:\Program Files\Python314\Lib\ast.py:46: ResourceWarning: unclosed database in <sqlite3.Connection object at 0x000001E6DCFC5E40>
-  return compile(source, filename, mode, flags,
-ResourceWarning: Enable tracemalloc to get the object allocation traceback
-....................F........................................................................2026-11-08 20:02:46,296 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,296 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,296 [INFO] sisense.client: HTTP 503 (0.00 sec)
-2026-11-08 20:02:46,296 [INFO] sisense.client: Response header names: ['content-type']
-2026-11-08 20:02:46,296 [WARNING] sisense.retry: JAQL currently_enrolled_people attempt 1/3 failed (transient): TransientSisenseError: HTTP 503 from JAQL endpoint; retrying in 0.0 sec
-2026-11-08 20:02:46,297 [INFO] sisense.client: JAQL attempt 2/3 (timeout 0 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: HTTP 504 (0.00 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: Response header names: ['content-type']
-2026-11-08 20:02:46,297 [WARNING] sisense.retry: JAQL currently_enrolled_people attempt 2/3 failed (transient): TransientSisenseError: HTTP 504 from JAQL endpoint; retrying in 0.0 sec
-2026-11-08 20:02:46,297 [INFO] sisense.client: JAQL attempt 3/3 (timeout 0 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: Value cells: 1
-2026-11-08 20:02:46,297 [INFO] sisense.client: Duration: 0.00 sec
-.2026-11-08 20:02:46,297 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,297 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:46,297 [INFO] sisense.client: Value cells: 1
-2026-11-08 20:02:46,297 [INFO] sisense.client: Duration: 0.00 sec
-.2026-11-08 20:02:46,297 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,298 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: HTTP 401 (0.00 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: Response header names: ['content-type']
-2026-11-08 20:02:46,298 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,298 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: HTTP 302 (0.00 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: Response header names: ['content-type']
-2026-11-08 20:02:46,298 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,298 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: HTTP 403 (0.00 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: Response header names: ['content-type']
-2026-11-08 20:02:46,298 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:46,298 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: HTTP 400 (0.00 sec)
-2026-11-08 20:02:46,298 [INFO] sisense.client: Response header names: ['content-type']
-...2026-11-08 20:02:46,299 [WARNING] sisense.retry: test attempt 1/3 failed (transient): TransientSisenseError: 503; retrying in 2.3 sec
-2026-11-08 20:02:46,299 [WARNING] sisense.retry: test attempt 2/3 failed (transient): TransientSisenseError: 503; retrying in 5.5 sec
-2026-11-08 20:02:46,299 [ERROR] sisense.retry: test failed on final attempt 3/3: TransientSisenseError: 503
-..2026-11-08 20:02:46,299 [WARNING] sisense.retry: test attempt 1/6 failed (transient): TransientSisenseError: 504; retrying in 2.3 sec
-2026-11-08 20:02:46,299 [WARNING] sisense.retry: test attempt 2/6 failed (transient): TransientSisenseError: 504; retrying in 5.5 sec
-2026-11-08 20:02:46,299 [WARNING] sisense.retry: test attempt 3/6 failed (transient): TransientSisenseError: 504; retrying in 9.7 sec
-2026-11-08 20:02:46,300 [WARNING] sisense.retry: test attempt 4/6 failed (transient): TransientSisenseError: 504; retrying in 9.0 sec
-2026-11-08 20:02:46,300 [WARNING] sisense.retry: test attempt 5/6 failed (transient): TransientSisenseError: 504; retrying in 10.0 sec
-.2026-11-08 20:02:46,300 [WARNING] sisense.retry: test attempt 1/3 failed (transient): TransientSisenseError: 502; retrying in 2.3 sec
-2026-11-08 20:02:46,300 [WARNING] sisense.retry: test attempt 2/3 failed (transient): TimeoutError: t; retrying in 5.5 sec
-......................................2026-11-08 20:02:51,256 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:51,257 [INFO] sisense.client: JAQL attempt 1/1 (timeout 30 sec)
-2026-11-08 20:02:51,257 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:51,257 [INFO] sisense.client: Value cells: 2
-2026-11-08 20:02:51,257 [INFO] sisense.client: Duration: 0.00 sec
-...........2026-11-08 20:02:52,419 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Authentication successful
-2026-11-08 20:02:52,420 [INFO] sisense.auth: Sisense session verified
-2026-11-08 20:02:52,423 [INFO] sisense.auth: Session state saved to tmpurvpj06t\auth\sisense_state.json
-2026-11-08 20:02:52,423 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:52,423 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-08 20:02:52,424 [INFO] sisense.client: HTTP 401 (0.00 sec)
-2026-11-08 20:02:52,424 [INFO] sisense.client: Response header names: ['content-type']
-.2026-11-08 20:02:52,427 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:02:52,427 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 20:02:52,427 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:02:52,427 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 20:02:52,428 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:02:52,428 [INFO] sisense.auth: Authentication successful
-2026-11-08 20:02:52,428 [INFO] sisense.auth: Sisense session verified
-2026-11-08 20:02:52,429 [INFO] sisense.auth: Session state saved to tmp88u4nvhs\auth\sisense_state.json
-2026-11-08 20:02:52,430 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:52,430 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-08 20:02:52,430 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:52,430 [INFO] sisense.client: Value cells: 2
-2026-11-08 20:02:52,430 [INFO] sisense.client: Duration: 0.00 sec
-.2026-11-08 20:02:52,433 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Login form detected; credentials required
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Authentication successful
-2026-11-08 20:02:52,433 [INFO] sisense.auth: Sisense session verified
-2026-11-08 20:02:52,434 [INFO] sisense.auth: Session state saved to tmpsjpar8sr\auth\sisense_state.json
-2026-11-08 20:02:52,435 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:52,435 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-08 20:02:52,435 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:52,435 [INFO] sisense.client: Value cells: 2
-2026-11-08 20:02:52,435 [INFO] sisense.client: Duration: 0.00 sec
-.2026-11-08 20:02:52,437 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
-2026-11-08 20:02:52,437 [INFO] sisense.auth: Saved session found; verifying
-2026-11-08 20:02:52,437 [INFO] sisense.auth: Dashboard navigation landed on: dashboard
-2026-11-08 20:02:52,437 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 20:02:52,437 [INFO] sisense.auth: Sisense session verified (saved state)
-2026-11-08 20:02:52,437 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:52,437 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-08 20:02:52,437 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:52,438 [INFO] sisense.client: Value cells: 2
-2026-11-08 20:02:52,438 [INFO] sisense.client: Duration: 0.00 sec
-....................................................2026-11-08 20:02:52,768 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 20:02:52,768 [INFO] sisense.client: JAQL attempt 1/1 (timeout 30 sec)
-2026-11-08 20:02:52,768 [INFO] sisense.client: HTTP 200 (0.00 sec)
-2026-11-08 20:02:52,768 [INFO] sisense.client: Value cells: 2
-2026-11-08 20:02:52,769 [INFO] sisense.client: Duration: 0.00 sec
+2026-11-08 20:20:18,053 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
+...............................................................................................2026-11-08 20:20:43,110 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,110 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,110 [INFO] sisense.client: HTTP 503 (0.00 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: Response header names: ['content-type']
+2026-11-08 20:20:43,111 [WARNING] sisense.retry: JAQL currently_enrolled_people attempt 1/3 failed (transient): TransientSisenseError: HTTP 503 from JAQL endpoint; retrying in 0.0 sec
+2026-11-08 20:20:43,111 [INFO] sisense.client: JAQL attempt 2/3 (timeout 0 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: HTTP 504 (0.00 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: Response header names: ['content-type']
+2026-11-08 20:20:43,111 [WARNING] sisense.retry: JAQL currently_enrolled_people attempt 2/3 failed (transient): TransientSisenseError: HTTP 504 from JAQL endpoint; retrying in 0.0 sec
+2026-11-08 20:20:43,111 [INFO] sisense.client: JAQL attempt 3/3 (timeout 0 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: Value cells: 1
+2026-11-08 20:20:43,111 [INFO] sisense.client: Duration: 0.00 sec
+.2026-11-08 20:20:43,111 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,111 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: Value cells: 1
+2026-11-08 20:20:43,111 [INFO] sisense.client: Duration: 0.00 sec
+.2026-11-08 20:20:43,111 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,111 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: HTTP 401 (0.00 sec)
+2026-11-08 20:20:43,111 [INFO] sisense.client: Response header names: ['content-type']
+2026-11-08 20:20:43,112 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,112 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: HTTP 302 (0.00 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: Response header names: ['content-type']
+2026-11-08 20:20:43,112 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,112 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: HTTP 403 (0.00 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: Response header names: ['content-type']
+2026-11-08 20:20:43,112 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:43,112 [INFO] sisense.client: JAQL attempt 1/3 (timeout 0 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: HTTP 400 (0.00 sec)
+2026-11-08 20:20:43,112 [INFO] sisense.client: Response header names: ['content-type']
+...2026-11-08 20:20:43,112 [WARNING] sisense.retry: test attempt 1/3 failed (transient): TransientSisenseError: 503; retrying in 2.3 sec
+2026-11-08 20:20:43,112 [WARNING] sisense.retry: test attempt 2/3 failed (transient): TransientSisenseError: 503; retrying in 5.5 sec
+2026-11-08 20:20:43,112 [ERROR] sisense.retry: test failed on final attempt 3/3: TransientSisenseError: 503
+..2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 1/6 failed (transient): TransientSisenseError: 504; retrying in 2.3 sec
+2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 2/6 failed (transient): TransientSisenseError: 504; retrying in 5.5 sec
+2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 3/6 failed (transient): TransientSisenseError: 504; retrying in 9.7 sec
+2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 4/6 failed (transient): TransientSisenseError: 504; retrying in 9.0 sec
+2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 5/6 failed (transient): TransientSisenseError: 504; retrying in 10.0 sec
+.2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 1/3 failed (transient): TransientSisenseError: 502; retrying in 2.3 sec
+2026-11-08 20:20:43,113 [WARNING] sisense.retry: test attempt 2/3 failed (transient): TimeoutError: t; retrying in 5.5 sec
+......................................2026-11-08 20:20:48,036 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,037 [INFO] sisense.client: JAQL attempt 1/1 (timeout 30 sec)
+2026-11-08 20:20:48,037 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:48,037 [INFO] sisense.client: Value cells: 2
+2026-11-08 20:20:48,037 [INFO] sisense.client: Duration: 0.00 sec
+...........2026-11-08 20:20:48,225 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Authentication successful
+2026-11-08 20:20:48,225 [INFO] sisense.auth: Sisense session verified
+2026-11-08 20:20:48,226 [INFO] sisense.auth: Session state saved to tmppa90tbk8\auth\sisense_state.json
+2026-11-08 20:20:48,226 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,226 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-08 20:20:48,226 [INFO] sisense.client: HTTP 401 (0.00 sec)
+2026-11-08 20:20:48,227 [INFO] sisense.client: Response header names: ['content-type']
+.2026-11-08 20:20:48,229 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Authentication successful
+2026-11-08 20:20:48,229 [INFO] sisense.auth: Sisense session verified
+2026-11-08 20:20:48,231 [INFO] sisense.auth: Session state saved to tmppn9gleef\auth\sisense_state.json
+2026-11-08 20:20:48,231 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,231 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-08 20:20:48,231 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:48,231 [INFO] sisense.client: Value cells: 2
+2026-11-08 20:20:48,231 [INFO] sisense.client: Duration: 0.00 sec
+.2026-11-08 20:20:48,233 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:20:48,233 [INFO] sisense.auth: Dashboard navigation landed on: login
+2026-11-08 20:20:48,234 [INFO] sisense.auth: Login form detected; credentials required
+2026-11-08 20:20:48,234 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
+2026-11-08 20:20:48,234 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:20:48,234 [INFO] sisense.auth: Authentication successful
+2026-11-08 20:20:48,234 [INFO] sisense.auth: Sisense session verified
+2026-11-08 20:20:48,235 [INFO] sisense.auth: Session state saved to tmp09r4t17j\auth\sisense_state.json
+2026-11-08 20:20:48,235 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,235 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-08 20:20:48,235 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:48,235 [INFO] sisense.client: Value cells: 2
+2026-11-08 20:20:48,235 [INFO] sisense.client: Duration: 0.00 sec
+.2026-11-08 20:20:48,238 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=True)
+2026-11-08 20:20:48,238 [INFO] sisense.auth: Saved session found; verifying
+2026-11-08 20:20:48,238 [INFO] sisense.auth: Dashboard navigation landed on: dashboard
+2026-11-08 20:20:48,238 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
+2026-11-08 20:20:48,238 [INFO] sisense.auth: Sisense session verified (saved state)
+2026-11-08 20:20:48,238 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,238 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
+2026-11-08 20:20:48,238 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:48,238 [INFO] sisense.client: Value cells: 2
+2026-11-08 20:20:48,239 [INFO] sisense.client: Duration: 0.00 sec
+....................................................2026-11-08 20:20:48,551 [INFO] sisense.client: Metric: currently_enrolled_people
+2026-11-08 20:20:48,551 [INFO] sisense.client: JAQL attempt 1/1 (timeout 30 sec)
+2026-11-08 20:20:48,551 [INFO] sisense.client: HTTP 200 (0.00 sec)
+2026-11-08 20:20:48,551 [INFO] sisense.client: Value cells: 2
+2026-11-08 20:20:48,551 [INFO] sisense.client: Duration: 0.00 sec
 ...............
-======================================================================
-ERROR: test_daily_points_do_not_enter_metric_snapshots (tests.test_phase3h_c.ObservedIdentityTests.test_daily_points_do_not_enter_metric_snapshots)
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Program Files\Python314\Lib\shutil.py", line 701, in _rmtree_unsafe
-    os.unlink(fullname)
-    ~~~~~~~~~^^^^^^^^^^
-PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\SELMAK~1\\AppData\\Local\\Temp\\tmpkh0m2htc\\oe.sqlite3'                                                                                                                                 
+Ran 729 tests in 127.823s
 
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\tests\test_phase3h_c.py", line 124, in test_daily_points_do_not_enter_metric_snapshots                                                                                                                                                 
-    with tempfile.TemporaryDirectory() as tmp:
-         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
-  File "C:\Program Files\Python314\Lib\tempfile.py", line 971, in __exit__
-    self.cleanup()
-    ~~~~~~~~~~~~^^
-  File "C:\Program Files\Python314\Lib\tempfile.py", line 975, in cleanup
-    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python314\Lib\tempfile.py", line 955, in _rmtree
-    _shutil.rmtree(name, onexc=onexc)
-    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python314\Lib\shutil.py", line 852, in rmtree
-    _rmtree_impl(path, dir_fd, onexc)
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python314\Lib\shutil.py", line 705, in _rmtree_unsafe
-    onexc(os.unlink, fullname, err)
-    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Program Files\Python314\Lib\tempfile.py", line 930, in onexc
-    _os.unlink(path)
-    ~~~~~~~~~~^^^^^^
-PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\SELMAK~1\\AppData\\Local\\Temp\\tmpkh0m2htc\\oe.sqlite3'                                                                                                                                 
-
-======================================================================
-FAIL: test_no_extra_http_and_no_raw_or_secret_persistence (tests.test_phase3h_b.InventoryTests.test_no_extra_http_and_no_raw_or_secret_persistence)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\tests\test_phase3h_b.py", line 140, in test_no_extra_http_and_no_raw_or_secret_persistence                                                                                                                                             
-    self.assertNotIn("members", blob)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
-AssertionError: 'members' unexpectedly found in '[{"widget_id": "w-people-alias", "widget_title": "Enrolled/Cancelled vs Cancelled/Not Enrolled People", "datasource_id": "localhost_aMAIN", "datasource_title": "MAIN", "metadata_item_count": 5, "metadata_roles": [{"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Count of enrolled cancelled people", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Count of cancelled not enrolled", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f0", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": true, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f1", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f2", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}], "measure_titles": ["Count of enrolled cancelled people", "Count of cancelled not enrolled"], "dimension_titles": [], "dimension_columns": [], "column_titles": [], "context_fields": [], "has_date_dimension": false, "date_grain": null, "response_shape": "MULTI_MEASURE", "http_status": 200, "observations": 1, "definition_fingerprint": "sha256:99b4c218bc12633182181dd6f8cc2f60365748c79fb4a40284abeba59825380a"}, {"widget_id": "w-daily-alias", "widget_title": "Cancellation Activity", "datasource_id": "localhost_aMAIN", "datasource_title": "MAIN", "metadata_item_count": 6, "metadata_roles": [{"panel": "result", "kind": "dimension", "jaql_type": null, "title": "Date", "column_title": null, "table": null, "column": null, "date_level": "days", "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": []}, {"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Policy cancel count", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Policy termination count", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f0", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": true, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f1", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f2", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}], "measure_titles": ["Policy cancel count", "Policy termination count"], "dimension_titles": ["Date"], "dimension_columns": [null], "column_titles": [], "context_fields": [], "has_date_dimension": true, "date_grain": "days", "response_shape": "TIME_SERIES", "http_status": 200, "observations": 1, "definition_fingerprint": "sha256:be8f5aa95ef5d10ffe7ec9db6ea856f730256b5b45fa51fb6daef3c2b7b6ec2f"}, {"widget_id": "6a98048ccef60720fe7f9b47", "widget_title": "Currently Enrolled People", "datasource_id": "localhost_aMAIN", "datasource_title": "MAIN", "metadata_item_count": 8, "metadata_roles": [{"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Currently Enrolled People", "column_title": "Count([exchg_indiv_identifier])", "table": null, "column": null, "date_level": null, "context_fields": [{"table": "enrollee", "column": "exchg_indiv_identifier"}], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "% Effectuated", "column_title": "Formula", "table": null, "column": null, "date_level": null, "context_fields": [{"table": "enrollee", "column": "exchg_indiv_identifier"}, {"table": "enrollment", "column": "enrollment_status_description"}], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "enrollment_status_description", "column_title": null, "table": "enrollment", "column": "enrollment_status_description", "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": false, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:da4fd44f1fcd806fcc2cb3d4458647fb34fb99c4ad01067d4502075326df54a3", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "enrollee_status_description", "column_title": null, "table": "enrollee", "column": "enrollee_status_description", "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": false, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:da4fd44f1fcd806fcc2cb3d4458647fb34fb99c4ad01067d4502075326df54a3", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "Days in benefit_effective_date", "column_title": "benefit_effective_date", "table": "enrollment", "column": "benefit_effective_date", "date_level": "days", "context_fields": [], "is_dashboard_filter": false, "disabled": false, "locked": null, "filter_kind": "range", "filter_fingerprint": "sha256:289a350da5ce55205b3a287207e03e07e1e3392dae3b57c57bae5bf6052880ba", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "person_type_description", "column_title": "person_type_description", "table": "enrollee", "column": "person_type_description", "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:b7a9f37fdda8e0f81167689c6a146f94c354d9db28fdb7e32aabb5855ffceab9", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "coverage_year", "column_title": "coverage_year", "table": "ssap_applications", "column": "coverage_year", "date_level": null, "context_fields": [], "is_dashboard_filter": true, "disabled": false, "locked": true, "filter_kind": "members", "filter_fingerprint": "sha256:08c01f0a030c3004aa9ade6ae441d5e17595503cf68376efaac3f47cb8d2c573", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "insurance_type_description", "column_title": "insurance_type_description", "table": "enrollment", "column": "insurance_type_description", "date_level": null, "context_fields": [], "is_dashboard_filter": true, "disabled": false, "locked": true, "filter_kind": "members", "filter_fingerprint": "sha256:9a55f8e187cdbabc80ab3bb1f7a57e5190ebaa05fb35af74a2ad8d3a80c9bb7e", "aggregation_functions": []}], "measure_titles": ["Currently Enrolled People", "% Effectuated"], "dimension_titles": [], "dimension_columns": [], "column_titles": ["Count([exchg_indiv_identifier])", "Formula", "benefit_effective_date", "person_type_description", "coverage_year", "insurance_type_description"], "context_fields": ["enrollee.exchg_indiv_identifier", "enrollment.enrollment_status_description"], "has_date_dimension": false, "date_grain": null, "response_shape": "MULTI_MEASURE", "http_status": 200, "observations": 1, "definition_fingerprint": "sha256:96f5ed54eedaa32f4c8cb934b71e3d15c1e3fa0099bc58beb71f8a76744fbbbc"}]'                                                               
-
-======================================================================
-FAIL: test_safe_inventory_uses_passive_traffic_only (tests.test_phase3h_b.InventoryTests.test_safe_inventory_uses_passive_traffic_only)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\tests\test_phase3h_b.py", line 110, in test_safe_inventory_uses_passive_traffic_only                                                                                                                                                   
-    self.assertNotIn("members", json.dumps(row))
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 'members' unexpectedly found in '{"widget_id": "w-people-alias", "widget_title": "Enrolled/Cancelled vs Cancelled/Not Enrolled People", "datasource_id": "localhost_aMAIN", "datasource_title": "MAIN", "metadata_item_count": 5, "metadata_roles": [{"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Count of enrolled cancelled people", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "result", "kind": "measure", "jaql_type": "measure", "title": "Count of cancelled not enrolled", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": null, "disabled": null, "locked": null, "filter_kind": null, "filter_fingerprint": null, "aggregation_functions": ["count"]}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f0", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": true, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f1", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}, {"panel": "scope", "kind": "filter", "jaql_type": null, "title": "f2", "column_title": null, "table": null, "column": null, "date_level": null, "context_fields": [], "is_dashboard_filter": false, "disabled": null, "locked": null, "filter_kind": "members", "filter_fingerprint": "sha256:73e69499fdd5df2a3e3b132f83a48657536088efe8c897e82f4f6ce6b5416924", "aggregation_functions": []}], "measure_titles": ["Count of enrolled cancelled people", "Count of cancelled not enrolled"], "dimension_titles": [], "dimension_columns": [], "column_titles": [], "context_fields": [], "has_date_dimension": false, "date_grain": null, "response_shape": "MULTI_MEASURE", "http_status": 200, "observations": 1, "definition_fingerprint": "sha256:99b4c218bc12633182181dd6f8cc2f60365748c79fb4a40284abeba59825380a"}'                                                                                              
-
-======================================================================
-FAIL: test_filter_member_values_are_not_retained (tests.test_phase3h_j.SafeStructureTests.test_filter_member_values_are_not_retained)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\tests\test_phase3h_j.py", line 185, in test_filter_member_values_are_not_retained                                                                                                                                                      
-    self.assertNotIn(secret.lower(), document.lower())
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: 'members' unexpectedly found in '{\n  "generated_at_utc": "2026-11-10t14:30:00z",\n  "scope": "naturally occurring dashboard jaql requests only; structure only, no values",\n  "observed": {\n    "jaql_posts": 2,\n    "out_of_scope": 0,\n    "widgets": 2,\n    "widgets_dropped": 0,\n    "retention_skipped": 0\n  },\n  "metrics": [\n    {\n      "metric_id": "applications_started",\n      "label": "applications started",\n      "module": "applications",\n      "state": "verified",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "verified catalog metric; its verified widget was not observed in this run",\n      "control": "not observed"\n    },\n    {\n      "metric_id": "submitted_applications",\n      "label": "submitted applications",\n      "module": "applications",\n      "state": "verified",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "verified catalog metric; its verified widget was not observed in this run",\n      "control": "not observed"\n    },\n    {\n      "metric_id": "total_applicants",\n      "label": "total applicants",\n      "module": "applications",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "currently_enrolled_people",\n      "label": "currently enrolled people",\n      "module": "enrollment",\n      "state": "verified",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "verified catalog metric; its verified widget was not observed in this run",\n      "control": "not observed"\n    },\n    {\n      "metric_id": "percent_effectuated",\n      "label": "% effectuated",\n      "module": "enrollment",\n      "state": "verified",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "verified catalog metric; its verified widget was not observed in this run",\n      "control": "not observed"\n    },\n    {\n      "metric_id": "new_enrolled",\n      "label": "new",\n      "module": "enrollment",\n      "state": "verified",\n      "widget_ids": [\n        "w-nap"\n      ],\n      "match_sources": [\n        "measure title"\n      ],\n      "reason": "verified catalog metric; exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "active_enrolled",\n      "label": "active",\n      "module": "enrollment",\n      "state": "verified",\n      "widget_ids": [\n        "w-nap"\n      ],\n      "match_sources": [\n        "measure title"\n      ],\n      "reason": "verified catalog metric; exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "passive_enrolled",\n      "label": "passive",\n      "module": "enrollment",\n      "state": "verified",\n      "widget_ids": [\n        "w-nap"\n      ],\n      "match_sources": [\n        "measure title"\n      ],\n      "reason": "verified catalog metric; exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "cancelled",\n      "label": "cancelled",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "terminated",\n      "label": "terminated",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "enrolled_cancelled",\n      "label": "enrolled & cancelled",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "cancelled_not_enrolled",\n      "label": "cancelled - not enrolled",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "cancelled_policies_daily",\n      "label": "cancelled policies",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    },\n    {\n      "metric_id": "terminated_policies_daily",\n      "label": "terminated policies",\n      "module": "enrollment",\n      "state": "pending",\n      "widget_ids": [],\n      "match_sources": [],\n      "reason": "no exact label match in the dashboard\'s own requests",\n      "control": null\n    }\n  ],\n  "widget_inventory": [\n    {\n      "widget_id": "w-nap",\n      "widget_title": "new/active/passive",\n      "datasource_id": "localhost_amain",\n      "datasource_title": "main",\n      "metadata_item_count": 4,\n      "metadata_roles": [\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "scope",\n          "kind": "filter",\n          "jaql_type": null,\n          "title": "enrollment_status_description",\n          "column_title": "enrollment_status_description",\n          "table": "enrollment",\n          "column": "enrollment_status_description",\n          "date_level": null,\n          "context_fields": [],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": "members",\n          "filter_fingerprint": "sha256:328c59b284670b45292ac9c251945b86a8c028837bb6d003e9a1e5b2c90c35d6",\n          "aggregation_functions": []\n        }\n      ],\n      "measure_titles": [\n        "new",\n        "active",\n        "passive"\n      ],\n      "dimension_titles": [],\n      "dimension_columns": [],\n      "column_titles": [\n        "new",\n        "active",\n        "passive",\n        "enrollment_status_description"\n      ],\n      "context_fields": [\n        "enrollment.enrollment_status_description"\n      ],\n      "has_date_dimension": false,\n      "date_grain": null,\n      "response_shape": "unparseable",\n      "http_status": 200,\n      "observations": 1,\n      "definition_fingerprint": "sha256:0354c40791156dcd84934b1d7777b5d3d25ff3da677b58718fc10631abb356ba"\n    },\n    {\n      "widget_id": "w-nap",\n      "widget_title": "new/active/passive",\n      "datasource_id": "localhost_amain",\n      "datasource_title": "main",\n      "metadata_item_count": 4,\n      "metadata_roles": [\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": null,\n          "filter_fingerprint": null,\n          "aggregation_functions": [\n            "sentinel"\n          ]\n        },\n        {\n          "panel": "scope",\n          "kind": "filter",\n          "jaql_type": null,\n          "title": "enrollment_status_description",\n          "column_title": "enrollment_status_description",\n          "table": "enrollment",\n          "column": "enrollment_status_description",\n          "date_level": null,\n          "context_fields": [],\n          "is_dashboard_filter": null,\n          "disabled": null,\n          "locked": null,\n          "filter_kind": "members",\n          "filter_fingerprint": "sha256:41bb9e22a0f370c4780383497384f76471e08a23f46bb5625cda192978071e97",\n          "aggregation_functions": []\n        }\n      ],\n      "measure_titles": [\n        "new",\n        "active",\n        "passive"\n      ],\n      "dimension_titles": [],\n      "dimension_columns": [],\n      "column_titles": [\n        "new",\n        "active",\n        "passive",\n        "enrollment_status_description"\n      ],\n      "context_fields": [\n        "enrollment.enrollment_status_description"\n      ],\n      "has_date_dimension": false,\n      "date_grain": null,\n      "response_shape": "unparseable",\n      "http_status": 200,\n      "observations": 1,\n      "definition_fingerprint": "sha256:f35578f06da69e5e4966af16a9edced601051bcd37c9b40e17fc083bd6a97336"\n    }\n  ],\n  "cancellation_source_identification": [],\n  "definition_state_comparison": [\n    {\n      "widget_id": "w-nap",\n      "widget_title": "new/active/passive",\n      "fingerprint_a": "sha256:0354c40791156dcd84934b1d7777b5d3d25ff3da677b58718fc10631abb356ba",\n      "fingerprint_b": "sha256:f35578f06da69e5e4966af16a9edced601051bcd37c9b40e17fc083bd6a97336",\n      "column_title_changed": false,\n      "table_column_changed": false,\n      "context_fields_changed": false,\n      "scope_structure_changed": false,\n      "jaql_title_changed": false,\n      "note": "fingerprint differs only in non-exposed state metadata."\n    }\n  ],\n  "widgets": [\n    {\n      "widget_id": "w-nap",\n      "widget_title": "new/active/passive",\n      "widget_type": "indicator",\n      "datasource": "main",\n      "measures": [\n        "new",\n        "active",\n        "passive"\n      ],\n      "measure_details": [\n        {\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        }\n      ],\n      "dimensions": [],\n      "filter_count": 1,\n      "dashboard_filter_count": 0,\n      "observations": 1,\n      "distinct_definitions": 2,\n      "structure_changed": true,\n      "matches": {\n        "new": [\n          "measure title"\n        ],\n        "active": [\n          "measure title"\n        ],\n        "passive": [\n          "measure title"\n        ]\n      },\n      "datasource_id": "localhost_amain",\n      "metadata_item_count": 4,\n      "metadata_roles": [\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "scope",\n          "kind": "filter",\n          "jaql_type": null,\n          "title": "enrollment_status_description",\n          "column_title": "enrollment_status_description",\n          "table": "enrollment",\n          "column": "enrollment_status_description",\n          "date_level": null,\n          "context_fields": []\n        }\n      ],\n      "has_date_dimension": false,\n      "date_grain": null,\n      "definition_fingerprint": "sha256:0354c40791156dcd84934b1d7777b5d3d25ff3da677b58718fc10631abb356ba",\n      "control": null,\n      "response": {\n        "http_status": 200,\n        "available": true,\n        "shape": "unparseable",\n        "rows": 0,\n        "value_cells": 0,\n        "time_points": 0,\n        "first_period": null,\n        "last_period": null,\n        "matched_category_labels": [],\n        "failure": "rows do not match request columns"\n      }\n    },\n    {\n      "widget_id": "w-nap",\n      "widget_title": "new/active/passive",\n      "widget_type": "indicator",\n      "datasource": "main",\n      "measures": [\n        "new",\n        "active",\n        "passive"\n      ],\n      "measure_details": [\n        {\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        }\n      ],\n      "dimensions": [],\n      "filter_count": 1,\n      "dashboard_filter_count": 0,\n      "observations": 1,\n      "distinct_definitions": 2,\n      "structure_changed": true,\n      "matches": {\n        "new": [\n          "measure title"\n        ],\n        "active": [\n          "measure title"\n        ],\n        "passive": [\n          "measure title"\n        ]\n      },\n      "datasource_id": "localhost_amain",\n      "metadata_item_count": 4,\n      "metadata_roles": [\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "new",\n          "column_title": "new",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "active",\n          "column_title": "active",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "result",\n          "kind": "measure",\n          "jaql_type": "measure",\n          "title": "passive",\n          "column_title": "passive",\n          "table": "enrollment",\n          "column": "id",\n          "date_level": null,\n          "context_fields": [\n            {\n              "table": "enrollment",\n              "column": "enrollment_status_description"\n            }\n          ]\n        },\n        {\n          "panel": "scope",\n          "kind": "filter",\n          "jaql_type": null,\n          "title": "enrollment_status_description",\n          "column_title": "enrollment_status_description",\n          "table": "enrollment",\n          "column": "enrollment_status_description",\n          "date_level": null,\n          "context_fields": []\n        }\n      ],\n      "has_date_dimension": false,\n      "date_grain": null,\n      "definition_fingerprint": "sha256:f35578f06da69e5e4966af16a9edced601051bcd37c9b40e17fc083bd6a97336",\n      "control": null,\n      "response": {\n        "http_status": 200,\n        "available": true,\n        "shape": "unparseable",\n        "rows": 0,\n        "value_cells": 0,\n        "time_points": 0,\n        "first_period": null,\n        "last_period": null,\n        "matched_category_labels": [],\n        "failure": "rows do not match request columns"\n      }\n    }\n  ]\n}'           
-
-----------------------------------------------------------------------
-Ran 729 tests in 131.728s
-
-FAILED (failures=3, errors=1)
+OK
 PS C:\
