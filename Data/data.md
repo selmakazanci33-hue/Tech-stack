@@ -1,159 +1,34 @@
 
 
-
-.\.venv\Scripts\python.exe main.py
-2026-11-08 21:22:10,102 [INFO] sisense.browser: Launching installed browser channel: msedge (headless=False)
-2026-11-08 21:22:10,602 [INFO] sisense.auth: Saved session found; verifying
-2026-11-08 21:22:14,706 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 21:22:14,706 [INFO] sisense.auth: Saved session is expired or invalid; discarding it
-2026-11-08 21:22:18,743 [INFO] sisense.auth: Dashboard navigation landed on: login
-2026-11-08 21:22:18,783 [INFO] sisense.auth: Login form detected; credentials required
-Sisense password: 
-2026-11-08 21:22:25,390 [INFO] sisense.auth: Credentials submitted; waiting for dashboard (SSO/MFA may be completed in the browser)
-2026-11-08 21:22:29,635 [INFO] sisense.auth: Dashboard: PY 2027 - OE Executive Dashboard
-2026-11-08 21:22:29,636 [INFO] sisense.auth: Authentication successful
-2026-11-08 21:22:29,636 [INFO] sisense.auth: Sisense session verified
-2026-11-08 21:22:29,645 [INFO] sisense.auth: Session state saved to runtime\auth\sisense_state.json
-2026-11-08 21:22:29,645 [INFO] oe_trend_pipeline: [debug] Authenticated BrowserContext ready (reused saved state: False)
-2026-11-08 21:22:36,720 [INFO] sisense.diagnostics: [debug] Dashboard sent 37 JAQL POST(s); 1 finished and kept for inspection
-2026-11-08 21:22:36,739 [INFO] sisense.diagnostics: [debug] Inspected 1 dashboard JAQL POST(s); statuses: ['200']
-2026-11-08 21:22:36,739 [INFO] sisense.diagnostics: [debug] Header names on every HTTP 200 dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-08 21:22:36,739 [INFO] sisense.diagnostics: [debug] Cookie names sent on every HTTP 200 dashboard JAQL POST: ['XSRF-TOKEN', 'server.session']
-2026-11-08 21:22:36,739 [INFO] sisense.diagnostics: [debug] Header names seen on any dashboard JAQL POST: [':authority', ':method', ':path', ':scheme', 'accept', 'accept-encoding', 'accept-language', 'content-length', 'content-type', 'cookie', 'internal', 'origin', 'priority', 'referer', 'sec-ch-ua', 'sec-ch-ua-mobile', 'sec-ch-ua-platform', 'sec-fetch-dest', 'sec-fetch-mode', 'sec-fetch-site', 'user-agent', 'x-request-id', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-08 21:22:36,744 [INFO] sisense.diagnostics: [debug] Context cookies: 3 total
-2026-11-08 21:22:36,745 [INFO] sisense.diagnostics: [debug] Cookie domains: ['.candu.ai', 'gahixreports.getinsured.com']
-2026-11-08 21:22:36,745 [INFO] sisense.diagnostics: [debug] Cookies applicable to gahixreports.getinsured.com/api/datasources/MAIN/jaql: 2
-2026-11-08 21:22:36,745 [INFO] sisense.diagnostics: [debug]   server.session domain=gahixreports.getinsured.com path=/ secure=True httpOnly=True sameSite=Lax session=False
-2026-11-08 21:22:36,746 [INFO] sisense.diagnostics: [debug]   XSRF-TOKEN domain=gahixreports.getinsured.com path=/ secure=True httpOnly=False sameSite=Lax session=False
-2026-11-08 21:22:36,747 [INFO] sisense.diagnostics: [debug]   not sent to JAQL: cdn-allocation domain=.candu.ai path=/ secure=True httpOnly=True sameSite=None session=True
-2026-11-08 21:22:36,766 [INFO] oe_trend_pipeline: Request metadata taken from observed dashboard JAQL request: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-08 21:22:36,766 [INFO] oe_trend_pipeline: CSRF header matches current BrowserContext cookie: True
-2026-11-08 21:23:06,034 [INFO] oe_trend_pipeline: Passive proof: 143 dashboard JAQL POST(s) seen, 4 for the verified widget; parse PASS
-2026-11-08 21:23:06,097 [INFO] oe_trend_pipeline: Passive production metrics: percent_effectuated EXTRACTED, applications_started EXTRACTED, submitted_applications EXTRACTED, new_enrolled FAILED, active_enrolled FAILED, passive_enrolled FAILED
-Passive observation window is active.
-2026-11-08 21:23:06,098 [INFO] oe_trend_pipeline: Passive observation window is active.
-Use the already-open dashboard normally to expose the widgets you want to validate.
-2026-11-08 21:23:06,098 [INFO] oe_trend_pipeline: Use the already-open dashboard normally to expose the widgets you want to validate.
-No additional application JAQL requests will be generated.
-2026-11-08 21:23:06,098 [INFO] oe_trend_pipeline: No additional application JAQL requests will be generated.
-Press ENTER in this terminal when natural dashboard observation is complete.
-2026-11-08 21:23:06,098 [INFO] oe_trend_pipeline: Press ENTER in this terminal when natural dashboard observation is complete.
-
-2026-11-08 21:24:41,963 [INFO] sisense.client: Metric: currently_enrolled_people
-2026-11-08 21:24:41,963 [INFO] sisense.client: JAQL attempt 1/3 (timeout 30 sec)
-2026-11-08 21:24:41,963 [INFO] sisense.client: Forwarding observed request metadata headers: ['internal', 'origin', 'referer', 'x-sisense-origin', 'x-tenant-id', 'x-xsrf-token']
-2026-11-08 21:24:42,282 [INFO] sisense.client: HTTP 200 (0.32 sec)
-2026-11-08 21:24:42,283 [INFO] sisense.client: Value cells: 2
-2026-11-08 21:24:42,283 [INFO] sisense.client: Duration: 0.32 sec
-2026-11-08 21:24:42,396 [INFO] sisense.discovery: Discovery scope: 4 out-of-scope JAQL POST(s) {'no_dashboard_or_widget_reference': 4}; other JAQL paths {'/api/datasources/DW_FAST/jaql': 22}
-2026-11-08 21:24:42,397 [INFO] oe_trend_pipeline: Wave 1 discovery: 424 dashboard JAQL POST(s), 37 widget(s), 61 definition(s); VERIFIED 7, DISCOVERED 3, PENDING 4
-2026-11-08 21:24:42,413 [INFO] oe_trend_pipeline: Wave 1 discovery report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
-2026-11-08 21:24:42,451 [INFO] oe_trend_pipeline: Wave 1 runtime validation: VALUE_EXTRACTED 7, SERIES_EXTRACTED 2, NOT_AVAILABLE 0, VALIDATION_FAILED 2, PENDING 2
-2026-11-08 21:24:42,454 [INFO] oe_trend_pipeline: Cancellation source identification: UNRESOLVED/UNRESOLVED (6abe90b12d01ccb8699b1e55), DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (6a98048ccef60720fe7f9b39), DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (6a98048ccef60720fe7f9b39), DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (6a98048ccef60720fe7f9b39), DAILY_CANCELLATION_CANDIDATE/EXACT_IDENTITY_CONFIRMED (6a98048ccef60720fe7f9b39)
-2026-11-08 21:24:42,797 [INFO] oe_trend_pipeline: Current PY2027 value: 797311
-2026-11-08 21:24:42,798 [INFO] oe_trend_pipeline: Manual baseline: 791826
-2026-11-08 21:24:42,798 [INFO] oe_trend_pipeline: Difference: 797311 - 791826 = +5485
-2026-11-08 21:24:42,798 [INFO] oe_trend_pipeline: Result: {"metric": "currently_enrolled_people", "plan_year": 2027, "value": 797311, "retrieved_at": "2026-11-09T02:24:42+00:00", "source": "Sisense MAIN", "dashboard": "PY 2027 - OE Executive Dashboard"}
-
-============================================================
-Georgia Access — PY2027 Sisense Retrieval
-============================================================
-
-Authentication        PASS
-Dashboard             PY 2027 - OE Executive Dashboard
-Datasource            MAIN
-Metric                Currently Enrolled People
-Coverage Year         2027
-Current Value         797,311
-Manual Baseline       791,826
-Retrieved             2026-11-09T02:24:42+00:00
-JAQL Status           PASS
-
-============================================================
-
-Passive JAQL proof (validation only — application value is authoritative)
-Passive observation:
-  Candidate: FOUND
-  Dashboard: MATCH
-  Widget: MATCH
-  Datasource: MATCH
-  Primary Measure: MATCH
-  Filters: MATCH
-  HTTP Status: 200
-  Parse: PASS
-
-Passive Value: 797,311
-Application Value: 797,311
-Difference: 0
-Passive Validation: PASS
-
-============================================================
-2026-11-08 21:24:42,799 [INFO] oe_trend_pipeline: Passive Validation: PASS
-
-Wave 1 discovery (developer review only — not used for snapshots or the executive report)
-  VERIFIED    7
-  DISCOVERED  3
-  PENDING     4
-  Identification 5 cancellation source candidate(s)
-  Report      C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\discovery\wave1_metric_discovery.html
-
-============================================================
-
-Wave 1 runtime validation (developer review only — not stored, not in the executive report)
-  Applications Started        VALUE_EXTRACTED     572,753
-  Submitted Applications      VALUE_EXTRACTED     571,405
-  Total Applicants            VALUE_EXTRACTED     840,166
-  % Effectuated               VALUE_EXTRACTED     93.94% (raw 0.939435)
-  New                         VALUE_EXTRACTED     4,402
-  Active                      VALUE_EXTRACTED     58,793
-  Passive                     VALUE_EXTRACTED     734,544
-  Enrolled & Cancelled        VALIDATION_FAILED   
-  Cancelled - Not Enrolled    VALIDATION_FAILED   
-  Cancelled Policies — OBSERVED
-  SERIES_EXTRACTED
-  Cancelled Policies          SERIES_EXTRACTED    
-  Terminated Policies         SERIES_EXTRACTED    
-  Cancelled                   PENDING             
-  Terminated                  PENDING             
-  Currently Enrolled identity IDENTITY_PASS
-  Currently Enrolled Control  EXACT_VALUE_MATCH
-  Promotion evidence (validation-only candidates; nothing is promoted automatically)
-    Total Applicants          STABLE        ELIGIBLE
-  Cancellation / termination evidence (validation only; not production)
-    Enrolled & Cancelled      MISSING       NOT ELIGIBLE (Extraction status VALIDATION_FAILED)
-    Cancelled - Not Enrolled  MISSING       NOT ELIGIBLE (Extraction status VALIDATION_FAILED)
-    Cancelled Policies        NO BASELINE   ELIGIBLE
-    Terminated Policies       NO BASELINE   ELIGIBLE
-    Shared widget cancelled_policies_daily, terminated_policies_daily: ELIGIBLE TOGETHER
-    Fingerprint observation: RECORDED
-  Cancellation source identification (structure only; not production)
-    6abe90b12d01ccb8699b1e55UNRESOLVED                      UNRESOLVED
-    6a98048ccef60720fe7f9b39DAILY_CANCELLATION_CANDIDATE    EXACT_IDENTITY_CONFIRMED
-    6a98048ccef60720fe7f9b39DAILY_CANCELLATION_CANDIDATE    EXACT_IDENTITY_CONFIRMED
-    6a98048ccef60720fe7f9b39DAILY_CANCELLATION_CANDIDATE    EXACT_IDENTITY_CONFIRMED
-    6a98048ccef60720fe7f9b39DAILY_CANCELLATION_CANDIDATE    EXACT_IDENTITY_CONFIRMED
-  Report: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\validation\wave1_runtime_validation.html
-
-============================================================
-2026-11-08 21:24:42,810 [INFO] oe_trend_pipeline: Currently Enrolled control: EXACT_VALUE_MATCH (IDENTITY_PASS)
-Currently Enrolled    797,311
-Snapshot              SKIPPED (DUPLICATE_SLOT: kept existing snapshot from Nov 09, 2026 02:04 UTC)
-Historical Snapshots  13
-Data Status           LIVE
-Previous Snapshot Change+0 (+0.00%)
-Daily Change          Insufficient history
-7-Day Change          Insufficient history
-30-Day Change         Insufficient history
-Overall Data Status   PARTIAL
-Report                C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\latest\index.html
-
-============================================================
-Verified dashboard metrics (passive, zero additional requests)
-  % Effectuated               LIVE           93.94%  snapshot DUPLICATE_SLOT
-  Applications Started        LIVE           572,753  snapshot DUPLICATE_SLOT
-  Submitted Applications      LIVE           571,405  snapshot DUPLICATE_SLOT
-  New                         STALE          Response body unavailable
-  Active                      STALE          Response body unavailable
-  Passive                     STALE          Response body unavailable
-
-============================================================
+.\.venv\Scripts\python.exe -m database.comparison.activity_snapshot_drift        
+PY2026 ACTIVITY SNAPSHOT DRIFT (read-only, aggregates only)                                                                                               
+Cancelled: Enrollments_PY2526_01312026 -> Enrollments_PY2526_02272026 lag=27d window=2025-11-02..2026-01-31 A=19525 B=16 both=16 A_only=19509 B_only=0 (new=0) retention=0.000819 same=16 moved_date=0 changed_status=0 both_changed=40 disappeared=19469 -> MUTABLE_LATEST_STATE                                   
+Terminated: Enrollments_PY2526_01312026 -> Enrollments_PY2526_02272026 lag=27d window=2025-11-02..2026-01-31 A=313 B=259 both=259 A_only=54 B_only=0 (new=0) retention=0.827476 same=259 moved_date=30 changed_status=0 both_changed=1 disappeared=23 -> MIXED                                                      
+Cancelled: Enrollments_PY2526_02272026 -> Enrollments_PY2526_03312026 lag=32d window=2025-11-29..2026-02-27 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE                                 
+Terminated: Enrollments_PY2526_02272026 -> Enrollments_PY2526_03312026 lag=32d window=2025-11-29..2026-02-27 A=49772 B=103370 both=39363 A_only=10409 B_only=64007 (new=64007) retention=0.790866 same=39363 moved_date=4073 changed_status=0 both_changed=1851 disappeared=4485 -> MIXED
+Cancelled: Enrollments_PY2526_03312026 -> Enrollments_PY2526_04302026 lag=30d window=2025-12-31..2026-03-31 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
+Terminated: Enrollments_PY2526_03312026 -> Enrollments_PY2526_04302026 lag=30d window=2025-12-31..2026-03-31 A=138725 B=97777 both=97743 A_only=40982 B_only=34 (new=34) retention=0.704581 same=97743 moved_date=35349 changed_status=0 both_changed=3572 disappeared=2061 -> MIXED
+Cancelled: Enrollments_PY2526_04302026 -> Enrollments_PY2526_05302026 lag=30d window=2026-01-30..2026-04-30 A=79774 B=75829 both=73642 A_only=6132 B_only=2187 (new=2187) retention=0.923133 same=73642 moved_date=3788 changed_status=0 both_changed=175 disappeared=2169 -> MIXED
+Terminated: Enrollments_PY2526_04302026 -> Enrollments_PY2526_05302026 lag=30d window=2026-01-30..2026-04-30 A=331950 B=317145 both=317101 A_only=14849 B_only=44 (new=44) retention=0.955267 same=317101 moved_date=12248 changed_status=0 both_changed=1985 disappeared=616 -> IMMUTABLE_EVENT_LIKE
+Cancelled: Enrollments_PY2526_05302026 -> Enrollments_PY2526_05312026 lag=1d window=2026-03-01..2026-05-30 A=57964 B=0 both=0 A_only=57964 B_only=0 (new=0) retention=0.0 same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=57964 -> MUTABLE_LATEST_STATE
+Terminated: Enrollments_PY2526_05302026 -> Enrollments_PY2526_05312026 lag=1d window=2026-03-01..2026-05-30 A=332907 B=0 both=0 A_only=332907 B_only=0 (new=0) retention=0.0 same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=332907 -> MUTABLE_LATEST_STATE
+Cancelled: Enrollments_PY2526_05312026 -> Enrollments_PY2526_07302026 lag=60d window=2026-03-02..2026-05-31 A=0 B=56744 both=0 A_only=0 B_only=56744 (new=56744) retention=N/A same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=0 -> INSUFFICIENT_EVIDENCE
+Terminated: Enrollments_PY2526_05312026 -> Enrollments_PY2526_07302026 lag=60d window=2026-03-02..2026-05-31 A=0 B=326724 both=0 A_only=0 B_only=326724 (new=326724) retention=N/A same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=0 -> INSUFFICIENT_EVIDENCE
+Cancelled: Enrollments_PY2526_07302026 -> Enrollments_PY2526_08302026 lag=31d window=2026-05-01..2026-07-30 A=36068 B=33895 both=33637 A_only=2431 B_only=258 (new=258) retention=0.9326 same=33637 moved_date=2020 changed_status=0 both_changed=38 disappeared=373 -> MIXED
+Terminated: Enrollments_PY2526_07302026 -> Enrollments_PY2526_08302026 lag=31d window=2026-05-01..2026-07-30 A=116363 B=108539 both=108531 A_only=7832 B_only=8 (new=8) retention=0.932693 same=108531 moved_date=4633 changed_status=0 both_changed=1456 disappeared=1743 -> MIXED
+Cancelled: Enrollments_PY2526_08302026 -> Enrollments_PY2526_09302026 lag=31d window=2026-06-01..2026-08-30 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
+Terminated: Enrollments_PY2526_08302026 -> Enrollments_PY2526_09302026 lag=31d window=2026-06-01..2026-08-30 A=96984 B=93687 both=92872 A_only=4112 B_only=815 (new=815) retention=0.957601 same=92872 moved_date=3496 changed_status=0 both_changed=615 disappeared=1 -> IMMUTABLE_EVENT_LIKE
+Cancelled: Enrollments_PY2526_09302026 -> Enrollments_PY2526_10312026 lag=31d window=2026-07-02..2026-09-30 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
+Terminated: Enrollments_PY2526_09302026 -> Enrollments_PY2526_10312026 lag=31d window=2026-07-02..2026-09-30 A=96262 B=91224 both=91223 A_only=5039 B_only=1 (new=1) retention=0.947653 same=91223 moved_date=3724 changed_status=0 both_changed=524 disappeared=791 -> MIXED
+Cancelled: DIAGNOSTIC_ONLY (MIXED; 4/9 pairs sufficient)
+Terminated: DIAGNOSTIC_ONLY (MIXED; 8/9 pairs sufficient)
+Skipped Enrollments_PY2526_06312026: No proven snapshot date; month-day tokens do not invent a year.
+Skipped Enrollments_PY2526_DEC31: No proven snapshot date; month-day tokens do not invent a year.
+Skipped Enrollments_PY2526_NOV30: No proven snapshot date; month-day tokens do not invent a year.
+Failure: transition Enrollments_PY2526_02272026->Enrollments_PY2526_03312026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
+Failure: transition Enrollments_PY2526_03312026->Enrollments_PY2526_04302026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
+Failure: transition Enrollments_PY2526_08302026->Enrollments_PY2526_09302026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
+Failure: transition Enrollments_PY2526_09302026->Enrollments_PY2526_10312026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
+Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_activity_snapshot_drift.json
+Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_activity_snapshot_drift.html
+PS C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation> 
