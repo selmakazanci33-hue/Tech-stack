@@ -1,918 +1,7349 @@
 
 
-.\.venv\Scripts\python.exe -m database.comparison.activity_snapshot_drift        
-PY2026 ACTIVITY SNAPSHOT DRIFT (read-only, aggregates only)                                                                                               
-Cancelled: Enrollments_PY2526_01312026 -> Enrollments_PY2526_02272026 lag=27d window=2025-11-02..2026-01-31 A=19525 B=16 both=16 A_only=19509 B_only=0 (new=0) retention=0.000819 same=16 moved_date=0 changed_status=0 both_changed=40 disappeared=19469 -> MUTABLE_LATEST_STATE                                   
-Terminated: Enrollments_PY2526_01312026 -> Enrollments_PY2526_02272026 lag=27d window=2025-11-02..2026-01-31 A=313 B=259 both=259 A_only=54 B_only=0 (new=0) retention=0.827476 same=259 moved_date=30 changed_status=0 both_changed=1 disappeared=23 -> MIXED                                                      
-Cancelled: Enrollments_PY2526_02272026 -> Enrollments_PY2526_03312026 lag=32d window=2025-11-29..2026-02-27 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE                                 
-Terminated: Enrollments_PY2526_02272026 -> Enrollments_PY2526_03312026 lag=32d window=2025-11-29..2026-02-27 A=49772 B=103370 both=39363 A_only=10409 B_only=64007 (new=64007) retention=0.790866 same=39363 moved_date=4073 changed_status=0 both_changed=1851 disappeared=4485 -> MIXED
-Cancelled: Enrollments_PY2526_03312026 -> Enrollments_PY2526_04302026 lag=30d window=2025-12-31..2026-03-31 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
-Terminated: Enrollments_PY2526_03312026 -> Enrollments_PY2526_04302026 lag=30d window=2025-12-31..2026-03-31 A=138725 B=97777 both=97743 A_only=40982 B_only=34 (new=34) retention=0.704581 same=97743 moved_date=35349 changed_status=0 both_changed=3572 disappeared=2061 -> MIXED
-Cancelled: Enrollments_PY2526_04302026 -> Enrollments_PY2526_05302026 lag=30d window=2026-01-30..2026-04-30 A=79774 B=75829 both=73642 A_only=6132 B_only=2187 (new=2187) retention=0.923133 same=73642 moved_date=3788 changed_status=0 both_changed=175 disappeared=2169 -> MIXED
-Terminated: Enrollments_PY2526_04302026 -> Enrollments_PY2526_05302026 lag=30d window=2026-01-30..2026-04-30 A=331950 B=317145 both=317101 A_only=14849 B_only=44 (new=44) retention=0.955267 same=317101 moved_date=12248 changed_status=0 both_changed=1985 disappeared=616 -> IMMUTABLE_EVENT_LIKE
-Cancelled: Enrollments_PY2526_05302026 -> Enrollments_PY2526_05312026 lag=1d window=2026-03-01..2026-05-30 A=57964 B=0 both=0 A_only=57964 B_only=0 (new=0) retention=0.0 same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=57964 -> MUTABLE_LATEST_STATE
-Terminated: Enrollments_PY2526_05302026 -> Enrollments_PY2526_05312026 lag=1d window=2026-03-01..2026-05-30 A=332907 B=0 both=0 A_only=332907 B_only=0 (new=0) retention=0.0 same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=332907 -> MUTABLE_LATEST_STATE
-Cancelled: Enrollments_PY2526_05312026 -> Enrollments_PY2526_07302026 lag=60d window=2026-03-02..2026-05-31 A=0 B=56744 both=0 A_only=0 B_only=56744 (new=56744) retention=N/A same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=0 -> INSUFFICIENT_EVIDENCE
-Terminated: Enrollments_PY2526_05312026 -> Enrollments_PY2526_07302026 lag=60d window=2026-03-02..2026-05-31 A=0 B=326724 both=0 A_only=0 B_only=326724 (new=326724) retention=N/A same=0 moved_date=0 changed_status=0 both_changed=0 disappeared=0 -> INSUFFICIENT_EVIDENCE
-Cancelled: Enrollments_PY2526_07302026 -> Enrollments_PY2526_08302026 lag=31d window=2026-05-01..2026-07-30 A=36068 B=33895 both=33637 A_only=2431 B_only=258 (new=258) retention=0.9326 same=33637 moved_date=2020 changed_status=0 both_changed=38 disappeared=373 -> MIXED
-Terminated: Enrollments_PY2526_07302026 -> Enrollments_PY2526_08302026 lag=31d window=2026-05-01..2026-07-30 A=116363 B=108539 both=108531 A_only=7832 B_only=8 (new=8) retention=0.932693 same=108531 moved_date=4633 changed_status=0 both_changed=1456 disappeared=1743 -> MIXED
-Cancelled: Enrollments_PY2526_08302026 -> Enrollments_PY2526_09302026 lag=31d window=2026-06-01..2026-08-30 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
-Terminated: Enrollments_PY2526_08302026 -> Enrollments_PY2526_09302026 lag=31d window=2026-06-01..2026-08-30 A=96984 B=93687 both=92872 A_only=4112 B_only=815 (new=815) retention=0.957601 same=92872 moved_date=3496 changed_status=0 both_changed=615 disappeared=1 -> IMMUTABLE_EVENT_LIKE
-Cancelled: Enrollments_PY2526_09302026 -> Enrollments_PY2526_10312026 lag=31d window=2026-07-02..2026-09-30 A=N/A B=N/A both=N/A A_only=N/A B_only=N/A (new=N/A) retention=N/A same=N/A moved_date=N/A changed_status=N/A both_changed=N/A disappeared=N/A -> INSUFFICIENT_EVIDENCE
-Terminated: Enrollments_PY2526_09302026 -> Enrollments_PY2526_10312026 lag=31d window=2026-07-02..2026-09-30 A=96262 B=91224 both=91223 A_only=5039 B_only=1 (new=1) retention=0.947653 same=91223 moved_date=3724 changed_status=0 both_changed=524 disappeared=791 -> MIXED
-Cancelled: DIAGNOSTIC_ONLY (MIXED; 4/9 pairs sufficient)
-Terminated: DIAGNOSTIC_ONLY (MIXED; 8/9 pairs sufficient)
-Skipped Enrollments_PY2526_06312026: No proven snapshot date; month-day tokens do not invent a year.
-Skipped Enrollments_PY2526_DEC31: No proven snapshot date; month-day tokens do not invent a year.
-Skipped Enrollments_PY2526_NOV30: No proven snapshot date; month-day tokens do not invent a year.
-Failure: transition Enrollments_PY2526_02272026->Enrollments_PY2526_03312026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
-Failure: transition Enrollments_PY2526_03312026->Enrollments_PY2526_04302026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
-Failure: transition Enrollments_PY2526_08302026->Enrollments_PY2526_09302026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
-Failure: transition Enrollments_PY2526_09302026->Enrollments_PY2526_10312026 Cancelled: ('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')
-Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_activity_snapshot_drift.json
-Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_activity_snapshot_drift.html
-PS C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation> 
-
-
-{
-  "report_kind": "PY2026_ACTIVITY_SNAPSHOT_DRIFT",
-  "question": "Do PY2026 snapshot tables keep a policy's Cancelled/Terminated day placement (event history) or move it as the record changes (latest state)?",
-  "operator": "COUNT(DISTINCT enrollment_id) per CAST(enrollment_last_update_date AS date)",
-  "status_semantics": {
-    "Cancelled": "= 'Cancelled'",
-    "Terminated": "LIKE 'Term%'"
-  },
-  "coverage_year": 2026,
-  "window_rule": "Complete days in the 90 days before the earlier snapshot date.",
-  "thresholds": {
-    "min_policies": 100,
-    "immutable_unchanged_share": 0.95,
-    "immutable_max_moved_in_share": 0.05,
-    "max_ambiguous_share": 0.05,
-    "mutable_unchanged_share": 0.5
+.\.venv\Scripts\python.exe -m database.comparison.py2026_source_discovery
+PY2026 DATABASE SOURCE DISCOVERY (read-only, aggregates only)
+dbo.2025_GASBE_enrollments [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=False person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_fpl [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_fpl_with_income [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_fpl_with_income_new [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_fpl_with_income_new2 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_premium [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.arpa_household_premium_new [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.CarrierInvoice [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.CarrierInvoice_All_test [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.CarrierInvoice_test [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_ALL [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_ALL_NEW [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_enrollments_cms [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=False person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_GI [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_GI_1 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.concurrent_GI_2 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.Consolidated_Full_list [BASE TABLE] py2026=True rows=11765 policies=10553 persons=11285 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.Demographics_Premium [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.Enrollee_Premium [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.Enrollee_Premium_Summary [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.Enrollment_Enrollee_Premium [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.Enrollment_Premium [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.Enrollments_AETNA [BASE TABLE] py2026=False rows=0 policies=0 persons=0 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.Enrollments_Agent [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.Enrollments_PY2526_01312026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_02272026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_03312026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_04302026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_05302026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_05312026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_06312026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_07302026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_08302026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_09302026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_10312026 [BASE TABLE] py2026=True rows=2330683 policies=1688696 persons=1320502 policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_DEC31 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_PY2526_NOV30 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> SNAPSHOT_SOURCE
+dbo.Enrollments_TEST [BASE TABLE] py2026=True rows=2330683 policies=1688696 persons=1320502 policy_grain=True person_grain=True -> LATEST_STATE_SOURCE
+dbo.Enrollments_TEST_TEMP [BASE TABLE] py2026=True rows=2330683 policies=1688696 persons=1320502 policy_grain=True person_grain=True -> LATEST_STATE_SOURCE
+dbo.FPL_Dental_ALL [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.FPL_Health_ALL [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.FPL_PY2025_PY2026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.hh_demograohics_fraudanalysis [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.hh_demographics [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2025_DUPSSN [BASE TABLE] py2026=False rows=0 policies=0 persons=0 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2025_Fraud_Analysis [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026-Enrollments_All [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_DUPSSN [BASE TABLE] py2026=True rows=286932 policies=214649 persons=141512 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_DUPSSN_OCT [BASE TABLE] py2026=True rows=326309 policies=241901 persons=157493 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_DUPSSN_OCT_MIS [BASE TABLE] py2026=True rows=164 policies=138 persons=82 policy_grain=True person_grain=True -> LATEST_STATE_SOURCE
+dbo.PY2026_DUPSSN_SEP [BASE TABLE] py2026=True rows=306280 policies=227569 persons=148727 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_DUPSSN_TEST [BASE TABLE] py2026=True rows=264121 policies=197800 persons=131274 policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_Fraud_Analysis [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_Medical_Prescription_PAC [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_PAC [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_PAC_E [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_PAC_S1 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_PAC_S2 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2026_Relationship_Category [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=False person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY242526_enrollment_lastupdate_test [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=True -> INSUFFICIENT_EVIDENCE
+dbo.PY2627_PAC_NEW [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.PY2627_PAC_NEW2 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+dbo.Reinsurance_APR_PY2026 [BASE TABLE] py2026=N/A rows=N/A policies=N/A persons=N/A policy_grain=True person_grain=False -> INSUFFICIENT_EVIDENCE
+Named object Enrollments_PY2026: exists=False [] None
+Named object Enrollments_TEST: exists=True ['dbo.Enrollments_TEST'] ['LATEST_STATE_SOURCE']
+Recommendation: NONE - INSUFFICIENT_EVIDENCE: two candidates tie on every criterion.   {
+  "report_kind": "PY2026_DATABASE_SOURCE_DISCOVERY",
+  "architecture": "PY2026 from the database versus PY2027 from current Sisense. PY2027 is not searched in the database.",
+  "plan_year_filter": "coverage_year = 2026",
+  "exclusions": {
+    "name_markers": [
+      "834",
+      "inbound",
+      "rcni",
+      "sftp"
+    ],
+    "rule": "Objects whose names contain these markers are excluded in the catalog query; nothing about them is read."
   },
   "definitions": {
-    "intersection_policies": "In the family and in the window in both snapshots.",
-    "same_date_status": "Earlier-window policy found later with the same date and the same status.",
-    "moved_date": "Same status, different last-update date.",
-    "changed_status": "Same last-update date, different status.",
-    "both_changed": "Different date and different status.",
-    "disappeared": "Earlier-window policy absent from the later snapshot.",
-    "b_only_new_policies": "Later-window policy absent from the earlier snapshot.",
-    "b_moved_in_policies": "Later-window policy present earlier with another date or status.",
-    "null": "N/A: evidence did not run. Never zero."
+    "FULL_RECORD_SOURCE": "PY2026 at policy grain with several versions per policy-member, or system-versioned.",
+    "LATEST_STATE_SOURCE": "PY2026 at policy grain with one current row per policy-member.",
+    "SNAPSHOT_SOURCE": "Point-in-time copy (dated snapshot table name or snapshot/as-of column).",
+    "AGGREGATE_SOURCE": "Enrollment-named object without policy or person identifiers.",
+    "INSUFFICIENT_EVIDENCE": "Not proven by metadata and aggregates. N/A values mean a query did not run; never zero.",
+    "NAME_SIMILAR_UNPROVEN": "Column listed by name similarity only; never queried or mapped."
   },
-  "pairs": [
+  "sources": [
     {
-      "earlier": "Enrollments_PY2526_01312026",
-      "later": "Enrollments_PY2526_02272026",
-      "earlier_date": "2026-01-31",
-      "later_date": "2026-02-27",
-      "lag_days": 27,
-      "window_start": "2025-11-02",
-      "window_end_exclusive": "2026-01-31",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": 19525,
-        "b_policies": 16,
-        "intersection_policies": 16,
-        "b_only_policies": 0,
-        "b_only_new_policies": 0,
-        "disappeared": 19469,
-        "same_date_status": 16,
-        "moved_date": 0,
-        "changed_status": 0,
-        "both_changed": 40,
-        "moved_later": 40,
-        "moved_earlier": 0,
-        "left_family": 40,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 19509,
-        "present_in_b": 56,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.000819,
-        "unchanged_share": 0.000819,
-        "disappeared_share": 0.997132,
-        "moved_date_share": 0.0,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.002049,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.0
-      },
-      "dominant_change": "disappeared",
-      "classification": "MUTABLE_LATEST_STATE",
-      "reason": "Most policies leave the snapshot, move to another last-update date, or change status. The table holds latest state, not event history."
-    },
-    {
-      "earlier": "Enrollments_PY2526_01312026",
-      "later": "Enrollments_PY2526_02272026",
-      "earlier_date": "2026-01-31",
-      "later_date": "2026-02-27",
-      "lag_days": 27,
-      "window_start": "2025-11-02",
-      "window_end_exclusive": "2026-01-31",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 313,
-        "b_policies": 259,
-        "intersection_policies": 259,
-        "b_only_policies": 0,
-        "b_only_new_policies": 0,
-        "disappeared": 23,
-        "same_date_status": 259,
-        "moved_date": 30,
-        "changed_status": 0,
-        "both_changed": 1,
-        "moved_later": 31,
-        "moved_earlier": 0,
-        "left_family": 1,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 54,
-        "present_in_b": 290,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.827476,
-        "unchanged_share": 0.827476,
-        "disappeared_share": 0.073482,
-        "moved_date_share": 0.095847,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.003195,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.0
-      },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_02272026",
-      "later": "Enrollments_PY2526_03312026",
-      "earlier_date": "2026-02-27",
-      "later_date": "2026-03-31",
-      "lag_days": 32,
-      "window_start": "2025-11-29",
-      "window_end_exclusive": "2026-02-27",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": null,
-        "b_policies": null,
-        "intersection_policies": null,
-        "b_only_policies": null,
-        "b_only_new_policies": null,
-        "disappeared": null,
-        "same_date_status": null,
-        "moved_date": null,
-        "changed_status": null,
-        "both_changed": null,
-        "moved_later": null,
-        "moved_earlier": null,
-        "left_family": null,
-        "null_in_b": null,
-        "ambiguous_policies": null,
-        "a_only_policies": null,
-        "present_in_b": null,
-        "b_moved_in_policies": null
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": null,
+      "db_source": "dbo.2025_GASBE_enrollments",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": false,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Query did not run; counts are N/A, not zero."
+      "evidence": [
+        "No policy or person identifier column."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_02272026",
-      "later": "Enrollments_PY2526_03312026",
-      "earlier_date": "2026-02-27",
-      "later_date": "2026-03-31",
-      "lag_days": 32,
-      "window_start": "2025-11-29",
-      "window_end_exclusive": "2026-02-27",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 49772,
-        "b_policies": 103370,
-        "intersection_policies": 39363,
-        "b_only_policies": 64007,
-        "b_only_new_policies": 64007,
-        "disappeared": 4485,
-        "same_date_status": 39363,
-        "moved_date": 4073,
-        "changed_status": 0,
-        "both_changed": 1851,
-        "moved_later": 5924,
-        "moved_earlier": 0,
-        "left_family": 1851,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 10409,
-        "present_in_b": 45287,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.790866,
-        "unchanged_share": 0.790866,
-        "disappeared_share": 0.090111,
-        "moved_date_share": 0.081833,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.03719,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.619203
-      },
-      "dominant_change": "disappeared",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_03312026",
-      "later": "Enrollments_PY2526_04302026",
-      "earlier_date": "2026-03-31",
-      "later_date": "2026-04-30",
-      "lag_days": 30,
-      "window_start": "2025-12-31",
-      "window_end_exclusive": "2026-03-31",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": null,
-        "b_policies": null,
-        "intersection_policies": null,
-        "b_only_policies": null,
-        "b_only_new_policies": null,
-        "disappeared": null,
-        "same_date_status": null,
-        "moved_date": null,
-        "changed_status": null,
-        "both_changed": null,
-        "moved_later": null,
-        "moved_earlier": null,
-        "left_family": null,
-        "null_in_b": null,
-        "ambiguous_policies": null,
-        "a_only_policies": null,
-        "present_in_b": null,
-        "b_moved_in_policies": null
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": null,
+      "db_source": "dbo.arpa_household_fpl",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Query did not run; counts are N/A, not zero."
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_03312026",
-      "later": "Enrollments_PY2526_04302026",
-      "earlier_date": "2026-03-31",
-      "later_date": "2026-04-30",
-      "lag_days": 30,
-      "window_start": "2025-12-31",
-      "window_end_exclusive": "2026-03-31",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 138725,
-        "b_policies": 97777,
-        "intersection_policies": 97743,
-        "b_only_policies": 34,
-        "b_only_new_policies": 34,
-        "disappeared": 2061,
-        "same_date_status": 97743,
-        "moved_date": 35349,
-        "changed_status": 0,
-        "both_changed": 3572,
-        "moved_later": 38921,
-        "moved_earlier": 0,
-        "left_family": 3572,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 40982,
-        "present_in_b": 136664,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.704581,
-        "unchanged_share": 0.704581,
-        "disappeared_share": 0.014857,
-        "moved_date_share": 0.254813,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.025749,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.000348
-      },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_04302026",
-      "later": "Enrollments_PY2526_05302026",
-      "earlier_date": "2026-04-30",
-      "later_date": "2026-05-30",
-      "lag_days": 30,
-      "window_start": "2026-01-30",
-      "window_end_exclusive": "2026-04-30",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": 79774,
-        "b_policies": 75829,
-        "intersection_policies": 73642,
-        "b_only_policies": 2187,
-        "b_only_new_policies": 2187,
-        "disappeared": 2169,
-        "same_date_status": 73642,
-        "moved_date": 3788,
-        "changed_status": 0,
-        "both_changed": 175,
-        "moved_later": 3963,
-        "moved_earlier": 0,
-        "left_family": 175,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 6132,
-        "present_in_b": 77605,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.923133,
-        "unchanged_share": 0.923133,
-        "disappeared_share": 0.027189,
-        "moved_date_share": 0.047484,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.002194,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.028841
-      },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_04302026",
-      "later": "Enrollments_PY2526_05302026",
-      "earlier_date": "2026-04-30",
-      "later_date": "2026-05-30",
-      "lag_days": 30,
-      "window_start": "2026-01-30",
-      "window_end_exclusive": "2026-04-30",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 331950,
-        "b_policies": 317145,
-        "intersection_policies": 317101,
-        "b_only_policies": 44,
-        "b_only_new_policies": 44,
-        "disappeared": 616,
-        "same_date_status": 317101,
-        "moved_date": 12248,
-        "changed_status": 0,
-        "both_changed": 1985,
-        "moved_later": 14233,
-        "moved_earlier": 0,
-        "left_family": 1985,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 14849,
-        "present_in_b": 331334,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.955267,
-        "unchanged_share": 0.955267,
-        "disappeared_share": 0.001856,
-        "moved_date_share": 0.036897,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.00598,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.000139
-      },
-      "dominant_change": "moved_date",
-      "classification": "IMMUTABLE_EVENT_LIKE",
-      "reason": "Policies keep the same date and status in the later snapshot; earlier days are preserved."
-    },
-    {
-      "earlier": "Enrollments_PY2526_05302026",
-      "later": "Enrollments_PY2526_05312026",
-      "earlier_date": "2026-05-30",
-      "later_date": "2026-05-31",
-      "lag_days": 1,
-      "window_start": "2026-03-01",
-      "window_end_exclusive": "2026-05-30",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": 57964,
-        "b_policies": 0,
-        "intersection_policies": 0,
-        "b_only_policies": 0,
-        "b_only_new_policies": 0,
-        "disappeared": 57964,
-        "same_date_status": 0,
-        "moved_date": 0,
-        "changed_status": 0,
-        "both_changed": 0,
-        "moved_later": 0,
-        "moved_earlier": 0,
-        "left_family": 0,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 57964,
-        "present_in_b": 0,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.0,
-        "unchanged_share": 0.0,
-        "disappeared_share": 1.0,
-        "moved_date_share": 0.0,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.0,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": "disappeared",
-      "classification": "MUTABLE_LATEST_STATE",
-      "reason": "Most policies leave the snapshot, move to another last-update date, or change status. The table holds latest state, not event history."
-    },
-    {
-      "earlier": "Enrollments_PY2526_05302026",
-      "later": "Enrollments_PY2526_05312026",
-      "earlier_date": "2026-05-30",
-      "later_date": "2026-05-31",
-      "lag_days": 1,
-      "window_start": "2026-03-01",
-      "window_end_exclusive": "2026-05-30",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 332907,
-        "b_policies": 0,
-        "intersection_policies": 0,
-        "b_only_policies": 0,
-        "b_only_new_policies": 0,
-        "disappeared": 332907,
-        "same_date_status": 0,
-        "moved_date": 0,
-        "changed_status": 0,
-        "both_changed": 0,
-        "moved_later": 0,
-        "moved_earlier": 0,
-        "left_family": 0,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 332907,
-        "present_in_b": 0,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.0,
-        "unchanged_share": 0.0,
-        "disappeared_share": 1.0,
-        "moved_date_share": 0.0,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.0,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": "disappeared",
-      "classification": "MUTABLE_LATEST_STATE",
-      "reason": "Most policies leave the snapshot, move to another last-update date, or change status. The table holds latest state, not event history."
-    },
-    {
-      "earlier": "Enrollments_PY2526_05312026",
-      "later": "Enrollments_PY2526_07302026",
-      "earlier_date": "2026-05-31",
-      "later_date": "2026-07-30",
-      "lag_days": 60,
-      "window_start": "2026-03-02",
-      "window_end_exclusive": "2026-05-31",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": 0,
-        "b_policies": 56744,
-        "intersection_policies": 0,
-        "b_only_policies": 56744,
-        "b_only_new_policies": 56744,
-        "disappeared": 0,
-        "same_date_status": 0,
-        "moved_date": 0,
-        "changed_status": 0,
-        "both_changed": 0,
-        "moved_later": 0,
-        "moved_earlier": 0,
-        "left_family": 0,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 0,
-        "present_in_b": 0,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 1.0
-      },
-      "dominant_change": null,
+      "db_source": "dbo.arpa_household_fpl_with_income",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Fewer than 100 policies in the earlier snapshot window."
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_05312026",
-      "later": "Enrollments_PY2526_07302026",
-      "earlier_date": "2026-05-31",
-      "later_date": "2026-07-30",
-      "lag_days": 60,
-      "window_start": "2026-03-02",
-      "window_end_exclusive": "2026-05-31",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 0,
-        "b_policies": 326724,
-        "intersection_policies": 0,
-        "b_only_policies": 326724,
-        "b_only_new_policies": 326724,
-        "disappeared": 0,
-        "same_date_status": 0,
-        "moved_date": 0,
-        "changed_status": 0,
-        "both_changed": 0,
-        "moved_later": 0,
-        "moved_earlier": 0,
-        "left_family": 0,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 0,
-        "present_in_b": 0,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 1.0
-      },
-      "dominant_change": null,
+      "db_source": "dbo.arpa_household_fpl_with_income_new",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Fewer than 100 policies in the earlier snapshot window."
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_07302026",
-      "later": "Enrollments_PY2526_08302026",
-      "earlier_date": "2026-07-30",
-      "later_date": "2026-08-30",
-      "lag_days": 31,
-      "window_start": "2026-05-01",
-      "window_end_exclusive": "2026-07-30",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": 36068,
-        "b_policies": 33895,
-        "intersection_policies": 33637,
-        "b_only_policies": 258,
-        "b_only_new_policies": 258,
-        "disappeared": 373,
-        "same_date_status": 33637,
-        "moved_date": 2020,
-        "changed_status": 0,
-        "both_changed": 38,
-        "moved_later": 2058,
-        "moved_earlier": 0,
-        "left_family": 38,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 2431,
-        "present_in_b": 35695,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.9326,
-        "unchanged_share": 0.9326,
-        "disappeared_share": 0.010342,
-        "moved_date_share": 0.056005,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.001054,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.007612
-      },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_07302026",
-      "later": "Enrollments_PY2526_08302026",
-      "earlier_date": "2026-07-30",
-      "later_date": "2026-08-30",
-      "lag_days": 31,
-      "window_start": "2026-05-01",
-      "window_end_exclusive": "2026-07-30",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 116363,
-        "b_policies": 108539,
-        "intersection_policies": 108531,
-        "b_only_policies": 8,
-        "b_only_new_policies": 8,
-        "disappeared": 1743,
-        "same_date_status": 108531,
-        "moved_date": 4633,
-        "changed_status": 0,
-        "both_changed": 1456,
-        "moved_later": 6089,
-        "moved_earlier": 0,
-        "left_family": 1456,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 7832,
-        "present_in_b": 114620,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.932693,
-        "unchanged_share": 0.932693,
-        "disappeared_share": 0.014979,
-        "moved_date_share": 0.039815,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.012513,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 7.4e-05
-      },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
-    },
-    {
-      "earlier": "Enrollments_PY2526_08302026",
-      "later": "Enrollments_PY2526_09302026",
-      "earlier_date": "2026-08-30",
-      "later_date": "2026-09-30",
-      "lag_days": 31,
-      "window_start": "2026-06-01",
-      "window_end_exclusive": "2026-08-30",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": null,
-        "b_policies": null,
-        "intersection_policies": null,
-        "b_only_policies": null,
-        "b_only_new_policies": null,
-        "disappeared": null,
-        "same_date_status": null,
-        "moved_date": null,
-        "changed_status": null,
-        "both_changed": null,
-        "moved_later": null,
-        "moved_earlier": null,
-        "left_family": null,
-        "null_in_b": null,
-        "ambiguous_policies": null,
-        "a_only_policies": null,
-        "present_in_b": null,
-        "b_moved_in_policies": null
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": null,
+      "db_source": "dbo.arpa_household_fpl_with_income_new2",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Query did not run; counts are N/A, not zero."
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_08302026",
-      "later": "Enrollments_PY2526_09302026",
-      "earlier_date": "2026-08-30",
-      "later_date": "2026-09-30",
-      "lag_days": 31,
-      "window_start": "2026-06-01",
-      "window_end_exclusive": "2026-08-30",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 96984,
-        "b_policies": 93687,
-        "intersection_policies": 92872,
-        "b_only_policies": 815,
-        "b_only_new_policies": 815,
-        "disappeared": 1,
-        "same_date_status": 92872,
-        "moved_date": 3496,
-        "changed_status": 0,
-        "both_changed": 615,
-        "moved_later": 4111,
-        "moved_earlier": 0,
-        "left_family": 615,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 4112,
-        "present_in_b": 96983,
-        "b_moved_in_policies": 0
-      },
-      "shares": {
-        "retention": 0.957601,
-        "unchanged_share": 0.957601,
-        "disappeared_share": 1e-05,
-        "moved_date_share": 0.036047,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.006341,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 0.008699
-      },
-      "dominant_change": "moved_date",
-      "classification": "IMMUTABLE_EVENT_LIKE",
-      "reason": "Policies keep the same date and status in the later snapshot; earlier days are preserved."
-    },
-    {
-      "earlier": "Enrollments_PY2526_09302026",
-      "later": "Enrollments_PY2526_10312026",
-      "earlier_date": "2026-09-30",
-      "later_date": "2026-10-31",
-      "lag_days": 31,
-      "window_start": "2026-07-02",
-      "window_end_exclusive": "2026-09-30",
-      "status_family": "Cancelled",
-      "counts": {
-        "a_policies": null,
-        "b_policies": null,
-        "intersection_policies": null,
-        "b_only_policies": null,
-        "b_only_new_policies": null,
-        "disappeared": null,
-        "same_date_status": null,
-        "moved_date": null,
-        "changed_status": null,
-        "both_changed": null,
-        "moved_later": null,
-        "moved_earlier": null,
-        "left_family": null,
-        "null_in_b": null,
-        "ambiguous_policies": null,
-        "a_only_policies": null,
-        "present_in_b": null,
-        "b_moved_in_policies": null
-      },
-      "shares": {
-        "retention": null,
-        "unchanged_share": null,
-        "disappeared_share": null,
-        "moved_date_share": null,
-        "changed_status_share": null,
-        "both_changed_share": null,
-        "ambiguous_share": null,
-        "b_moved_in_share": null,
-        "b_new_share": null
-      },
-      "dominant_change": null,
+      "db_source": "dbo.arpa_household_premium",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
       "classification": "INSUFFICIENT_EVIDENCE",
-      "reason": "Query did not run; counts are N/A, not zero."
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     },
     {
-      "earlier": "Enrollments_PY2526_09302026",
-      "later": "Enrollments_PY2526_10312026",
-      "earlier_date": "2026-09-30",
-      "later_date": "2026-10-31",
-      "lag_days": 31,
-      "window_start": "2026-07-02",
-      "window_end_exclusive": "2026-09-30",
-      "status_family": "Terminated",
-      "counts": {
-        "a_policies": 96262,
-        "b_policies": 91224,
-        "intersection_policies": 91223,
-        "b_only_policies": 1,
-        "b_only_new_policies": 1,
-        "disappeared": 791,
-        "same_date_status": 91223,
-        "moved_date": 3724,
-        "changed_status": 0,
-        "both_changed": 524,
-        "moved_later": 4248,
-        "moved_earlier": 0,
-        "left_family": 524,
-        "null_in_b": 0,
-        "ambiguous_policies": 0,
-        "a_only_policies": 5039,
-        "present_in_b": 95471,
-        "b_moved_in_policies": 0
+      "db_source": "dbo.arpa_household_premium_new",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
       },
-      "shares": {
-        "retention": 0.947653,
-        "unchanged_share": 0.947653,
-        "disappeared_share": 0.008217,
-        "moved_date_share": 0.038686,
-        "changed_status_share": 0.0,
-        "both_changed_share": 0.005443,
-        "ambiguous_share": 0.0,
-        "b_moved_in_share": 0.0,
-        "b_new_share": 1.1e-05
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.CarrierInvoice",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
       },
-      "dominant_change": "moved_date",
-      "classification": "MIXED",
-      "reason": "Part of the earlier day placement is preserved and part is not."
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.CarrierInvoice_All_test",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.CarrierInvoice_test",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_ALL",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollee_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollee_ID"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "NAME_SIMILAR_UNPROVEN",
+          "columns": [
+            "Enrollment_Status"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_ALL_NEW",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollee_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollee_ID"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "NAME_SIMILAR_UNPROVEN",
+          "columns": [
+            "Enrollment_Status"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_enrollments_cms",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": false,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No policy or person identifier column."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_GI",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_GI_1",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.concurrent_GI_2",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Consolidated_Full_list",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 11765,
+      "distinct_policies": 10553,
+      "distinct_persons": 11285,
+      "distinct_issuers": 14,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "11765 coverage_year = 2026 rows.",
+        "245 of 11520 policy-member keys have repeated rows (0.0213); 0 key-level status/update-day variations.",
+        "Repeated rows without status or update-day variation: unexplained duplication."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 11765,
+        "distinct_policies": 10553,
+        "distinct_persons": 11285,
+        "distinct_issuers": 14,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_enrollment_last_update": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2025-11-14",
+        "min_enrollment_last_update": "2025-10-16",
+        "max_enrollment_last_update": "2025-11-14",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-01-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 11520,
+        "keys_with_repeated_rows": 245,
+        "max_rows_per_key": 2,
+        "keys_with_multiple_statuses": 0,
+        "keys_with_multiple_update_days": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 10536,
+            "distinct_policies": 9457
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 717,
+            "distinct_policies": 634
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 512,
+            "distinct_policies": 462
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 10536,
+            "distinct_policies": 9457
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 717,
+            "distinct_policies": 634
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 512,
+            "distinct_policies": 462
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.Demographics_Premium",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollee_Premium",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollee_Premium_Summary",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollment_Enrollee_Premium",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollment_Premium",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_AETNA",
+      "object_type": "BASE TABLE",
+      "py2026_present": false,
+      "row_count": 0,
+      "distinct_policies": 0,
+      "distinct_persons": 0,
+      "distinct_issuers": 0,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year = 2026 rows."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 0,
+        "distinct_policies": 0,
+        "distinct_persons": 0,
+        "distinct_issuers": 0,
+        "null_policy_identifier": null,
+        "null_person_identifier": null,
+        "null_enrollment_status": null,
+        "null_enrollment_last_update": null,
+        "null_benefit_effective_date": null,
+        "null_issuer_id": null,
+        "min_enrollment_confirmation_date": null,
+        "max_enrollment_confirmation_date": null,
+        "min_enrollment_last_update": null,
+        "max_enrollment_last_update": null,
+        "min_benefit_effective_date": null,
+        "max_benefit_effective_date": null,
+        "min_benefit_end_date": null,
+        "max_benefit_end_date": null
+      },
+      "grain": {
+        "grain_keys": 0,
+        "keys_with_repeated_rows": 0,
+        "max_rows_per_key": null,
+        "keys_with_multiple_statuses": 0,
+        "keys_with_multiple_update_days": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [],
+        "enrollee_status": []
+      }
+    },
+    {
+      "db_source": "dbo.Enrollments_Agent",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [
+        "enrollment_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_01312026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_02272026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_03312026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_04302026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_05302026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_05312026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_06312026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (INVALID_FILENAME_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_07302026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_08302026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_09302026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_10312026",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 2330683,
+      "distinct_policies": 1688696,
+      "distinct_persons": 1320502,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (FILENAME_INFERRED_SNAPSHOT_DATE). Phase 5C showed these tables hold mutable latest state at each snapshot date.",
+        "Profiled as the population baseline only."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 2330683,
+        "distinct_policies": 1688696,
+        "distinct_persons": 1320502,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_enrollment_last_update": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_create_date": "2025-10-16",
+        "max_enrollment_create_date": "2026-11-01",
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-11-01",
+        "min_enrollment_last_update": "2025-10-16",
+        "max_enrollment_last_update": "2026-11-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-12-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_DEC31",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (MONTH_DAY_TOKEN). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_PY2526_NOV30",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "SNAPSHOT_SOURCE",
+      "evidence": [
+        "Monthly snapshot table (MONTH_DAY_TOKEN). Phase 5C showed these tables hold mutable latest state at each snapshot date."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Enrollments_TEST",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 2330683,
+      "distinct_policies": 1688696,
+      "distinct_persons": 1320502,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "LATEST_STATE_SOURCE",
+      "evidence": [
+        "2330683 coverage_year = 2026 rows.",
+        "5146 of 2324955 policy-member keys have repeated rows (0.0022); 0 key-level status/update-day variations.",
+        "One row per policy-member: current state of each record."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 2330683,
+        "distinct_policies": 1688696,
+        "distinct_persons": 1320502,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_enrollment_last_update": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_create_date": "2025-10-16",
+        "max_enrollment_create_date": "2026-11-01",
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-11-01",
+        "min_enrollment_last_update": "2025-10-16",
+        "max_enrollment_last_update": "2026-11-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-12-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 2324955,
+        "keys_with_repeated_rows": 5146,
+        "max_rows_per_key": 5,
+        "keys_with_multiple_statuses": 0,
+        "keys_with_multiple_update_days": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 928518,
+            "distinct_policies": 650877
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 697361,
+            "distinct_policies": 485313
+          },
+          {
+            "status_value": "Terminated",
+            "rows_2026": 679443,
+            "distinct_policies": 533065
+          },
+          {
+            "status_value": "Pend canceled",
+            "rows_2026": 13460,
+            "distinct_policies": 10801
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 11681,
+            "distinct_policies": 8444
+          },
+          {
+            "status_value": "Pend",
+            "rows_2026": 220,
+            "distinct_policies": 196
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 909211,
+            "distinct_policies": 650806
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 700615,
+            "distinct_policies": 487770
+          },
+          {
+            "status_value": "Terminated",
+            "rows_2026": 695552,
+            "distinct_policies": 546812
+          },
+          {
+            "status_value": "Pend canceled",
+            "rows_2026": 13460,
+            "distinct_policies": 10801
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 11597,
+            "distinct_policies": 8432
+          },
+          {
+            "status_value": "Pend",
+            "rows_2026": 220,
+            "distinct_policies": 196
+          },
+          {
+            "status_value": "Aborted",
+            "rows_2026": 28,
+            "distinct_policies": 25
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.Enrollments_TEST_TEMP",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 2330683,
+      "distinct_policies": 1688696,
+      "distinct_persons": 1320502,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_create_date",
+        "enrollment_confirmation_date",
+        "enrollment_last_update_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "LATEST_STATE_SOURCE",
+      "evidence": [
+        "2330683 coverage_year = 2026 rows.",
+        "5146 of 2324955 policy-member keys have repeated rows (0.0022); 0 key-level status/update-day variations.",
+        "One row per policy-member: current state of each record."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_last_update_date"
+          ]
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "application_type"
+          ]
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 2330683,
+        "distinct_policies": 1688696,
+        "distinct_persons": 1320502,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_enrollment_last_update": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_create_date": "2025-10-16",
+        "max_enrollment_create_date": "2026-11-01",
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-11-01",
+        "min_enrollment_last_update": "2025-10-16",
+        "max_enrollment_last_update": "2026-11-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-12-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 2324955,
+        "keys_with_repeated_rows": 5146,
+        "max_rows_per_key": 5,
+        "keys_with_multiple_statuses": 0,
+        "keys_with_multiple_update_days": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 928518,
+            "distinct_policies": 650877
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 697361,
+            "distinct_policies": 485313
+          },
+          {
+            "status_value": "Terminated",
+            "rows_2026": 679443,
+            "distinct_policies": 533065
+          },
+          {
+            "status_value": "Pend canceled",
+            "rows_2026": 13460,
+            "distinct_policies": 10801
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 11681,
+            "distinct_policies": 8444
+          },
+          {
+            "status_value": "Pend",
+            "rows_2026": 220,
+            "distinct_policies": 196
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "Enrolled",
+            "rows_2026": 909211,
+            "distinct_policies": 650806
+          },
+          {
+            "status_value": "Cancelled",
+            "rows_2026": 700615,
+            "distinct_policies": 487770
+          },
+          {
+            "status_value": "Terminated",
+            "rows_2026": 695552,
+            "distinct_policies": 546812
+          },
+          {
+            "status_value": "Pend canceled",
+            "rows_2026": 13460,
+            "distinct_policies": 10801
+          },
+          {
+            "status_value": "Pending",
+            "rows_2026": 11597,
+            "distinct_policies": 8432
+          },
+          {
+            "status_value": "Pend",
+            "rows_2026": 220,
+            "distinct_policies": 196
+          },
+          {
+            "status_value": "Aborted",
+            "rows_2026": 28,
+            "distinct_policies": 25
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.FPL_Dental_ALL",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollee_ID"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.FPL_Health_ALL",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollee_ID"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.FPL_PY2025_PY2026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollment_ID"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "Enrollee_ID"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.hh_demograohics_fraudanalysis",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.hh_demographics",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2025_DUPSSN",
+      "object_type": "BASE TABLE",
+      "py2026_present": false,
+      "row_count": 0,
+      "distinct_policies": 0,
+      "distinct_persons": 0,
+      "distinct_issuers": 0,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year = 2026 rows."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 0,
+        "distinct_policies": 0,
+        "distinct_persons": 0,
+        "distinct_issuers": 0,
+        "null_policy_identifier": null,
+        "null_person_identifier": null,
+        "null_enrollment_status": null,
+        "null_benefit_effective_date": null,
+        "null_issuer_id": null,
+        "min_enrollment_confirmation_date": null,
+        "max_enrollment_confirmation_date": null,
+        "min_benefit_effective_date": null,
+        "max_benefit_effective_date": null,
+        "min_benefit_end_date": null,
+        "max_benefit_end_date": null
+      },
+      "grain": {
+        "grain_keys": 0,
+        "keys_with_repeated_rows": 0,
+        "max_rows_per_key": null,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [],
+        "enrollee_status": []
+      }
+    },
+    {
+      "db_source": "dbo.PY2025_Fraud_Analysis",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026-Enrollments_All",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [
+        "enrollment_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_DUPSSN",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 286932,
+      "distinct_policies": 214649,
+      "distinct_persons": 141512,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "286932 coverage_year = 2026 rows.",
+        "5726 of 280563 policy-member keys have repeated rows (0.0204); 0 key-level status/update-day variations.",
+        "Repeated rows without status or update-day variation: unexplained duplication."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 286932,
+        "distinct_policies": 214649,
+        "distinct_persons": 141512,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-08-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-09-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 280563,
+        "keys_with_repeated_rows": 5726,
+        "max_rows_per_key": 8,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 161510,
+            "distinct_policies": 120726
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 125422,
+            "distinct_policies": 93923
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 165093,
+            "distinct_policies": 123364
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 121828,
+            "distinct_policies": 93551
+          },
+          {
+            "status_value": "CANCELLED",
+            "rows_2026": 7,
+            "distinct_policies": 6
+          },
+          {
+            "status_value": "PENDING",
+            "rows_2026": 4,
+            "distinct_policies": 2
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.PY2026_DUPSSN_OCT",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 326309,
+      "distinct_policies": 241901,
+      "distinct_persons": 157493,
+      "distinct_issuers": 17,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "326309 coverage_year = 2026 rows.",
+        "7159 of 317660 policy-member keys have repeated rows (0.0225); 0 key-level status/update-day variations.",
+        "Repeated rows without status or update-day variation: unexplained duplication."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 326309,
+        "distinct_policies": 241901,
+        "distinct_persons": 157493,
+        "distinct_issuers": 17,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2024-10-23",
+        "max_enrollment_confirmation_date": "2026-10-01",
+        "min_benefit_effective_date": "2025-01-01",
+        "max_benefit_effective_date": "2026-11-01",
+        "min_benefit_end_date": "2025-01-31",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 317660,
+        "keys_with_repeated_rows": 7159,
+        "max_rows_per_key": 10,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 189825,
+            "distinct_policies": 140469
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 136484,
+            "distinct_policies": 101432
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 194473,
+            "distinct_policies": 143690
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 131822,
+            "distinct_policies": 100903
+          },
+          {
+            "status_value": "CANCELLED",
+            "rows_2026": 10,
+            "distinct_policies": 8
+          },
+          {
+            "status_value": "PENDING",
+            "rows_2026": 4,
+            "distinct_policies": 2
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.PY2026_DUPSSN_OCT_MIS",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 164,
+      "distinct_policies": 138,
+      "distinct_persons": 82,
+      "distinct_issuers": 7,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "LATEST_STATE_SOURCE",
+      "evidence": [
+        "164 coverage_year = 2026 rows.",
+        "0 of 164 policy-member keys have repeated rows (0.0000); 0 key-level status/update-day variations.",
+        "One row per policy-member: current state of each record."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 164,
+        "distinct_policies": 138,
+        "distinct_persons": 82,
+        "distinct_issuers": 7,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2026-07-03",
+        "max_enrollment_confirmation_date": "2026-10-01",
+        "min_benefit_effective_date": "2026-06-15",
+        "max_benefit_effective_date": "2026-10-01",
+        "min_benefit_end_date": "2026-08-31",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 164,
+        "keys_with_repeated_rows": 0,
+        "max_rows_per_key": 1,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 147,
+            "distinct_policies": 123
+          },
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 17,
+            "distinct_policies": 15
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 147,
+            "distinct_policies": 123
+          },
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 17,
+            "distinct_policies": 15
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.PY2026_DUPSSN_SEP",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 306280,
+      "distinct_policies": 227569,
+      "distinct_persons": 148727,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "306280 coverage_year = 2026 rows.",
+        "6405 of 298711 policy-member keys have repeated rows (0.0214); 0 key-level status/update-day variations.",
+        "Repeated rows without status or update-day variation: unexplained duplication."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 306280,
+        "distinct_policies": 227569,
+        "distinct_persons": 148727,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-09-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-10-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 298711,
+        "keys_with_repeated_rows": 6405,
+        "max_rows_per_key": 10,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 174203,
+            "distinct_policies": 129197
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 132077,
+            "distinct_policies": 98372
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 178089,
+            "distinct_policies": 131985
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 128180,
+            "distinct_policies": 97939
+          },
+          {
+            "status_value": "CANCELLED",
+            "rows_2026": 7,
+            "distinct_policies": 6
+          },
+          {
+            "status_value": "PENDING",
+            "rows_2026": 4,
+            "distinct_policies": 2
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.PY2026_DUPSSN_TEST",
+      "object_type": "BASE TABLE",
+      "py2026_present": true,
+      "row_count": 264121,
+      "distinct_policies": 197800,
+      "distinct_persons": 131274,
+      "distinct_issuers": 16,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [
+        "enrollment_confirmation_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "264121 coverage_year = 2026 rows.",
+        "5184 of 258397 policy-member keys have repeated rows (0.0201); 0 key-level status/update-day variations.",
+        "Repeated rows without status or update-day variation: unexplained duplication."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_confirmation_date"
+          ]
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": {
+        "rows_2026": 264121,
+        "distinct_policies": 197800,
+        "distinct_persons": 131274,
+        "distinct_issuers": 16,
+        "null_policy_identifier": 0,
+        "null_person_identifier": 0,
+        "null_enrollment_status": 0,
+        "null_benefit_effective_date": 0,
+        "null_issuer_id": 0,
+        "min_enrollment_confirmation_date": "2025-10-16",
+        "max_enrollment_confirmation_date": "2026-07-01",
+        "min_benefit_effective_date": "2026-01-01",
+        "max_benefit_effective_date": "2026-08-01",
+        "min_benefit_end_date": "2026-01-01",
+        "max_benefit_end_date": "2026-12-31"
+      },
+      "grain": {
+        "grain_keys": 258397,
+        "keys_with_repeated_rows": 5184,
+        "max_rows_per_key": 8,
+        "keys_with_multiple_statuses": 0
+      },
+      "status_distribution": {
+        "enrollment_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 147378,
+            "distinct_policies": 110322
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 116743,
+            "distinct_policies": 87478
+          }
+        ],
+        "enrollee_status": [
+          {
+            "status_value": "TERMINATED",
+            "rows_2026": 150524,
+            "distinct_policies": 112701
+          },
+          {
+            "status_value": "ENROLLED",
+            "rows_2026": 113587,
+            "distinct_policies": 87169
+          },
+          {
+            "status_value": "CANCELLED",
+            "rows_2026": 7,
+            "distinct_policies": 6
+          },
+          {
+            "status_value": "PENDING",
+            "rows_2026": 3,
+            "distinct_policies": 1
+          }
+        ]
+      }
+    },
+    {
+      "db_source": "dbo.PY2026_Fraud_Analysis",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_Medical_Prescription_PAC",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_PAC",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "NAME_SIMILAR_UNPROVEN",
+          "columns": [
+            "enrollment_status"
+          ]
+        },
+        "enrollee_status": {
+          "status": "NAME_SIMILAR_UNPROVEN",
+          "columns": [
+            "enrollee_status"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_PAC_E",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_PAC_S1",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_PAC_S2",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2026_Relationship_Category",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": false,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY242526_enrollment_lastupdate_test",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": true,
+      "date_fields": [],
+      "status_fields": [],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_id"
+          ]
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollee_status": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_end_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2627_PAC_NEW",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.PY2627_PAC_NEW2",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": "hios_issuer_id",
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "PY2026 profile did not run or failed (N/A, not zero).",
+        "Not profiled: limit is 10 objects."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "coverage_year"
+          ]
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "hios_issuer_id"
+          ]
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
+    },
+    {
+      "db_source": "dbo.Reinsurance_APR_PY2026",
+      "object_type": "BASE TABLE",
+      "py2026_present": null,
+      "row_count": null,
+      "distinct_policies": null,
+      "distinct_persons": null,
+      "distinct_issuers": null,
+      "policy_grain_available": true,
+      "person_grain_available": false,
+      "date_fields": [
+        "enrollment_create_date",
+        "benefit_effective_date",
+        "benefit_end_date"
+      ],
+      "status_fields": [
+        "enrollment_status_description",
+        "enrollee_status_description"
+      ],
+      "issuer_field": null,
+      "temporal_type": null,
+      "classification": "INSUFFICIENT_EVIDENCE",
+      "evidence": [
+        "No coverage_year column; PY2026 cannot be isolated without inventing a mapping."
+      ],
+      "concepts": {
+        "coverage_year": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "policy_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_id"
+          ]
+        },
+        "person_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_policy_identifier": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "exchange_person_identifier": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "exchg_indiv_identifier"
+          ]
+        },
+        "enrollment_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_status_description"
+          ]
+        },
+        "enrollee_status": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollee_status_description"
+          ]
+        },
+        "enrollment_create_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "enrollment_create_date"
+          ]
+        },
+        "enrollment_confirmation_date": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "enrollment_last_update": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "benefit_effective_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_effective_date"
+          ]
+        },
+        "benefit_end_date": {
+          "status": "EXACT_NAME",
+          "columns": [
+            "benefit_end_date"
+          ]
+        },
+        "issuer_id": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "application_type": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "version_columns": {
+          "status": "ABSENT",
+          "columns": []
+        },
+        "snapshot_date": {
+          "status": "ABSENT",
+          "columns": []
+        }
+      },
+      "profile": null,
+      "grain": null,
+      "status_distribution": null
     }
   ],
-  "skipped_tables": [
+  "focus_objects": [
     {
-      "table": "Enrollments_PY2526_06312026",
-      "filename_status": "INVALID_FILENAME_DATE",
-      "reason": "No proven snapshot date; month-day tokens do not invent a year."
+      "object": "Enrollments_PY2026",
+      "exists": false,
+      "found_as": [],
+      "classification": null
     },
     {
-      "table": "Enrollments_PY2526_DEC31",
-      "filename_status": "MONTH_DAY_TOKEN",
-      "reason": "No proven snapshot date; month-day tokens do not invent a year."
-    },
-    {
-      "table": "Enrollments_PY2526_NOV30",
-      "filename_status": "MONTH_DAY_TOKEN",
-      "reason": "No proven snapshot date; month-day tokens do not invent a year."
+      "object": "Enrollments_TEST",
+      "exists": true,
+      "found_as": [
+        "dbo.Enrollments_TEST"
+      ],
+      "classification": [
+        "LATEST_STATE_SOURCE"
+      ]
     }
   ],
-  "metrics": {
-    "Cancelled": {
-      "historical_behavior": "MIXED",
-      "decision": "DIAGNOSTIC_ONLY",
-      "reason": "Pairs disagree; behavior is not uniform across the plan year.",
-      "pairs_sufficient": 4,
-      "pairs_total": 9,
-      "production_comparable": false
-    },
-    "Terminated": {
-      "historical_behavior": "MIXED",
-      "decision": "DIAGNOSTIC_ONLY",
-      "reason": "Pairs disagree; behavior is not uniform across the plan year.",
-      "pairs_sufficient": 8,
-      "pairs_total": 9,
-      "production_comparable": false
-    }
+  "baseline_snapshot": {
+    "db_source": "dbo.Enrollments_PY2526_10312026",
+    "row_count": 2330683,
+    "distinct_policies": 1688696,
+    "distinct_persons": 1320502
   },
-  "failures": [
-    {
-      "step": "transition Enrollments_PY2526_02272026->Enrollments_PY2526_03312026 Cancelled",
-      "error": "('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')"
-    },
-    {
-      "step": "transition Enrollments_PY2526_03312026->Enrollments_PY2526_04302026 Cancelled",
-      "error": "('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')"
-    },
-    {
-      "step": "transition Enrollments_PY2526_08302026->Enrollments_PY2526_09302026 Cancelled",
-      "error": "('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')"
-    },
-    {
-      "step": "transition Enrollments_PY2526_09302026->Enrollments_PY2526_10312026 Cancelled",
-      "error": "('HYT00', '[HYT00] [Microsoft][ODBC Driver 17 for SQL Server]Query timeout expired (0) (SQLExecDirectW)')"
-    }
-  ],
+  "recommendation": {
+    "source": null,
+    "reason": "INSUFFICIENT_EVIDENCE: two candidates tie on every criterion.",
+    "tied": [
+      "dbo.Enrollments_TEST",
+      "dbo.Enrollments_TEST_TEMP"
+    ]
+  },
+  "production_comparable": false,
+  "failures": [],
   "notes": [
-    "Identifier-level tracing runs inside the database; only aggregates are returned.",
-    "Snapshots are compared pairwise and never unioned or summed.",
-    "The Sisense widget is computed from current rows. Latest-state history can only be compared as-of aligned, which is a separate decision; nothing here is production-comparable."
+    "Catalog metadata and aggregates only. Identifier values never leave the database.",
+    "Snapshot tables are not unioned or summed.",
+    "Daily Cancelled/Terminated equivalence is out of scope for this phase."
   ],
-  "command": ".\\.venv\\Scripts\\python.exe -m database.comparison.activity_snapshot_drift"
+  "command": ".\\.venv\\Scripts\\python.exe -m database.comparison.py2026_source_discovery"
 }
+
+Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_source_discovery.json
+Wrote: C:\Users\SelmaKazanci\Downloads\project\oe_trend_pipeline_automation\reports\comparison\py2026_source_discovery.html
+PS
