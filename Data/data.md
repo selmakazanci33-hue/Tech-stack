@@ -1,20 +1,51 @@
 
+Mital Patel
 
+Selma Kazanci
+Curtis Porter
+Hello Selma,
 
+ 
 
-Hi Team,
+Could you please create a copy of the existing PY2027 OE Executive Dashboard and update it to support our EDE reporting needs. We can create an internal folder in Sisense and keep it shared with EDE Team only.
 
-I wanted to share the latest version of the **Georgia Access Enrollment Dashboard**.
+ 
 
-We have developed a dynamic pipeline that:
-- Pulls **current PY2027 enrollment metrics directly from the Sisense OE Executive Dashboard**.
-- Integrates **PY2026 historical enrollment records from the database** for prior-year comparison.
-- Automatically refreshes and generates an **interactive HTML dashboard** using the latest available data.
-- Provides enrollment, status, application, and daily/monthly trend views.
+Report Requirements
 
-**Next steps:** expand the dashboard with direct **daily and monthly PY2026 vs. PY2027 comparisons** and incorporate **EDE reporting and analysis** into the pipeline.
+Total EDE Applications Auto-Renewed
+Count of all EDE applications successfully auto-renewed.
+Passive EDE Enrollments
+Count of all passive EDE enrollments.
+Active EDE Enrollments
+Count of all active EDE enrollments.
+EDE Enrollment Status Breakdown
+Count of records in the following categories:
+Enrolled → Cancelled
+Cancelled → Not Enrolled
+Cancelled & Terminated Enrollments
+Count of EDE cancelled enrollments.
+Count of EDE terminated enrollments.
+ 
 
-I’ve attached a short PowerPoint overview of the current dashboard.
+Required Report Filters
 
-Thank you,  
-Selma
+Please include the following filters to allow users to segment and analyze the data:
+
+Coverage Year
+EDE Business Name
+Insurance Type Description
+Enrollment ID
+Enrollment Creation Date
+Enrollment Status
+ 
+
+ 
+
+Thanks & Regards,
+
+Mital Patel
+
+Thanks & Regards,
+
+Mital Patel
