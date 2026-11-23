@@ -1,13 +1,62 @@
 
 
-
-Msg 229, Level 14, State 5, Line 187
-The REFERENCES permission was denied on the object 'outbound_automation', database 'GAA CMS Data', schema 'dbo'.
-Msg 1088, Level 16, State 20, Line 187
-Cannot find the object "dbo.outbound_automation" because it does not exist or you do not have permissions.
-Msg 1750, Level 16, State 1, Line 187
-Could not create constraint or index. See previous errors.
-Msg 1088, Level 16, State 12, Line 224
-Cannot find the object "dbo.outbound_automation_monthly_premium" because it does not exist or you do not have permissions.
-
-Completion time: 2026-11-23T06:57:53.5516356-05:00
+COLUMN_NAME	DATA_TYPE	IS_NULLABLE
+id	bigint	NO
+load_run_id	nvarchar	NO
+loaded_at	datetime2	NO
+issuer	nvarchar	NO
+folder_year	int	NO
+folder_month	int	NO
+filename_file_year	int	YES
+filename_file_month	int	YES
+source_file	nvarchar	NO
+source_file_path	nvarchar	NO
+file_hash	nvarchar	NO
+row_number_in_file	int	NO
+raw_record_hash	nvarchar	NO
+parser_version	nvarchar	YES
+runner_version	nvarchar	YES
+git_commit	nvarchar	YES
+warning_count	int	YES
+warning_codes	nvarchar	YES
+enrollment_event_id	nvarchar	YES
+enrollment_action_code	nvarchar	YES
+enrollee_event_type_code	nvarchar	YES
+enrollee_event_reason_code	nvarchar	YES
+maintenance_type_code	nvarchar	YES
+additional_maint_reason_code	nvarchar	YES
+outbound_transaction_type	nvarchar	YES
+request_submit_timestamp	nvarchar	YES
+payment_txn_id	nvarchar	YES
+policy_id	nvarchar	NO
+previous_policy_id	nvarchar	YES
+member_id	nvarchar	NO
+subscriber_id	nvarchar	YES
+issuer_subscriber_identifier	nvarchar	YES
+issuer_indiv_identifier	nvarchar	YES
+subscriber_flag	nvarchar	YES
+relationship	nvarchar	YES
+member_first_name	nvarchar	YES
+member_last_name	nvarchar	YES
+insurance_type_code	nvarchar	YES
+insurance_type	nvarchar	YES
+insurer_cms_plan_id	nvarchar	YES
+class_of_contract_code	nvarchar	YES
+health_coverage_policy_no	nvarchar	YES
+household_or_employee_case_id	nvarchar	YES
+benefit_effective_date	date	YES
+benefit_end_date	date	YES
+member_maint_effective_date	date	YES
+last_premium_paid_date	date	YES
+coverage_year	int	YES
+coverage_year_source	nvarchar	YES
+total_premium_amount	decimal	YES
+individual_responsibility_amount	decimal	YES
+aptc_amount	decimal	YES
+health_coverage_premium_amount	decimal	YES
+rating_area	nvarchar	YES
+source_exchg_id	nvarchar	YES
+qtyn	nvarchar	YES
+qtyy	nvarchar	YES
+qtyt	nvarchar	YES
+source_xml_json	nvarchar	NO
