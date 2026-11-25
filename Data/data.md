@@ -29,3 +29,11 @@ FROM dbo.inbound_automation_run_log
 ORDER BY id DESC;
 
 
+SELECT
+    issuer,
+    coverage_year,
+    COUNT_BIG(*) AS record_count
+FROM dbo.inbound_automation
+GROUP BY issuer, coverage_year
+ORDER BY issuer, coverage_year;
+
