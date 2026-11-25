@@ -2,7 +2,7 @@
 
 
 # 1. Issuer/month inbound files download
-python run_inbound_automation_load.py --download --issuer 70893 --year 2026 --month 10
+python main.py --issuer 70893 --year 2026 --month 10 --no-clean
 
 # 2. Parse/validate without Azure write
 python run_inbound_automation_load.py --dry-run --issuer 70893 --year 2026 --month 10
@@ -27,3 +27,5 @@ ORDER BY id DESC;
 SELECT TOP 100 *
 FROM dbo.inbound_automation_run_log
 ORDER BY id DESC;
+
+
